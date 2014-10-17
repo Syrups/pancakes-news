@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73B33A6B19F13D6000BFB546 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6919F13D6000BFB546 /* PodFile */; };
+		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
 		B3B1D5B319EEC499001E8BBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B219EEC499001E8BBF /* main.m */; };
 		B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B519EEC499001E8BBF /* AppDelegate.m */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
+		73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseThemesViewController.h; sourceTree = "<group>"; };
 		B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseThemesViewController.m; sourceTree = "<group>"; };
 		B3B1D5AD19EEC499001E8BBF /* Pancakes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pancakes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +76,8 @@
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
+				73B33A6919F13D6000BFB546 /* PodFile */,
+				73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */,
 				B3B1D5AF19EEC499001E8BBF /* Pancakes */,
 				B3B1D5C919EEC499001E8BBF /* PancakesTests */,
 				B3B1D5AE19EEC499001E8BBF /* Products */,
@@ -207,8 +213,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
+				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
