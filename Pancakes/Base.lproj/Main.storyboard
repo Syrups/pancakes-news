@@ -4,6 +4,23 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
+        <!--Article View Controller-->
+        <scene sceneID="HnT-7x-OaG">
+            <objects>
+                <viewController id="ejU-4E-oaO" customClass="ArticleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c9O-0C-3LP"/>
+                        <viewControllerLayoutGuide type="bottom" id="gaj-1d-LZO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SX6-30-hic">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QG4-ww-f3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1171.5" y="151.5"/>
+        </scene>
         <!--Choose Themes View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -87,8 +104,7 @@
                                         <exclude reference="zSp-gC-1Lm"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="408" height="400"/>
+                                <variation key="heightClass=compact-widthClass=regular">
                                     <mask key="subviews">
                                         <exclude reference="QUX-cY-B4K"/>
                                         <exclude reference="zSp-gC-1Lm"/>

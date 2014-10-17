@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
+		B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09BD19F13CB10013B920 /* ArticleViewController.m */; };
+		B38F09C219F13EEE0013B920 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09C119F13EEE0013B920 /* Article.m */; };
 		B3B1D5B319EEC499001E8BBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B219EEC499001E8BBF /* main.m */; };
 		B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B519EEC499001E8BBF /* AppDelegate.m */; };
 		B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BA19EEC499001E8BBF /* Main.storyboard */; };
@@ -29,6 +31,10 @@
 /* Begin PBXFileReference section */
 		B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseThemesViewController.h; sourceTree = "<group>"; };
 		B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseThemesViewController.m; sourceTree = "<group>"; };
+		B38F09BC19F13CB10013B920 /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
+		B38F09BD19F13CB10013B920 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
+		B38F09C019F13EEE0013B920 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		B38F09C119F13EEE0013B920 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		B3B1D5AD19EEC499001E8BBF /* Pancakes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pancakes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5B119EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5B219EEC499001E8BBF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -65,8 +71,19 @@
 			children = (
 				B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */,
 				B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */,
+				B38F09BC19F13CB10013B920 /* ArticleViewController.h */,
+				B38F09BD19F13CB10013B920 /* ArticleViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B38F09BF19F13EDF0013B920 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B38F09C019F13EEE0013B920 /* Article.h */,
+				B38F09C119F13EEE0013B920 /* Article.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		B3B1D5A419EEC498001E8BBF = {
@@ -90,6 +107,7 @@
 		B3B1D5AF19EEC499001E8BBF /* Pancakes */ = {
 			isa = PBXGroup;
 			children = (
+				B38F09BF19F13EDF0013B920 /* Models */,
 				B38554E319F11B0800AB8459 /* Controllers */,
 				B3B1D5B419EEC499001E8BBF /* AppDelegate.h */,
 				B3B1D5B519EEC499001E8BBF /* AppDelegate.m */,
@@ -227,7 +245,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */,
+				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 			);
