@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		73B33A6B19F13D6000BFB546 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6919F13D6000BFB546 /* PodFile */; };
 		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
+		73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A7019F15CC600BFB546 /* UIThemeView.xib */; };
+		73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B33A7319F15DB700BFB546 /* UIThemeView.m */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
 		B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09BD19F13CB10013B920 /* ArticleViewController.m */; };
 		B38F09C219F13EEE0013B920 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09C119F13EEE0013B920 /* Article.m */; };
@@ -47,6 +49,9 @@
 /* Begin PBXFileReference section */
 		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
 		73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
+		73B33A7019F15CC600BFB546 /* UIThemeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIThemeView.xib; sourceTree = "<group>"; };
+		73B33A7219F15DB700BFB546 /* UIThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThemeView.h; sourceTree = "<group>"; };
+		73B33A7319F15DB700BFB546 /* UIThemeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIThemeView.m; sourceTree = "<group>"; };
 		B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseThemesViewController.h; sourceTree = "<group>"; };
 		B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseThemesViewController.m; sourceTree = "<group>"; };
 		B38F09BC19F13CB10013B920 /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
@@ -113,6 +118,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73B33A6D19F15AD600BFB546 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73B33A7019F15CC600BFB546 /* UIThemeView.xib */,
+				73B33A7219F15DB700BFB546 /* UIThemeView.h */,
+				73B33A7319F15DB700BFB546 /* UIThemeView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		B38554E319F11B0800AB8459 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +240,7 @@
 		B3B1D5AF19EEC499001E8BBF /* Pancakes */ = {
 			isa = PBXGroup;
 			children = (
+				73B33A6D19F15AD600BFB546 /* Views */,
 				B38F09BF19F13EDF0013B920 /* Models */,
 				B38554E319F11B0800AB8459 /* Controllers */,
 				B3B1D5B419EEC499001E8BBF /* AppDelegate.h */,
@@ -347,6 +363,7 @@
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
+				73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */,
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */,
 				B39BC84B19F284B600277370 /* JSONModel+networking.m in Sources */,
