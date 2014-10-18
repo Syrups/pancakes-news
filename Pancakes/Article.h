@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONModel.h"
+#import "Block.h"
+#import "Comment.h"
 
-@interface Article : NSObject
+@interface Article : JSONModel
+
+@property (strong, nonatomic) NSString* _id;
+@property (strong, nonatomic) NSString* title;
+@property (strong, nonatomic) NSArray<Block>* blocks;
+@property (strong, nonatomic) NSArray<Comment>* comments;
 
 @end
