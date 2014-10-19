@@ -10,6 +10,7 @@
 #import "JSONHTTPClient.h"
 #import "Article.h"
 #import "Block.h"
+#import "GenericBlockCell.h"
 
 @interface ArticleViewController ()
 
@@ -44,6 +45,8 @@
         
         [self.tableView reloadData];
     }];
+    
+    [self.tableView registerClass:[GenericBlockCell class] forCellReuseIdentifier:@"GenericBlockCell"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -53,17 +56,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"BlockCell";
-    
     Block* block = [self.displayedArticle.blocks objectAtIndex:[indexPath row]];
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    GenericBlockCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GenericBlockCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[GenericBlockCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GenericBlockCell"];
     }
     
-    cell.textLabel.text = block.title != nil ? block.title : @"Generic block";
+    [cell setFrame:self.tableView.frame];
+    [cell layoutWithBlock:block];
     
     return cell;
 }
