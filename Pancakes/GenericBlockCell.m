@@ -19,6 +19,7 @@
         CGRect frame = self.contentView.frame;
         frame.size.width = 480.0f;
         self.textLabel = [[UILabel alloc] initWithFrame:frame];
+        self.textLabel.numberOfLines = 200;
         
         [self.contentView addSubview:self.textLabel];
         [self.layer setMasksToBounds:YES];
@@ -37,10 +38,18 @@
     }
     
     self.textLabel.text = block.content != nil ? [parser getCleanedString:block.content] : @"NO CONTENT";
+    
+    [self.textLabel sizeToFit];
 }
 
 - (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
     NSLog(@"%@", blockId);
+}
+
+- (void)setFrame:(CGRect)frame {
+    frame.size.width = self.superview.frame.size.width - 40.0f;
+    frame.origin.x += 20.0;
+    [super setFrame:frame];
 }
 
 @end

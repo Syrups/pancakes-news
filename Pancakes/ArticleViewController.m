@@ -59,6 +59,9 @@
     Block* block = [self.displayedArticle.blocks objectAtIndex:[indexPath row]];
     GenericBlockCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GenericBlockCell"];
     
+    CGRect frame = cell.frame;
+    NSLog(@"%f", frame.size.width);
+    
     if (cell == nil) {
         cell = [[GenericBlockCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GenericBlockCell"];
     }
@@ -78,7 +81,7 @@
         return 0.0f;
     }
     
-    return UITableViewAutomaticDimension;
+    return 200.0f;
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
