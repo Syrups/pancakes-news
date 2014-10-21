@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Article.h"
 
-@interface ArticleViewController : UIViewController
+@interface ArticleViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) Article* displayedArticle;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *articleTitleLabel;
 
 @end
