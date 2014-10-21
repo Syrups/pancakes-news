@@ -8,48 +8,54 @@
 
 #import "GenericBlockCell.h"
 
-@implementation GenericBlockCell
+@implementation GenericBlockCell {
+    BOOL layouted;
+}
 
 @synthesize textLabel;
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (id)initWithFrame:(CGRect)frame {
+    
+    layouted = false;
+    
+    self = [super initWithFrame:frame];
     
     if (self) {
-        CGRect frame = self.contentView.frame;
-        frame.size.width = 480.0f;
-        self.textLabel = [[UILabel alloc] initWithFrame:frame];
-        self.textLabel.numberOfLines = 200;
+        // Initialization code
+        NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"GenericBlockCell" owner:self options:nil];
         
-        [self.contentView addSubview:self.textLabel];
-        [self.layer setMasksToBounds:YES];
+        if ([arrayOfViews count] < 1) {
+            return nil;
+        }
+        
+        if (![[arrayOfViews objectAtIndex:0] isKindOfClass:[GenericBlockCell class]]) {
+            return nil;
+        }
+        
+        self = [arrayOfViews objectAtIndex:0];
+        
     }
     
     return self;
+    
 }
 
 - (void)layoutWithBlock:(Block *)block {
+    if (layouted) {
+        return;
+    }
+    
     self.block = block;
     
     ContentParser* parser = [[ContentParser alloc] init];
-    parser.delegate = self;
-    if (block.content != nil) {
-        [parser parseCallsFromString:block.content];
-    }
     
     self.textLabel.text = block.content != nil ? [parser getCleanedString:block.content] : @"NO CONTENT";
     
-    [self.textLabel sizeToFit];
+    layouted = true;
 }
 
 - (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
     NSLog(@"%@", blockId);
-}
-
-- (void)setFrame:(CGRect)frame {
-    frame.size.width = self.superview.frame.size.width - 40.0f;
-    frame.origin.x += 20.0;
-    [super setFrame:frame];
 }
 
 @end

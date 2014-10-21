@@ -8,7 +8,6 @@
 
 #import "ArticleViewController.h"
 #import "JSONHTTPClient.h"
-#import "Article.h"
 #import "Block.h"
 #import "GenericBlockCell.h"
 
@@ -43,56 +42,106 @@
             }
         }
         
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
     }];
     
-    [self.tableView registerClass:[GenericBlockCell class] forCellReuseIdentifier:@"GenericBlockCell"];
+    self.parser = [[ContentParser alloc] init];
+    self.parser.delegate = self;
+    
+    [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.displayedArticle.blocks count];
+- (void)viewDidLayoutSubviews {
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 2000.0f)];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    Block* block = [self.displayedArticle.blocks objectAtIndex:[indexPath row]];
-    GenericBlockCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GenericBlockCell"];
+    return [self.displayedArticle.blocks count] + 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGRect frame = cell.frame;
-    NSLog(@"%f", frame.size.width);
-    
-    if (cell == nil) {
-        cell = [[GenericBlockCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GenericBlockCell"];
+    if ([indexPath row] == 0) {
+        return [self articleTitleCell];
     }
     
-    [cell setFrame:self.tableView.frame];
+    Block* block = [self blockAtIndexPath:indexPath];
+    GenericBlockCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
+    
     [cell layoutWithBlock:block];
+    
+    if (block.content != nil) {
+        [self.parser parseCallsFromString:block.content];
+    }
     
     return cell;
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Block* block = [self.displayedArticle.blocks objectAtIndex:[indexPath row]];
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    Block* block = [self blockAtIndexPath:indexPath];
     
     if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
-        return 0.0f;
+        return CGSizeMake(self.collectionView.frame.size.width, 0.0f);
     }
     
-    return 200.0f;
+    return CGSizeMake(self.collectionView.frame.size.width, 250.0f);
 }
 
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
+- (UICollectionViewCell*) articleTitleCell {
+    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
+    UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    articleTitle.text = self.displayedArticle.title;
+    UIImageView* imageView = (UIImageView*)[cell.contentView viewWithTag:20];
+    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.displayedArticle.coverImage]]];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
-    
-    [hiddenBlocks removeObject:[self.displayedArticle.blocks objectAtIndex:1]];
-    
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
+    return cell;
 }
 
+- (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {
+    if ([indexPath row] == 0) {
+        return nil;
+    }
+    return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
+}
+
+- (void)revealBlock:(UIButton*)sender {
+    
+    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
+    Block* block = nil;
+    for (Block* b in self.displayedArticle.blocks) {
+        if ([b.id isEqualToString:blockId]) {
+            block = b;
+        }
+    }
+    
+    if (block == nil) {
+        return;
+    }
+
+//    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView performBatchUpdates:^{
+        [hiddenBlocks removeObject:block];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    CGPoint anchor;
+    anchor.x = 0.0f; anchor.y = 400.0f;
+    
+    [self.collectionView setContentOffset:anchor animated:YES];
+}
+
+#pragma mark - ContentParserDelegate
+
+- (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    button.frame = CGRectMake(self.collectionView.frame.size.width-35.0f, [blockId intValue]*100.0f, 20.0f, 20.0f);
+    button.tag = [blockId intValue];
+    
+    [button addTarget:self action:@selector(revealBlock:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.collectionView addSubview:button];
+}
 
 @end

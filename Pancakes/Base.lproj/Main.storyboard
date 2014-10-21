@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ejU-4E-oaO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Article View Controller-->
@@ -16,38 +17,75 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fW7-S1-gAL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OlU-OJ-bSg">
-                                        <rect key="frame" x="0.0" y="163" width="600" height="437"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="ejU-4E-oaO" id="S5w-Yg-im2"/>
-                                            <outlet property="delegate" destination="ejU-4E-oaO" id="9Fu-DB-Xqr"/>
-                                        </connections>
-                                    </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ey-XN-vdP">
-                                        <rect key="frame" x="0.0" y="68" width="600" height="64"/>
-                                        <color key="backgroundColor" red="0.52019935409999996" green="0.39215825230000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nRy-lB-sDS">
+                                <rect key="frame" x="-1" y="0.0" width="570" height="320"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kim-09-bMn">
+                                    <size key="itemSize" width="564.5" height="168"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArticleTitleCell" id="yUI-eg-v4f">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="564.5" height="168"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6w-yJ-Ex5">
+                                                    <rect key="frame" x="-37" y="-44" width="627" height="255"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Awe-h3-up0">
+                                                    <rect key="frame" x="102" y="56" width="361" height="66"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVj-zY-wd7">
+                                                    <rect key="frame" x="530" y="19" width="22" height="22"/>
+                                                    <state key="normal">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="c6w-yJ-Ex5" secondAttribute="trailing" constant="-20" id="3Dt-0H-HBM"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="Awe-h3-up0" secondAttribute="trailing" constant="97" id="5DK-lp-akF"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="Awe-h3-up0" secondAttribute="bottom" constant="38" id="GRk-mH-lgt"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="c6w-yJ-Ex5" secondAttribute="bottom" constant="-43" id="J7Y-cd-jLc"/>
+                                            <constraint firstItem="Awe-h3-up0" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="91" id="Mbg-WH-Uqd"/>
+                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="top" id="cUn-UI-vfy"/>
+                                            <constraint firstItem="Awe-h3-up0" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="topMargin" constant="48" id="fEC-rX-Fez"/>
+                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="-9" id="gln-vu-M9s"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ejU-4E-oaO" id="HtR-m1-cnl"/>
+                                    <outlet property="delegate" destination="ejU-4E-oaO" id="Ucq-7v-YL3"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nRy-lB-sDS" firstAttribute="bottom" secondItem="gaj-1d-LZO" secondAttribute="top" id="12R-Vz-srO"/>
+                            <constraint firstItem="nRy-lB-sDS" firstAttribute="top" secondItem="SX6-30-hic" secondAttribute="top" id="9Qk-QK-PYa"/>
+                            <constraint firstItem="nRy-lB-sDS" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-17" id="llM-aG-2xk"/>
+                            <constraint firstItem="nRy-lB-sDS" firstAttribute="centerX" secondItem="SX6-30-hic" secondAttribute="centerX" id="mx4-QJ-9h7"/>
+                        </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="articleTitleLabel" destination="2ey-XN-vdP" id="cQs-a3-v6w"/>
-                        <outlet property="tableView" destination="OlU-OJ-bSg" id="lTO-qg-oSR"/>
+                        <outlet property="collectionView" destination="nRy-lB-sDS" id="zZl-T6-jIE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QG4-ww-f3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="142"/>
+            <point key="canvasLocation" x="776" y="142"/>
         </scene>
         <!--Choose Themes View Controller-->
         <scene sceneID="ufC-wZ-h7g">

@@ -10,10 +10,11 @@
 #import "Block.h"
 #import "ContentParser.h"
 
-@interface GenericBlockCell : UITableViewCell <ContentParserDelegate>
+@interface GenericBlockCell : UICollectionViewCell <ContentParserDelegate>
 
 @property (strong, nonatomic) Block* block;
-@property (strong, nonatomic) UILabel *textLabel;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 - (void)layoutWithBlock:(Block*)block;
 
