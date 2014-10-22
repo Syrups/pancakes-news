@@ -37,30 +37,24 @@
                                                 <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6w-yJ-Ex5">
                                                     <rect key="frame" x="-37" y="-44" width="627" height="255"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Awe-h3-up0">
-                                                    <rect key="frame" x="102" y="56" width="361" height="66"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Awe-h3-up0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="564.5" height="174"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVj-zY-wd7">
-                                                    <rect key="frame" x="530" y="19" width="22" height="22"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="c6w-yJ-Ex5" secondAttribute="trailing" constant="-20" id="3Dt-0H-HBM"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Awe-h3-up0" secondAttribute="trailing" constant="97" id="5DK-lp-akF"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="Awe-h3-up0" secondAttribute="bottom" constant="38" id="GRk-mH-lgt"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="c6w-yJ-Ex5" secondAttribute="bottom" constant="-43" id="J7Y-cd-jLc"/>
-                                            <constraint firstItem="Awe-h3-up0" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="91" id="Mbg-WH-Uqd"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="c6w-yJ-Ex5" secondAttribute="bottom" constant="-51" id="OIG-jR-PTm"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="c6w-yJ-Ex5" secondAttribute="trailing" constant="-33" id="Ucv-WH-Yhu"/>
+                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="-45" id="XLa-p4-r9d"/>
                                             <constraint firstItem="c6w-yJ-Ex5" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="top" id="cUn-UI-vfy"/>
-                                            <constraint firstItem="Awe-h3-up0" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="topMargin" constant="48" id="fEC-rX-Fez"/>
                                             <constraint firstItem="c6w-yJ-Ex5" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="-9" id="gln-vu-M9s"/>
+                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="topMargin" constant="-52" id="nsN-R1-Ife"/>
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
@@ -69,11 +63,22 @@
                                     <outlet property="delegate" destination="ejU-4E-oaO" id="Ucq-7v-YL3"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVj-zY-wd7">
+                                <rect key="frame" x="530" y="30" width="22" height="22"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleMenu:" destination="ejU-4E-oaO" eventType="touchUpInside" id="3kN-6k-fQX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nRy-lB-sDS" firstAttribute="bottom" secondItem="gaj-1d-LZO" secondAttribute="top" id="12R-Vz-srO"/>
                             <constraint firstItem="nRy-lB-sDS" firstAttribute="top" secondItem="SX6-30-hic" secondAttribute="top" id="9Qk-QK-PYa"/>
+                            <constraint firstItem="KVj-zY-wd7" firstAttribute="top" secondItem="c9O-0C-3LP" secondAttribute="bottom" constant="10" id="DcL-dm-lhx"/>
+                            <constraint firstItem="KVj-zY-wd7" firstAttribute="trailing" secondItem="SX6-30-hic" secondAttribute="trailingMargin" id="dM9-Qw-akO"/>
                             <constraint firstItem="nRy-lB-sDS" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-17" id="llM-aG-2xk"/>
                             <constraint firstItem="nRy-lB-sDS" firstAttribute="centerX" secondItem="SX6-30-hic" secondAttribute="centerX" id="mx4-QJ-9h7"/>
                         </constraints>

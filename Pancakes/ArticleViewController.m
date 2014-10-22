@@ -10,6 +10,7 @@
 #import "JSONHTTPClient.h"
 #import "Block.h"
 #import "GenericBlockCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ArticleViewController ()
 
@@ -24,6 +25,20 @@
     
     hiddenBlocks = [NSMutableArray array];
     
+    [self fetchArticleData];
+    [self loadMenuView];
+    
+    self.parser = [[ContentParser alloc] init];
+    self.parser.delegate = self;
+    
+    [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
+}
+
+- (void)viewDidLayoutSubviews {
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 2000.0f)];
+}
+
+- (void)fetchArticleData {
     // TEST
     self.displayedArticle = [[Article alloc] init];
     self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
@@ -44,21 +59,122 @@
         
         [self.collectionView reloadData];
     }];
-    
-    self.parser = [[ContentParser alloc] init];
-    self.parser.delegate = self;
-    
-    [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
+
 }
 
-- (void)viewDidLayoutSubviews {
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 2000.0f)];
+- (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {
+    if ([indexPath row] == 0) {
+        return nil;
+    }
+    return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
 }
+
+#pragma mark - Helper view methods
+
+/**
+ * Build the article title cell at the top of the view
+ */
+
+- (UICollectionViewCell*) articleTitleCell {
+    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
+    UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    articleTitle.text = self.displayedArticle.title;
+    
+    articleTitle.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.3f];
+    UIImageView* imageView = (UIImageView*)[cell.contentView viewWithTag:20];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil];
+    
+    articleTitle.frame = imageView.frame;
+    articleTitle.textColor = [UIColor whiteColor];
+    
+    return cell;
+}
+
+- (IBAction)toggleMenu:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5f];
+    
+    CGRect rightFrame = self.rightMenuView.frame;
+    CGRect leftFrame = self.leftMenuView.frame;
+    
+    CGFloat screenSize = self.view.frame.size.width;
+    
+    if (leftFrame.origin.x == 0) { // if menu displayed
+        rightFrame.origin.x = screenSize;
+        leftFrame.origin.x = -screenSize/2;
+    } else {
+        rightFrame.origin.x = screenSize/2;
+        leftFrame.origin.x = 0.0f;
+    }
+    
+    self.rightMenuView.frame = rightFrame;
+    self.leftMenuView.frame = leftFrame;
+    
+    [UIView commitAnimations];
+}
+
+- (void)loadMenuView {
+    CGRect rightFrame = self.view.frame;
+    CGRect leftFrame = self.view.frame;
+    CGFloat screenSize = self.view.frame.size.width;
+    rightFrame.origin.x = screenSize;
+    leftFrame.origin.x = - screenSize/2;
+    rightFrame.size.width /= 2; leftFrame.size.width /= 2;
+    
+    self.rightMenuView = [[[UINib nibWithNibName:@"ArticleRightMenu" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
+    self.rightMenuView.frame = rightFrame;
+    self.rightMenuView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
+    self.leftMenuView = [[[UINib nibWithNibName:@"ArticleLeftMenu" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
+    self.leftMenuView.frame = leftFrame;
+    self.leftMenuView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
+    
+    [self.view addSubview:self.rightMenuView];
+    [self.view addSubview:self.leftMenuView];
+}
+
+/**
+ * Reveals a hidden block and scroll to it
+ */
+
+- (void)revealBlock:(UIButton*)sender {
+    
+    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
+    Block* block = nil;
+    for (Block* b in self.displayedArticle.blocks) {
+        if ([b.id isEqualToString:blockId]) {
+            block = b;
+        }
+    }
+    
+    if (block == nil) {
+        return;
+    }
+    
+    NSUInteger index = [self.displayedArticle.blocks indexOfObject:block];
+    UICollectionViewCell* cell = [self collectionView:self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index+1 inSection:0]];
+    
+    //    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView performBatchUpdates:^{
+        [hiddenBlocks removeObject:block];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    // scroll to revealed block
+    CGPoint anchor;
+    anchor.x = 0.0f; anchor.y = cell.frame.origin.y;
+    
+    [self.collectionView setContentOffset:anchor animated:YES];
+}
+
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [self.displayedArticle.blocks count] + 1;
 }
+
+#pragma mark - UICollectionViewFlowLayoutDelegate
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -86,50 +202,6 @@
     }
     
     return CGSizeMake(self.collectionView.frame.size.width, 250.0f);
-}
-
-- (UICollectionViewCell*) articleTitleCell {
-    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
-    UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
-    articleTitle.text = self.displayedArticle.title;
-    UIImageView* imageView = (UIImageView*)[cell.contentView viewWithTag:20];
-    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.displayedArticle.coverImage]]];
-    
-    return cell;
-}
-
-- (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {
-    if ([indexPath row] == 0) {
-        return nil;
-    }
-    return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
-}
-
-- (void)revealBlock:(UIButton*)sender {
-    
-    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
-    Block* block = nil;
-    for (Block* b in self.displayedArticle.blocks) {
-        if ([b.id isEqualToString:blockId]) {
-            block = b;
-        }
-    }
-    
-    if (block == nil) {
-        return;
-    }
-
-//    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView performBatchUpdates:^{
-        [hiddenBlocks removeObject:block];
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    CGPoint anchor;
-    anchor.x = 0.0f; anchor.y = 400.0f;
-    
-    [self.collectionView setContentOffset:anchor animated:YES];
 }
 
 #pragma mark - ContentParserDelegate

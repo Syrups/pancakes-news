@@ -19,4 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (strong, nonatomic) ContentParser* parser;
 
+@property (strong, nonatomic) UIView* leftMenuView;
+@property (strong, nonatomic) UIView* rightMenuView;
+
 @end

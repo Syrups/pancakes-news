@@ -27,6 +27,8 @@
 		B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BD19EEC499001E8BBF /* Images.xcassets */; };
 		B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */; };
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
+		B3ED1B6619F84FFE00AA621C /* ArticleRightMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6519F84FFE00AA621C /* ArticleRightMenu.xib */; };
+		B3ED1B6819F850D100AA621C /* ArticleLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6719F850D100AA621C /* ArticleLeftMenu.xib */; };
 		E310CF3788055FD7481EAEB8 /* libPods-Pancakes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		B3B1D5C619EEC499001E8BBF /* PancakesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PancakesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5CB19EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
+		B3ED1B6519F84FFE00AA621C /* ArticleRightMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleRightMenu.xib; sourceTree = "<group>"; };
+		B3ED1B6719F850D100AA621C /* ArticleLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleLeftMenu.xib; sourceTree = "<group>"; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 		DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pancakes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,6 +119,8 @@
 				73B33A7019F15CC600BFB546 /* UIThemeView.xib */,
 				73B33A7219F15DB700BFB546 /* UIThemeView.h */,
 				73B33A7319F15DB700BFB546 /* UIThemeView.m */,
+				B3ED1B6519F84FFE00AA621C /* ArticleRightMenu.xib */,
+				B3ED1B6719F850D100AA621C /* ArticleLeftMenu.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -323,9 +329,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */,
+				B3ED1B6819F850D100AA621C /* ArticleLeftMenu.xib in Resources */,
 				B3183C3C19F68B90004C401F /* GenericBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
+				B3ED1B6619F84FFE00AA621C /* ArticleRightMenu.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
 				73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
