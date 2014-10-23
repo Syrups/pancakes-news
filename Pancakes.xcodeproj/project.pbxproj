@@ -29,6 +29,9 @@
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
 		B3ED1B6619F84FFE00AA621C /* ArticleRightMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6519F84FFE00AA621C /* ArticleRightMenu.xib */; };
 		B3ED1B6819F850D100AA621C /* ArticleLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6719F850D100AA621C /* ArticleLeftMenu.xib */; };
+		B3ED1B6A19F8575300AA621C /* MapBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6919F8575300AA621C /* MapBlockCell.xib */; };
+		B3ED1B6D19F8579200AA621C /* MapBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3ED1B6C19F8579200AA621C /* MapBlockCell.m */; };
+		B3ED1B6F19F857B400AA621C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3ED1B6E19F857B400AA621C /* MapKit.framework */; };
 		E310CF3788055FD7481EAEB8 /* libPods-Pancakes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +84,10 @@
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
 		B3ED1B6519F84FFE00AA621C /* ArticleRightMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleRightMenu.xib; sourceTree = "<group>"; };
 		B3ED1B6719F850D100AA621C /* ArticleLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleLeftMenu.xib; sourceTree = "<group>"; };
+		B3ED1B6919F8575300AA621C /* MapBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapBlockCell.xib; sourceTree = "<group>"; };
+		B3ED1B6B19F8579200AA621C /* MapBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBlockCell.h; sourceTree = "<group>"; };
+		B3ED1B6C19F8579200AA621C /* MapBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBlockCell.m; sourceTree = "<group>"; };
+		B3ED1B6E19F857B400AA621C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 		DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pancakes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -90,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3ED1B6F19F857B400AA621C /* MapKit.framework in Frameworks */,
 				E310CF3788055FD7481EAEB8 /* libPods-Pancakes.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +115,7 @@
 		39615222AF1BB60813B8A01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3ED1B6E19F857B400AA621C /* MapKit.framework */,
 				DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */,
 			);
 			name = Frameworks;
@@ -131,6 +140,9 @@
 				B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */,
 				B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */,
 				B3183C3B19F68B90004C401F /* GenericBlockCell.xib */,
+				B3ED1B6919F8575300AA621C /* MapBlockCell.xib */,
+				B3ED1B6B19F8579200AA621C /* MapBlockCell.h */,
+				B3ED1B6C19F8579200AA621C /* MapBlockCell.m */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -330,6 +342,7 @@
 			files = (
 				73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */,
 				B3ED1B6819F850D100AA621C /* ArticleLeftMenu.xib in Resources */,
+				B3ED1B6A19F8575300AA621C /* MapBlockCell.xib in Resources */,
 				B3183C3C19F68B90004C401F /* GenericBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
@@ -395,6 +408,7 @@
 				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
 				B39BC80219F2847600277370 /* Block.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
+				B3ED1B6D19F8579200AA621C /* MapBlockCell.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,

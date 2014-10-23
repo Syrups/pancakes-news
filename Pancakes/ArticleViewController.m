@@ -10,6 +10,7 @@
 #import "JSONHTTPClient.h"
 #import "Block.h"
 #import "GenericBlockCell.h"
+#import "MapBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ArticleViewController ()
@@ -32,6 +33,7 @@
     self.parser.delegate = self;
     
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
+    [self.collectionView registerClass:[MapBlockCell class] forCellWithReuseIdentifier:@"MapBlockCell"];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -183,7 +185,13 @@
     }
     
     Block* block = [self blockAtIndexPath:indexPath];
-    GenericBlockCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
+    GenericBlockCell* cell = nil;
+    
+    if ([block.type.name isEqualToString:@"map"]) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MapBlockCell" forIndexPath:indexPath];
+    } else {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
+    }
     
     [cell layoutWithBlock:block];
     

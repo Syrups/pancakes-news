@@ -22,7 +22,7 @@
     
     if (self) {
         // Initialization code
-        NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"GenericBlockCell" owner:self options:nil];
+        NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
         
         if ([arrayOfViews count] < 1) {
             return nil;
