@@ -12,6 +12,7 @@
 #import "GenericBlockCell.h"
 #import "MapBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 @interface ArticleViewController ()
 
@@ -68,6 +69,7 @@
     if ([indexPath row] == 0) {
         return nil;
     }
+
     return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
 }
 
@@ -82,9 +84,15 @@
     UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
     articleTitle.text = self.displayedArticle.title;
     
-    articleTitle.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.3f];
+    articleTitle.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
     UIImageView* imageView = (UIImageView*)[cell.contentView viewWithTag:20];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil];
+    
+    [imageView sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image != nil) {
+            [imageView setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:^{
+            }];
+        }
+    }];
     
     articleTitle.frame = imageView.frame;
     articleTitle.textColor = [UIColor whiteColor];
@@ -134,13 +142,7 @@
     [self.view addSubview:self.leftMenuView];
 }
 
-/**
- * Reveals a hidden block and scroll to it
- */
-
-- (void)revealBlock:(UIButton*)sender {
-    
-    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
+- (Block*) blockWithId:(NSString*)blockId {
     Block* block = nil;
     for (Block* b in self.displayedArticle.blocks) {
         if ([b.id isEqualToString:blockId]) {
@@ -148,9 +150,17 @@
         }
     }
     
-    if (block == nil) {
-        return;
-    }
+    return block;
+}
+
+/**
+ * Reveals a hidden block and scroll to it
+ */
+
+- (void)revealBlock:(UIButton*)sender {
+    
+    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
+    Block* block = [self blockWithId:blockId];
     
     NSUInteger index = [self.displayedArticle.blocks indexOfObject:block];
     UICollectionViewCell* cell = [self collectionView:self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index+1 inSection:0]];
@@ -159,14 +169,12 @@
     [self.collectionView performBatchUpdates:^{
         [hiddenBlocks removeObject:block];
     } completion:^(BOOL finished) {
+        // scroll to revealed block
+        CGPoint anchor;
+        anchor.x = 0.0f; anchor.y = cell.frame.origin.y;
         
+        [self.collectionView setContentOffset:anchor animated:YES];
     }];
-    
-    // scroll to revealed block
-    CGPoint anchor;
-    anchor.x = 0.0f; anchor.y = cell.frame.origin.y;
-    
-    [self.collectionView setContentOffset:anchor animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -199,22 +207,39 @@
         [self.parser parseCallsFromString:block.content];
     }
     
+    NSLog(@"Showing block cell with block index %lu", (unsigned long) [self.displayedArticle.blocks indexOfObject:block]);
+    
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([indexPath row] == 0) {
+        return CGSizeMake(self.collectionView.frame.size.width, 250.0f);
+    }
+    
     Block* block = [self blockAtIndexPath:indexPath];
     
     if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
         return CGSizeMake(self.collectionView.frame.size.width, 0.0f);
     }
     
-    return CGSizeMake(self.collectionView.frame.size.width, 250.0f);
+//    return CGSizeMake(
+//                self.collectionView.frame.size.width,
+//                [block.content sizeWithFont:[UIFont fontWithName:@"Arial" size:20.0f] constrainedToSize:CGSizeMake(self.collectionView.frame.size.width, 9999.0f) lineBreakMode: NSLineBreakByWordWrapping].height
+//            );
+    
+    return CGSizeMake(
+                self.collectionView.frame.size.width,
+                250.0f
+            );
 }
 
 #pragma mark - ContentParserDelegate
 
 - (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
+    Block* calledBlock = [self blockWithId:blockId];
+    
     UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     button.frame = CGRectMake(self.collectionView.frame.size.width-35.0f, [blockId intValue]*100.0f, 20.0f, 20.0f);
     button.tag = [blockId intValue];

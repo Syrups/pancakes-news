@@ -32,6 +32,7 @@
 		B3ED1B6A19F8575300AA621C /* MapBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6919F8575300AA621C /* MapBlockCell.xib */; };
 		B3ED1B6D19F8579200AA621C /* MapBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3ED1B6C19F8579200AA621C /* MapBlockCell.m */; };
 		B3ED1B6F19F857B400AA621C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3ED1B6E19F857B400AA621C /* MapKit.framework */; };
+		B3FB2D3719F99B8400DF09D8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FB2D3619F99B8400DF09D8 /* Accelerate.framework */; };
 		E310CF3788055FD7481EAEB8 /* libPods-Pancakes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +48,7 @@
 
 /* Begin PBXFileReference section */
 		350E046FF2281BACA6E6CE33 /* Pods-Pancakes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.debug.xcconfig"; sourceTree = "<group>"; };
-		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
+		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		73B33A7019F15CC600BFB546 /* UIThemeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIThemeView.xib; sourceTree = "<group>"; };
 		73B33A7219F15DB700BFB546 /* UIThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThemeView.h; sourceTree = "<group>"; };
@@ -88,6 +89,8 @@
 		B3ED1B6B19F8579200AA621C /* MapBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBlockCell.h; sourceTree = "<group>"; };
 		B3ED1B6C19F8579200AA621C /* MapBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBlockCell.m; sourceTree = "<group>"; };
 		B3ED1B6E19F857B400AA621C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B3FB2D3619F99B8400DF09D8 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B3FB2D3819F9A56000DF09D8 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 		DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pancakes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3FB2D3719F99B8400DF09D8 /* Accelerate.framework in Frameworks */,
 				B3ED1B6F19F857B400AA621C /* MapKit.framework in Frameworks */,
 				E310CF3788055FD7481EAEB8 /* libPods-Pancakes.a in Frameworks */,
 			);
@@ -115,6 +119,7 @@
 		39615222AF1BB60813B8A01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3FB2D3619F99B8400DF09D8 /* Accelerate.framework */,
 				B3ED1B6E19F857B400AA621C /* MapKit.framework */,
 				DA1A360C3B8FA268D3387F1D /* libPods-Pancakes.a */,
 			);
@@ -219,6 +224,7 @@
 				B3B1D5BD19EEC499001E8BBF /* Images.xcassets */,
 				B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */,
 				B3B1D5B019EEC499001E8BBF /* Supporting Files */,
+				B3FB2D3819F9A56000DF09D8 /* Macros.h */,
 			);
 			path = Pancakes;
 			sourceTree = "<group>";

@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *textLabel;
 
 - (void)layoutWithBlock:(Block*)block;
+- (CGFloat)contentHeight;
 
 @end

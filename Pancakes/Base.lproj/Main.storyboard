@@ -20,8 +20,8 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nRy-lB-sDS">
                                 <rect key="frame" x="-1" y="0.0" width="570" height="320"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kim-09-bMn">
-                                    <size key="itemSize" width="564.5" height="168"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="1" id="kim-09-bMn">
+                                    <size key="itemSize" width="569.5" height="207"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -31,11 +31,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="564.5" height="168"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="569.5" height="207"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6w-yJ-Ex5">
-                                                    <rect key="frame" x="-37" y="-44" width="627" height="255"/>
+                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c6w-yJ-Ex5">
+                                                    <rect key="frame" x="0.0" y="-6" width="578.5" height="224"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Awe-h3-up0">
                                                     <rect key="frame" x="0.0" y="0.0" width="564.5" height="174"/>
@@ -46,16 +46,6 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailingMargin" secondItem="c6w-yJ-Ex5" secondAttribute="trailing" constant="-20" id="3Dt-0H-HBM"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="c6w-yJ-Ex5" secondAttribute="bottom" constant="-43" id="J7Y-cd-jLc"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="c6w-yJ-Ex5" secondAttribute="bottom" constant="-51" id="OIG-jR-PTm"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="c6w-yJ-Ex5" secondAttribute="trailing" constant="-33" id="Ucv-WH-Yhu"/>
-                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="-45" id="XLa-p4-r9d"/>
-                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="top" id="cUn-UI-vfy"/>
-                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="leading" secondItem="yUI-eg-v4f" secondAttribute="leadingMargin" constant="-9" id="gln-vu-M9s"/>
-                                            <constraint firstItem="c6w-yJ-Ex5" firstAttribute="top" secondItem="yUI-eg-v4f" secondAttribute="topMargin" constant="-52" id="nsN-R1-Ife"/>
-                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
