@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25D738D955411A703F52C406 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EC56249BB21E39D5D93BB /* libPods.a */; };
+		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
+		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
 		73B33A6B19F13D6000BFB546 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6919F13D6000BFB546 /* PodFile */; };
 		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
 		73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A7019F15CC600BFB546 /* UIThemeView.xib */; };
@@ -20,22 +23,13 @@
 		B39BC80319F2847600277370 /* BlockType.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7FD19F2847600277370 /* BlockType.m */; };
 		B39BC80419F2847600277370 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7FF19F2847600277370 /* Comment.m */; };
 		B39BC80519F2847600277370 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC80119F2847600277370 /* User.m */; };
-		B39BC84419F284B600277370 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC82D19F284B600277370 /* JSONModel.m */; };
-		B39BC84519F284B600277370 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC82F19F284B600277370 /* JSONModelArray.m */; };
-		B39BC84619F284B600277370 /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC83119F284B600277370 /* JSONModelClassProperty.m */; };
-		B39BC84719F284B600277370 /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC83319F284B600277370 /* JSONModelError.m */; };
-		B39BC84819F284B600277370 /* NSArray+JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC83619F284B600277370 /* NSArray+JSONModel.m */; };
-		B39BC84919F284B600277370 /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC83A19F284B600277370 /* JSONAPI.m */; };
-		B39BC84A19F284B600277370 /* JSONHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC83C19F284B600277370 /* JSONHTTPClient.m */; };
-		B39BC84B19F284B600277370 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC83E19F284B600277370 /* JSONModel+networking.m */; };
-		B39BC84C19F284B600277370 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC84119F284B600277370 /* JSONKeyMapper.m */; };
-		B39BC84D19F284B600277370 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC84319F284B600277370 /* JSONValueTransformer.m */; };
 		B3B1D5B319EEC499001E8BBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B219EEC499001E8BBF /* main.m */; };
 		B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B519EEC499001E8BBF /* AppDelegate.m */; };
 		B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BA19EEC499001E8BBF /* Main.storyboard */; };
 		B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BD19EEC499001E8BBF /* Images.xcassets */; };
 		B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */; };
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
+		D801CAA315D503C752005C10 /* libPods-Pancakes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9407447283D9666076675468 /* libPods-Pancakes.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,11 +43,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
+		350E046FF2281BACA6E6CE33 /* Pods-Pancakes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.debug.xcconfig"; sourceTree = "<group>"; };
+		7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubThemeViewCell.h; sourceTree = "<group>"; };
+		7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubThemeViewCell.m; sourceTree = "<group>"; };
+		7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubThemeViewCell.xib; sourceTree = "<group>"; };
+		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		73B33A7019F15CC600BFB546 /* UIThemeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIThemeView.xib; sourceTree = "<group>"; };
 		73B33A7219F15DB700BFB546 /* UIThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThemeView.h; sourceTree = "<group>"; };
 		73B33A7319F15DB700BFB546 /* UIThemeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIThemeView.m; sourceTree = "<group>"; };
+		924EC56249BB21E39D5D93BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9407447283D9666076675468 /* libPods-Pancakes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pancakes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericBlockCell.h; sourceTree = "<group>"; };
 		B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericBlockCell.m; sourceTree = "<group>"; };
 		B375C0CB19F47069002D7AE7 /* ContentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentParser.h; sourceTree = "<group>"; };
@@ -72,27 +72,6 @@
 		B39BC7FF19F2847600277370 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		B39BC80019F2847600277370 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		B39BC80119F2847600277370 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		B39BC82C19F284B600277370 /* JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModel.h; sourceTree = "<group>"; };
-		B39BC82D19F284B600277370 /* JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModel.m; sourceTree = "<group>"; };
-		B39BC82E19F284B600277370 /* JSONModelArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelArray.h; sourceTree = "<group>"; };
-		B39BC82F19F284B600277370 /* JSONModelArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelArray.m; sourceTree = "<group>"; };
-		B39BC83019F284B600277370 /* JSONModelClassProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelClassProperty.h; sourceTree = "<group>"; };
-		B39BC83119F284B600277370 /* JSONModelClassProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelClassProperty.m; sourceTree = "<group>"; };
-		B39BC83219F284B600277370 /* JSONModelError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelError.h; sourceTree = "<group>"; };
-		B39BC83319F284B600277370 /* JSONModelError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModelError.m; sourceTree = "<group>"; };
-		B39BC83519F284B600277370 /* NSArray+JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSONModel.h"; sourceTree = "<group>"; };
-		B39BC83619F284B600277370 /* NSArray+JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSONModel.m"; sourceTree = "<group>"; };
-		B39BC83719F284B600277370 /* JSONModelLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelLib.h; sourceTree = "<group>"; };
-		B39BC83919F284B600277370 /* JSONAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPI.h; sourceTree = "<group>"; };
-		B39BC83A19F284B600277370 /* JSONAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPI.m; sourceTree = "<group>"; };
-		B39BC83B19F284B600277370 /* JSONHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONHTTPClient.h; sourceTree = "<group>"; };
-		B39BC83C19F284B600277370 /* JSONHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONHTTPClient.m; sourceTree = "<group>"; };
-		B39BC83D19F284B600277370 /* JSONModel+networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONModel+networking.h"; sourceTree = "<group>"; };
-		B39BC83E19F284B600277370 /* JSONModel+networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONModel+networking.m"; sourceTree = "<group>"; };
-		B39BC84019F284B600277370 /* JSONKeyMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKeyMapper.h; sourceTree = "<group>"; };
-		B39BC84119F284B600277370 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
-		B39BC84219F284B600277370 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
-		B39BC84319F284B600277370 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
 		B3B1D5AD19EEC499001E8BBF /* Pancakes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pancakes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5B119EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5B219EEC499001E8BBF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +83,7 @@
 		B3B1D5C619EEC499001E8BBF /* PancakesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PancakesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5CB19EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
+		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D801CAA315D503C752005C10 /* libPods-Pancakes.a in Frameworks */,
+				25D738D955411A703F52C406 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39615222AF1BB60813B8A01E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9407447283D9666076675468 /* libPods-Pancakes.a */,
+				924EC56249BB21E39D5D93BB /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		73B33A6D19F15AD600BFB546 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +122,9 @@
 				73B33A7019F15CC600BFB546 /* UIThemeView.xib */,
 				73B33A7219F15DB700BFB546 /* UIThemeView.h */,
 				73B33A7319F15DB700BFB546 /* UIThemeView.m */,
+				7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */,
+				7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */,
+				7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -181,75 +175,16 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		B39BC82A19F284B600277370 /* JSONModel */ = {
-			isa = PBXGroup;
-			children = (
-				B39BC82B19F284B600277370 /* JSONModel */,
-				B39BC83419F284B600277370 /* JSONModelCategories */,
-				B39BC83719F284B600277370 /* JSONModelLib.h */,
-				B39BC83819F284B600277370 /* JSONModelNetworking */,
-				B39BC83F19F284B600277370 /* JSONModelTransformations */,
-			);
-			path = JSONModel;
-			sourceTree = "<group>";
-		};
-		B39BC82B19F284B600277370 /* JSONModel */ = {
-			isa = PBXGroup;
-			children = (
-				B39BC82C19F284B600277370 /* JSONModel.h */,
-				B39BC82D19F284B600277370 /* JSONModel.m */,
-				B39BC82E19F284B600277370 /* JSONModelArray.h */,
-				B39BC82F19F284B600277370 /* JSONModelArray.m */,
-				B39BC83019F284B600277370 /* JSONModelClassProperty.h */,
-				B39BC83119F284B600277370 /* JSONModelClassProperty.m */,
-				B39BC83219F284B600277370 /* JSONModelError.h */,
-				B39BC83319F284B600277370 /* JSONModelError.m */,
-			);
-			path = JSONModel;
-			sourceTree = "<group>";
-		};
-		B39BC83419F284B600277370 /* JSONModelCategories */ = {
-			isa = PBXGroup;
-			children = (
-				B39BC83519F284B600277370 /* NSArray+JSONModel.h */,
-				B39BC83619F284B600277370 /* NSArray+JSONModel.m */,
-			);
-			path = JSONModelCategories;
-			sourceTree = "<group>";
-		};
-		B39BC83819F284B600277370 /* JSONModelNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				B39BC83919F284B600277370 /* JSONAPI.h */,
-				B39BC83A19F284B600277370 /* JSONAPI.m */,
-				B39BC83B19F284B600277370 /* JSONHTTPClient.h */,
-				B39BC83C19F284B600277370 /* JSONHTTPClient.m */,
-				B39BC83D19F284B600277370 /* JSONModel+networking.h */,
-				B39BC83E19F284B600277370 /* JSONModel+networking.m */,
-			);
-			path = JSONModelNetworking;
-			sourceTree = "<group>";
-		};
-		B39BC83F19F284B600277370 /* JSONModelTransformations */ = {
-			isa = PBXGroup;
-			children = (
-				B39BC84019F284B600277370 /* JSONKeyMapper.h */,
-				B39BC84119F284B600277370 /* JSONKeyMapper.m */,
-				B39BC84219F284B600277370 /* JSONValueTransformer.h */,
-				B39BC84319F284B600277370 /* JSONValueTransformer.m */,
-			);
-			path = JSONModelTransformations;
-			sourceTree = "<group>";
-		};
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
-				B39BC82A19F284B600277370 /* JSONModel */,
 				73B33A6919F13D6000BFB546 /* PodFile */,
 				73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */,
 				B3B1D5AF19EEC499001E8BBF /* Pancakes */,
 				B3B1D5C919EEC499001E8BBF /* PancakesTests */,
 				B3B1D5AE19EEC499001E8BBF /* Products */,
+				EF8C83CFC8F3D0303706B267 /* Pods */,
+				39615222AF1BB60813B8A01E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -305,6 +240,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EF8C83CFC8F3D0303706B267 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				350E046FF2281BACA6E6CE33 /* Pods-Pancakes.debug.xcconfig */,
+				B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -312,9 +256,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3B1D5D019EEC499001E8BBF /* Build configuration list for PBXNativeTarget "Pancakes" */;
 			buildPhases = (
+				58216529F6A22814FC15622B /* Check Pods Manifest.lock */,
 				B3B1D5A919EEC498001E8BBF /* Sources */,
 				B3B1D5AA19EEC498001E8BBF /* Frameworks */,
 				B3B1D5AB19EEC498001E8BBF /* Resources */,
+				42B20EF52E03ABE6D2BDA115 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -390,6 +336,7 @@
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
 				73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */,
+				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +350,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		42B20EF52E03ABE6D2BDA115 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58216529F6A22814FC15622B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B3B1D5A919EEC498001E8BBF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -412,24 +392,15 @@
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */,
 				B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */,
-				B39BC84B19F284B600277370 /* JSONModel+networking.m in Sources */,
+				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,
 				B39BC80519F2847600277370 /* User.m in Sources */,
 				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
-				B39BC84A19F284B600277370 /* JSONHTTPClient.m in Sources */,
 				B39BC80219F2847600277370 /* Block.m in Sources */,
-				B39BC84619F284B600277370 /* JSONModelClassProperty.m in Sources */,
-				B39BC84D19F284B600277370 /* JSONValueTransformer.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
-				B39BC84919F284B600277370 /* JSONAPI.m in Sources */,
-				B39BC84819F284B600277370 /* NSArray+JSONModel.m in Sources */,
-				B39BC84C19F284B600277370 /* JSONKeyMapper.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,
 				B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */,
-				B39BC84719F284B600277370 /* JSONModelError.m in Sources */,
-				B39BC84419F284B600277370 /* JSONModel.m in Sources */,
-				B39BC84519F284B600277370 /* JSONModelArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +520,7 @@
 		};
 		B3B1D5D119EEC499001E8BBF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 350E046FF2281BACA6E6CE33 /* Pods-Pancakes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Pancakes/Info.plist;
@@ -560,6 +532,7 @@
 		};
 		B3B1D5D219EEC499001E8BBF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Pancakes/Info.plist;

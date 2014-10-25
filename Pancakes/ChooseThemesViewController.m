@@ -14,7 +14,10 @@
 
 @implementation ChooseThemesViewController {
     NSMutableArray* categoriesViews;
+    
 }
+
+static NSString *CellIdentifier = @"SubThemeViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +26,7 @@
     
     self.themesData = @[
                         @{@"name":@"All",
-                          @"subthemes":@[@"Lol",@"Li",@"LA"]
+                          @"subthemes":@[@"Lol",@"Li",@"LA", @"dqsdqsd"]
                           },
                         @{@"name":@"Diseases",
                           @"subthemes":@[@"EBOLA",@"VIH",@"HAN1"]
@@ -43,6 +46,9 @@
     int screenMidSize = self.view.frame.size.width/2;
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, self.view.frame.size.height)];
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, self.view.frame.size.height)];
+    
+    // Register Class for Cell Reuse Identifier
+    //[self.subThemesView registerClass:[UISubThemeViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     [self.subThemesView setDelegate:self];
     [self.subThemesView setDataSource:self];
@@ -112,16 +118,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"SimpleTableCell";
+    UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    if (!cell) {
+        [tableView registerNib:[UINib nibWithNibName:@"UISubThemeViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        //NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        //cell = [nib objectAtIndex:0];
+        
+     
     }
     
-    cell.textLabel.text = [self.currentThemeSubs objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UISubThemeViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+    NSString *text = [self.currentThemeSubs objectAtIndex:indexPath.row];
+    [cell.title setText:text];
+    
+    //NSLog(text);
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,5 +154,15 @@
     
     [alertView show];
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
 }
 @end

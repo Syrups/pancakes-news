@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIThemeView.h"
+#import "UISubThemeViewCell.h"
 
 @interface ChooseThemesViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +19,8 @@
 @property (nonatomic, retain) NSArray* themesData;
 @property (nonatomic, retain) NSDictionary* currentTheme;
 @property (nonatomic, retain) NSArray* currentThemeSubs;
+
+
 
 - (UIThemeView*) getUIThemeView: (CGFloat) xOrigin;
 
