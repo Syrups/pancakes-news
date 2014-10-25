@@ -7,49 +7,73 @@
 //
 
 #import "GenericBlockCell.h"
+#import "Macros.h"
 
-@implementation GenericBlockCell
+@implementation GenericBlockCell {
+    BOOL layouted;
+}
 
 @synthesize textLabel;
 
-- (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (id)initWithFrame:(CGRect)frame {
+    
+    layouted = false;
+    
+    self = [super initWithFrame:frame];
     
     if (self) {
-        CGRect frame = self.contentView.frame;
-        frame.size.width = 480.0f;
-        self.textLabel = [[UILabel alloc] initWithFrame:frame];
-        self.textLabel.numberOfLines = 200;
+        // Initialization code
+        NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
         
-        [self.contentView addSubview:self.textLabel];
-        [self.layer setMasksToBounds:YES];
+        if ([arrayOfViews count] < 1) {
+            return nil;
+        }
+        
+        if (![[arrayOfViews objectAtIndex:0] isKindOfClass:[GenericBlockCell class]]) {
+            return nil;
+        }
+        
+        self = [arrayOfViews objectAtIndex:0];
+        
     }
     
     return self;
+    
 }
 
 - (void)layoutWithBlock:(Block *)block {
+    if (layouted) {
+        return;
+    }
+    
     self.block = block;
     
     ContentParser* parser = [[ContentParser alloc] init];
-    parser.delegate = self;
-    if (block.content != nil) {
-        [parser parseCallsFromString:block.content];
-    }
     
     self.textLabel.text = block.content != nil ? [parser getCleanedString:block.content] : @"NO CONTENT";
+    self.textLabel.attributedText = [[NSAttributedString alloc] initWithString:self.textLabel.text];
+//    UIFont *font=[UIFont fontWithName:@"Arial" size:14.f];
+//    NSDictionary *attrsDict=[NSDictionary dictionaryWithObject:font
+//                                                        forKey:NSFontAttributeName];
+//    NSMutableAttributedString *attribString=[[NSMutableAttributedString alloc] initWithString:self.textLabel.text   attributes:attrsDict];
+//    
+//    
+//    UIFont *fontFirst=[UIFont fontWithName:@"Arial" size:50.f];
+//    NSDictionary *attrsDictFirst=[NSDictionary dictionaryWithObject:fontFirst forKey:NSFontAttributeName];
+//    NSAttributedString *firstString=[[NSAttributedString alloc] initWithString:[attribString.string substringToIndex:1] attributes:attrsDictFirst];
+//    
+//    [attribString replaceCharactersInRange:NSMakeRange(0, 1)  withAttributedString:firstString];
+//    self.textLabel.attributedText = attribString;
     
-    [self.textLabel sizeToFit];
+    layouted = true;
+}
+
+- (CGFloat)contentHeight {
+    return [self.textLabel.text sizeWithFont:[UIFont fontWithName:@"Arial" size:18.0f] constrainedToSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 9999.0f) lineBreakMode: NSLineBreakByWordWrapping].height;
 }
 
 - (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
     NSLog(@"%@", blockId);
-}
-
-- (void)setFrame:(CGRect)frame {
-    frame.size.width = self.superview.frame.size.width - 40.0f;
-    frame.origin.x += 20.0;
-    [super setFrame:frame];
 }
 
 @end

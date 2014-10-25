@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "Article.h"
+#import "ContentParser.h"
 
-@interface ArticleViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ArticleViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ContentParserDelegate>
 
 @property (strong, nonatomic) Article* displayedArticle;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *articleTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *moreButton;
+@property (strong, nonatomic) ContentParser* parser;
+
+@property (strong, nonatomic) UIView* leftMenuView;
+@property (strong, nonatomic) UIView* rightMenuView;
 
 @end

@@ -14,6 +14,7 @@
 		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
 		73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A7019F15CC600BFB546 /* UIThemeView.xib */; };
 		73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B33A7319F15DB700BFB546 /* UIThemeView.m */; };
+		B3183C3C19F68B90004C401F /* GenericBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3183C3B19F68B90004C401F /* GenericBlockCell.xib */; };
 		B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */; };
 		B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0CC19F47069002D7AE7 /* ContentParser.m */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
@@ -83,6 +84,14 @@
 		B3B1D5C619EEC499001E8BBF /* PancakesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PancakesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5CB19EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
+		B3ED1B6519F84FFE00AA621C /* ArticleRightMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleRightMenu.xib; sourceTree = "<group>"; };
+		B3ED1B6719F850D100AA621C /* ArticleLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleLeftMenu.xib; sourceTree = "<group>"; };
+		B3ED1B6919F8575300AA621C /* MapBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapBlockCell.xib; sourceTree = "<group>"; };
+		B3ED1B6B19F8579200AA621C /* MapBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBlockCell.h; sourceTree = "<group>"; };
+		B3ED1B6C19F8579200AA621C /* MapBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBlockCell.m; sourceTree = "<group>"; };
+		B3ED1B6E19F857B400AA621C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B3FB2D3619F99B8400DF09D8 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B3FB2D3819F9A56000DF09D8 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +143,10 @@
 			children = (
 				B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */,
 				B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */,
+				B3183C3B19F68B90004C401F /* GenericBlockCell.xib */,
+				B3ED1B6919F8575300AA621C /* MapBlockCell.xib */,
+				B3ED1B6B19F8579200AA621C /* MapBlockCell.h */,
+				B3ED1B6C19F8579200AA621C /* MapBlockCell.m */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -210,6 +223,7 @@
 				B3B1D5BD19EEC499001E8BBF /* Images.xcassets */,
 				B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */,
 				B3B1D5B019EEC499001E8BBF /* Supporting Files */,
+				B3FB2D3819F9A56000DF09D8 /* Macros.h */,
 			);
 			path = Pancakes;
 			sourceTree = "<group>";
@@ -332,8 +346,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */,
+				B3ED1B6819F850D100AA621C /* ArticleLeftMenu.xib in Resources */,
+				B3ED1B6A19F8575300AA621C /* MapBlockCell.xib in Resources */,
+				B3183C3C19F68B90004C401F /* GenericBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
+				B3ED1B6619F84FFE00AA621C /* ArticleRightMenu.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
 				73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */,
 				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
@@ -397,6 +415,7 @@
 				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
 				B39BC80219F2847600277370 /* Block.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
+				B3ED1B6D19F8579200AA621C /* MapBlockCell.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,

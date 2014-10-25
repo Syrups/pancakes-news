@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSString* _id;
 @property (strong, nonatomic) NSString* title;
+@property (strong, nonatomic) NSString* coverImage;
 @property (strong, nonatomic) NSArray<Block>* blocks;
 @property (strong, nonatomic) NSArray<Comment>* comments;
 

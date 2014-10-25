@@ -4,6 +4,7 @@
 
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Article View Controller-->
@@ -101,8 +102,7 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="articleTitleLabel" destination="2ey-XN-vdP" id="cQs-a3-v6w"/>
-                        <outlet property="tableView" destination="OlU-OJ-bSg" id="lTO-qg-oSR"/>
+                        <outlet property="collectionView" destination="nRy-lB-sDS" id="zZl-T6-jIE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QG4-ww-f3F" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,16 +12,29 @@
 
 - (void)parseCallsFromString:(NSString *)string {
     NSError* error = nil;
-    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"\\[call=([0-9]+)\\](.*?)\\[/call\\]" options:NSRegularExpressionAnchorsMatchLines error:&error];
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"\\[call=([0-9a-z]+)\\](.*?)\\[\\/call\\]" options:NSRegularExpressionAnchorsMatchLines error:&error];
     
     [regex enumerateMatchesInString:string options:0 range:NSMakeRange(0, string.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         
         NSRange blockIdRange = [result rangeAtIndex:1];
+        NSRange attributesRange = [result rangeAtIndex:2];
+        
         NSString* blockId = [string substringWithRange:blockIdRange];
+        
+        [self parseCallAttributesFromCallString:[string substringWithRange:attributesRange]];
         
         if (self.delegate != nil) {
             [self.delegate parser:self didCallBlockWithId:blockId atTextLocation:blockIdRange.location];
         }
+    }];
+}
+
+- (void)parseCallAttributesFromCallString:(NSString*)callString {
+    NSError* error = nil;
+    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"([a-z]+)=([\\w\\s]+)" options:NSRegularExpressionAnchorsMatchLines error:&error];
+    
+    [regex enumerateMatchesInString:callString options:0 range:NSMakeRange(0, callString.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        NSLog(@"%@", [callString substringWithRange:[result rangeAtIndex:0]]);
     }];
 }
 
