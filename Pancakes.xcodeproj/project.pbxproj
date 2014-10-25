@@ -163,6 +163,8 @@
 		B38554E319F11B0800AB8459 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B30ED5EA19FA8EC300DB2621 /* MyFeedViewController.h */,
+				B30ED5EB19FA8EC300DB2621 /* MyFeedViewController.m */,
 				B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */,
 				B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */,
 				B38F09BC19F13CB10013B920 /* ArticleViewController.h */,
@@ -213,6 +215,7 @@
 		B3B1D5AF19EEC499001E8BBF /* Pancakes */ = {
 			isa = PBXGroup;
 			children = (
+				B32A535E19FAE6ED00432378 /* Configuration.h */,
 				B375C0CA19F4704D002D7AE7 /* Services */,
 				73B33A6D19F15AD600BFB546 /* Views */,
 				B38F09BF19F13EDF0013B920 /* Models */,

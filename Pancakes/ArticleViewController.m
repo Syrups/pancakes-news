@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Gobelins. All rights reserved.
 //
 
+#import "Configuration.h"
 #import "ArticleViewController.h"
 #import "JSONHTTPClient.h"
 #import "Block.h"
@@ -47,7 +48,8 @@
     self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
     // /TEST
     
-    NSString* articleUrl = [NSString stringWithFormat:@"http://localhost:5000/api/articles/%@", self.displayedArticle._id];
+    NSString* articlePath = [NSString stringWithFormat:@"/articles/%@", self.displayedArticle._id];
+    NSString* articleUrl = [kApiRootUrl stringByAppendingString:articlePath];
     
     [JSONHTTPClient getJSONFromURLWithString:articleUrl completion:^(NSDictionary *json, JSONModelError *err) {
         NSError* error = nil;
