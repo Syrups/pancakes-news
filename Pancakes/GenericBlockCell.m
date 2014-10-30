@@ -18,7 +18,6 @@
 - (id)initWithFrame:(CGRect)frame {
     
     layouted = false;
-    
     self = [super initWithFrame:frame];
     
     if (self) {
@@ -34,13 +33,14 @@
         }
         
         self = [arrayOfViews objectAtIndex:0];
-        
     }
     
     return self;
-    
 }
 
+/*
+ * Configures and layout the cell with block data from model
+ */
 - (void)layoutWithBlock:(Block *)block {
     if (layouted) {
         return;
@@ -50,8 +50,83 @@
     
     ContentParser* parser = [[ContentParser alloc] init];
     
-    self.textLabel.text = block.content != nil ? [parser getCleanedString:block.content] : @"NO CONTENT";
-    self.textLabel.attributedText = [[NSAttributedString alloc] initWithString:self.textLabel.text];
+    __block NSInteger originY = 0.0f;
+    
+    // Iterate over each paragraph of the block
+    
+    for (NSString* p in block.paragraphs) {
+        
+        __block NSMutableArray* blocksToAppend = [NSMutableArray array];
+        
+        // Parse eventual block calls
+        [parser parseCallsFromString:p withBlock:^(NSArray *calls) {
+            
+            NSString* clean = [parser getCleanedString:p];
+            NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:clean];
+            
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, originY, self.frame.size.width - 80.0f, 120.0f)];
+            label.numberOfLines = 0;
+            
+            // For each call, underline the corresponding portion of
+            // text and (TODO) add a button for displaying the called block.
+            for (NSDictionary* call in calls) {
+                NSRange range;
+                [(NSValue*)[call objectForKey:@"textRange"] getValue:&range];
+                [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:range];
+                
+                NSString* blockId = [call objectForKey:@"blockId"];
+                Block* child = [block childWithId:blockId];
+                
+                if (child != nil) {
+                    [blocksToAppend addObject:child];
+                }
+            }
+            
+            // Finally set the label with attributes
+            label.attributedText = content;
+            
+            // Configure the label height
+            CGSize exceptedSize = [content.string sizeWithFont:label.font constrainedToSize:self.frame.size lineBreakMode:label.lineBreakMode];
+            CGRect frame = label.frame;
+            frame.size.height = exceptedSize.height + 40.0f;
+            label.frame = frame;
+            
+            
+            [self addSubview:label];
+            
+            // Change the origin Y point for next paragraph
+            originY += label.frame.size.height;
+            
+            // Iterate now over each sub-block called by the current paragraph,
+            // and add each of them after it.
+            for (Block* block in blocksToAppend) {
+                
+                // Append each sub-block paragraph
+                for (NSString* p in block.paragraphs) {
+                    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(80.0f, originY, self.frame.size.width - 80.0f, 100.0f)];
+                    label.numberOfLines = 0;
+                    label.text = p;
+                    
+                    // Configure the label height
+                    CGSize exceptedSize = [p sizeWithFont:label.font constrainedToSize:self.frame.size lineBreakMode:label.lineBreakMode];
+                    CGRect frame = label.frame;
+                    frame.size.height = exceptedSize.height + 40.0f;
+                    label.frame = frame;
+                    
+                    [self addSubview:label];
+                    
+                    originY += label.frame.size.height;
+                    
+                }
+            }
+            
+            
+            
+        }];
+        
+    }
+
+    
 //    UIFont *font=[UIFont fontWithName:@"Arial" size:14.f];
 //    NSDictionary *attrsDict=[NSDictionary dictionaryWithObject:font
 //                                                        forKey:NSFontAttributeName];
@@ -68,12 +143,5 @@
     layouted = true;
 }
 
-- (CGFloat)contentHeight {
-    return [self.textLabel.text sizeWithFont:[UIFont fontWithName:@"Arial" size:18.0f] constrainedToSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 9999.0f) lineBreakMode: NSLineBreakByWordWrapping].height;
-}
-
-- (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
-    NSLog(@"%@", blockId);
-}
 
 @end

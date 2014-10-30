@@ -10,6 +10,14 @@
 
 @implementation Block
 
-
+- (Block *)childWithId:(NSString *)blockId {
+    for (Block* block in self.children) {
+        if ([block.id isEqualToString:blockId]) {
+            return block;
+        }
+    }
+    
+    return nil;
+}
 
 @end

@@ -21,5 +21,9 @@
 @property (strong, nonatomic) NSString<Optional>* latitude;
 @property (strong, nonatomic) NSString<Optional>* longitude;
 @property (strong, nonatomic) NSString<Optional>* image;
+@property (strong, nonatomic) NSArray* paragraphs;
+@property (strong, nonatomic) NSArray<Block, Optional>* children;
+
+- (Block*)childWithId:(NSString*)blockId;
 
 @end

@@ -11,7 +11,6 @@
 #import "JSONHTTPClient.h"
 #import "Block.h"
 #import "GenericBlockCell.h"
-#import "MapBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
@@ -35,7 +34,6 @@
     self.parser.delegate = self;
     
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
-    [self.collectionView registerClass:[MapBlockCell class] forCellWithReuseIdentifier:@"MapBlockCell"];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -82,17 +80,19 @@
  */
 
 - (UICollectionViewCell*) articleTitleCell {
+    
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
     UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
     articleTitle.text = self.displayedArticle.title;
     
     articleTitle.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
     UIImageView* imageView = (UIImageView*)[cell.contentView viewWithTag:20];
+    imageView.frame = cell.frame;
     
     [imageView sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image != nil) {
-            [imageView setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:^{
-            }];
+//            [imageView setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:^{
+//            }];
         }
     }];
     
@@ -197,17 +197,10 @@
     Block* block = [self blockAtIndexPath:indexPath];
     GenericBlockCell* cell = nil;
     
-    if ([block.type.name isEqualToString:@"map"]) {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MapBlockCell" forIndexPath:indexPath];
-    } else {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
-    }
+    
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
     
     [cell layoutWithBlock:block];
-    
-    if (block.content != nil) {
-        [self.parser parseCallsFromString:block.content];
-    }
     
     NSLog(@"Showing block cell with block index %lu", (unsigned long) [self.displayedArticle.blocks indexOfObject:block]);
     
@@ -217,13 +210,13 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 0) {
-        return CGSizeMake(self.collectionView.frame.size.width, 250.0f);
+        return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height);
     }
     
     Block* block = [self blockAtIndexPath:indexPath];
     
     if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
-        return CGSizeMake(self.collectionView.frame.size.width, 0.0f);
+        return CGSizeMake(self.collectionView.frame.size.width, 50.0f);
     }
     
 //    return CGSizeMake(
@@ -233,22 +226,33 @@
     
     return CGSizeMake(
                 self.collectionView.frame.size.width,
-                250.0f
+                [block.paragraphs count] * 150.0f // This is dirty, we'll do something cleverer later :)
             );
 }
 
 #pragma mark - ContentParserDelegate
 
 - (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
-    Block* calledBlock = [self blockWithId:blockId];
-    
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    button.frame = CGRectMake(self.collectionView.frame.size.width-35.0f, [blockId intValue]*100.0f, 20.0f, 20.0f);
-    button.tag = [blockId intValue];
-    
-    [button addTarget:self action:@selector(revealBlock:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.collectionView addSubview:button];
+//    Block* calledBlock = [self blockWithId:blockId];
+//    
+//    UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
+//    button.frame = CGRectMake(self.collectionView.frame.size.width-35.0f, [blockId intValue]*100.0f, 20.0f, 20.0f);
+//    button.tag = [blockId intValue];
+//    
+//    [button addTarget:self action:@selector(revealBlock:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.collectionView addSubview:button];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (self.collectionView.contentOffset.y >= 40 && self.collectionView.contentOffset.y < self.view.frame.size.height/2) {
+        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height/2) animated:YES];
+    }
+    if (self.collectionView.contentOffset.y < 40) {
+        [self.collectionView setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
+    }
 }
 
 @end

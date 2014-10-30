@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) id delegate;
 
-- (void) parseCallsFromString:(NSString*)string;
+- (void)parseCallsFromString:(NSString *)string withBlock:(void(^)(NSArray* calls))block;
 - (NSString*) getCleanedString:(NSString*)string;
 
 @end
