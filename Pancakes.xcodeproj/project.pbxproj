@@ -28,8 +28,6 @@
 		B3A8B62A19FBF85B00D52EB6 /* ArticleLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */; };
 		B3A8B62B19FBF85B00D52EB6 /* ArticleRightMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */; };
 		B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */; };
-		B3A8B62D19FBF89F00D52EB6 /* MapBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B3ED1B6C19F8579200AA621C /* MapBlockCell.m */; };
-		B3A8B62E19FBF9A300D52EB6 /* MapBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3ED1B6919F8575300AA621C /* MapBlockCell.xib */; };
 		B3A8B63019FBF9CB00D52EB6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A8B62F19FBF9CB00D52EB6 /* Accelerate.framework */; };
 		B3A8B63219FBF9D200D52EB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A8B63119FBF9D200D52EB6 /* MapKit.framework */; };
 		B3B1D5B319EEC499001E8BBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5B219EEC499001E8BBF /* main.m */; };
@@ -100,9 +98,6 @@
 		B3B1D5C619EEC499001E8BBF /* PancakesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PancakesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5CB19EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
-		B3ED1B6919F8575300AA621C /* MapBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapBlockCell.xib; sourceTree = "<group>"; };
-		B3ED1B6B19F8579200AA621C /* MapBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapBlockCell.h; sourceTree = "<group>"; };
-		B3ED1B6C19F8579200AA621C /* MapBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapBlockCell.m; sourceTree = "<group>"; };
 		B3FB2D3819F9A56000DF09D8 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,9 +157,6 @@
 				B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */,
 				B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */,
 				B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */,
-				B3ED1B6919F8575300AA621C /* MapBlockCell.xib */,
-				B3ED1B6B19F8579200AA621C /* MapBlockCell.h */,
-				B3ED1B6C19F8579200AA621C /* MapBlockCell.m */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -368,7 +360,6 @@
 			files = (
 				73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */,
 				B3A8B62A19FBF85B00D52EB6 /* ArticleLeftMenu.xib in Resources */,
-				B3A8B62E19FBF9A300D52EB6 /* MapBlockCell.xib in Resources */,
 				B3A8B62B19FBF85B00D52EB6 /* ArticleRightMenu.xib in Resources */,
 				B3183C3C19F68B90004C401F /* (null) in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
@@ -428,7 +419,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3A8B62D19FBF89F00D52EB6 /* MapBlockCell.m in Sources */,
 				73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */,
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */,

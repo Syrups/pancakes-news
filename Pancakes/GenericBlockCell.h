@@ -13,9 +13,8 @@
 @interface GenericBlockCell : UICollectionViewCell <ContentParserDelegate>
 
 @property (strong, nonatomic) Block* block;
-@property (strong, nonatomic) IBOutlet UILabel *textLabel;
+@property (strong, nonatomic) UILabel *textLabel;
 
 - (void)layoutWithBlock:(Block*)block;
-- (CGFloat)contentHeight;
 
 @end
