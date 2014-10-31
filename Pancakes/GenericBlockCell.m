@@ -88,14 +88,14 @@
             // Configure the label height
             CGSize exceptedSize = [content.string sizeWithFont:label.font constrainedToSize:self.frame.size lineBreakMode:label.lineBreakMode];
             CGRect frame = label.frame;
-            frame.size.height = exceptedSize.height + 40.0f;
+            frame.size.height = exceptedSize.height + 30.0f;
             label.frame = frame;
             
             
             [self addSubview:label];
             
             // Change the origin Y point for next paragraph
-            originY += label.frame.size.height;
+            originY += label.frame.size.height + 10.0f;
             
             // Iterate now over each sub-block called by the current paragraph,
             // and add each of them after it.
@@ -103,14 +103,15 @@
                 
                 // Append each sub-block paragraph
                 for (NSString* p in block.paragraphs) {
-                    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(80.0f, originY, self.frame.size.width - 80.0f, 100.0f)];
+                    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(80.0f, originY, self.frame.size.width - 120.0f, 100.0f)];
                     label.numberOfLines = 0;
                     label.text = p;
+                    label.backgroundColor = [UIColor grayColor];
                     
                     // Configure the label height
                     CGSize exceptedSize = [p sizeWithFont:label.font constrainedToSize:self.frame.size lineBreakMode:label.lineBreakMode];
                     CGRect frame = label.frame;
-                    frame.size.height = exceptedSize.height + 40.0f;
+                    frame.size.height = exceptedSize.height + 20.0f;
                     label.frame = frame;
                     
                     [self addSubview:label];
@@ -118,6 +119,8 @@
                     originY += label.frame.size.height;
                     
                 }
+                
+                originY += 20.0f;
             }
             
             

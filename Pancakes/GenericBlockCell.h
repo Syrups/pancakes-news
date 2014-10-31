@@ -10,7 +10,7 @@
 #import "Block.h"
 #import "ContentParser.h"
 
-@interface GenericBlockCell : UICollectionViewCell <ContentParserDelegate>
+@interface GenericBlockCell : UICollectionViewCell
 
 @property (strong, nonatomic) Block* block;
 @property (strong, nonatomic) UILabel *textLabel;

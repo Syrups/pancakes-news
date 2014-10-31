@@ -30,6 +30,13 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BreeBold.otf</string>
+		<string>BreeRegular.otf</string>
+		<string>Heuristica-Italic.otf</string>
+		<string>Heuristica-Regular.otf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

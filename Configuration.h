@@ -11,4 +11,15 @@
 
 #define kApiRootUrl @"http://localhost:5000/api"
 
+// Colors
+
+#define kArticleViewBlockBackground RgbColor(243, 243, 243)
+
+// Fonts
+
+#define kFontHeuristicaRegular @"Heuristica-Regular"
+#define kFontHeuristicaItalic @"Heuristica-Italic"
+#define kFontBreeRegular @"Bree-Regular"
+#define kFontBreeBold @"Bree-Bold"
+
 #endif
