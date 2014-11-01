@@ -18,6 +18,8 @@
 		B3183C3C19F68B90004C401F /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B34E701F1A02DA5A00C4ECA2 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = B34E701E1A02DA5A00C4ECA2 /* UIImage+StackBlur.m */; };
 		B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */ = {isa = PBXBuildFile; fileRef = B34E70221A02DEA200C4ECA2 /* UIImage+DSP.m */; };
+		B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B35841FB1A03DAC400A17468 /* SectionBlockCell.m */; };
+		B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */; };
 		B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */; };
 		B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0CC19F47069002D7AE7 /* ContentParser.m */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
@@ -79,6 +81,9 @@
 		B34E701E1A02DA5A00C4ECA2 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		B34E70211A02DEA200C4ECA2 /* UIImage+DSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DSP.h"; sourceTree = "<group>"; };
 		B34E70221A02DEA200C4ECA2 /* UIImage+DSP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DSP.m"; sourceTree = "<group>"; };
+		B35841FA1A03DAC400A17468 /* SectionBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionBlockCell.h; sourceTree = "<group>"; };
+		B35841FB1A03DAC400A17468 /* SectionBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionBlockCell.m; sourceTree = "<group>"; };
+		B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionBlockCell.xib; sourceTree = "<group>"; };
 		B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericBlockCell.h; sourceTree = "<group>"; };
 		B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericBlockCell.m; sourceTree = "<group>"; };
 		B375C0CB19F47069002D7AE7 /* ContentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentParser.h; sourceTree = "<group>"; };
@@ -213,6 +218,9 @@
 				B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */,
 				B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */,
 				B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */,
+				B35841FA1A03DAC400A17468 /* SectionBlockCell.h */,
+				B35841FB1A03DAC400A17468 /* SectionBlockCell.m */,
+				B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -455,6 +463,7 @@
 				B3A8B62B19FBF85B00D52EB6 /* ArticleRightMenu.xib in Resources */,
 				B3183C3C19F68B90004C401F /* (null) in Resources */,
 				B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */,
+				B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
@@ -517,6 +526,7 @@
 			files = (
 				B34E701F1A02DA5A00C4ECA2 /* UIImage+StackBlur.m in Sources */,
 				73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */,
+				B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */,
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */,
 				B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */,

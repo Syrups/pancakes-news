@@ -8,6 +8,7 @@
 
 #import "GenericBlockCell.h"
 #import "Macros.h"
+#import "Configuration.h"
 
 @implementation GenericBlockCell {
     BOOL layouted;
@@ -35,13 +36,15 @@
         self = [arrayOfViews objectAtIndex:0];
     }
     
+    self.backgroundColor = kArticleViewBlockBackground;
+    
     return self;
 }
 
 /*
  * Configures and layout the cell with block data from model
  */
-- (void)layoutWithBlock:(Block *)block {
+- (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     if (layouted) {
         return;
     }
@@ -50,7 +53,8 @@
     
     ContentParser* parser = [[ContentParser alloc] init];
     
-    __block NSInteger originY = 0.0f;
+    // margin top
+    __block NSInteger originY = offsetY;
     
     // Iterate over each paragraph of the block
     
@@ -64,8 +68,12 @@
             NSString* clean = [parser getCleanedString:p];
             NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:clean];
             
-            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, originY, self.frame.size.width - 80.0f, 120.0f)];
+            NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+            [style setLineSpacing:8.0f];
+            
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, originY, self.frame.size.width - 100.0f, 120.0f)];
             label.numberOfLines = 0;
+            label.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
             
             // For each call, underline the corresponding portion of
             // text and (TODO) add a button for displaying the called block.
@@ -83,6 +91,7 @@
             }
             
             // Finally set the label with attributes
+            [content addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, content.length)];
             label.attributedText = content;
             
             // Configure the label height
@@ -92,7 +101,7 @@
             label.frame = frame;
             
             
-            [self addSubview:label];
+            [self.contentView addSubview:label];
             
             // Change the origin Y point for next paragraph
             originY += label.frame.size.height + 10.0f;
@@ -114,7 +123,7 @@
                     frame.size.height = exceptedSize.height + 20.0f;
                     label.frame = frame;
                     
-                    [self addSubview:label];
+                    [self.contentView addSubview:label];
                     
                     originY += label.frame.size.height;
                     

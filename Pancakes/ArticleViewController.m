@@ -12,6 +12,7 @@
 #import "JSONHTTPClient.h"
 #import "Block.h"
 #import "GenericBlockCell.h"
+#import "SectionBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+StackBlur.h"
 
@@ -23,12 +24,15 @@
     NSMutableArray* hiddenBlocks;
     UIImage *coverOriginalImage;
     UIImage *coverBlurredImage;
+    BOOL titleCellAnimated;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     hiddenBlocks = [NSMutableArray array];
+    
+    titleCellAnimated = false;
     
     [self fetchArticleData];
     [self loadMenuView];
@@ -37,6 +41,7 @@
     self.parser.delegate = self;
     
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
+    [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -94,9 +99,28 @@
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
     UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
     articleTitle.text = self.displayedArticle.title;
-
     articleTitle.textColor = [UIColor whiteColor];
     articleTitle.font = [UIFont fontWithName:kFontBreeBold size:36];
+    
+    UILabel* creditsLabel = (UILabel*)[cell.contentView viewWithTag:20];
+    creditsLabel.text = self.displayedArticle.credits;
+    creditsLabel.textColor = [UIColor whiteColor];
+    creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
+    
+    if (!titleCellAnimated) {
+        [UIView animateWithDuration:0.7f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect frame = articleTitle.frame;
+            frame.origin.y += self.view.frame.size.height;
+            articleTitle.frame = frame;
+            [articleTitle setAlpha:1.0f];
+            frame = creditsLabel.frame;
+            frame.origin.y += self.view.frame.size.height;
+            creditsLabel.frame = frame;
+            [creditsLabel setAlpha:1.0f];
+        } completion:^(BOOL finished) {
+            titleCellAnimated = YES;
+        }];
+    }
     
     return cell;
 }
@@ -172,15 +196,14 @@
     Block* block = [self blockAtIndexPath:indexPath];
     GenericBlockCell* cell = nil;
     
-    cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
-    
     if (![block.type.name isEqualToString:@"generic"]) {
-        cell.backgroundColor = [UIColor orangeColor];
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SectionBlockCell" forIndexPath:indexPath];
+        cell.contentView.alpha = 0.0f;
     } else {
-        cell.backgroundColor = kArticleViewBlockBackground;
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
     }
     
-    [cell layoutWithBlock:block];
+    [cell layoutWithBlock:block offsetY:20.0f];
     
     NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, indexPath.row);
     
@@ -190,21 +213,20 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 0) {
-        return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height * 1.5);
+        return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height * 1.75);
     }
     
     Block* block = [self blockAtIndexPath:indexPath];
     
     if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
-        return CGSizeMake(self.collectionView.frame.size.width, 50.0f);
+        return CGSizeMake(self.collectionView.frame.size.width, 70.0f);
     }
     
     return CGSizeMake(
                 self.collectionView.frame.size.width,
-                [block.paragraphs count] * 150.0f // This is dirty, we'll do something cleverer later :)
+                [block.paragraphs count] * 200.0f // This is dirty, we'll do something cleverer later :)
             );
 }
-
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     Block* block = [self blockAtIndexPath:indexPath];
@@ -213,34 +235,14 @@
         return;
     }
     
-    UICollectionViewCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
     //        [self.collectionView.collectionViewLayout invalidateLayout];
     NSLog(@"%f", cell.frame.origin.y);
     [self.collectionView performBatchUpdates:^{
-        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
-            
-            [self.collectionView setContentOffset:CGPointMake(0, cell.frame.origin.y)];
-            
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-                [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentOffset.y - 20.0f)];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.12f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-                    [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentOffset.y + 20.0f)];
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.08f delay:0.0f options:UIViewAnimationOptionCurveLinear animations:^{
-                        [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentOffset.y - 8.0f)];
-                    } completion:^(BOOL finished) {
-                        [UIView animateWithDuration:0.08f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
-                            [self.collectionView setContentOffset:CGPointMake(0, self.collectionView.contentOffset.y + 8.0f)];
-                        } completion:NULL];
-                    }];
-                }];
-            }];
-        }];
-        
         
         [hiddenBlocks removeObject:block];
+        [cell openWithAnimation];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y) animated:YES];
         
     } completion:^(BOOL finished) {
         
@@ -249,13 +251,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     Block* block = [self blockAtIndexPath:indexPath];
+    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
     
-    if (block == nil) return;
+    if (block == nil || [cell class] != [SectionBlockCell class]) return;
     
     //    [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView performBatchUpdates:^{
         if ([hiddenBlocks indexOfObject:block] == NSNotFound) {
             [hiddenBlocks addObject:block];
+            [cell closeWithAnimation];
         }
     } completion:^(BOOL finished) {
         
@@ -280,9 +284,9 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     NSLog(@"%f", scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y >= 150.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
+    if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
         
-        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height) animated:YES];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.35) animated:YES];
     }
    
 }
@@ -296,7 +300,7 @@
     if (self.collectionView.contentOffset.y == 0) {
         [self.articleCoverImage setImage:coverOriginalImage];
     } else {
-        int radius = self.collectionView.contentOffset.y / 5;
+        int radius = self.collectionView.contentOffset.y / 4;
 //        coverBlurredImage = [coverOriginalImage stackBlur:radius];
 //        [self.articleCoverImage setImage:coverBlurredImage];
         

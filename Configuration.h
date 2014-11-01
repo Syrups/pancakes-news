@@ -15,6 +15,8 @@
 
 #define kArticleViewBlockBackground RgbColor(243, 243, 243)
 
+#define kOrangeColor RgbColor(255, 121, 0)
+
 // Fonts
 
 #define kFontHeuristicaRegular @"Heuristica-Regular"
