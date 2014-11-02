@@ -108,7 +108,29 @@
     creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
     
     if (!titleCellAnimated) {
+        CGRect f = self.moreButtonBackground.frame;
+        f.origin.y = -60.0f;
+        self.moreButtonBackground.frame = f;
+        f = self.moreButton.frame;
+        f.origin.y = -50.0f;
+        self.moreButton.frame = f;
+        
         [UIView animateWithDuration:0.7f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = self.moreButtonBackground.frame;
+            f.origin.y = 20.0f;
+            self.moreButtonBackground.frame = f;
+            self.moreButtonBackground.alpha = 1.0f;
+            self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI );
+        } completion:NULL];
+        
+        [UIView animateWithDuration:0.5f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = self.moreButton.frame;
+            f.origin.y = 55.0f;
+            self.moreButton.frame = f;
+            self.moreButton.alpha = 1.0f;
+        } completion:NULL];
+        
+        [UIView animateWithDuration:0.8f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect frame = articleTitle.frame;
             frame.origin.y += self.view.frame.size.height;
             articleTitle.frame = frame;

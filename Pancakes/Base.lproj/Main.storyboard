@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ejU-4E-oaO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--My Feed View Controller-->
@@ -128,14 +127,14 @@
                                     <outlet property="delegate" destination="ejU-4E-oaO" id="6wb-oh-6hs"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEr-ms-3dg">
-                                <rect key="frame" x="530" y="30" width="22" height="22"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="article-more-bg" translatesAutoresizingMaskIntoConstraints="NO" id="bDa-eq-amW">
+                                <rect key="frame" x="507" y="20" width="47" height="47"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEr-ms-3dg">
+                                <rect key="frame" x="523" y="35" width="16" height="16"/>
+                                <state key="normal" image="article-more-plus">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="toggleMenu:" destination="ejU-4E-oaO" eventType="touchUpInside" id="rWS-BY-fIE"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -143,9 +142,7 @@
                             <constraint firstItem="Myw-hq-Hpy" firstAttribute="top" secondItem="SX6-30-hic" secondAttribute="top" id="E8s-6b-xXa"/>
                             <constraint firstItem="Myw-hq-Hpy" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leading" id="JAK-27-azT"/>
                             <constraint firstAttribute="trailing" secondItem="Myw-hq-Hpy" secondAttribute="trailing" id="MfZ-Ck-ifi"/>
-                            <constraint firstItem="SEr-ms-3dg" firstAttribute="trailing" secondItem="SX6-30-hic" secondAttribute="trailingMargin" id="f1Q-H7-bxv"/>
                             <constraint firstAttribute="centerY" secondItem="Myw-hq-Hpy" secondAttribute="centerY" id="lHM-qt-ZFJ"/>
-                            <constraint firstItem="SEr-ms-3dg" firstAttribute="top" secondItem="c9O-0C-3LP" secondAttribute="bottom" constant="10" id="mcO-3D-4Dw"/>
                             <constraint firstItem="gaj-1d-LZO" firstAttribute="top" secondItem="Myw-hq-Hpy" secondAttribute="bottom" id="qf6-u9-ntC"/>
                             <constraint firstAttribute="centerX" secondItem="Myw-hq-Hpy" secondAttribute="centerX" id="tHP-1x-n9O"/>
                         </constraints>
@@ -154,6 +151,8 @@
                     <connections>
                         <outlet property="articleCoverImage" destination="0Ws-Kg-Hbu" id="ryg-oK-iER"/>
                         <outlet property="collectionView" destination="Myw-hq-Hpy" id="uo2-Q1-96A"/>
+                        <outlet property="moreButton" destination="SEr-ms-3dg" id="x1u-AC-EWX"/>
+                        <outlet property="moreButtonBackground" destination="bDa-eq-amW" id="gf3-sZ-E4q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QG4-ww-f3F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -191,6 +190,10 @@
             <point key="canvasLocation" x="81.599999999999994" y="142.94666666666666"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="article-more-bg" width="48" height="48"/>
+        <image name="article-more-plus" width="16" height="16"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

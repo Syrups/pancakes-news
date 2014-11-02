@@ -66,7 +66,7 @@
         f.size.height = 0.0f;
         self.titleBanner.frame = f;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGRect f = self.titleLabel.frame;
             f.origin.y += 40.0f;
             self.titleLabel.frame = f;
