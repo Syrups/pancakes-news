@@ -20,6 +20,7 @@
 		B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */ = {isa = PBXBuildFile; fileRef = B34E70221A02DEA200C4ECA2 /* UIImage+DSP.m */; };
 		B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B35841FB1A03DAC400A17468 /* SectionBlockCell.m */; };
 		B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */; };
+		B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B35842011A069C4700A17468 /* DefinitionEmbeddedBlock.m */; };
 		B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */; };
 		B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0CC19F47069002D7AE7 /* ContentParser.m */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
@@ -84,6 +85,8 @@
 		B35841FA1A03DAC400A17468 /* SectionBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionBlockCell.h; sourceTree = "<group>"; };
 		B35841FB1A03DAC400A17468 /* SectionBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionBlockCell.m; sourceTree = "<group>"; };
 		B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionBlockCell.xib; sourceTree = "<group>"; };
+		B35842001A069C4700A17468 /* DefinitionEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinitionEmbeddedBlock.h; sourceTree = "<group>"; };
+		B35842011A069C4700A17468 /* DefinitionEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinitionEmbeddedBlock.m; sourceTree = "<group>"; };
 		B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericBlockCell.h; sourceTree = "<group>"; };
 		B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericBlockCell.m; sourceTree = "<group>"; };
 		B375C0CB19F47069002D7AE7 /* ContentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentParser.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 		73B33A6D19F15AD600BFB546 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */,
+				B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */,
 				B375C0C619F46B4F002D7AE7 /* Blocks */,
 				73B33A7019F15CC600BFB546 /* UIThemeView.xib */,
 				73B33A7219F15DB700BFB546 /* UIThemeView.h */,
@@ -210,11 +215,19 @@
 			path = "Pancakes/UIImage+DSP";
 			sourceTree = "<group>";
 		};
+		B35841FF1A069C1900A17468 /* EmbeddedBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				B35842001A069C4700A17468 /* DefinitionEmbeddedBlock.h */,
+				B35842011A069C4700A17468 /* DefinitionEmbeddedBlock.m */,
+			);
+			name = EmbeddedBlocks;
+			sourceTree = "<group>";
+		};
 		B375C0C619F46B4F002D7AE7 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */,
-				B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */,
+				B35841FF1A069C1900A17468 /* EmbeddedBlocks */,
 				B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */,
 				B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */,
 				B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */,
@@ -536,6 +549,7 @@
 				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
 				B39BC80219F2847600277370 /* Block.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
+				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,

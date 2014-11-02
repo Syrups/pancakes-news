@@ -203,7 +203,7 @@
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
     }
     
-    [cell layoutWithBlock:block offsetY:20.0f];
+    [cell layoutWithBlock:block offsetY:40.0f];
     
     NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, indexPath.row);
     
@@ -224,7 +224,7 @@
     
     return CGSizeMake(
                 self.collectionView.frame.size.width,
-                [block.paragraphs count] * 200.0f // This is dirty, we'll do something cleverer later :)
+                [block.paragraphs count] * 200.0f + [block.children count] * 230.0f // This is dirty, we'll do something cleverer later :)
             );
 }
 
@@ -242,7 +242,7 @@
         
         [hiddenBlocks removeObject:block];
         [cell openWithAnimation];
-        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y) animated:YES];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y + 8.0f) animated:YES];
         
     } completion:^(BOOL finished) {
         

@@ -16,5 +16,6 @@
 @property (strong, nonatomic) UILabel *textLabel;
 
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
+- (void)openEmbeddedBlockWithId:(NSString*)blockId completion:(void(^)())completion;
 
 @end

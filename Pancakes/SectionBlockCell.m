@@ -26,7 +26,7 @@
     
     if (opened) return;
     
-    UIImageView *coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 290.0f)];
+    UIImageView *coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 290.0f)];
     coverImage.contentMode = UIViewContentModeScaleAspectFit;
     [coverImage sd_setImageWithURL:[NSURL URLWithString:block.image]];
     [self addSubview:coverImage];
@@ -39,8 +39,10 @@
     
     self.imageMask = imageMask;
      
-    UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, self.frame.size.width, 45.0f)];
+    UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 20.0f, self.frame.size.width + 2.0f, 45.0f)];
     titleBanner.backgroundColor = [UIColor whiteColor];
+    titleBanner.layer.borderColor = kArticleViewSectionBannerBorderColor.CGColor;
+    titleBanner.layer.borderWidth = 1.0f;
     [self addSubview:titleBanner];
     
     self.titleBanner = titleBanner;
