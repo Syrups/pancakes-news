@@ -10,6 +10,7 @@
 #import <JSONModel/JSONHTTPClient.h>
 #import "Article.h"
 #import "Configuration.h"
+#import "ArticleViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MyFeedViewController ()
@@ -18,18 +19,18 @@
 
 @implementation MyFeedViewController {
     NSArray* feedArticles;
+    Article* selectedArticle;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.feedTableView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.7f];
-    
-    // dummy data
-    feedArticles = [NSArray array];
-    
     [self fetchFeed];
     [self.view bringSubviewToFront:self.feedTableView];
+    
+    self.feedTableView.layoutMargins = UIEdgeInsetsZero;
+    self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.feedTableView setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
 }
 
 - (void)fetchFeed {
@@ -47,6 +48,29 @@
     }] resume];
 }
 
+#pragma mark - Actions
+
+- (IBAction)displaySelectedArticle:(id)sender {
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect f = self.feedTableView.frame;
+        f.origin.x = -self.view.frame.size.width/2;
+        [self.feedTableView setFrame:f];
+        f = self.topBar.frame;
+        f.origin.x = -self.view.frame.size.width/2;
+        [self.topBar setFrame:f];
+    } completion:^(BOOL finished) {
+        ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
+        vc.displayedArticle = selectedArticle;
+        vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
+        [vc.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:selectedArticle.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self presentViewController:vc animated:NO completion:nil];
+        }];
+    }];
+}
+
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [feedArticles count];
 }
@@ -55,12 +79,16 @@
     return 1;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return self.view.frame.size.height/3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"FeedArticleCell"];
+    cell.backgroundColor = kArticleViewBlockBackground;
+    
     Article* article = [feedArticles objectAtIndex:[indexPath row]];
     
     if (cell == nil) {
@@ -69,10 +97,27 @@
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.text = article.title;
+    feedCellTitle.font = [UIFont fontWithName:kFontBreeBold size:16];
+    feedCellTitle.textColor = kFeedViewListTitleColor;
     
-    
+    UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
+    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Article* article = [feedArticles objectAtIndex:[indexPath row]];
+    
+    selectedArticle = article;
+    
+    [self.selectedArticleCover sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.contentView.backgroundColor = kFeedViewListTopBarColor;
+    
+    UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    feedCellTitle.textColor = [UIColor whiteColor];
 }
 
 @end

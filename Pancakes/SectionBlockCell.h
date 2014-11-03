@@ -11,6 +11,8 @@
 
 @interface SectionBlockCell : GenericBlockCell
 
+@property (assign, nonatomic) BOOL opened;
+
 @property (strong, nonatomic) UILabel* titleLabel;
 @property (strong, nonatomic) UIView* titleBanner;
 @property (strong, nonatomic) UIImageView *coverImage;

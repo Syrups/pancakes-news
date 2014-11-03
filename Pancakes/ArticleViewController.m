@@ -13,6 +13,7 @@
 #import "Block.h"
 #import "GenericBlockCell.h"
 #import "SectionBlockCell.h"
+#import "EditorsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+StackBlur.h"
 
@@ -42,6 +43,7 @@
     
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
     [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
+    [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -67,6 +69,8 @@
                 [hiddenBlocks addObject:block];
             }
         }
+        
+        coverOriginalImage = self.articleCoverImage.image;
        
         [self.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if (image != nil) {
@@ -100,7 +104,7 @@
     UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
     articleTitle.text = self.displayedArticle.title;
     articleTitle.textColor = [UIColor whiteColor];
-    articleTitle.font = [UIFont fontWithName:kFontBreeBold size:36];
+    articleTitle.font = [UIFont fontWithName:kFontBreeBold size:32];
     
     UILabel* creditsLabel = (UILabel*)[cell.contentView viewWithTag:20];
     creditsLabel.text = self.displayedArticle.credits;
@@ -115,7 +119,7 @@
         f.origin.y = -50.0f;
         self.moreButton.frame = f;
         
-        [UIView animateWithDuration:0.7f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = self.moreButtonBackground.frame;
             f.origin.y = 20.0f;
             self.moreButtonBackground.frame = f;
@@ -123,14 +127,14 @@
             self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI );
         } completion:NULL];
         
-        [UIView animateWithDuration:0.5f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = self.moreButton.frame;
-            f.origin.y = 55.0f;
+            f.origin.y = 37.0f;
             self.moreButton.frame = f;
             self.moreButton.alpha = 1.0f;
         } completion:NULL];
         
-        [UIView animateWithDuration:0.8f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.6f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect frame = articleTitle.frame;
             frame.origin.y += self.view.frame.size.height;
             articleTitle.frame = frame;
@@ -219,7 +223,11 @@
     GenericBlockCell* cell = nil;
     
     if (![block.type.name isEqualToString:@"generic"]) {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SectionBlockCell" forIndexPath:indexPath];
+        if ([block.type.name isEqualToString:@"editors"]) {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EditorsBlockCell" forIndexPath:indexPath];
+        } else {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SectionBlockCell" forIndexPath:indexPath];
+        }
         cell.contentView.alpha = 0.0f;
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
@@ -246,7 +254,7 @@
     
     return CGSizeMake(
                 self.collectionView.frame.size.width,
-                [block.paragraphs count] * 200.0f + [block.children count] * 230.0f // This is dirty, we'll do something cleverer later :)
+                [block.paragraphs count] * 250.0f + [block.children count] * 230.0f // This is dirty, we'll do something cleverer later :)
             );
 }
 
@@ -308,7 +316,7 @@
     NSLog(@"%f", scrollView.contentOffset.y);
     if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
         
-        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.35) animated:YES];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.32) animated:YES];
     }
    
 }

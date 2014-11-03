@@ -11,20 +11,18 @@
 #import "Macros.h"
 #import "UIImageView+WebCache.h"
 
-@implementation SectionBlockCell {
-    BOOL opened;
-}
+@implementation SectionBlockCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor whiteColor];
+//    self.backgroundColor = [UIColor whiteColor];
     
     return self;
 }
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     
-    if (opened) return;
+    if (self.opened) return;
     
     UIImageView *coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 290.0f)];
     coverImage.contentMode = UIViewContentModeScaleAspectFit;
@@ -39,7 +37,7 @@
     
     self.imageMask = imageMask;
      
-    UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 20.0f, self.frame.size.width + 2.0f, 45.0f)];
+    UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 15.0f, self.frame.size.width + 2.0f, 50.0f)];
     titleBanner.backgroundColor = [UIColor whiteColor];
     titleBanner.layer.borderColor = kArticleViewSectionBannerBorderColor.CGColor;
     titleBanner.layer.borderWidth = 1.0f;
@@ -47,7 +45,7 @@
     
     self.titleBanner = titleBanner;
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 20.0f, self.frame.size.width - 110.0f, 50.0f)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 15.0f, self.frame.size.width - 110.0f, 50.0f)];
     titleLabel.text = block.title;
     titleLabel.textAlignment = NSTextAlignmentRight;
     titleLabel.font = [UIFont fontWithName:kFontBreeBold size:24.0f];
@@ -57,6 +55,8 @@
     self.titleLabel = titleLabel;
     
     [super layoutWithBlock:block offsetY:300.0f];
+    
+    self.contentView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)openWithAnimation {
@@ -66,9 +66,9 @@
         f.size.height = 0.0f;
         self.titleBanner.frame = f;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             CGRect f = self.titleLabel.frame;
-            f.origin.y += 40.0f;
+            f.origin.y += 90.0f;
             self.titleLabel.frame = f;
             self.titleLabel.textColor = [UIColor whiteColor];
             
@@ -80,14 +80,14 @@
                 self.contentView.alpha = 1.0f;
                 self.imageMask.alpha = 0.0f;
             } completion:^(BOOL finished) {
-                opened = true;
+                self.opened = true;
             }];
         }];
     }];
 }
 
 - (void)closeWithAnimation {
-    opened = false;
+    self.opened = false;
 }
 
 @end

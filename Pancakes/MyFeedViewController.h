@@ -11,5 +11,9 @@
 @interface MyFeedViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *feedTableView;
+@property (strong, nonatomic) IBOutlet UIView *topBar;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedArticleCover;
+
+@property (strong, nonatomic) IBOutlet UIButton *readButton;
 
 @end
