@@ -12,6 +12,15 @@
 
 @implementation DefinitionEmbeddedBlock
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
+    self.layer.borderWidth = 1.0f;
+    
+    return self;
+}
+
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     
     self.backgroundColor = [UIColor whiteColor];
@@ -31,14 +40,19 @@
     title.text = block.title;
     [self addSubview:title];
     
-    UIView* contentView = [[UIView alloc] initWithFrame:CGRectMake(40.0f, coverImage.frame.size.height+30.0f, self.frame.size.width-60.0f, 0.0f)];
+    UIView* contentView = [[UIView alloc] initWithFrame:CGRectMake(30.0f, coverImage.frame.size.height+20.0f, self.frame.size.width-60.0f, 0.0f)];
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    [style setLineSpacing:kArticleViewTextLineSpacing];
     
     for (NSString* p in block.paragraphs) {
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, offsetY, self.frame.size.width, 120.0f)];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, offsetY, contentView.frame.size.width, 120.0f)];
         label.numberOfLines = 0;
         label.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
         
         NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:p];
+        
+        [content addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, content.length)];
         
         label.attributedText = content;
         
@@ -50,6 +64,7 @@
     
     [contentView sizeToFit];
     [self addSubview:contentView];
+
 }
 
 @end

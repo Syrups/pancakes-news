@@ -19,7 +19,7 @@
 #define kArticleViewTextColor                   RgbColor(52, 52, 52)
 #define kFeedViewListTitleColor                 RgbColor(56, 56, 56)
 #define kArticleViewSectionBannerBorderColor    RgbColor(225, 225, 225)
-#define kOrangeColor                            RgbColor(255, 121, 0)
+#define kOrangeColor                            RgbColor(250, 187, 60)
 #define kArticleViewSectionSeparatorColor       RgbColor(188, 188, 188)
 #define kArticleEmbeddedBlockBorderColor        RgbColor(210, 210, 210)
 #define kFeedViewListTopBarColor                RgbColor(10, 10, 10)

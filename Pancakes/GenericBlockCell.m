@@ -9,6 +9,7 @@
 #import "GenericBlockCell.h"
 #import "Macros.h"
 #import "Configuration.h"
+#import "MapEmbeddedBlock.h"
 #import "DefinitionEmbeddedBlock.h"
 
 @implementation GenericBlockCell {
@@ -99,7 +100,16 @@
             // and add each of them after it.
             for (Block* block in blocksToAppend) {
                 originY += 20.0f;
-                DefinitionEmbeddedBlock* blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:CGRectMake(40.0f, originY, self.frame.size.width-120.0f, 230.0f)];
+                
+                CGRect blockFrame = CGRectMake(40.0f, originY, self.frame.size.width-120.0f, 230.0f + block.paragraphs.count * 100.0f);
+                
+                DefinitionEmbeddedBlock* blockView = nil;
+                
+                if ([block.type.name isEqualToString:@"map"]) {
+                    blockView = (MapEmbeddedBlock*)[[MapEmbeddedBlock alloc] initWithFrame:blockFrame];
+                } else {
+                    blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:blockFrame];
+                }
                 
                 [blockView layoutWithBlock:block offsetY:0.0f];
 //                [blockView setBounds:blockView.frame];

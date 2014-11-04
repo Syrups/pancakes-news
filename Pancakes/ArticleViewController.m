@@ -41,19 +41,17 @@
     self.parser = [[ContentParser alloc] init];
     self.parser.delegate = self;
     
+    self.articleCoverImage.image = self.cover;
+    
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
     [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
     [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
 }
 
-- (void)viewDidLayoutSubviews {
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 2000.0f)];
-}
-
 - (void)fetchArticleData {
     // TEST
-    self.displayedArticle = [[Article alloc] init];
-    self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
+//    self.displayedArticle = [[Article alloc] init];
+//    self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
     // /TEST
     
     NSString* articlePath = [NSString stringWithFormat:@"/articles/%@", self.displayedArticle._id];
@@ -71,13 +69,6 @@
         }
         
         coverOriginalImage = self.articleCoverImage.image;
-       
-        [self.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (image != nil) {
-                    coverOriginalImage = self.articleCoverImage.image;
-                }
-        }];
-        
         
         [self.collectionView reloadData];
     }];
@@ -91,6 +82,13 @@
 
     return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
 }
+
+#pragma mark - Actions
+
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Helper view methods
 
@@ -121,7 +119,7 @@
         
         [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = self.moreButtonBackground.frame;
-            f.origin.y = 20.0f;
+            f.origin.y = 15.0f;
             self.moreButtonBackground.frame = f;
             self.moreButtonBackground.alpha = 1.0f;
             self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI );
@@ -129,7 +127,7 @@
         
         [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = self.moreButton.frame;
-            f.origin.y = 37.0f;
+            f.origin.y = 30.0f;
             self.moreButton.frame = f;
             self.moreButton.alpha = 1.0f;
         } completion:NULL];
@@ -318,6 +316,9 @@
         
         [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.32) animated:YES];
     }
+    if (scrollView.contentOffset.y <= 40.0f) {
+        [self.collectionView setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
+    }
    
 }
 
@@ -330,7 +331,7 @@
     if (self.collectionView.contentOffset.y == 0) {
         [self.articleCoverImage setImage:coverOriginalImage];
     } else {
-        int radius = self.collectionView.contentOffset.y / 4;
+        int radius = self.collectionView.contentOffset.y / 6;
 //        coverBlurredImage = [coverOriginalImage stackBlur:radius];
 //        [self.articleCoverImage setImage:coverBlurredImage];
         

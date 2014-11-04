@@ -13,10 +13,6 @@
 #import "ArticleViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface MyFeedViewController ()
-
-@end
-
 @implementation MyFeedViewController {
     NSArray* feedArticles;
     Article* selectedArticle;
@@ -64,7 +60,10 @@
         vc.displayedArticle = selectedArticle;
         vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
         [vc.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:selectedArticle.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [self presentViewController:vc animated:NO completion:nil];
+            if (image != nil) {
+                vc.cover = image;
+                [self.navigationController pushViewController:vc animated:NO];
+            }
         }];
     }];
 }
@@ -118,6 +117,14 @@
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.textColor = [UIColor whiteColor];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.contentView.backgroundColor = kArticleViewBlockBackground;
+    
+    UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    feedCellTitle.textColor = kFeedViewListTitleColor;
 }
 
 @end
