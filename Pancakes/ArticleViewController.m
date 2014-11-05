@@ -36,7 +36,7 @@
     titleCellAnimated = false;
     
     [self fetchArticleData];
-    [self loadMenuView];
+//    [self loadMenuView];
     
     self.parser = [[ContentParser alloc] init];
     self.parser.delegate = self;

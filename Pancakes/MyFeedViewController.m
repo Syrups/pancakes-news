@@ -11,6 +11,7 @@
 #import "Article.h"
 #import "Configuration.h"
 #import "ArticleViewController.h"
+#import "MainMenuViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation MyFeedViewController {
@@ -27,6 +28,8 @@
     self.feedTableView.layoutMargins = UIEdgeInsetsZero;
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
     [self.feedTableView setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
+    
+    [self createMainMenu];
 }
 
 - (void)fetchFeed {
@@ -44,7 +47,27 @@
     }] resume];
 }
 
+#pragma mark - Helpers
+
+- (void) createMainMenu {
+    MainMenuViewController* menuVc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainMenu"];
+    menuVc.currentViewController = self;
+    [self addChildViewController:menuVc];
+    [menuVc didMoveToParentViewController:self];
+    menuVc.view.frame = CGRectMake(-self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height);
+    [self.view addSubview:menuVc.view];
+    self.mainMenu = menuVc;
+}
+
 #pragma mark - Actions
+
+- (IBAction)toggleMainMenu:(id)sender {
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.mainMenu.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self.mainMenu animateOpening];
+    }];
+}
 
 - (IBAction)displaySelectedArticle:(id)sender {
     
@@ -56,6 +79,7 @@
         f.origin.x = -self.view.frame.size.width/2;
         [self.topBar setFrame:f];
     } completion:^(BOOL finished) {
+        
         ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
         vc.displayedArticle = selectedArticle;
         vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
@@ -86,13 +110,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"FeedArticleCell"];
-    cell.backgroundColor = kArticleViewBlockBackground;
+    cell.contentView.backgroundColor = kArticleViewBlockBackground;
     
     Article* article = [feedArticles objectAtIndex:[indexPath row]];
     
     if (cell == nil) {
          cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedArticleCell"];
     }
+    
+    UIView* overlay = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height/3)];
+    overlay.tag = 5;
+    overlay.backgroundColor = RgbaColor(0, 0, 0, 0.6f);
+    overlay.hidden = YES;
+    [cell.contentView addSubview:overlay];
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.text = article.title;
@@ -101,6 +131,8 @@
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
     [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    
+    [cell setNeedsLayout];
     
     return cell;
 }
@@ -113,10 +145,17 @@
     [self.selectedArticleCover sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.contentView.backgroundColor = kFeedViewListTopBarColor;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = RgbaColor(0, 0, 0, 0);
+    cell.contentView.backgroundColor = RgbaColor(0, 0, 0, 0);
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.textColor = [UIColor whiteColor];
+    
+    UIView* overlay = [cell.contentView viewWithTag:5];
+    overlay.hidden = NO;
+    
+    [cell.contentView bringSubviewToFront:feedCellTitle];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +164,20 @@
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.textColor = kFeedViewListTitleColor;
+    
+    UIView* overlay = [cell.contentView viewWithTag:5];
+    overlay.hidden = YES;
+}
+
+#pragma mark - MainMenuDisplayer
+
+- (void)closeMainMenu {
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.mainMenu.view.frame = CGRectMake(-self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self.mainMenu animateClosing];
+    }];
+
 }
 
 @end

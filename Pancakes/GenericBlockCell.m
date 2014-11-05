@@ -73,7 +73,7 @@
                 
                 NSString* blockId = [call objectForKey:@"blockId"];
                 Block* child = [block childWithId:blockId];
-                
+                                
                 if (child != nil) {
                     [blocksToAppend addObject:child];
                 }
