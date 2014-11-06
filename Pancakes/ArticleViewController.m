@@ -6,13 +6,16 @@
 //  Copyright (c) 2014 Gobelins. All rights reserved.
 //
 
+#import "Macros.h"
 #import "Configuration.h"
 #import "ArticleViewController.h"
 #import "JSONHTTPClient.h"
 #import "Block.h"
 #import "GenericBlockCell.h"
+#import "SectionBlockCell.h"
+#import "EditorsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <LBBlurredImage/UIImageView+LBBlurredImage.h>
+#import "UIImage+StackBlur.h"
 
 @interface ArticleViewController ()
 
@@ -20,6 +23,9 @@
 
 @implementation ArticleViewController {
     NSMutableArray* hiddenBlocks;
+    UIImage *coverOriginalImage;
+    UIImage *coverBlurredImage;
+    BOOL titleCellAnimated;
 }
 
 - (void)viewDidLoad {
@@ -27,23 +33,25 @@
     
     hiddenBlocks = [NSMutableArray array];
     
+    titleCellAnimated = false;
+    
     [self fetchArticleData];
-    [self loadMenuView];
+//    [self loadMenuView];
     
     self.parser = [[ContentParser alloc] init];
     self.parser.delegate = self;
     
+    self.articleCoverImage.image = self.cover;
+    
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
-}
-
-- (void)viewDidLayoutSubviews {
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 2000.0f)];
+    [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
+    [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
 }
 
 - (void)fetchArticleData {
     // TEST
-    self.displayedArticle = [[Article alloc] init];
-    self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
+//    self.displayedArticle = [[Article alloc] init];
+//    self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
     // /TEST
     
     NSString* articlePath = [NSString stringWithFormat:@"/articles/%@", self.displayedArticle._id];
@@ -60,6 +68,8 @@
             }
         }
         
+        coverOriginalImage = self.articleCoverImage.image;
+        
         [self.collectionView reloadData];
     }];
 
@@ -73,6 +83,13 @@
     return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
 }
 
+#pragma mark - Actions
+
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 #pragma mark - Helper view methods
 
 /**
@@ -84,20 +101,50 @@
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
     UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
     articleTitle.text = self.displayedArticle.title;
-    
-    articleTitle.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
-    UIImageView* imageView = (UIImageView*)[cell.contentView viewWithTag:20];
-    imageView.frame = cell.frame;
-    
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.displayedArticle.coverImage] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image != nil) {
-//            [imageView setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:^{
-//            }];
-        }
-    }];
-    
-    articleTitle.frame = imageView.frame;
     articleTitle.textColor = [UIColor whiteColor];
+    articleTitle.font = [UIFont fontWithName:kFontBreeBold size:32];
+    
+    UILabel* creditsLabel = (UILabel*)[cell.contentView viewWithTag:20];
+    creditsLabel.text = self.displayedArticle.credits;
+    creditsLabel.textColor = [UIColor whiteColor];
+    creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
+    
+    if (!titleCellAnimated) {
+        CGRect f = self.moreButtonBackground.frame;
+        f.origin.y = -60.0f;
+        self.moreButtonBackground.frame = f;
+        f = self.moreButton.frame;
+        f.origin.y = -50.0f;
+        self.moreButton.frame = f;
+        
+        [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = self.moreButtonBackground.frame;
+            f.origin.y = 15.0f;
+            self.moreButtonBackground.frame = f;
+            self.moreButtonBackground.alpha = 1.0f;
+            self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI );
+        } completion:NULL];
+        
+        [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = self.moreButton.frame;
+            f.origin.y = 30.0f;
+            self.moreButton.frame = f;
+            self.moreButton.alpha = 1.0f;
+        } completion:NULL];
+        
+        [UIView animateWithDuration:0.6f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect frame = articleTitle.frame;
+            frame.origin.y += self.view.frame.size.height;
+            articleTitle.frame = frame;
+            [articleTitle setAlpha:1.0f];
+            frame = creditsLabel.frame;
+            frame.origin.y += self.view.frame.size.height;
+            creditsLabel.frame = frame;
+            [creditsLabel setAlpha:1.0f];
+        } completion:^(BOOL finished) {
+            titleCellAnimated = YES;
+        }];
+    }
     
     return cell;
 }
@@ -155,30 +202,6 @@
     return block;
 }
 
-/**
- * Reveals a hidden block and scroll to it
- */
-
-- (void)revealBlock:(UIButton*)sender {
-    
-    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
-    Block* block = [self blockWithId:blockId];
-    
-    NSUInteger index = [self.displayedArticle.blocks indexOfObject:block];
-    UICollectionViewCell* cell = [self collectionView:self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index+1 inSection:0]];
-    
-    //    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView performBatchUpdates:^{
-        [hiddenBlocks removeObject:block];
-    } completion:^(BOOL finished) {
-        // scroll to revealed block
-        CGPoint anchor;
-        anchor.x = 0.0f; anchor.y = cell.frame.origin.y;
-        
-        [self.collectionView setContentOffset:anchor animated:YES];
-    }];
-}
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -197,12 +220,20 @@
     Block* block = [self blockAtIndexPath:indexPath];
     GenericBlockCell* cell = nil;
     
+    if (![block.type.name isEqualToString:@"generic"]) {
+        if ([block.type.name isEqualToString:@"editors"]) {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EditorsBlockCell" forIndexPath:indexPath];
+        } else {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SectionBlockCell" forIndexPath:indexPath];
+        }
+        cell.contentView.alpha = 0.0f;
+    } else {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
+    }
     
-    cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
+    [cell layoutWithBlock:block offsetY:40.0f];
     
-    [cell layoutWithBlock:block];
-    
-    NSLog(@"Showing block cell with block index %lu", (unsigned long) [self.displayedArticle.blocks indexOfObject:block]);
+    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, indexPath.row);
     
     return cell;
 }
@@ -210,24 +241,57 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 0) {
-        return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height);
+        return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height * 1.75);
     }
     
     Block* block = [self blockAtIndexPath:indexPath];
     
     if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
-        return CGSizeMake(self.collectionView.frame.size.width, 50.0f);
+        return CGSizeMake(self.collectionView.frame.size.width, 70.0f);
     }
-    
-//    return CGSizeMake(
-//                self.collectionView.frame.size.width,
-//                [block.content sizeWithFont:[UIFont fontWithName:@"Arial" size:20.0f] constrainedToSize:CGSizeMake(self.collectionView.frame.size.width, 9999.0f) lineBreakMode: NSLineBreakByWordWrapping].height
-//            );
     
     return CGSizeMake(
                 self.collectionView.frame.size.width,
-                [block.paragraphs count] * 150.0f // This is dirty, we'll do something cleverer later :)
+                [block.paragraphs count] * 250.0f + [block.children count] * 230.0f // This is dirty, we'll do something cleverer later :)
             );
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    Block* block = [self blockAtIndexPath:indexPath];
+    
+    if ([hiddenBlocks indexOfObject:block] == NSNotFound) {
+        return;
+    }
+    
+    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    //        [self.collectionView.collectionViewLayout invalidateLayout];
+    NSLog(@"%f", cell.frame.origin.y);
+    [self.collectionView performBatchUpdates:^{
+        
+        [hiddenBlocks removeObject:block];
+        [cell openWithAnimation];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y + 8.0f) animated:YES];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    Block* block = [self blockAtIndexPath:indexPath];
+    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    if (block == nil || [cell class] != [SectionBlockCell class]) return;
+    
+    //    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView performBatchUpdates:^{
+        if ([hiddenBlocks indexOfObject:block] == NSNotFound) {
+            [hiddenBlocks addObject:block];
+            [cell closeWithAnimation];
+        }
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 #pragma mark - ContentParserDelegate
@@ -247,12 +311,41 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (self.collectionView.contentOffset.y >= 40 && self.collectionView.contentOffset.y < self.view.frame.size.height/2) {
-        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height/2) animated:YES];
+    NSLog(@"%f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
+        
+        [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.32) animated:YES];
     }
-    if (self.collectionView.contentOffset.y < 40) {
+    if (scrollView.contentOffset.y <= 40.0f) {
         [self.collectionView setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
     }
+   
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+//    NSLog(@"%ld", (unsigned long) scrollView.contentOffset.y);
+
+    if (self.collectionView.contentOffset.y > self.articleCoverImage.frame.size.height/2 || self.collectionView.contentOffset.y <= 0) return;
+    
+    if (self.collectionView.contentOffset.y == 0) {
+        [self.articleCoverImage setImage:coverOriginalImage];
+    } else {
+        int radius = self.collectionView.contentOffset.y / 6;
+//        coverBlurredImage = [coverOriginalImage stackBlur:radius];
+//        [self.articleCoverImage setImage:coverBlurredImage];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+            coverBlurredImage = [coverOriginalImage stackBlur:radius];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self.articleCoverImage setImage:coverBlurredImage];
+            });
+        });
+    }
+}
+
 
 @end

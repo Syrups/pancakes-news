@@ -17,7 +17,11 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *articleTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
+@property (weak, nonatomic) IBOutlet UIImageView *moreButtonBackground;
 @property (strong, nonatomic) ContentParser* parser;
+
+@property (strong, nonatomic) UIImage *cover;
+@property (strong, nonatomic) IBOutlet UIImageView* articleCoverImage;
 
 @property (strong, nonatomic) UIView* leftMenuView;
 @property (strong, nonatomic) UIView* rightMenuView;

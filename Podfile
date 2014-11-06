@@ -7,7 +7,6 @@ target 'Pancakes' do
 pod 'AFNetworking', '~> 2.0'
 pod 'JSONModel'
 pod 'SDWebImage'
-pod 'LBBlurredImage'
 end
 
 target 'PancakesTests' do
