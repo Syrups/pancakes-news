@@ -7,6 +7,7 @@ target 'Pancakes' do
 pod 'AFNetworking', '~> 2.0'
 pod 'JSONModel'
 pod 'SDWebImage'
+pod 'pop', '~> 1.0'
 end
 
 target 'PancakesTests' do
