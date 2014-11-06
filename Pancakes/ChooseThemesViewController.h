@@ -14,14 +14,16 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITableView *subThemesView;
+@property (strong, nonatomic) IBOutlet UITextView * themeDescription;
 @property (weak, nonatomic) IBOutlet UILabel *currentPageNum;
 //@property (nonatomic, retain) NSMutableArray* tableData;
-@property (nonatomic, retain) NSArray* themesData;
+@property (nonatomic, retain) NSMutableArray* themesData;
 @property (nonatomic, retain) NSDictionary* currentTheme;
 @property (nonatomic, retain) NSArray* currentThemeSubs;
 
 
 
 - (UIThemeView*) getUIThemeView: (CGFloat) xOrigin;
+- (void) setThemeState :(id)sender  ;
 
 @end

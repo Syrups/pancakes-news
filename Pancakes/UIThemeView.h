@@ -12,4 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
 
+-(void) setSwitchReceiverSelector: (SEL)action;
+
 @end

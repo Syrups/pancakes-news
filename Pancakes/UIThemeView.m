@@ -18,4 +18,9 @@
 }
 */
 
+
+-(void) setSwitchReceiverSelector: (SEL)action{
+}
+
+
 @end
