@@ -29,7 +29,7 @@
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
     [self.feedTableView setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
     
-    [self createMainMenu];
+    //[self createMainMenu];
 }
 
 - (void)fetchFeed {
@@ -49,25 +49,10 @@
 
 #pragma mark - Helpers
 
-- (void) createMainMenu {
-    MainMenuViewController* menuVc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainMenu"];
-    menuVc.currentViewController = self;
-    [self addChildViewController:menuVc];
-    [menuVc didMoveToParentViewController:self];
-    menuVc.view.frame = CGRectMake(-self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height);
-    [self.view addSubview:menuVc.view];
-    self.mainMenu = menuVc;
-}
 
 #pragma mark - Actions
 
-- (IBAction)toggleMainMenu:(id)sender {
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.mainMenu.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height);
-    } completion:^(BOOL finished) {
-        [self.mainMenu animateOpening];
-    }];
-}
+
 
 - (IBAction)displaySelectedArticle:(id)sender {
     
@@ -169,15 +154,7 @@
     overlay.hidden = YES;
 }
 
-#pragma mark - MainMenuDisplayer
 
-- (void)closeMainMenu {
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.mainMenu.view.frame = CGRectMake(-self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height);
-    } completion:^(BOOL finished) {
-        [self.mainMenu animateClosing];
-    }];
 
-}
 
 @end

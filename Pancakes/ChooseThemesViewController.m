@@ -18,6 +18,7 @@
 }
 
 static NSString *CellIdentifier = @"SubThemeViewCell";
+static int currentPageNumber;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -112,11 +113,13 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat width = self.scrollView.frame.size.height;
-    NSUInteger page = (self.scrollView.contentOffset.y + (0.5f * width)) / width;
-    //Boolean isOn =[self.currentTheme objectForKey:@"description"];
+    CGFloat height = scrollView.frame.size.height;
+    NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
+    
+    
     
     if(scrollView == self.scrollView){
+        
         self.currentTheme = [self.themesData objectAtIndex:page];
         self.currentThemeSubs = [self.currentTheme objectForKey:@"subthemes"];
         self.themeDescription.text =[self.currentTheme objectForKey:@"description"];
@@ -127,15 +130,11 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
             self.themeDescription.alpha =  view.self.themeCheck.isOn ? 0 : 1.0;
             //[self.themeDescription setHidden:view.self.themeCheck.isOn];
         }];
-        
     }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
-                  willDecelerate:(BOOL)decelerate{
-    CGFloat width = self.scrollView.frame.size.height;
-    NSUInteger page = (self.scrollView.contentOffset.y + (0.5f * width)) / width;
-    //BOOL isANewPage =(self.currentTheme != [self.themesData objectAtIndex:page]);
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    //NSLog(@"scrollViewDidEndDecelerating is %i", currentPageNumber);
     
     if(scrollView == self.scrollView ){
         //[self.subThemesView reloadData];

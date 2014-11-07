@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainMenuViewController.h"
 
-@interface MyFeedViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MainMenuDisplayer>
+@interface MyFeedViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *feedTableView;
 @property (strong, nonatomic) IBOutlet UIView *topBar;
@@ -17,5 +17,5 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *readButton;
 
-@property (weak, nonatomic) IBOutlet MainMenuViewController *mainMenu;
+//@property (weak, nonatomic) IBOutlet MainMenuViewController *mainMenu;
 @end

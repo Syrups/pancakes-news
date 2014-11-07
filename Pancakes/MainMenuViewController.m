@@ -17,14 +17,16 @@ frame.origin.x -= 10; \
 [button setFrame:frame]; \
 
 @implementation MainMenuViewController {
-    NSDictionary* itemTagsControllers;
+    //NSDictionary* itemTagsControllers;
+    
+    
 }
+
+float baseToggleX = 0.0f;
+Boolean isOpen = false;
 
 - (void)viewDidLoad {
     
-    itemTagsControllers = @{
-                            @"10": [MyFeedViewController class]
-                        };
     
     [self.newsButton setAlpha:0.0f];
     [self.profileButton setAlpha:0.0f];
@@ -62,14 +64,47 @@ frame.origin.x -= 10; \
 - (IBAction)menuItemSelected:(UIView*)sender {
     NSString* tag = [NSString stringWithFormat:@"%d", sender.tag];
     
-    // Check if the current dispplayed VC is the one that has been selected
-    // in the menu, and if so, close the menu
-    if ([itemTagsControllers objectForKey:tag] == [self.currentViewController class]) {
-        [self.currentViewController closeMainMenu];
-    } else {
-        [self.currentViewController closeMainMenu];
-        // Display target VC
+    [self.delegate menuDidSelectItem : tag];
+    [self close];
+}
+
+
+- (IBAction)toggle:(id)sender {
+    
+    if(!isOpen){
+        [self open];
+    }else {
+        [self close];
     }
+    
+    NSLog(@"toggle %hhu", isOpen);
+    
+}
+
+- (void)open {
+    isOpen = !isOpen;
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+        CGRect theFrame = [self.toggleItem frame];
+        theFrame.origin.x = self.view.frame.size.width;
+        self.toggleItem.frame = theFrame;
+        
+    } completion:^(BOOL finished) {
+        [self animateOpening];
+    }];
+}
+
+- (void)close {
+    isOpen = !isOpen;
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.view.frame = CGRectMake(-self.view.frame.size.width, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+        CGRect theFrame = [self.toggleItem frame];
+        theFrame.origin.x = 0;
+        self.toggleItem.frame = theFrame;
+    } completion:^(BOOL finished) {
+        [self animateClosing];
+    }];
+    
 }
 
 @end

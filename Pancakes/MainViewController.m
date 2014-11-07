@@ -1,0 +1,126 @@
+//
+//  MainViewController.m
+//  Pancakes
+//
+//  Created by Glenn Sonna on 06/11/2014.
+//  Copyright (c) 2014 Gobelins. All rights reserved.
+//
+
+#import "MyProfileViewController.h"
+#import "ChooseThemesViewController.h"
+#import "MyFeedViewController.h"
+#import "MainViewController.h"
+#import "MainMenuViewController.h"
+#import "SynchroViewController.h"
+
+@interface MainViewController ()
+@property (nonatomic, strong) UIView *privateButtonsView; /// The view hosting the buttons of the child view controllers.
+@property (nonatomic, strong) UIView *privateContainerView; /// The view hosting the child view controllers views.
+@end
+
+@implementation MainViewController
+
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view .backgroundColor = [UIColor whiteColor];
+    self.view .opaque = YES;
+    
+    self.viewControllers = @{
+                             @"10": [[MyFeedViewController alloc] init],
+                             @"20": [[MyProfileViewController alloc] init],
+                             @"30": [[ChooseThemesViewController alloc] init],
+                             @"40": [[SynchroViewController alloc] init]
+                             };
+    
+    [self createMainMenu];
+    [self displayContentController : [self.viewControllers objectForKey:@"10"]];
+    
+    
+}
+
+
+#pragma mark - Menu
+
+- (void) createMainMenu {
+    
+    float screenMidSize =self.view.frame.size.width/2;
+    
+    MainMenuViewController* menuVc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainMenu"];
+    [self addChildViewController:menuVc];
+    menuVc.view.frame = CGRectMake(-screenMidSize, 0.0f, screenMidSize, self.view.frame.size.height);
+    
+    
+    [self.view addSubview:menuVc.view];
+    [menuVc didMoveToParentViewController:self];
+    
+    
+    self.mainMenu = menuVc;
+    self.mainMenu.toggleItem = self.menuItem;
+    menuVc.delegate = self;
+}
+
+
+-(void) viewDidLayoutSubviews{
+    
+    float screenMidSize =self.view.frame.size.width/2;
+    CGRect rect = [self.menuTopBar frame] ;
+    rect.size.width = screenMidSize;
+    [self.menuTopBar setFrame:rect];
+    
+}
+
+-(void) menuDidSelectItem:(NSString *)tag{
+    
+    UIViewController* toController = [self.viewControllers objectForKey:tag] ;
+    [self transitionToChildViewController:toController];
+    
+    NSLog(@"%@", tag);
+}
+
+
+#pragma mark - Actions
+
+- (IBAction)toggleMainMenu:(id)sender {
+    [self.mainMenu toggle:sender];
+    //[self.view bringSubviewToFront:self.menuItem];
+}
+
+#pragma mark - Show/hide logic
+
+- (void) displayContentController: (UIViewController*) content;
+{
+    [self addChildViewController:content];                 // 1
+    //content.view.frame = [self.childsContainer frame];      // 2
+    [self.childsContainer addSubview:content.view];
+    [content didMoveToParentViewController:self];          // 3
+    self.currentViewController = content;
+    
+    
+    NSLog(content.description);
+}
+
+
+- (void) hideContentController: (UIViewController*) content
+{
+    [content willMoveToParentViewController:nil];  // 1
+    [content.view removeFromSuperview];            // 2
+    [content removeFromParentViewController];      // 3
+}
+
+
+- (void)transitionToChildViewController:(UIViewController *)toViewController {
+    
+    
+    if (toViewController == self.currentViewController || ![self isViewLoaded]) {
+        return;
+    }
+    
+    [self hideContentController: self.currentViewController];
+    [self displayContentController: toViewController];
+}
+
+
+
+@end

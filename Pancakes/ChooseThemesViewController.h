@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSMutableArray* themesData;
 @property (nonatomic, retain) NSDictionary* currentTheme;
 @property (nonatomic, retain) NSArray* currentThemeSubs;
+//@property (nonatomic) NSUInteger* currentPageNumber;
 
 
 
