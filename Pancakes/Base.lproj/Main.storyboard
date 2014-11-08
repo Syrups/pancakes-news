@@ -6,6 +6,7 @@
     <customFonts key="customFonts">
         <mutableArray key="BreeBold.otf">
             <string>Bree-Bold</string>
+            <string>Bree-Bold</string>
         </mutableArray>
         <mutableArray key="BreeRegular.otf">
             <string>Bree-Regular</string>
@@ -15,6 +16,9 @@
             <string>Heuristica-Italic</string>
             <string>Heuristica-Italic</string>
             <string>Heuristica-Italic</string>
+        </mutableArray>
+        <mutableArray key="Heuristica-Regular.otf">
+            <string>Heuristica-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -52,9 +56,15 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="95"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBv-a5-Lr5">
-                                                    <rect key="frame" x="120" y="36" width="154" height="51"/>
+                                                    <rect key="frame" x="120" y="40" width="154" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Climate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7d-B9-GNx">
+                                                    <rect key="frame" x="120" y="8" width="154" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Bree-Bold" family="Bree" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -78,12 +88,19 @@
                                     <action selector="displaySelectedArticle:" destination="His-ZU-OcS" eventType="touchUpInside" id="mIg-rv-nIQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp5-6w-FkX">
+                                <rect key="frame" x="314" y="189" width="238" height="73"/>
+                                <fontDescription key="fontDescription" name="Heuristica-Regular" family="Heuristica" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="67B-0p-TLI"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="articleExcerpt" destination="tp5-6w-FkX" id="LWW-UO-g9d"/>
                         <outlet property="feedTableView" destination="Mu4-r2-ijH" id="g1d-M8-3MT"/>
                         <outlet property="readButton" destination="BhQ-Id-3aK" id="TEc-ky-AWI"/>
                         <outlet property="selectedArticleCover" destination="0lt-1M-Cys" id="Wdr-ge-oFQ"/>
@@ -298,7 +315,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="293" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My news" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5d-AW-Hqe">
-                                        <rect key="frame" x="47" y="12" width="69" height="21"/>
+                                        <rect key="frame" x="47" y="12" width="222" height="21"/>
                                         <fontDescription key="fontDescription" name="Bree-Regular" family="Bree" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

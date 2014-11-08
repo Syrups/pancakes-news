@@ -65,10 +65,14 @@
 
 #pragma mark - Helpers
 
+- (NSString*)excerptOfContent:(NSString*)content firstWordsCount:(NSInteger)nWords {
+    NSRange wordRange = NSMakeRange(0, nWords);
+    NSArray *firstWords = [[content componentsSeparatedByString:@" "] subarrayWithRange:wordRange];
+    
+    return [[firstWords componentsJoinedByString:@" "] stringByAppendingString:@" (...)"];
+}
 
 #pragma mark - Actions
-
-
 
 - (IBAction)displaySelectedArticle:(id)sender {
     
@@ -132,7 +136,7 @@
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.text = article.title;
-    feedCellTitle.font = [UIFont fontWithName:kFontBreeBold size:16];
+    feedCellTitle.font = [UIFont fontWithName:kFontBreeBold size:15];
     feedCellTitle.textColor = kFeedViewListTitleColor;
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
@@ -160,6 +164,14 @@
     
     UIView* overlay = [cell.contentView viewWithTag:5];
     overlay.hidden = NO;
+    
+    // ... Yes, that's dirty
+    Block* firstBlock = (Block*)article.blocks[1];
+    NSString* content = firstBlock.paragraphs[0];
+    
+    ContentParser* parser = [[ContentParser alloc] init];
+    
+    self.articleExcerpt.text = [self excerptOfContent:[parser getCleanedString:content] firstWordsCount:22];
     
     [cell.contentView bringSubviewToFront:feedCellTitle];
 }

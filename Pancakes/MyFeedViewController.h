@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIView *topBar;
 @property (strong, nonatomic) IBOutlet UIImageView *selectedArticleCover;
 
+@property (weak, nonatomic) IBOutlet UILabel *articleExcerpt;
 @property (strong, nonatomic) IBOutlet UIButton *readButton;
 
 //@property (weak, nonatomic) IBOutlet MainMenuViewController *mainMenu;

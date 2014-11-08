@@ -18,14 +18,21 @@
 @property (nonatomic, strong) UIView *privateContainerView; /// The view hosting the child view controllers views.
 @end
 
-@implementation MainViewController
-
-
+@implementation MainViewController {
+    NSDictionary* titles;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view .backgroundColor = [UIColor whiteColor];
     self.view .opaque = YES;
+    
+    titles = @{
+                @"10": @"My news",
+                @"20": @"My profile",
+                @"30": @"My interests",
+                @"40": @"Synchronization"
+            };
     
     self.viewControllers = @{
                              @"10": [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyFeedView"],
@@ -76,6 +83,8 @@
     UIViewController* toController = [self.viewControllers objectForKey:tag] ;
     [self transitionToChildViewController:toController];
     
+    self.currentSectionTitle.text = [titles objectForKey:tag];
+    
     NSLog(@"%@", tag);
 }
 
@@ -96,7 +105,6 @@
     [self.childsContainer addSubview:content.view];
     [content didMoveToParentViewController:self];          // 3
     self.currentViewController = content;
-    
     
     NSLog(content.description);
 }
