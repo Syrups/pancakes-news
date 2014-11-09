@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SubThemeInterest.h"
 
 @interface UISubThemeViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UITextView *caption;
+
+@property (assign, nonatomic) BOOL *isSeleted;
+@property (weak, nonatomic) SubThemeInterest *subTheme;
 
 @end
