@@ -12,6 +12,7 @@
 #import "Configuration.h"
 #import "ArticleViewController.h"
 #import "MainMenuViewController.h"
+#import "MainViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation MyFeedViewController {
@@ -29,7 +30,22 @@
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
     [self.feedTableView setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
     
-    //[self createMainMenu];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
+    
+    // back from article view ?
+    if (parent.menuItem.frame.origin.x < 0) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = parent.menuTopBar.frame;
+            f.origin.x += self.view.frame.size.width/2;
+            [parent.menuTopBar setFrame:f];
+            f = parent.menuItem.frame;
+            f.origin.x += self.view.frame.size.width/2;
+            [parent.menuItem setFrame:f];
+        } completion:nil];
+    }
 }
 
 - (void)fetchFeed {
@@ -56,13 +72,18 @@
 
 - (IBAction)displaySelectedArticle:(id)sender {
     
+    MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
+    
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect f = self.feedTableView.frame;
         f.origin.x = -self.view.frame.size.width/2;
         [self.feedTableView setFrame:f];
-        f = self.topBar.frame;
-        f.origin.x = -self.view.frame.size.width/2;
-        [self.topBar setFrame:f];
+        f = parent.menuTopBar.frame;
+        f.origin.x -= self.view.frame.size.width/2;
+        [parent.menuTopBar setFrame:f];
+        f = parent.menuItem.frame;
+        f.origin.x -= self.view.frame.size.width/2;
+        [parent.menuItem setFrame:f];
     } completion:^(BOOL finished) {
         
         ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];

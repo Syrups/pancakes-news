@@ -28,10 +28,10 @@
     self.view .opaque = YES;
     
     self.viewControllers = @{
-                             @"10": [[MyFeedViewController alloc] init],
-                             @"20": [[MyProfileViewController alloc] init],
-                             @"30": [[ChooseThemesViewController alloc] init],
-                             @"40": [[SynchroViewController alloc] init]
+                             @"10": [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyFeedView"],
+                             @"20": [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MyProfileView"],
+                             @"30": [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ChooseThemesView"],
+                             @"40": [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SynchroView"]
                              };
     
     [self createMainMenu];
