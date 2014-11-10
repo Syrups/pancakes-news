@@ -37,6 +37,10 @@
     
     [self addSubview:self.tableView];
     
+    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 1.0f, self.frame.size.height)];
+    storyline.backgroundColor = RgbColor(180, 180, 180);
+    [self addSubview:storyline];
+    
     return self;
 }
 
@@ -122,12 +126,14 @@
                 [blockIndexPaths setObject:blockView forKey:[NSIndexPath indexPathForRow:items.count+1 inSection:0]];
                 [items addObject:blockView];
                 
-                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, 0.0f, 60, 60)];
+                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY, 60, 60)];
                 [blockButton setImage:[UIImage imageNamed:@"article-block-button-map"] forState:UIControlStateNormal];
-                blockButton.tag = [child.id integerValue];
-                [paragraphView addSubview:blockButton];
-                [paragraphView bringSubviewToFront:blockButton];
                 [blockButton addTarget:self action:@selector(blockButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+                blockButton.tag = [child.id integerValue];
+                
+                [self addSubview:blockButton];
+                [self bringSubviewToFront:blockButton];
+                
             }
 
         }];

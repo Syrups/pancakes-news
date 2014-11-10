@@ -108,18 +108,17 @@
     
     self.menuDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuDetailView"];
     [self addChildViewController:self.menuDetailViewController];
-    self.menuDetailViewController.view.frame = CGRectMake(-screenMidSize, 0.0f, screenMidSize, self.view.frame.size.height);
+    self.menuDetailViewController.view.frame = CGRectMake(0.0f, self.view.frame.size.height, screenMidSize, self.view.frame.size.height);
     
     
     [self.view addSubview:self.menuDetailViewController.view];
     [self.menuDetailViewController didMoveToParentViewController:self];
-    
 }
 
 #pragma mark - Actions
 
 - (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (IBAction)displayMenu:(id)sender {

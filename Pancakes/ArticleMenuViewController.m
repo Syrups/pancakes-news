@@ -24,6 +24,34 @@
         @"30": [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuRelatedView"],
         @"40": [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuCommentView"]
     };
+    
+}
+
+- (void)animateOpen {
+    // Set up path movement
+    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.fillMode = kCAFillModeForwards;
+    pathAnimation.removedOnCompletion = NO;
+    
+    CGPoint startPoint = CGPointMake(120.0f, 15.0f);
+    CGPoint endPoint = CGPointMake(59.0f, 252.0f);
+    CGPoint arcCenter = CGPointMake(226.0f, 194.0f);
+    
+    CGMutablePathRef curvedPath = CGPathCreateMutable();
+    CGPathMoveToPoint(curvedPath, NULL, startPoint.x, startPoint.y);
+    CGPathAddArcToPoint(curvedPath, NULL, startPoint.x, startPoint.y, endPoint.x, endPoint.y, startPoint.y-arcCenter.y);
+    pathAnimation.path = curvedPath;
+    CGPathRelease(curvedPath);
+    
+    pathAnimation.duration = 2.0f;
+
+    for (UIView* v in self.view.subviews) {
+        if (v.class == [UIButton class]) {
+            [v.layer addAnimation:pathAnimation forKey:@"rotateAnimation"];
+        }
+    }
+
 }
 
 - (IBAction)didSelectItem:(UIButton*)sender {
