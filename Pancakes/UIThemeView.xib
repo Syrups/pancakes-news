@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf7-5h-wuh">
-                        <rect key="frame" x="124" y="68" width="97" height="79"/>
+                        <rect key="frame" x="124" y="20" width="97" height="79"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="79" id="CeX-D2-LSt"/>
                             <constraint firstAttribute="height" constant="79" id="qiq-9L-50L"/>
@@ -34,7 +34,7 @@
                         </variation>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Uq2-lC-wzF">
-                        <rect key="frame" x="148" y="191" width="51" height="31"/>
+                        <rect key="frame" x="148" y="143" width="51" height="31"/>
                     </switch>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -47,7 +47,7 @@
                 <constraint firstItem="qf7-5h-wuh" firstAttribute="leading" secondItem="Qn9-6b-oJW" secondAttribute="leading" constant="97" id="MB2-rF-4Ng"/>
                 <constraint firstItem="qf7-5h-wuh" firstAttribute="top" secondItem="Qn9-6b-oJW" secondAttribute="top" constant="68" id="Tf8-k1-VHJ"/>
                 <constraint firstAttribute="centerX" secondItem="Uq2-lC-wzF" secondAttribute="centerX" id="bKO-Lj-JVs"/>
-                <constraint firstItem="qf7-5h-wuh" firstAttribute="top" secondItem="Qn9-6b-oJW" secondAttribute="top" constant="68" id="c83-kM-KSO"/>
+                <constraint firstItem="qf7-5h-wuh" firstAttribute="top" secondItem="Qn9-6b-oJW" secondAttribute="top" constant="20" id="c83-kM-KSO"/>
                 <constraint firstItem="qf7-5h-wuh" firstAttribute="centerY" secondItem="Uq2-lC-wzF" secondAttribute="centerY" id="dsd-9c-Hnf"/>
                 <constraint firstAttribute="centerX" secondItem="qf7-5h-wuh" secondAttribute="centerX" id="jQZ-KI-Gg3"/>
                 <constraint firstItem="Uq2-lC-wzF" firstAttribute="top" secondItem="qf7-5h-wuh" secondAttribute="bottom" constant="44" id="prW-hO-D3N"/>

@@ -7,6 +7,8 @@
 //
 
 #import "ChooseThemesViewController.h"
+#import "UIImage+StackBlur.h"
+
 
 @interface ChooseThemesViewController ()
 
@@ -55,14 +57,20 @@ static int currentPageNumber;
     self.currentTheme = [self.themesData objectAtIndex:0];
     
     self.currentThemeSubs =[self.currentTheme subThemes];
-    self.themeDescription.text = self.currentTheme.description;
+    
     
     //InitScrollView and TableView
     int screenMidSize = self.view.frame.size.width/2;
     int screenHeight = self.view.frame.size.height;
-   
+    
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
+    self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
+     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
+    self.themeDescription.textColor = [self colorWithHexString:@"322e1d"];
+    
+    [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.themeDescription.text = self.currentTheme.desc;
     
     [self setupCollectionView];
     [self.subThemesView setDelegate:self];
@@ -75,6 +83,8 @@ static int currentPageNumber;
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
+    
+    [self setSubthemesBackground];
 }
 
 -(void)setupCollectionView {
@@ -88,10 +98,11 @@ static int currentPageNumber;
     [flowLayout setMinimumInteritemSpacing:0.0f];
     [flowLayout setMinimumLineSpacing:0.0f];
     
-    self.scrollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, self.view.frame.size.height ) collectionViewLayout: flowLayout];
+    //float percent20 = self.view.frame.size.height - (self.view.frame.size.height/4);
+    self.scrollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, self.view.frame.size.height) collectionViewLayout: flowLayout];
     [self.scrollView registerClass:[UIThemeView class] forCellWithReuseIdentifier:@"cellIdentifier"];
     
-    [self.scrollView setPagingEnabled:YES];
+    //[self.scrollView setPagingEnabled:YES];
     [self.scrollView setCollectionViewLayout:flowLayout];
     [self.scrollView setDelegate:self];
     [self.scrollView setDataSource:self];
@@ -123,7 +134,7 @@ static int currentPageNumber;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat height = scrollView.frame.size.height;
     NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
-    
+     NSLog(@"offset :%f, page : %i, h : %f",scrollView.contentOffset.y, page, scrollView.frame.size.height);
     /*
     if(scrollView == self.scrollView){
         
@@ -148,9 +159,14 @@ static int currentPageNumber;
 
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    CGFloat height = scrollView.frame.size.height;
+    NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
+   
+    
     for (UIThemeView *cell in [self.scrollView visibleCells]) {
         NSIndexPath *indexPath = [self.scrollView indexPathForCell:cell];
-        NSLog(@"%ld",(long)indexPath.row);
+        
         
         
         //NSLog(@"scrollViewDidEndDecelerating is %i", currentPageNumber);
@@ -168,18 +184,20 @@ static int currentPageNumber;
             [UIView animateWithDuration:0.3 animations:^() {
                 self.themeDescription.alpha =  view.self.themeCheck.isOn ? 0 : 1.0;
                 //[self.themeDescription setHidden:view.self.themeCheck.isOn];
-                UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.currentTheme.coverImage]];
-                [tempImageView setFrame:self.subThemesView.frame];
+                UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
+                UIImage *blurImage = [baseImage stackBlur:20];
                 
+                UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
+                [tempImageView setFrame:self.subThemesView.frame];
                 self.subThemesView.backgroundView = tempImageView;
             }];
             
-            if (scrollView.contentOffset.x == 0) {
+            if (scrollView.contentOffset.y == 0) {
                 // user is scrolling to the left from image 1 to image 10.
                 // reposition offset to show image 10 that is on the right in the scroll view
                 //[scrollView scrollRectToVisible:CGRectMake(3520,0,320,480) animated:NO];
             }
-            else if (scrollView.contentOffset.x == 3840) {
+            else if (scrollView.contentOffset.y == 3840) {
                 // user is scrolling to the right from image 10 to image 1.
                 // reposition offset to show image 1 that is on the left in the scroll view
                 //[scrollView scrollRectToVisible:CGRectMake(320,0,320,480) animated:NO];
@@ -188,6 +206,16 @@ static int currentPageNumber;
             [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
         }
     }
+}
+
+- (void)setSubthemesBackground {
+    
+    UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
+    UIImage *blurImage = [baseImage stackBlur:20];
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
+    [tempImageView setFrame:self.subThemesView.frame];
+    self.subThemesView.backgroundView = tempImageView;
 }
 
 
@@ -216,9 +244,9 @@ static int currentPageNumber;
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    //float percent20 = (self.scrollView.frame.size.height/5);
-    return CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+
+    float percent20 = self.scrollView.frame.size.height - (self.scrollView.frame.size.height/3);
+    return CGSizeMake(self.scrollView.frame.size.width, percent20);
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -244,7 +272,8 @@ static int currentPageNumber;
     SubThemeInterest* sub =[self.currentThemeSubs objectAtIndex:indexPath.row];
     NSString *text = sub.title;
     [cell.title setText:text];
-    
+    [cell updateThemeColor: [self colorWithHexString: self.currentTheme.color]];
+   
     //NSLog(text);
     
 }
@@ -255,18 +284,22 @@ static int currentPageNumber;
      
      [alertView show];
      */
+    
+    UISubThemeViewCell* cell = (UISubThemeViewCell *)[self.subThemesView cellForRowAtIndexPath:indexPath];
+    [cell updateStatus];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier ];
     //UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
     if (!cell) {
         [tableView registerNib:[UINib nibWithNibName:@"UISubThemeViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
         
         //cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.view.frame.size.width/2, cell.frame.size.height);
         
