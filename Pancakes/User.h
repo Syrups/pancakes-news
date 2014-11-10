@@ -7,12 +7,15 @@
 //
 
 #import "JSONModel.h"
+#import "SubThemeInterest.h"
 
 @protocol User <NSObject>
 @end
 
 @interface User : JSONModel
 
-@property (strong, nonatomic) NSString* username;
-
+//@property (strong, nonatomic) NSString* username;
+@property (strong, nonatomic) NSString* _id;
+@property (strong, nonatomic) NSString* phantomId;
+@property (strong, nonatomic) NSArray* interests;
 @end

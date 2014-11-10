@@ -8,8 +8,11 @@
 
 #import "UserDataHolder.h"
 #import <UIKit/UIKit.h>
+#import "JSONModel/JSONModelNetworking/JSONHTTPClient.h"
+#import "Configuration.h"
 
 NSString * const PUSER = @"PancakesUser";
+
 
 @implementation UserDataHolder
 - (id) init
@@ -43,6 +46,15 @@ NSString * const PUSER = @"PancakesUser";
      NSLog(@"saving %@", userAsJson);
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/save"];
+    [JSONHTTPClient postJSONFromURLWithString:createUser params:[self.user toDictionary] completion:^(id json, JSONModelError *err) {
+        NSLog(@"%@", json);
+        
+        //NSDictionary *j = [json toDictionary];
+        
+    }];
+    
 }
 
 -(void)loadData
@@ -57,9 +69,18 @@ NSString * const PUSER = @"PancakesUser";
         
         NSLog(@"user loaded %@", userAsJson);
         
+        NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/create"];
+        [JSONHTTPClient postJSONFromURLWithString:createUser params:@{@"phantom_id":self.user.phantomId} completion:^(id json, JSONModelError *err) {
+            NSLog(@"%@", json);
+            
+            NSDictionary *j = [json toDictionary];
+            
+        }];
+        
     }
     else
     {
+        NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/create"];
         
         NSString *phantomId =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         NSString *userString = [NSString stringWithFormat:@"{phantom_id : %@}", phantomId];
@@ -67,6 +88,12 @@ NSString * const PUSER = @"PancakesUser";
         
         self.user  =[[User alloc] initWithString:userString error:&err];
         NSLog(@"user first load %@", userString);
+        
+        
+        //make post, get requests
+        [JSONHTTPClient postJSONFromURLWithString:createUser params:@{@"phantom_id":phantomId} completion:^(id json, JSONModelError *err) {
+            NSLog(@"%@", json);
+        }];
     }
 }
 @end
