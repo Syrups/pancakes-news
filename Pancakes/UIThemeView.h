@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIThemeView : UIView
+@interface UIThemeView : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
 
 -(void) setSwitchReceiverSelector: (SEL)action;
+- (void) updateCellWithImage :  (NSString *)imageName ;
 
 @end
