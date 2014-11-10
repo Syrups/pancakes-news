@@ -22,6 +22,7 @@
 - (id)initWithFrame:(CGRect)frame {
     
     layouted = false;
+    embeddedBlocks = @{}.mutableCopy;
     self = [super initWithFrame:frame];
     
     self.backgroundColor = kArticleViewBlockBackground;
@@ -102,6 +103,7 @@
                 originY += 20.0f;
                 
                 CGRect blockFrame = CGRectMake(40.0f, originY, self.frame.size.width-120.0f, 230.0f + block.paragraphs.count * 100.0f);
+//                CGRect blockFrame = CGRectMake(40.0f, originY, self.frame.size.width-120.0f, 0.0f);
                 
                 DefinitionEmbeddedBlock* blockView = nil;
                 
@@ -112,8 +114,7 @@
                 }
                 
                 [blockView layoutWithBlock:block offsetY:0.0f];
-//                [blockView setBounds:blockView.frame];
-//                [blockView setClipsToBounds:YES];
+                [blockView setClipsToBounds:YES];
                 [self.contentView addSubview:blockView];
                 
                 [embeddedBlocks setObject:blockView forKey:block.id];
@@ -127,20 +128,35 @@
 
     layouted = true;
     
-    [self openEmbeddedBlockWithId:@"1.2" completion:NULL];
+//    [self openEmbeddedBlockWithId:@"1" completion:nil];
 }
 
 - (void)openEmbeddedBlockWithId:(NSString *)blockId completion:(void (^)())completion {
-    UIView* blockView = [embeddedBlocks objectForKey:blockId];
+    DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
+
+    NSLog(@"%@", embeddedBlocks);
     
-    [UIView animateWithDuration:.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect f = blockView.frame;
-        f.size.height = 200.0f;
-        blockView.bounds = f;
-        blockView.frame = f;
-    } completion:^(BOOL finished) {
-        
-    }];
+    CGRect f = blockView.frame;
+    f.size.height = 200.0f;
+    blockView.bounds = f;
+    blockView.frame = f;
+    blockView.autoresizesSubviews = YES;
+    
+    [blockView layoutWithBlock:[self blockWithId:blockId] offsetY:0.0f];
+    
+    [blockView sizeToFit];
+    
+}
+
+- (Block*) blockWithId:(NSString*)blockId {
+    Block* block = nil;
+    for (Block* b in self.block.children) {
+        if ([b.id isEqualToString:blockId]) {
+            block = b;
+        }
+    }
+    
+    return block;
 }
 
 @end

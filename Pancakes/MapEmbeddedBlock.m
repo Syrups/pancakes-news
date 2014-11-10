@@ -15,6 +15,8 @@
     
     // Embedded map
     MKMapView* map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    
+    if (self.frame.size.height == 0.0f) return;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
