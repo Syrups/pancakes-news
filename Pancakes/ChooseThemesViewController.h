@@ -12,9 +12,9 @@
 #import "SubThemeInterest.h"
 #import "ThemeInterest.h"
 
-@interface ChooseThemesViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ChooseThemesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UICollectionView *scrollView;
+@property (strong, nonatomic) IBOutlet UITableView *themesView;
 @property (strong, nonatomic) IBOutlet UITableView *subThemesView;
 @property (strong, nonatomic) IBOutlet UITextView * themeDescription;
 @property (weak, nonatomic) IBOutlet UILabel *currentPageNum;

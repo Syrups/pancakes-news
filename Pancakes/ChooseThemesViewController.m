@@ -63,79 +63,48 @@ static int currentPageNumber;
     int screenMidSize = self.view.frame.size.width/2;
     int screenHeight = self.view.frame.size.height;
     
+    
+    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, screenHeight)];
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
+    
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
-     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
+    self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
     self.themeDescription.textColor = [self colorWithHexString:@"322e1d"];
     
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.themeDescription.text = self.currentTheme.desc;
+    self.themeDescription.alpha = 0;
     
-    [self setupCollectionView];
+
     [self.subThemesView setDelegate:self];
+    [self.themesView setDelegate:self];
+    
     [self.subThemesView setDataSource:self];
+    [self.themesView setDataSource:self];
     
     
-    [self.subThemesView reloadInputViews];
-    [self.scrollView reloadInputViews];
-    
-    [self.view addSubview:self.scrollView];
+    [self.view addSubview:self.themesView];
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
     
+    [self.subThemesView reloadInputViews];
+    [self.themesView reloadInputViews];
+    
     [self setSubthemesBackground];
+    
+    //[self.scrollView setDataSource:self];
 }
 
--(void)setupCollectionView {
-    
-    //[self setupDataForCollectionView];
-    int screenMidSize = self.view.frame.size.width/2;
-    //self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, self.view.frame.size.height - 100)];
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:0.0f];
-    
-    //float percent20 = self.view.frame.size.height - (self.view.frame.size.height/4);
-    self.scrollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, self.view.frame.size.height) collectionViewLayout: flowLayout];
-    [self.scrollView registerClass:[UIThemeView class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    
-    //[self.scrollView setPagingEnabled:YES];
-    [self.scrollView setCollectionViewLayout:flowLayout];
-    [self.scrollView setDelegate:self];
-    [self.scrollView setDataSource:self];
-    
-}
-
--(void)setupDataForCollectionView {
-    
-    // Grab references to the first and last items
-    // They're typed as id so you don't need to worry about what kind
-    // of objects the originalArray is holding
-    id firstItem = self.themesData[0];
-    id lastItem = [self.themesData lastObject];
-    
-    NSMutableArray *workingArray = [self.themesData mutableCopy];
-    
-    // Add the copy of the last item to the beginning
-    [workingArray insertObject:lastItem atIndex:0];
-    
-    // Add the copy of the first item to the end
-    [workingArray addObject:firstItem];
-    
-    // Update the collection view's data source property
-    self.themesData = [NSMutableArray arrayWithArray:workingArray];
-}
 
 #pragma mark - UIScrollView
 
+/*
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat height = scrollView.frame.size.height;
     NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
-     NSLog(@"offset :%f, page : %i, h : %f",scrollView.contentOffset.y, page, scrollView.frame.size.height);
-    /*
+     //NSLog(@"offset :%f, page : %i, h : %f",scrollView.contentOffset.y, page, scrollView.frame.size.height);
+    
     if(scrollView == self.scrollView){
         
         self.currentTheme = [self.themesData objectAtIndex:page];
@@ -154,56 +123,94 @@ static int currentPageNumber;
              
              self.subThemesView.backgroundView = tempImageView;
         }];
-    }*/
+    }
+}*/
+
+
+
+-(void) updateThemeDataWithCell : (UIThemeView *) cell{
+    //[self.subThemesView reloadData];
+    // The key is repositioning without animation
+    
+    self.currentTheme = cell.theme;
+    self.currentThemeSubs = self.currentTheme.subThemes;
+    self.themeDescription.text = self.currentTheme.desc;
+    
+    [UIView animateWithDuration:0.3 animations:^() {
+        self.themeDescription.alpha =  cell.self.themeCheck.isOn ? 0 : 1.0;
+        //[self.themeDescription setHidden:view.self.themeCheck.isOn];
+        UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
+        UIImage *blurImage = [baseImage stackBlur:20];
+        
+        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
+        [tempImageView setFrame:self.subThemesView.frame];
+        self.subThemesView.backgroundView = tempImageView;
+        
+    }];
+    
+ 
+    [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (scrollView == self.themesView) {
+        
+        CGFloat currentOffsetX = scrollView.contentOffset.x;
+        CGFloat currentOffSetY = scrollView.contentOffset.y;
+        CGFloat contentHeight = scrollView.contentSize.height;
+        
+        if (currentOffSetY < (contentHeight / 8.0)) {
+            scrollView.contentOffset = CGPointMake(currentOffsetX,(currentOffSetY + (contentHeight/2)));
+        }
+        if (currentOffSetY > ((contentHeight * 6)/ 8.0)) {
+            scrollView.contentOffset = CGPointMake(currentOffsetX,(currentOffSetY - (contentHeight/2)));
+        }
+        
+        if(scrollView.isDecelerating){
+            //[self centerTableWithScrollView: scrollView ];
+        }
+    }
+}
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    if (scrollView == self.themesView) {
+        [self centerTableWithScrollView: scrollView updateData:false ];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    // if decelerating, let scrollViewDidEndDecelerating: handle it
+    //ecelerate == NO &&
+    if (decelerate == NO && scrollView == self.themesView) {
+        [self centerTableWithScrollView: scrollView updateData : false];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
-    CGFloat height = scrollView.frame.size.height;
-    NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
-   
+    if (scrollView == self.themesView) {
+        [self centerTableWithScrollView: scrollView updateData : true];
+    }
+}
+
+- (void)centerTableWithScrollView : (UIScrollView *) scrollView updateData:(BOOL)update{
+    NSIndexPath *pathForCenterCell = [self.themesView indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.themesView.bounds), CGRectGetMidY(self.themesView.bounds))];
     
-    for (UIThemeView *cell in [self.scrollView visibleCells]) {
-        NSIndexPath *indexPath = [self.scrollView indexPathForCell:cell];
-        
-        
-        
-        //NSLog(@"scrollViewDidEndDecelerating is %i", currentPageNumber);
-        
-        if(scrollView == self.scrollView ){
-            //[self.subThemesView reloadData];
-            // The key is repositioning without animation
+    [self.themesView scrollToRowAtIndexPath:pathForCenterCell atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
+    
+    if(update){
+        for (UIThemeView *cell in self.themesView.visibleCells) {
+            CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
             
-            self.currentTheme = [self.themesData objectAtIndex:indexPath.row];
-            self.currentThemeSubs = self.currentTheme.subThemes;
-            self.themeDescription.text = self.currentTheme.desc;
-            
-            UIThemeView *view = [[scrollView subviews] objectAtIndex:indexPath.row];
-            
-            [UIView animateWithDuration:0.3 animations:^() {
-                self.themeDescription.alpha =  view.self.themeCheck.isOn ? 0 : 1.0;
-                //[self.themeDescription setHidden:view.self.themeCheck.isOn];
-                UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
-                UIImage *blurImage = [baseImage stackBlur:20];
+            if (CGRectContainsRect(scrollView.frame, cellRect)){
                 
-                UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
-                [tempImageView setFrame:self.subThemesView.frame];
-                self.subThemesView.backgroundView = tempImageView;
-            }];
-            
-            if (scrollView.contentOffset.y == 0) {
-                // user is scrolling to the left from image 1 to image 10.
-                // reposition offset to show image 10 that is on the right in the scroll view
-                //[scrollView scrollRectToVisible:CGRectMake(3520,0,320,480) animated:NO];
+                NSLog(@"fully %@", cell.themeLabel.text);
+                [self updateThemeDataWithCell:cell];
+            }else{
+                //NSLog(@"not fully %@", cell.themeLabel.text);
             }
-            else if (scrollView.contentOffset.y == 3840) {
-                // user is scrolling to the right from image 10 to image 1.
-                // reposition offset to show image 1 that is on the left in the scroll view
-                //[scrollView scrollRectToVisible:CGRectMake(320,0,320,480) animated:NO];
-            }
-            
-            [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
         }
     }
 }
@@ -219,60 +226,80 @@ static int currentPageNumber;
 }
 
 
-#pragma mark - CollectionView
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIThemeView *cell = (UIThemeView *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    
-    ThemeInterest *theme =[self.themesData objectAtIndex:indexPath.row];
-    //CGFloat xOrigin = i * self.scrollView.frame.size.height ; //+ 40;
-    //UIThemeView *view = [self getUIThemeView:xOrigin];
-    //CGRect position = CGRectMake(0, xOrigin , self.scrollView.frame.size.width, self.scrollView.frame.size.height);
-    //UIView *awesomeView = [[UIView alloc] initWithFrame:CGRectMake(0, xOrigin, self.view.frame.size.width/2, self.view.frame.size.height)];
-    
-    //cell.backgroundColor = [UIColor colorWithRed:0.5/indexPath.row green:0.5 blue:0.5 alpha:1]
-
-    [cell.themeLabel setText:theme.title];
-    [cell.themeLabel setTextColor: [self colorWithHexString: theme.color]];
-    [cell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
-    
-    [cell updateCellWithImage:theme.coverImage];
-    //[cell.backgroundImage setFrame:cell.frame];
-    
-    return cell;
-}
-
-
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    float percent20 = self.scrollView.frame.size.height - (self.scrollView.frame.size.height/3);
-    return CGSizeMake(self.scrollView.frame.size.width, percent20);
-}
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.themesData count];
-}
-
-
 #pragma mark - TableView
 
-//Table View
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return [self.currentThemeSubs count];
+    if(tableView == self.themesView){
+        return [self.themesData count] * 10;
+      
+    }else{
+         return [self.currentThemeSubs count];
+    }
 }
 
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UISubThemeViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    SubThemeInterest* sub =[self.currentThemeSubs objectAtIndex:indexPath.row];
-    NSString *text = sub.title;
-    [cell.title setText:text];
-    [cell updateThemeColor: [self colorWithHexString: self.currentTheme.color]];
+    
+    if(tableView == self.themesView){
+        UIThemeView *cell = (UIThemeView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier ];
+        
+        if (!cell) {
+            [tableView registerNib:[UINib nibWithNibName:@"UIThemeView" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+        }
+        
+        return cell;
+        
+    }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier ];
+        //UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        
+        
+        if (!cell) {
+            [tableView registerNib:[UINib nibWithNibName:@"UISubThemeViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            
+            
+            //cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.view.frame.size.width/2, cell.frame.size.height);
+            
+            //NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            //cell = [nib objectAtIndex:0];
+            
+        }
+        
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if(tableView == self.themesView){
+        NSUInteger actualRow = indexPath.row % [self.themesData count];
+        ThemeInterest *theme =[self.themesData objectAtIndex:actualRow];
+        
+        UIThemeView *tCell = (UIThemeView *)cell;
+        
+        [tCell.themeLabel setText:theme.title];
+        [tCell.themeLabel setTextColor: [self colorWithHexString: theme.color]];
+        [tCell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
+        
+        [tCell updateCellWithImage:theme.coverImage];
+        tCell.theme = theme;
+        //[cell.backgroundImage setFrame:cell.frame];
+        
+    }else{
+        
+        UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
+        SubThemeInterest* sub =[self.currentThemeSubs objectAtIndex:indexPath.row];
+        [sCell setSubTheme:sub];
+        
+        [sCell updateThemeColor: [self colorWithHexString: self.currentTheme.color]];
+    }
+    
    
     //NSLog(text);
     
@@ -285,39 +312,29 @@ static int currentPageNumber;
      [alertView show];
      */
     
-    UISubThemeViewCell* cell = (UISubThemeViewCell *)[self.subThemesView cellForRowAtIndexPath:indexPath];
-    [cell updateStatus];
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier ];
-    //UISubThemeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    
-    if (!cell) {
-        [tableView registerNib:[UINib nibWithNibName:@"UISubThemeViewCell" bundle:nil] forCellReuseIdentifier:CellIdentifier];
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        
-        //cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, self.view.frame.size.width/2, cell.frame.size.height);
-        
-        //NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        //cell = [nib objectAtIndex:0];
+    if(tableView == self.subThemesView){
+        UISubThemeViewCell* cell = (UISubThemeViewCell *)[self.subThemesView cellForRowAtIndexPath:indexPath];
+        [cell updateStatus];
+    }else{
+        /*
+         */
         
     }
-    
-    return cell;
 }
 
 
+/*
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;
-}
+}*/
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    if(tableView == self.themesView){
+        float percent20 = tableView.frame.size.height - (tableView.frame.size.height/3);
+        return percent20;
+    }else{
+        return 100;
+    }
 }
 
 

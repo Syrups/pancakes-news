@@ -7,6 +7,7 @@
 //
 
 #import "UIThemeView.h"
+#import "UIImage+StackBlur.h"
 
 @implementation UIThemeView
 
@@ -18,30 +19,32 @@
 }
 */
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        NSArray *arrayOfViews = [[NSBundle mainBundle] loadNibNamed:@"UIThemeView" owner:self options:nil];
-        
-        if ([arrayOfViews count] < 1) {
-            return nil;
-        }
-        
-        if (![[arrayOfViews objectAtIndex:0] isKindOfClass:[UICollectionViewCell class]]) {
-            return nil;
-        }
-        
-        self = [arrayOfViews objectAtIndex:0];
-    }
+- (void)awakeFromNib {
+    // Initialization code
+    //self.caption.lineBreakMode = NSLineBreakByWordWrapping;
+    //self.caption.numberOfLines = 0;
     
-    return self;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    
 }
 
 -(void)updateCellWithImage: (NSString *)imageName {
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     [tempImageView setFrame:self.frame];
+    self.backgroundView = tempImageView;
+}
+
+
+
+- (void) updateAsNotfullyVisible{
+    UIImage *baseImage = [UIImage imageNamed:self.theme.coverImage];
+    UIImage *blurImage = [baseImage stackBlur:20];
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
+    [tempImageView setFrame:self.frame];
+    
     self.backgroundView = tempImageView;
 }
 

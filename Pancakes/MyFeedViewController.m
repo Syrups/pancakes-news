@@ -28,7 +28,7 @@
     
     self.feedTableView.layoutMargins = UIEdgeInsetsZero;
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.feedTableView setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
+    [self.feedTableView setFrame:CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height)];
     
 }
 
@@ -125,7 +125,7 @@
     Article* article = [feedArticles objectAtIndex:[indexPath row]];
     
     if (cell == nil) {
-         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedArticleCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedArticleCell"];
     }
     
     UIView* overlay = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height/3)];
@@ -140,7 +140,9 @@
     feedCellTitle.textColor = kFeedViewListTitleColor;
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
+    [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
     [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    feedCellThumb.clipsToBounds = YES;
     
     [cell setNeedsLayout];
     

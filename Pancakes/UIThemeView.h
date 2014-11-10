@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ThemeInterest.h"
 
-@interface UIThemeView : UICollectionViewCell
+@interface UIThemeView : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
+@property (weak, nonatomic) ThemeInterest *theme;
 
--(void) setSwitchReceiverSelector: (SEL)action;
+- (void) setSwitchReceiverSelector: (SEL)action;
 - (void) updateCellWithImage :  (NSString *)imageName ;
+- (void) updateAsNotfullyVisible;
 
 @end
