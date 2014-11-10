@@ -137,6 +137,10 @@
                         <exclude reference="YVR-6B-zIl"/>
                         <exclude reference="YkU-Dx-uFJ"/>
                         <exclude reference="tGM-8H-W2Z"/>
+                        <exclude reference="6jw-KF-54q"/>
+                        <exclude reference="AAR-Zj-5Hm"/>
+                        <exclude reference="MY1-4j-tji"/>
+                        <exclude reference="YBc-x7-qUe"/>
                         <exclude reference="04k-72-Eph"/>
                         <exclude reference="0lc-4a-d6e"/>
                         <exclude reference="2sq-gN-CvQ"/>
@@ -172,10 +176,6 @@
                         <exclude reference="rlh-Py-4hk"/>
                         <exclude reference="sBf-61-KgQ"/>
                         <exclude reference="zDE-vg-XOt"/>
-                        <exclude reference="6jw-KF-54q"/>
-                        <exclude reference="AAR-Zj-5Hm"/>
-                        <exclude reference="MY1-4j-tji"/>
-                        <exclude reference="YBc-x7-qUe"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

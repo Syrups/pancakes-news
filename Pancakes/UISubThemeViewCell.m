@@ -37,12 +37,20 @@
 
 - (void)updateThemeColor:(UIColor *) color {
     
-    [self.zigzag setTintColor:color];
-    [self.selectedFilter setBackgroundColor:color];
+    [self.title setText:self.subTheme.title];
     [self.title setTextColor:[UIColor blackColor]];
-    self.backgroundColor = [UIColor whiteColor];
-    self.selectedFilter.alpha =  0.70;
-    // Configure the view for the selected state
+    
+    [self.selectedFilter setBackgroundColor:color];
+    self.selectedFilter.alpha = self.isIncluded ? 0.70 : 0;
+    
+    [self.zigzag setTintColor:color];
+    
+    
+    
+    self.backgroundColor = self.isIncluded ? [UIColor clearColor] : [UIColor whiteColor];
+    [self.title setTextColor: self.isIncluded ? [UIColor whiteColor] : [UIColor blackColor]];
+
+
 }
 
 

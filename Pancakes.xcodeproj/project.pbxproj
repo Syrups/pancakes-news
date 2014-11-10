@@ -10,6 +10,7 @@
 		25D738D955411A703F52C406 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EC56249BB21E39D5D93BB /* libPods.a */; };
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
+		737668171A111379002ECAB5 /* UserDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 737668161A111379002ECAB5 /* UserDataHolder.m */; };
 		7392284D1A0D12CA005F02E9 /* ThemeInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7392284C1A0D12CA005F02E9 /* ThemeInterest.m */; };
 		739228501A0D1301005F02E9 /* SubThemeInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7392284F1A0D1301005F02E9 /* SubThemeInterest.m */; };
 		739228541A0D14B3005F02E9 /* MyInterest.json in Resources */ = {isa = PBXBuildFile; fileRef = 739228521A0D14B3005F02E9 /* MyInterest.json */; };
@@ -84,6 +85,8 @@
 		7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubThemeViewCell.h; sourceTree = "<group>"; };
 		7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubThemeViewCell.m; sourceTree = "<group>"; };
 		7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubThemeViewCell.xib; sourceTree = "<group>"; };
+		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
+		737668161A111379002ECAB5 /* UserDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataHolder.m; sourceTree = "<group>"; };
 		7392284B1A0D12CA005F02E9 /* ThemeInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeInterest.h; sourceTree = "<group>"; };
 		7392284C1A0D12CA005F02E9 /* ThemeInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeInterest.m; sourceTree = "<group>"; };
 		7392284E1A0D1301005F02E9 /* SubThemeInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubThemeInterest.h; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				7392284C1A0D12CA005F02E9 /* ThemeInterest.m */,
 				7392284E1A0D1301005F02E9 /* SubThemeInterest.h */,
 				7392284F1A0D1301005F02E9 /* SubThemeInterest.m */,
+				737668151A111379002ECAB5 /* UserDataHolder.h */,
+				737668161A111379002ECAB5 /* UserDataHolder.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -704,6 +709,7 @@
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
+				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,

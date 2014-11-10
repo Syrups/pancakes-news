@@ -6,11 +6,19 @@
   "desc": "UITextView displays a region that can contain multiple lines of editable text. When a user taps a text view, a keyboard appears; when a user taps Return in the keyboard, the keyboard disappears and the text view can handle the input in an application-specific way. You can specify attributes",
   "subThemes": [{
     "_id": "1",
-    "title": "Aid and developement",
+    "title": "Natural disaters",
     "image": ""
   }, {
     "_id": "2",
-    "title": "War and conflict",
+    "title": "Extreme weather",
+    "image": ""
+  }, {
+    "_id": "3",
+    "title": "Human rights",
+    "image": ""
+  }, {
+    "_id": "4",
+    "title": "Climate change",
     "image": ""
   }]
 }, {
@@ -27,6 +35,10 @@
     "_id": "2",
     "title": "War and conflict",
     "image": ""
+  }, {
+    "_id": "2",
+    "title": "Health and diseases",
+    "image": ""
   }]
 }, {
   "_id": "3",
@@ -36,11 +48,11 @@
   "desc": "UITextView displays a region that can contain multiple lines of editable text. When a user taps a text view, a keyboard appears; when a user taps Return in the keyboard, the keyboard disappears and the text view can handle the input in an application-specific way. You can specify attributes, such as font, color, and alignment, that apply to all text in a text view.",
   "subThemes": [{
     "_id": "1",
-    "title": "Aid and developement",
+    "title": "Money1",
     "image": ""
   }, {
     "_id": "2",
-    "title": "War and conflict",
+    "title": "Wall street",
     "image": ""
   }]
 }]
