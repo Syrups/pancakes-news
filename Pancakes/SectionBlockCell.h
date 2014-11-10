@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIImageView *coverImage;
 @property (strong, nonatomic) UIView* imageMask;
 
+- (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 - (void) openWithAnimation;
 - (void) closeWithAnimation;
 

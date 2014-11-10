@@ -37,6 +37,10 @@
     
     // back from article view ?
     if (parent.menuItem.frame.origin.x < 0) {
+        CGRect f = self.feedTableView.frame;
+        f.origin.x = - self.view.frame.size.width/2;
+        self.feedTableView.frame = f;
+        
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = parent.menuTopBar.frame;
             f.origin.x += self.view.frame.size.width/2;
@@ -44,6 +48,9 @@
             f = parent.menuItem.frame;
             f.origin.x += self.view.frame.size.width/2;
             [parent.menuItem setFrame:f];
+            f = self.feedTableView.frame;
+            f.origin.x = 0.0f;
+            self.feedTableView.frame = f;
         } completion:nil];
     }
 }
@@ -78,10 +85,13 @@
     
     MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
     
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect f = self.feedTableView.frame;
         f.origin.x = -self.view.frame.size.width/2;
         [self.feedTableView setFrame:f];
+        f = self.articleExcerpt.frame;
+        f.origin.y = self.view.frame.size.height;
+        [self.articleExcerpt setFrame:f];
         f = parent.menuTopBar.frame;
         f.origin.x -= self.view.frame.size.width/2;
         [parent.menuTopBar setFrame:f];
@@ -144,6 +154,15 @@
     [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
     
+    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 38.0f, 22.0f, 15.0f)];
+    check.image = [UIImage imageNamed:@"check_item"];
+    check.tintColor = [UIColor whiteColor];
+    check.contentMode = UIViewContentModeScaleAspectFit;
+    check.tag = 50;
+    check.alpha = 0.0f;
+    
+    [overlay addSubview:check];
+    
     [cell setNeedsLayout];
     
     return cell;
@@ -155,27 +174,40 @@
     selectedArticle = article;
     
     [self.selectedArticleCover sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    self.selectedArticleCover.transform = CGAffineTransformMakeScale(0.95f, 0.95f);
     
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = RgbaColor(0, 0, 0, 0);
-    cell.contentView.backgroundColor = RgbaColor(0, 0, 0, 0);
-    
-    UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
-    feedCellTitle.textColor = [UIColor whiteColor];
-    
-    UIView* overlay = [cell.contentView viewWithTag:5];
-    overlay.hidden = NO;
     
     // ... Yes, that's dirty
     Block* firstBlock = (Block*)article.blocks[1];
     NSString* content = firstBlock.paragraphs[0];
-    
     ContentParser* parser = [[ContentParser alloc] init];
-    
     self.articleExcerpt.text = [self excerptOfContent:[parser getCleanedString:content] firstWordsCount:22];
+    self.articleExcerpt.transform = CGAffineTransformMakeScale(0.95f, 0.95f);
+    self.articleExcerpt.alpha = 0.0f;
     
+    UIView* overlay = [cell.contentView viewWithTag:5];
+    UIView* check = [overlay viewWithTag:50];
+    check.transform = CGAffineTransformMakeScale(2.0f, 2.0f);
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        cell.backgroundColor = RgbaColor(0, 0, 0, 0);
+        cell.contentView.backgroundColor = RgbaColor(0, 0, 0, 0);
+        self.articleExcerpt.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        self.articleExcerpt.alpha = 1.0f;
+        overlay.hidden = NO;
+        
+        check.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        check.alpha = 1.0f;
+    } completion:nil];
+    
+    UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    feedCellTitle.textColor = [UIColor whiteColor];
     [cell.contentView bringSubviewToFront:feedCellTitle];
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,6 +219,8 @@
     
     UIView* overlay = [cell.contentView viewWithTag:5];
     overlay.hidden = YES;
+    UIView* check = [overlay viewWithTag:50];
+    check.alpha = 0.0f;
 }
 
 

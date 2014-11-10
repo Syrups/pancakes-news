@@ -11,6 +11,8 @@
 
 @interface DefinitionEmbeddedBlock : UIView
 
+@property (strong, nonatomic) Block* block;
+
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 
 @end

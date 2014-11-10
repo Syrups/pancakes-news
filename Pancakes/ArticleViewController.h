@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Article.h"
 #import "ContentParser.h"
+#import "ArticleMenuViewController.h"
 
 @interface ArticleViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ContentParserDelegate>
 
@@ -23,7 +24,11 @@
 @property (strong, nonatomic) UIImage *cover;
 @property (strong, nonatomic) IBOutlet UIImageView* articleCoverImage;
 
-@property (strong, nonatomic) UIView* leftMenuView;
-@property (strong, nonatomic) UIView* rightMenuView;
+@property (strong, nonatomic) ArticleMenuViewController* menuViewController;
+@property (strong, nonatomic) UINavigationController* menuDetailViewController;
+
+@property (strong, nonatomic) UIView* storyline;
+
+- (void)addBlockButtonAtOffset:(CGFloat)offset;
 
 @end
