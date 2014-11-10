@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Block.h"
 #import "ContentParser.h"
+#import "ArticleViewController.h"
 
-@interface GenericBlockCell : UICollectionViewCell
+@interface GenericBlockCell : UICollectionViewCell <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) Block* block;
 @property (strong, nonatomic) UILabel *textLabel;
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) ArticleViewController* articleViewController;
 
+- (void)loadWithBlock:(Block*)block;
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 - (void)openEmbeddedBlockWithId:(NSString*)blockId completion:(void(^)())completion;
 

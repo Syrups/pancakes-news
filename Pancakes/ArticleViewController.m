@@ -46,6 +46,9 @@
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
     [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
     [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
+    
+    [self createMainMenu];
+    [self createDetailMenu];
 }
 
 - (void)fetchArticleData {
@@ -83,12 +86,48 @@
     return [self.displayedArticle.blocks objectAtIndex:[indexPath row]-1];
 }
 
+#pragma mark - Menu
+
+- (void) createMainMenu {
+    
+    float screenMidSize =self.view.frame.size.width/2;
+    
+    self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuView"];
+    [self addChildViewController:self.menuViewController];
+    self.menuViewController.view.frame = CGRectMake(self.view.frame.size.width, 0.0f, screenMidSize, self.view.frame.size.height);
+    
+    
+    [self.view addSubview:self.menuViewController.view];
+    [self.menuViewController didMoveToParentViewController:self];
+
+}
+
+- (void) createDetailMenu {
+    
+    float screenMidSize =self.view.frame.size.width/2;
+    
+    self.menuDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuDetailView"];
+    [self addChildViewController:self.menuDetailViewController];
+    self.menuDetailViewController.view.frame = CGRectMake(-screenMidSize, 0.0f, screenMidSize, self.view.frame.size.height);
+    
+    
+    [self.view addSubview:self.menuDetailViewController.view];
+    [self.menuDetailViewController didMoveToParentViewController:self];
+    
+}
+
 #pragma mark - Actions
 
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)displayMenu:(id)sender {
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.menuViewController.view setFrame:CGRectMake(self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
+        [self.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
+    } completion:nil];
+}
 
 #pragma mark - Helper view methods
 
@@ -141,54 +180,21 @@
             frame.origin.y += self.view.frame.size.height;
             creditsLabel.frame = frame;
             [creditsLabel setAlpha:1.0f];
+            
+            UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.moreButtonBackground.frame.origin.x + self.moreButtonBackground.frame.size.width/2, self.moreButtonBackground.frame.origin.y + self.moreButtonBackground.frame.size.height, 1.0f, 0.0f)];
+            storyline.backgroundColor = RgbColor(180, 180, 180);
+            [cell addSubview:storyline];
+            
+            frame = storyline.frame;
+            frame.size.height = self.view.frame.size.height * 1.75f
+            ;
+            storyline.frame = frame;
         } completion:^(BOOL finished) {
             titleCellAnimated = YES;
         }];
     }
     
     return cell;
-}
-
-- (IBAction)toggleMenu:(id)sender {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5f];
-    
-    CGRect rightFrame = self.rightMenuView.frame;
-    CGRect leftFrame = self.leftMenuView.frame;
-    
-    CGFloat screenSize = self.view.frame.size.width;
-    
-    if (leftFrame.origin.x == 0) { // if menu displayed
-        rightFrame.origin.x = screenSize;
-        leftFrame.origin.x = -screenSize/2;
-    } else {
-        rightFrame.origin.x = screenSize/2;
-        leftFrame.origin.x = 0.0f;
-    }
-    
-    self.rightMenuView.frame = rightFrame;
-    self.leftMenuView.frame = leftFrame;
-    
-    [UIView commitAnimations];
-}
-
-- (void)loadMenuView {
-    CGRect rightFrame = self.view.frame;
-    CGRect leftFrame = self.view.frame;
-    CGFloat screenSize = self.view.frame.size.width;
-    rightFrame.origin.x = screenSize;
-    leftFrame.origin.x = - screenSize/2;
-    rightFrame.size.width /= 2; leftFrame.size.width /= 2;
-    
-    self.rightMenuView = [[[UINib nibWithNibName:@"ArticleRightMenu" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
-    self.rightMenuView.frame = rightFrame;
-    self.rightMenuView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
-    self.leftMenuView = [[[UINib nibWithNibName:@"ArticleLeftMenu" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
-    self.leftMenuView.frame = leftFrame;
-    self.leftMenuView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
-    
-    [self.view addSubview:self.rightMenuView];
-    [self.view addSubview:self.leftMenuView];
 }
 
 - (Block*) blockWithId:(NSString*)blockId {
@@ -227,13 +233,15 @@
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SectionBlockCell" forIndexPath:indexPath];
         }
         cell.contentView.alpha = 0.0f;
+        cell.articleViewController = self;
+        [cell layoutWithBlock:block offsetY:40.0f];
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
+        cell.articleViewController = self;
+        [cell loadWithBlock:block];
     }
     
-    [cell layoutWithBlock:block offsetY:40.0f];
-    
-    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, indexPath.row);
+    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, (long)indexPath.row);
     
     return cell;
 }
@@ -294,20 +302,6 @@
     }];
 }
 
-#pragma mark - ContentParserDelegate
-
-- (void)parser:(ContentParser *)parser didCallBlockWithId:(NSString *)blockId atTextLocation:(NSUInteger)location {
-//    Block* calledBlock = [self blockWithId:blockId];
-//    
-//    UIButton* button = [UIButton buttonWithType:UIButtonTypeInfoLight];
-//    button.frame = CGRectMake(self.collectionView.frame.size.width-35.0f, [blockId intValue]*100.0f, 20.0f, 20.0f);
-//    button.tag = [blockId intValue];
-//    
-//    [button addTarget:self action:@selector(revealBlock:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.collectionView addSubview:button];
-}
-
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -324,16 +318,12 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-//    NSLog(@"%ld", (unsigned long) scrollView.contentOffset.y);
-
     if (self.collectionView.contentOffset.y > self.articleCoverImage.frame.size.height/2 || self.collectionView.contentOffset.y <= 0) return;
     
     if (self.collectionView.contentOffset.y == 0) {
         [self.articleCoverImage setImage:coverOriginalImage];
     } else {
-        int radius = self.collectionView.contentOffset.y / 6;
-//        coverBlurredImage = [coverOriginalImage stackBlur:radius];
-//        [self.articleCoverImage setImage:coverBlurredImage];
+        int radius = self.collectionView.contentOffset.y / 7;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             

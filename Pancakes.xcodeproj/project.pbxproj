@@ -52,6 +52,11 @@
 		B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */; };
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
+		B3E539741A10DC99006FF158 /* Storyline.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E539731A10DC99006FF158 /* Storyline.m */; };
+		B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */; };
+		B3E5397B1A110C27006FF158 /* ArticleMenuInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5397A1A110C27006FF158 /* ArticleMenuInterestsViewController.m */; };
+		B3E5397E1A110E5B006FF158 /* ArticleMenuShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5397D1A110E5B006FF158 /* ArticleMenuShareViewController.m */; };
+		B3E539811A110F84006FF158 /* ArticleMenuRelatedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E539801A110F84006FF158 /* ArticleMenuRelatedViewController.m */; };
 		B3EF695F1A03D35D00150BF7 /* BreeBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695A1A03D35D00150BF7 /* BreeBold.otf */; };
 		B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695B1A03D35D00150BF7 /* BreeRegular.otf */; };
 		B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695D1A03D35D00150BF7 /* Heuristica-Italic.otf */; };
@@ -151,6 +156,16 @@
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
 		B3B9375F1A0A41B400584843 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		B3B937601A0A41B400584843 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		B3E539721A10DC99006FF158 /* Storyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storyline.h; sourceTree = "<group>"; };
+		B3E539731A10DC99006FF158 /* Storyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storyline.m; sourceTree = "<group>"; };
+		B3E539751A10FEC0006FF158 /* ArticleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuViewController.h; sourceTree = "<group>"; };
+		B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuViewController.m; sourceTree = "<group>"; };
+		B3E539791A110C27006FF158 /* ArticleMenuInterestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuInterestsViewController.h; sourceTree = "<group>"; };
+		B3E5397A1A110C27006FF158 /* ArticleMenuInterestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuInterestsViewController.m; sourceTree = "<group>"; };
+		B3E5397C1A110E5B006FF158 /* ArticleMenuShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuShareViewController.h; sourceTree = "<group>"; };
+		B3E5397D1A110E5B006FF158 /* ArticleMenuShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuShareViewController.m; sourceTree = "<group>"; };
+		B3E5397F1A110F84006FF158 /* ArticleMenuRelatedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuRelatedViewController.h; sourceTree = "<group>"; };
+		B3E539801A110F84006FF158 /* ArticleMenuRelatedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuRelatedViewController.m; sourceTree = "<group>"; };
 		B3EF695A1A03D35D00150BF7 /* BreeBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreeBold.otf; sourceTree = "<group>"; };
 		B3EF695B1A03D35D00150BF7 /* BreeRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreeRegular.otf; sourceTree = "<group>"; };
 		B3EF695D1A03D35D00150BF7 /* Heuristica-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heuristica-Italic.otf"; sourceTree = "<group>"; };
@@ -254,8 +269,11 @@
 		73DC79BB1A0C23CF00093265 /* Article */ = {
 			isa = PBXGroup;
 			children = (
+				B3E539781A110BD7006FF158 /* MenuDetail */,
 				B38F09BD19F13CB10013B920 /* ArticleViewController.m */,
 				B38F09BC19F13CB10013B920 /* ArticleViewController.h */,
+				B3E539751A10FEC0006FF158 /* ArticleMenuViewController.h */,
+				B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */,
 			);
 			name = Article;
 			sourceTree = "<group>";
@@ -331,6 +349,8 @@
 			children = (
 				B375C0CB19F47069002D7AE7 /* ContentParser.h */,
 				B375C0CC19F47069002D7AE7 /* ContentParser.m */,
+				B3E539721A10DC99006FF158 /* Storyline.h */,
+				B3E539731A10DC99006FF158 /* Storyline.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -448,6 +468,19 @@
 				B3B937601A0A41B400584843 /* MainMenuViewController.m */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		B3E539781A110BD7006FF158 /* MenuDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B3E539791A110C27006FF158 /* ArticleMenuInterestsViewController.h */,
+				B3E5397A1A110C27006FF158 /* ArticleMenuInterestsViewController.m */,
+				B3E5397C1A110E5B006FF158 /* ArticleMenuShareViewController.h */,
+				B3E5397D1A110E5B006FF158 /* ArticleMenuShareViewController.m */,
+				B3E5397F1A110F84006FF158 /* ArticleMenuRelatedViewController.h */,
+				B3E539801A110F84006FF158 /* ArticleMenuRelatedViewController.m */,
+			);
+			name = MenuDetail;
 			sourceTree = "<group>";
 		};
 		B3EF69571A03D35D00150BF7 /* Resources */ = {
@@ -647,6 +680,8 @@
 			files = (
 				B34E701F1A02DA5A00C4ECA2 /* UIImage+StackBlur.m in Sources */,
 				73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */,
+				B3E5397E1A110E5B006FF158 /* ArticleMenuShareViewController.m in Sources */,
+				B3E539811A110F84006FF158 /* ArticleMenuRelatedViewController.m in Sources */,
 				B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */,
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */,
@@ -655,13 +690,16 @@
 				73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */,
 				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,
 				B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */,
+				B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */,
 				B39BC80519F2847600277370 /* User.m in Sources */,
 				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
+				B3E5397B1A110C27006FF158 /* ArticleMenuInterestsViewController.m in Sources */,
 				B39BC80219F2847600277370 /* Block.m in Sources */,
 				73FB80471A0BD09900CCA3F1 /* MainViewController.m in Sources */,
 				739228501A0D1301005F02E9 /* SubThemeInterest.m in Sources */,
 				B37334611A0791C000FDBF70 /* EditorsBlockCell.m in Sources */,
 				7392284D1A0D12CA005F02E9 /* ThemeInterest.m in Sources */,
+				B3E539741A10DC99006FF158 /* Storyline.m in Sources */,
 				B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */,
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
