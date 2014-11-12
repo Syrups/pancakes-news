@@ -16,7 +16,6 @@
 
 @implementation ChooseThemesViewController {
     NSMutableArray* categoriesViews;
-    
 }
 
 static NSString *CellIdentifier = @"SubThemeViewCell";
@@ -24,46 +23,13 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //initDummy Datas
-    
-    NSString * filePath =[[NSBundle mainBundle] pathForResource:@"MyInterest" ofType:@"json"];
-    NSError * error;
-    NSString* fileContents =[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
-
-    if(error)
-    {
-        NSLog(@"Error reading file: %@",error.localizedDescription);
-    }
-    
-    NSArray *jsonArray = (NSArray *)[NSJSONSerialization
-                                  JSONObjectWithData:[fileContents dataUsingEncoding:NSUTF8StringEncoding]
-                                  options:0 error:NULL];
-    
-    self.themesData = [[NSMutableArray alloc] init];
-    
-    for (id json in jsonArray) {
-        
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:json options:0 error:nil];
-        NSString* jsonString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-
-        
-        NSError* err = nil;
-        ThemeInterest *theme  =[[ThemeInterest alloc] initWithString:jsonString error:&err];
-        
-        [self.themesData addObject:theme];
-    }
-    
-    self.currentTheme = [self.themesData objectAtIndex:0];
-    
-    self.currentThemeSubs =[self.currentTheme subThemes];
-    
     
     //InitScrollView and TableView
     int screenMidSize = self.view.frame.size.width/2;
     int screenHeight = self.view.frame.size.height;
     
     
-    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, screenHeight)];
+    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth)];
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
     
@@ -75,7 +41,7 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
     self.themeDescription.text = self.currentTheme.desc;
     self.themeDescription.alpha = 0;
     
-
+    
     [self.subThemesView setDelegate:self];
     [self.themesView setDelegate:self];
     
@@ -87,44 +53,11 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
     
-    [self.subThemesView reloadInputViews];
-    [self.themesView reloadInputViews];
-    
-    [self setSubthemesBackground];
-    
-    //[self.scrollView setDataSource:self];
+    [self loadThemesFromNetwork];
 }
 
 
 #pragma mark - UIScrollView
-
-/*
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat height = scrollView.frame.size.height;
-    NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
-     //NSLog(@"offset :%f, page : %i, h : %f",scrollView.contentOffset.y, page, scrollView.frame.size.height);
-    
-    if(scrollView == self.scrollView){
-        
-        self.currentTheme = [self.themesData objectAtIndex:page];
-        self.currentThemeSubs = self.currentTheme.subThemes;
-        //[self.currentTheme objectForKey:@"subthemes"];
-        self.themeDescription.text = self.currentTheme.description;
-        //[self.currentTheme objectForKey:@"description"];
-        
-        UIThemeView *view = [[scrollView subviews] objectAtIndex:page];
-        
-        [UIView animateWithDuration:0.3 animations:^() {
-            self.themeDescription.alpha =  view.self.themeCheck.isOn ? 0 : 1.0;
-            //[self.themeDescription setHidden:view.self.themeCheck.isOn];
-            UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.currentTheme.coverImage]];
-            [tempImageView setFrame:self.subThemesView.frame];
-             
-             self.subThemesView.backgroundView = tempImageView;
-        }];
-    }
-}*/
-
 
 
 -(void) updateThemeDataWithCell : (UIThemeView *) cell{
@@ -132,7 +65,7 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
     // The key is repositioning without animation
     
     self.currentTheme = cell.theme;
-    self.currentThemeSubs = self.currentTheme.subThemes;
+    self.currentThemeSubs = self.currentTheme.subthemes;
     self.themeDescription.text = self.currentTheme.desc;
     
     [UIView animateWithDuration:0.3 animations:^() {
@@ -147,11 +80,16 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
         
     }];
     
- 
+    
     [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    //ensure that the end of scroll is fired.
+    [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:scrollView afterDelay:0.3];
+    
     
     if (scrollView == self.themesView) {
         
@@ -173,6 +111,8 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
+    NSLog(@"scrollViewWillEndDragging");
     if (scrollView == self.themesView) {
         [self centerTableWithScrollView: scrollView updateData:false ];
     }
@@ -181,6 +121,9 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     // if decelerating, let scrollViewDidEndDecelerating: handle it
     //ecelerate == NO &&
+    
+    NSLog(@"scrollViewDidEndDragging");
+    
     if (decelerate == NO && scrollView == self.themesView) {
         [self centerTableWithScrollView: scrollView updateData : false];
     }
@@ -188,8 +131,30 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
+    //NSLog(@"scrollViewDidEndDecelerating");
     if (scrollView == self.themesView) {
         [self centerTableWithScrollView: scrollView updateData : true];
+    }
+}
+
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    //NSLog(@"scrollViewDidEndScrollingAnimation");
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    //[self centerTableWithScrollView: scrollView updateData : true];
+    
+    
+    for (UIThemeView *cell in self.themesView.visibleCells) {
+        CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
+        
+        if (CGRectContainsRect(scrollView.frame, cellRect)){
+            
+            NSLog(@"fully %@", cell.themeLabel.text);
+            [self updateThemeDataWithCell:cell];
+        }else{
+            //NSLog(@"not fully %@", cell.themeLabel.text);
+        }
     }
 }
 
@@ -232,9 +197,9 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
     
     if(tableView == self.themesView){
         return [self.themesData count] * 10;
-      
+        
     }else{
-         return [self.currentThemeSubs count];
+        return [self.currentThemeSubs count];
     }
 }
 
@@ -278,7 +243,8 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
     
     if(tableView == self.themesView){
         NSUInteger actualRow = indexPath.row % [self.themesData count];
-        ThemeInterest *theme =[self.themesData objectAtIndex:actualRow];
+        ThemeInterest *theme = [self.themesData objectAtIndex:actualRow];
+        
         
         UIThemeView *tCell = (UIThemeView *)cell;
         
@@ -291,41 +257,24 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
         //[cell.backgroundImage setFrame:cell.frame];
         
     }else{
+        SubThemeInterest* sub = [self.currentThemeSubs objectAtIndex:indexPath.row];
+        BOOL isInclude = [[[[UserDataHolder sharedInstance] user] interests] containsObject:sub._id];
         
         UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
-        SubThemeInterest* sub =[self.currentThemeSubs objectAtIndex:indexPath.row];
         [sCell setSubTheme:sub];
         
         [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color]];
     }
-    
-   
-    //NSLog(text);
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    /*NSString *subeTheme= [self.currentThemeSubs objectAtIndex:indexPath.row];
-     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:[NSString stringWithFormat:@"Selected Value is %@",subeTheme] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-     
-     [alertView show];
-     */
-    
     if(tableView == self.subThemesView){
+        
         UISubThemeViewCell* cell = (UISubThemeViewCell *)[self.subThemesView cellForRowAtIndexPath:indexPath];
         [cell updateStatus];
-    }else{
-        /*
-         */
-        
     }
 }
 
-
-/*
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
-}*/
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView == self.themesView){
@@ -342,6 +291,31 @@ static NSString *CellIdentifier = @"SubThemeViewCell";
     //[self.themeDescription setHidden:state];
     [UIView animateWithDuration:0.3 animations:^() {
         self.themeDescription.alpha = state ? 0 : 1.0;
+    }];
+}
+
+- (void) loadThemesFromNetwork {
+    [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
+        NSLog(@"%@", json);
+        self.themesData = [[NSMutableArray alloc] init];
+        
+        for (id j in json) {
+            
+            NSError* err = nil;
+            ThemeInterest *theme  =[[ThemeInterest alloc] initWithDictionary:j error:&err];
+            
+            [self.themesData addObject:theme];
+        }
+        
+        self.currentTheme = [self.themesData objectAtIndex:0];
+        self.currentThemeSubs =[self.currentTheme subthemes];
+        [self setSubthemesBackground];
+        
+        [self.subThemesView reloadInputViews];
+        [self.themesView reloadInputViews];
+        
+        [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.themesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
     }];
 }
 

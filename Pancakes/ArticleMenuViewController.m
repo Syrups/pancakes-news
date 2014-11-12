@@ -24,7 +24,6 @@
         @"30": [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuRelatedView"],
         @"40": [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuCommentView"]
     };
-    
 }
 
 - (void)animateOpen {

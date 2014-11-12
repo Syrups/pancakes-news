@@ -22,6 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIView *selectedFilter;
 
 
-- (void)updateThemeColor:(UIColor *) color;
+- (void)updateThemeColor:(UIColor *) color isIncluded :(BOOL) included;
 - (void)updateStatus;
 @end

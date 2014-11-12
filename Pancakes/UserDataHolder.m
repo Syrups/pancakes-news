@@ -12,7 +12,7 @@
 #import "Configuration.h"
 
 NSString * const PUSER = @"PancakesUser";
-
+NSString * const createUser = kApiRootUrl @"/user/create";
 
 @implementation UserDataHolder
 - (id) init
@@ -39,21 +39,17 @@ NSString * const PUSER = @"PancakesUser";
 
 -(void)saveData
 {
-    NSString *userAsJson = [self.user toJSONString];
-    [[NSUserDefaults standardUserDefaults]
-     setObject:userAsJson forKey:PUSER];
+    NSString *userAsJson = [ self.user toJSONString];
+    [[NSUserDefaults standardUserDefaults]setObject:userAsJson forKey:PUSER];
     
-     NSLog(@"saving %@", userAsJson);
+    NSLog(@"saving %@", userAsJson);
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/save"];
-    [JSONHTTPClient postJSONFromURLWithString:createUser params:[self.user toDictionary] completion:^(id json, JSONModelError *err) {
-        NSLog(@"%@", json);
-        
-        //NSDictionary *j = [json toDictionary];
-        
-    }];
+    //NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/save"];
+    /*[JSONHTTPClient postJSONFromURLWithString:createUser params:[self.user toDictionary] completion:^(id json, JSONModelError *err) {
+        NSLog(@"saved to network %@", json);
+    }];*/
     
 }
 
@@ -64,36 +60,46 @@ NSString * const PUSER = @"PancakesUser";
     if ([defaults objectForKey:PUSER])
     {
         NSString *userAsJson  = [defaults objectForKey:PUSER];
-        NSError* err = nil;
+        NSError* err ;
         self.user  =[[User alloc] initWithString:userAsJson error:&err];
         
-        NSLog(@"user loaded %@", userAsJson);
+        if (err) {
+            NSLog(@"Unable to initialize User, %@", err.localizedDescription);
+        }
         
-        NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/create"];
-        [JSONHTTPClient postJSONFromURLWithString:createUser params:@{@"phantom_id":self.user.phantomId} completion:^(id json, JSONModelError *err) {
-            NSLog(@"%@", json);
-            
-            NSDictionary *j = [json toDictionary];
-            
-        }];
-        
+        NSLog(@"user loaded %@", [self.user toJSONString]);
+        //[self loadJsonFromNetworkParams:@{@"phantomId":self.user.phantomId}];
     }
     else
     {
-        NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/create"];
-        
         NSString *phantomId =  [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        NSString *userString = [NSString stringWithFormat:@"{phantom_id : %@}", phantomId];
-        NSError* err = nil;
+        NSString *userString = [NSString stringWithFormat:@"{\"phantomId\" : \"%@\", \"interests\" : []}", phantomId];
+        NSError* err;
         
         self.user  =[[User alloc] initWithString:userString error:&err];
-        NSLog(@"user first load %@", userString);
         
+        if (err) {
+            NSLog(@"Unable to initialize User, %@", err.localizedDescription);
+        }
         
-        //make post, get requests
-        [JSONHTTPClient postJSONFromURLWithString:createUser params:@{@"phantom_id":phantomId} completion:^(id json, JSONModelError *err) {
-            NSLog(@"%@", json);
-        }];
+        NSLog(@"user first load %@", [self.user toJSONString]);
+        //[self loadJsonFromNetworkParams:@{@"phantomId":phantomId}];
+        
     }
 }
+
+- (void) loadJsonFromNetworkParams : (NSDictionary *) user {
+    NSError* err ;
+    
+    //make post, get requests
+    [JSONHTTPClient postJSONFromURLWithString:createUser params:user completion:^(id json, JSONModelError *jsonError) {
+        self.user  =[[User alloc] initWithDictionary:[json objectForKey:@"data"] error:&jsonError];
+        
+        if (err) {
+            NSLog(@"Unable to initialize User, %@", err.localizedDescription);
+        }
+        NSLog(@"user loaded from network %@", [self.user toJSONString]);
+    }];
+}
+
 @end

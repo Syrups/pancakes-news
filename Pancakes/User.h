@@ -15,7 +15,8 @@
 @interface User : JSONModel
 
 //@property (strong, nonatomic) NSString* username;
-@property (strong, nonatomic) NSString* _id;
+@property (strong, nonatomic) NSString<Optional>* _id;
 @property (strong, nonatomic) NSString* phantomId;
-@property (strong, nonatomic) NSArray* interests;
+@property (strong, nonatomic) NSMutableArray<Optional>* interests;
 @end
+
