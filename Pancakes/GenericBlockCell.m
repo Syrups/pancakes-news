@@ -292,7 +292,6 @@
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         UIView* line = [blockLines objectForKey:blockId];
         CGRect frame = line.frame;
-        CGRect cellFrame = [self.tableView rectFo];
         frame.size.height = blockView.frame.size.height;
         line.frame = frame;
     } completion:nil];
