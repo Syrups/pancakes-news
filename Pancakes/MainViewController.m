@@ -12,6 +12,7 @@
 #import "MainViewController.h"
 #import "MainMenuViewController.h"
 #import "SynchroViewController.h"
+#import "UserDataHolder.h"
 
 @interface MainViewController ()
 @property (nonatomic, strong) UIView *privateButtonsView; /// The view hosting the buttons of the child view controllers.
@@ -106,7 +107,9 @@
     [content didMoveToParentViewController:self];          // 3
     self.currentViewController = content;
     
-    NSLog(content.description);
+    
+    [[UserDataHolder sharedInstance] saveData];
+    NSLog(@"%@", content.description);
 }
 
 

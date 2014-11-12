@@ -7,6 +7,7 @@
 //
 
 #import "MyProfileViewController.h"
+#import "Configuration.h"
 
 @implementation MyProfileViewController
 - (void)viewDidLoad {
@@ -14,9 +15,9 @@
     int screenMidSize = self.view.frame.size.width/2;
     
     UIImage *image = [UIImage imageNamed:@"glenn_test"];
-    self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 43, screenMidSize, self.view.frame.size.height - 43)];
-    self.profilePicture.contentMode = UIViewContentModeScaleAspectFill;
-    //self.profilePicture.clipsToBounds = true;
+    self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, kMenuBarHeigth, screenMidSize, self.view.frame.size.height - kMenuBarHeigth)];
+    self.profilePicture.contentMode = UIViewContentModeTopLeft;
+    self.profilePicture.clipsToBounds = YES;
    //self.profilePicture.layer.contentsRect = CGRectMake(0.0, 0.0, 0, 0);
     
     self.synchroTable = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, self.view.frame.size.height)];

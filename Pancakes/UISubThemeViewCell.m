@@ -7,6 +7,7 @@
 //
 
 #import "UISubThemeViewCell.h"
+#import "UserDataHolder.h"
 
 
 @implementation UISubThemeViewCell
@@ -35,38 +36,54 @@
     // Configure the view for the selected state
 }
 
-- (void)updateThemeColor:(UIColor *) color {
+- (void)updateThemeColor:(UIColor *) color isIncluded :(BOOL) isInclude{
     
+   
+
     [self.title setText:self.subTheme.title];
     [self.title setTextColor:[UIColor blackColor]];
     
     [self.selectedFilter setBackgroundColor:color];
-    self.selectedFilter.alpha = self.isIncluded ? 0.70 : 0;
+    self.selectedFilter.alpha = isInclude ? 0.70 :0;
     
     [self.zigzag setTintColor:color];
-    
-    
-    
-    self.backgroundColor = self.isIncluded ? [UIColor clearColor] : [UIColor whiteColor];
-    [self.title setTextColor: self.isIncluded ? [UIColor whiteColor] : [UIColor blackColor]];
 
-
+    self.backgroundColor = isInclude ? [UIColor clearColor] : [UIColor whiteColor];
+    [self.title setTextColor: isInclude ? [UIColor whiteColor] : [UIColor blackColor]];
 }
 
 
 - (void)updateStatus{
     
-    [self setIsIncluded: !self.isIncluded];
+    BOOL notIncluded = ![[[[UserDataHolder sharedInstance] user] interests] containsObject:self.subTheme._id];
+    
+    NSLog(@"before add %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
+    
+    
+    if(notIncluded){
+        
+        [[[[UserDataHolder sharedInstance] user] interests] addObject:self.subTheme._id];
+        
+        
+    }else{
+        
+         [[[[UserDataHolder sharedInstance] user] interests] removeObject:self.subTheme._id];
+    }
+    
+    NSLog (notIncluded ? @"Adding : %@" : @"removing : %@", self.subTheme._id);
+    
+    NSLog(notIncluded ?  @"after add : %@ " : @"after rem : %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
+    
     
     [UIView animateWithDuration:0.3 animations:^() {
-        self.selectedFilter.alpha = self.isIncluded ? 0.70 : 0;
-        self.backgroundColor = self.isIncluded ? [UIColor clearColor] : [UIColor whiteColor];
-        [self.title setTextColor: self.isIncluded ? [UIColor whiteColor] : [UIColor blackColor]];
+        self.selectedFilter.alpha = notIncluded ? 0.70 :0;
+        self.backgroundColor = notIncluded ? [UIColor clearColor] : [UIColor whiteColor];
+        [self.title setTextColor: notIncluded ? [UIColor whiteColor] : [UIColor blackColor]];
     }];
     
    
     
-    NSLog (self.isIncluded?@"YES":@"NO");
+    
 
 }
 

@@ -8,6 +8,9 @@
 
 #import "ChooseThemesViewController.h"
 #import "UIImage+StackBlur.h"
+#import "Configuration.h"
+#import "UserDataHolder.h"
+#import "JSONModel/JSONModelNetworking/JSONHTTPClient.h"
 
 
 @interface ChooseThemesViewController ()
@@ -16,47 +19,13 @@
 
 @implementation ChooseThemesViewController {
     NSMutableArray* categoriesViews;
-    
 }
 
-static NSString *CellIdentifier = @"SubThemeViewCell";
-static int currentPageNumber;
+NSString * const themesUrl = kApiRootUrl @"/themes";
+NSString * const CellIdentifier = @"SubThemeViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //initDummy Datas
-    
-    NSString * filePath =[[NSBundle mainBundle] pathForResource:@"MyInterest" ofType:@"json"];
-    NSError * error;
-    NSString* fileContents =[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
-
-    if(error)
-    {
-        NSLog(@"Error reading file: %@",error.localizedDescription);
-    }
-    
-    NSArray *jsonArray = (NSArray *)[NSJSONSerialization
-                                  JSONObjectWithData:[fileContents dataUsingEncoding:NSUTF8StringEncoding]
-                                  options:0 error:NULL];
-    
-    self.themesData = [[NSMutableArray alloc] init];
-    
-    for (id json in jsonArray) {
-        
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:json options:0 error:nil];
-        NSString* jsonString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-
-        
-        NSError* err = nil;
-        ThemeInterest *theme  =[[ThemeInterest alloc] initWithString:jsonString error:&err];
-        
-        [self.themesData addObject:theme];
-    }
-    
-    self.currentTheme = [self.themesData objectAtIndex:0];
-    
-    self.currentThemeSubs =[self.currentTheme subThemes];
     
     
     //InitScrollView and TableView
@@ -64,19 +33,20 @@ static int currentPageNumber;
     int screenHeight = self.view.frame.size.height;
     
     
-    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, screenHeight)];
+    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth)];
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
     
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
     self.themeDescription.textColor = [self colorWithHexString:@"322e1d"];
+    self.themeDescription.selectable = NO;
     
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.themeDescription.text = self.currentTheme.desc;
     self.themeDescription.alpha = 0;
     
-
+    
     [self.subThemesView setDelegate:self];
     [self.themesView setDelegate:self];
     
@@ -88,44 +58,11 @@ static int currentPageNumber;
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
     
-    [self.subThemesView reloadInputViews];
-    [self.themesView reloadInputViews];
-    
-    [self setSubthemesBackground];
-    
-    //[self.scrollView setDataSource:self];
+    [self loadThemesFromNetwork];
 }
 
 
 #pragma mark - UIScrollView
-
-/*
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat height = scrollView.frame.size.height;
-    NSInteger page = currentPageNumber = (scrollView.contentOffset.y + (0.5f * height)) / height;
-     //NSLog(@"offset :%f, page : %i, h : %f",scrollView.contentOffset.y, page, scrollView.frame.size.height);
-    
-    if(scrollView == self.scrollView){
-        
-        self.currentTheme = [self.themesData objectAtIndex:page];
-        self.currentThemeSubs = self.currentTheme.subThemes;
-        //[self.currentTheme objectForKey:@"subthemes"];
-        self.themeDescription.text = self.currentTheme.description;
-        //[self.currentTheme objectForKey:@"description"];
-        
-        UIThemeView *view = [[scrollView subviews] objectAtIndex:page];
-        
-        [UIView animateWithDuration:0.3 animations:^() {
-            self.themeDescription.alpha =  view.self.themeCheck.isOn ? 0 : 1.0;
-            //[self.themeDescription setHidden:view.self.themeCheck.isOn];
-            UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.currentTheme.coverImage]];
-            [tempImageView setFrame:self.subThemesView.frame];
-             
-             self.subThemesView.backgroundView = tempImageView;
-        }];
-    }
-}*/
-
 
 
 -(void) updateThemeDataWithCell : (UIThemeView *) cell{
@@ -133,7 +70,7 @@ static int currentPageNumber;
     // The key is repositioning without animation
     
     self.currentTheme = cell.theme;
-    self.currentThemeSubs = self.currentTheme.subThemes;
+    self.currentThemeSubs = self.currentTheme.subthemes;
     self.themeDescription.text = self.currentTheme.desc;
     
     [UIView animateWithDuration:0.3 animations:^() {
@@ -148,11 +85,16 @@ static int currentPageNumber;
         
     }];
     
- 
+    
     [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    //ensure that the end of scroll is fired.
+    [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:scrollView afterDelay:0.3];
+    
     
     if (scrollView == self.themesView) {
         
@@ -174,6 +116,8 @@ static int currentPageNumber;
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
+    NSLog(@"scrollViewWillEndDragging");
     if (scrollView == self.themesView) {
         [self centerTableWithScrollView: scrollView updateData:false ];
     }
@@ -182,6 +126,9 @@ static int currentPageNumber;
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     // if decelerating, let scrollViewDidEndDecelerating: handle it
     //ecelerate == NO &&
+    
+    NSLog(@"scrollViewDidEndDragging");
+    
     if (decelerate == NO && scrollView == self.themesView) {
         [self centerTableWithScrollView: scrollView updateData : false];
     }
@@ -189,8 +136,30 @@ static int currentPageNumber;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
+    //NSLog(@"scrollViewDidEndDecelerating");
     if (scrollView == self.themesView) {
         [self centerTableWithScrollView: scrollView updateData : true];
+    }
+}
+
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    //NSLog(@"scrollViewDidEndScrollingAnimation");
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    //[self centerTableWithScrollView: scrollView updateData : true];
+    
+    
+    for (UIThemeView *cell in self.themesView.visibleCells) {
+        CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
+        
+        if (CGRectContainsRect(scrollView.frame, cellRect)){
+            
+            NSLog(@"fully %@", cell.themeLabel.text);
+            [self updateThemeDataWithCell:cell];
+        }else{
+            //NSLog(@"not fully %@", cell.themeLabel.text);
+        }
     }
 }
 
@@ -233,9 +202,9 @@ static int currentPageNumber;
     
     if(tableView == self.themesView){
         return [self.themesData count] * 10;
-      
+        
     }else{
-         return [self.currentThemeSubs count];
+        return [self.currentThemeSubs count];
     }
 }
 
@@ -279,7 +248,8 @@ static int currentPageNumber;
     
     if(tableView == self.themesView){
         NSUInteger actualRow = indexPath.row % [self.themesData count];
-        ThemeInterest *theme =[self.themesData objectAtIndex:actualRow];
+        ThemeInterest *theme = [self.themesData objectAtIndex:actualRow];
+        
         
         UIThemeView *tCell = (UIThemeView *)cell;
         
@@ -292,41 +262,23 @@ static int currentPageNumber;
         //[cell.backgroundImage setFrame:cell.frame];
         
     }else{
+        SubThemeInterest* sub = [self.currentThemeSubs objectAtIndex:indexPath.row];
+        BOOL isInclude = [[[[UserDataHolder sharedInstance] user] interests] containsObject:sub._id];
         
         UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
-        SubThemeInterest* sub =[self.currentThemeSubs objectAtIndex:indexPath.row];
         [sCell setSubTheme:sub];
-        
-        [sCell updateThemeColor: [self colorWithHexString: self.currentTheme.color]];
+        [sCell updateThemeColor: [self colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
     }
-    
-   
-    //NSLog(text);
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    /*NSString *subeTheme= [self.currentThemeSubs objectAtIndex:indexPath.row];
-     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:[NSString stringWithFormat:@"Selected Value is %@",subeTheme] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-     
-     [alertView show];
-     */
-    
     if(tableView == self.subThemesView){
+        
         UISubThemeViewCell* cell = (UISubThemeViewCell *)[self.subThemesView cellForRowAtIndexPath:indexPath];
         [cell updateStatus];
-    }else{
-        /*
-         */
-        
     }
 }
 
-
-/*
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
-}*/
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView == self.themesView){
@@ -343,6 +295,31 @@ static int currentPageNumber;
     //[self.themeDescription setHidden:state];
     [UIView animateWithDuration:0.3 animations:^() {
         self.themeDescription.alpha = state ? 0 : 1.0;
+    }];
+}
+
+- (void) loadThemesFromNetwork {
+    [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
+        NSLog(@"%@", json);
+        self.themesData = [[NSMutableArray alloc] init];
+        
+        for (id j in json) {
+            
+            NSError* err = nil;
+            ThemeInterest *theme  =[[ThemeInterest alloc] initWithDictionary:j error:&err];
+            
+            [self.themesData addObject:theme];
+        }
+        
+        self.currentTheme = [self.themesData objectAtIndex:0];
+        self.currentThemeSubs =[self.currentTheme subthemes];
+        [self setSubthemesBackground];
+        
+        [self.subThemesView reloadInputViews];
+        [self.themesView reloadInputViews];
+        
+        [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.themesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
     }];
 }
 
@@ -379,9 +356,9 @@ static int currentPageNumber;
     [[NSScanner scannerWithString:gString] scanHexInt:&g];
     [[NSScanner scannerWithString:bString] scanHexInt:&b];
     
-    return [UIColor colorWithRed:((float) r / 255.0f)  
-                           green:((float) g / 255.0f)  
-                            blue:((float) b / 255.0f)  
-                           alpha:1.0f];  
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
 }
 @end
