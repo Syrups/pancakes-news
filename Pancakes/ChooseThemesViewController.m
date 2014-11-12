@@ -8,7 +8,7 @@
 
 #import "ChooseThemesViewController.h"
 #import "UIImage+StackBlur.h"
-
+#import "Utils.h"
 
 @interface ChooseThemesViewController ()
 
@@ -20,7 +20,6 @@
 }
 
 static NSString *CellIdentifier = @"SubThemeViewCell";
-static int currentPageNumber;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,7 +69,7 @@ static int currentPageNumber;
     
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
-    self.themeDescription.textColor = [self colorWithHexString:@"322e1d"];
+    self.themeDescription.textColor = [Utils colorWithHexString:@"322e1d"];
     
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.themeDescription.text = self.currentTheme.desc;
@@ -284,7 +283,7 @@ static int currentPageNumber;
         UIThemeView *tCell = (UIThemeView *)cell;
         
         [tCell.themeLabel setText:theme.title];
-        [tCell.themeLabel setTextColor: [self colorWithHexString: theme.color]];
+        [tCell.themeLabel setTextColor: [Utils colorWithHexString: theme.color]];
         [tCell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
         
         [tCell updateCellWithImage:theme.coverImage];
@@ -297,7 +296,7 @@ static int currentPageNumber;
         SubThemeInterest* sub =[self.currentThemeSubs objectAtIndex:indexPath.row];
         [sCell setSubTheme:sub];
         
-        [sCell updateThemeColor: [self colorWithHexString: self.currentTheme.color]];
+        [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color]];
     }
     
    
@@ -347,41 +346,4 @@ static int currentPageNumber;
 }
 
 
-#pragma mark - Utils
-
--(UIColor*)colorWithHexString:(NSString*)hex
-{
-    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    
-    // String should be 6 or 8 characters
-    if ([cString length] < 6) return [UIColor grayColor];
-    
-    // strip 0X if it appears
-    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
-    
-    if ([cString length] != 6) return  [UIColor grayColor];
-    
-    // Separate into r, g, b substrings
-    NSRange range;
-    range.location = 0;
-    range.length = 2;
-    NSString *rString = [cString substringWithRange:range];
-    
-    range.location = 2;
-    NSString *gString = [cString substringWithRange:range];
-    
-    range.location = 4;
-    NSString *bString = [cString substringWithRange:range];
-    
-    // Scan values
-    unsigned int r, g, b;
-    [[NSScanner scannerWithString:rString] scanHexInt:&r];
-    [[NSScanner scannerWithString:gString] scanHexInt:&g];
-    [[NSScanner scannerWithString:bString] scanHexInt:&b];
-    
-    return [UIColor colorWithRed:((float) r / 255.0f)  
-                           green:((float) g / 255.0f)  
-                            blue:((float) b / 255.0f)  
-                           alpha:1.0f];  
-}
 @end

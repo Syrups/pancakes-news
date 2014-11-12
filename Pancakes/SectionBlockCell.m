@@ -9,6 +9,7 @@
 #import "SectionBlockCell.h"
 #import "Configuration.h"
 #import "Macros.h"
+#import "Utils.h"
 #import "UIImageView+WebCache.h"
 
 @implementation SectionBlockCell
@@ -49,14 +50,55 @@
     titleLabel.text = block.title;
     titleLabel.textAlignment = NSTextAlignmentRight;
     titleLabel.font = [UIFont fontWithName:kFontBreeBold size:24.0f];
-    titleLabel.textColor = kOrangeColor;
+    titleLabel.textColor = [Utils colorWithHexString:[self.articleViewController.displayedArticle color]];
+    NSLog(@"%@", self.articleViewController.displayedArticle.color);
     [self addSubview:titleLabel];
     
     self.titleLabel = titleLabel;
     
+    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 38.0f, 0.0f, 1.0f, self.frame.size.height)];
+    storyline.backgroundColor = RgbColor(180, 180, 180);
+    [self addSubview:storyline];
+    
+    UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 38.0f, 0.0f, 3.0f, 0.0f)];
+    storylineOpen.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+    [self addSubview:storylineOpen];
+    
+    self.storylineOpen = storylineOpen;
+    
+    UIButton* closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 56, 20.0f, 40, 40)];
+    [closeButton setTitle:@"x" forState:UIControlStateNormal];
+    closeButton.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+    closeButton.layer.cornerRadius = 20;
+    closeButton.alpha = 0;
+    closeButton.titleLabel.alpha = 0;
+    [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:closeButton];
+    
+    self.closeButton = closeButton;
+    
+    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 67.0f, 10.0f, 60, 60)];
+    [button setImage:[UIImage imageNamed:@"article-block-button-map"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(reveal:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button];
+    
+    self.revealButton = button;
+    
     [super layoutWithBlock:block offsetY:300.0f];
     
     self.contentView.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)reveal:(UIButton*)sender {
+    NSIndexPath* indexPath = [self.articleViewController.collectionView indexPathForCell:self];
+    
+    [self.articleViewController revealBlockAtIndexPath:indexPath];
+}
+
+- (void)close:(UIButton*)sender {
+    NSIndexPath* indexPath = [self.articleViewController.collectionView indexPathForCell:self];
+    
+    [self.articleViewController closeBlockAtIndexPath:indexPath];
 }
 
 - (void)openWithAnimation {
@@ -66,19 +108,43 @@
         f.size.height = 0.0f;
         self.titleBanner.frame = f;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             CGRect f = self.titleLabel.frame;
             f.origin.y += 90.0f;
             self.titleLabel.frame = f;
             self.titleLabel.textColor = [UIColor whiteColor];
             
+            f = self.revealButton.frame;
+            f.origin.y += 90.0f;
+            self.revealButton.frame = f;
+            f = self.closeButton.frame;
+            f.origin.y += 90.0f;
+            self.closeButton.frame = f;
+            self.closeButton.alpha = 1;
+            self.revealButton.alpha = 0;
+            self.revealButton.transform = CGAffineTransformMakeRotation(M_PI);
+            
             f = self.imageMask.frame;
             f.origin.y += 350.0f;
             self.imageMask.frame = f;
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.contentView.alpha = 1.0f;
+                
+                CGRect f = self.titleLabel.frame;
+                f.origin.y -= 10.0f;
+                self.titleLabel.frame = f;
+                
+                f = self.closeButton.frame;
+                f.origin.y -= 10.0f;
+                self.closeButton.frame = f;
+                self.closeButton.titleLabel.alpha = 1;
                 self.imageMask.alpha = 0.0f;
+                
+                f = self.storylineOpen.frame;
+                f.size.height = self.frame.size.height;
+                self.storylineOpen.frame = f;
+                
             } completion:^(BOOL finished) {
                 self.opened = true;
             }];

@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Block.h"
+#import "Article.h"
 
 @interface DefinitionEmbeddedBlock : UIView
 
 @property (strong, nonatomic) Block* block;
+@property (weak, nonatomic) Article* article;
+@property (strong, nonatomic) UIView* storyline;
 
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 

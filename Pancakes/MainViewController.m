@@ -105,8 +105,6 @@
     [self.childsContainer addSubview:content.view];
     [content didMoveToParentViewController:self];          // 3
     self.currentViewController = content;
-    
-    NSLog(content.description);
 }
 
 

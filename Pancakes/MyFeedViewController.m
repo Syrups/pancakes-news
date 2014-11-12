@@ -62,6 +62,10 @@
         NSError* err = nil;
         feedArticles = [Article arrayOfModelsFromData:data error:&err];
         
+        if (err != nil) {
+            NSLog(@"%@", err);
+        }
+        
         // Reload table data on main thread to avoid problems
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.feedTableView reloadData];
@@ -174,7 +178,7 @@
     selectedArticle = article;
     
     [self.selectedArticleCover sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
-    self.selectedArticleCover.transform = CGAffineTransformMakeScale(0.95f, 0.95f);
+    self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
     
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -184,7 +188,7 @@
     NSString* content = firstBlock.paragraphs[0];
     ContentParser* parser = [[ContentParser alloc] init];
     self.articleExcerpt.text = [self excerptOfContent:[parser getCleanedString:content] firstWordsCount:22];
-    self.articleExcerpt.transform = CGAffineTransformMakeScale(0.95f, 0.95f);
+    self.articleExcerpt.transform = CGAffineTransformMakeScale(0.9f, 0.9f);
     self.articleExcerpt.alpha = 0.0f;
     
     UIView* overlay = [cell.contentView viewWithTag:5];
@@ -192,7 +196,7 @@
     check.transform = CGAffineTransformMakeScale(2.0f, 2.0f);
     
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
         cell.backgroundColor = RgbaColor(0, 0, 0, 0);
         cell.contentView.backgroundColor = RgbaColor(0, 0, 0, 0);
         self.articleExcerpt.transform = CGAffineTransformMakeScale(1.0f, 1.0f);

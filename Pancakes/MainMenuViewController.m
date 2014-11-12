@@ -62,7 +62,7 @@ Boolean isOpen = false;
 }
 
 - (IBAction)menuItemSelected:(UIView*)sender {
-    NSString* tag = [NSString stringWithFormat:@"%d", sender.tag];
+    NSString* tag = [NSString stringWithFormat:@"%ld", (long)sender.tag];
     
     [self.delegate menuDidSelectItem : tag];
     [self close];
