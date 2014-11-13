@@ -11,6 +11,8 @@
 #import "Configuration.h"
 #import "MapEmbeddedBlock.h"
 #import "DefinitionEmbeddedBlock.h"
+#import "ArticleParagraphLayoutManager.h"
+#import "Utils.h"
 
 @implementation GenericBlockCell {
     BOOL layouted;
@@ -18,12 +20,17 @@
     NSMutableDictionary* embeddedBlocks;
     NSMutableDictionary* blockIndexPaths;
     NSMutableArray* items;
+    NSMutableDictionary* blockLines;
+    NSMutableDictionary* blockButtons;
 }
 
 - (id)initWithFrame:(CGRect)frame {
     
     layouted = false;
     embeddedBlocks = @{}.mutableCopy;
+    blockLines = @{}.mutableCopy;
+    blockButtons = @{}.mutableCopy;
+    
     self = [super initWithFrame:frame];
     
     self.backgroundColor = kArticleViewBlockBackground;
@@ -37,7 +44,7 @@
     
     [self addSubview:self.tableView];
     
-    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 1.0f, self.frame.size.height)];
+    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 38.0f, 0.0f, 1.0f, self.frame.size.height)];
     storyline.backgroundColor = RgbColor(180, 180, 180);
     [self addSubview:storyline];
     
@@ -86,7 +93,7 @@
                 NSRange range;
                 [(NSValue*)[call objectForKey:@"textRange"] getValue:&range];
                 [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithFloat:1.0f] range:range];
-                [content addAttribute:NSUnderlineColorAttributeName value:kOrangeColor range:range];
+                [content addAttribute:NSUnderlineColorAttributeName value:[Utils colorWithHexString:self.articleViewController.displayedArticle.color] range:range];
             }
             
             label.attributedText = content;
@@ -99,8 +106,6 @@
             paragraphView.frame = frame;
             
             [items addObject:paragraphView];
-            
-            offsetY += label.frame.size.height;
             
             for (NSDictionary* call in calls) {
                 NSString* blockId = [call objectForKey:@"blockId"];
@@ -121,20 +126,31 @@
                 
                 [blockView layoutWithBlock:child offsetY:0.0f];
                 [blockView setClipsToBounds:YES];
+                blockView.article = self.articleViewController.displayedArticle;
                 
                 [embeddedBlocks setObject:blockView forKey:child.id];
                 [blockIndexPaths setObject:blockView forKey:[NSIndexPath indexPathForRow:items.count+1 inSection:0]];
                 [items addObject:blockView];
                 
-                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY, 60, 60)];
+                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY + 20.0f, 60, 60)];
                 [blockButton setImage:[UIImage imageNamed:@"article-block-button-map"] forState:UIControlStateNormal];
                 [blockButton addTarget:self action:@selector(blockButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 blockButton.tag = [child.id integerValue];
+                
+                // Storyline on side
+                UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 39, offsetY + 40.0f, 3.0f, 0)];
+                storylineOpen.backgroundColor = kOrangeColor;
+                [self addSubview:storylineOpen];
+                
+                [blockLines setObject:storylineOpen forKey:child.id];
+                [blockButtons setObject:blockButton forKey:child.id];
                 
                 [self addSubview:blockButton];
                 [self bringSubviewToFront:blockButton];
                 
             }
+            
+            offsetY += paragraphView.frame.size.height + 20.0f;
 
         }];
         
@@ -252,10 +268,23 @@
 #pragma mark - Actions
 
 - (void)blockButtonTapped:(UIView*)sender {
-    NSString* blockId = [NSString stringWithFormat:@"%d", sender.tag];
+    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
     
-    [self openEmbeddedBlockWithId:blockId completion:^{
-        // stuff
+    [self openEmbeddedBlockWithId:blockId completion:nil];
+    
+    // Move all the buttons like they're pushed by the opening block
+    DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
+    
+    [blockButtons enumerateKeysAndObjectsUsingBlock:^(id key, UIButton* btn, BOOL *stop) {
+        // If this button is ABOVE the tapped button,
+        // there's no need to move it down
+        if (btn.frame.origin.y > sender.frame.origin.y) {
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                CGRect f = btn.frame;
+                f.origin.y += blockView.frame.size.height;
+                btn.frame = f;
+            } completion:nil];
+        }
     }];
 }
 
@@ -268,8 +297,20 @@
     CGRect f = blockView.frame;
     f.size.height = blockView.block.paragraphs.count * 100.0f + 230.0f;
     blockView.frame = f;
-    [blockView layoutWithBlock:blockView.block offsetY:0.0f];
+    if (blockView.class == [MapEmbeddedBlock class]) {
+        [blockView layoutWithBlock:blockView.block offsetY:0.0f];
+    }
     [self.tableView endUpdates];
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        UIView* line = [blockLines objectForKey:blockId];
+        CGRect frame = line.frame;
+        CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];
+        NSLog(@"%@", blockView.cellIndexPath);
+        frame.size.height = blockView.frame.size.height;
+        frame.origin.y = cellFrame.origin.y;
+        line.frame = frame;
+    } completion:nil];
 }
 
 - (Block*) blockWithId:(NSString*)blockId {
@@ -302,13 +343,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"%d", indexPath.row]];
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     
     UIView* v = [items objectAtIndex:indexPath.row];
     
     [cell.contentView addSubview:v];
+    
+    if ([v.class isSubclassOfClass:[DefinitionEmbeddedBlock class]]) {
+        [(DefinitionEmbeddedBlock*)v setCellIndexPath:indexPath];
+    }
     
     return cell;
 }

@@ -9,6 +9,7 @@
 #import "DefinitionEmbeddedBlock.h"
 #import "Configuration.h"
 #import "UIImageView+WebCache.h"
+#import "Utils.h"
 
 @implementation DefinitionEmbeddedBlock
 

@@ -8,10 +8,10 @@
 
 #import "ChooseThemesViewController.h"
 #import "UIImage+StackBlur.h"
+#import "Utils.h"
 #import "Configuration.h"
 #import "UserDataHolder.h"
 #import "JSONModel/JSONModelNetworking/JSONHTTPClient.h"
-
 
 @interface ChooseThemesViewController ()
 
@@ -39,7 +39,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
-    self.themeDescription.textColor = [self colorWithHexString:@"322e1d"];
+    self.themeDescription.textColor = [Utils colorWithHexString:@"322e1d"];
     self.themeDescription.selectable = NO;
     
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -262,7 +262,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         UIThemeView *tCell = (UIThemeView *)cell;
         
         [tCell.themeLabel setText:theme.title];
-        [tCell.themeLabel setTextColor: [self colorWithHexString: theme.color]];
+        [tCell.themeLabel setTextColor: [Utils colorWithHexString: theme.color]];
         [tCell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
         
         [tCell updateCellWithImage:theme.coverImage];
@@ -276,7 +276,8 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         
         UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
         [sCell setSubTheme:sub];
-        [sCell updateThemeColor: [self colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
+        [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
+        
     }
 }
 
@@ -309,6 +310,11 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
 
 - (void) loadThemesFromNetwork {
     [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
+        
+        if (json == nil) {
+            return;
+        }
+        
         NSLog(@"%@", json);
         self.themesData = [[NSMutableArray alloc] init];
         

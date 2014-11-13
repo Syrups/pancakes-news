@@ -11,7 +11,7 @@
 #import "ContentParser.h"
 #import "ArticleMenuViewController.h"
 
-@interface ArticleViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ContentParserDelegate>
+@interface ArticleViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) Article* displayedArticle;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIImageView *moreButtonBackground;
 @property (strong, nonatomic) ContentParser* parser;
+@property (strong, nonatomic) IBOutlet UIButton* backButton;
 
 @property (strong, nonatomic) UIImage *cover;
 @property (strong, nonatomic) IBOutlet UIImageView* articleCoverImage;
@@ -29,6 +30,7 @@
 
 @property (strong, nonatomic) UIView* storyline;
 
-- (void)addBlockButtonAtOffset:(CGFloat)offset;
+- (void)revealBlockAtIndexPath:(NSIndexPath *)indexPath;
+- (void)closeBlockAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

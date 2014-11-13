@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSString* coverImage;
 @property (strong, nonatomic) NSString* color;
 @property (strong, nonatomic) NSString* desc;
-@property (strong, nonatomic) NSArray<SubThemeInterest>* subthemes;
+@property (strong, nonatomic) NSArray<SubThemeInterest, Optional>* subthemes;
 
 
 + (BOOL) themInterestIsOn: (ThemeInterest *) theme forSubThemes :(NSArray *)subthemes;

@@ -106,10 +106,6 @@
     [self.childsContainer addSubview:content.view];
     [content didMoveToParentViewController:self];          // 3
     self.currentViewController = content;
-    
-    
-    [[UserDataHolder sharedInstance] saveData];
-    NSLog(@"%@", content.description);
 }
 
 

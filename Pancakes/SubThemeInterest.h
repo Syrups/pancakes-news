@@ -15,4 +15,5 @@
 @property (strong, nonatomic) NSString* _id;
 @property (strong, nonatomic) NSString* title;
 @property (strong, nonatomic) NSString* image;
+@property (strong, nonatomic) NSString<Optional>* color;
 @end

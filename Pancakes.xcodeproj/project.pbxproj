@@ -53,7 +53,8 @@
 		B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */; };
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
-		B3E539741A10DC99006FF158 /* Storyline.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E539731A10DC99006FF158 /* Storyline.m */; };
+		B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CB88CE1A13A03A006DFF03 /* Utils.m */; };
+		B3D1631F1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D1631E1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m */; };
 		B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */; };
 		B3E5397B1A110C27006FF158 /* ArticleMenuInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5397A1A110C27006FF158 /* ArticleMenuInterestsViewController.m */; };
 		B3E5397E1A110E5B006FF158 /* ArticleMenuShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5397D1A110E5B006FF158 /* ArticleMenuShareViewController.m */; };
@@ -159,8 +160,10 @@
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
 		B3B9375F1A0A41B400584843 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		B3B937601A0A41B400584843 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
-		B3E539721A10DC99006FF158 /* Storyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storyline.h; sourceTree = "<group>"; };
-		B3E539731A10DC99006FF158 /* Storyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Storyline.m; sourceTree = "<group>"; };
+		B3CB88CD1A13A03A006DFF03 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		B3CB88CE1A13A03A006DFF03 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		B3D1631D1A1391B100BCBE98 /* ArticleParagraphLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleParagraphLayoutManager.h; sourceTree = "<group>"; };
+		B3D1631E1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleParagraphLayoutManager.m; sourceTree = "<group>"; };
 		B3E539751A10FEC0006FF158 /* ArticleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuViewController.h; sourceTree = "<group>"; };
 		B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuViewController.m; sourceTree = "<group>"; };
 		B3E539791A110C27006FF158 /* ArticleMenuInterestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuInterestsViewController.h; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 		73B33A6D19F15AD600BFB546 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3D1631C1A13919500BCBE98 /* Layout */,
 				B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */,
 				B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */,
 				B375C0C619F46B4F002D7AE7 /* Blocks */,
@@ -273,8 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				B3E539781A110BD7006FF158 /* MenuDetail */,
-				B38F09BD19F13CB10013B920 /* ArticleViewController.m */,
 				B38F09BC19F13CB10013B920 /* ArticleViewController.h */,
+				B38F09BD19F13CB10013B920 /* ArticleViewController.m */,
 				B3E539751A10FEC0006FF158 /* ArticleMenuViewController.h */,
 				B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */,
 			);
@@ -352,8 +356,8 @@
 			children = (
 				B375C0CB19F47069002D7AE7 /* ContentParser.h */,
 				B375C0CC19F47069002D7AE7 /* ContentParser.m */,
-				B3E539721A10DC99006FF158 /* Storyline.h */,
-				B3E539731A10DC99006FF158 /* Storyline.m */,
+				B3CB88CD1A13A03A006DFF03 /* Utils.h */,
+				B3CB88CE1A13A03A006DFF03 /* Utils.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -473,6 +477,15 @@
 				B3B937601A0A41B400584843 /* MainMenuViewController.m */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		B3D1631C1A13919500BCBE98 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				B3D1631D1A1391B100BCBE98 /* ArticleParagraphLayoutManager.h */,
+				B3D1631E1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m */,
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 		B3E539781A110BD7006FF158 /* MenuDetail */ = {
@@ -695,6 +708,7 @@
 				73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */,
 				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,
 				B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */,
+				B3D1631F1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m in Sources */,
 				B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */,
 				B39BC80519F2847600277370 /* User.m in Sources */,
 				B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */,
@@ -704,7 +718,6 @@
 				739228501A0D1301005F02E9 /* SubThemeInterest.m in Sources */,
 				B37334611A0791C000FDBF70 /* EditorsBlockCell.m in Sources */,
 				7392284D1A0D12CA005F02E9 /* ThemeInterest.m in Sources */,
-				B3E539741A10DC99006FF158 /* Storyline.m in Sources */,
 				B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */,
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
@@ -715,6 +728,7 @@
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,
 				B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */,
+				B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,7 +54,7 @@
 }
 
 - (IBAction)didSelectItem:(UIButton*)sender {
-    NSString* tag = [NSString stringWithFormat:@"%d", sender.tag];
+    NSString* tag = [NSString stringWithFormat:@"%ld", (long)sender.tag];
     UIViewController* destination = [self.detailViewControllers objectForKey:tag];
     ArticleViewController* parent = (ArticleViewController*)self.parentViewController;
     
@@ -69,7 +69,7 @@
     sender.selected = YES;
     
     if (destination != nil) {
-        [parent.menuDetailViewController setViewControllers:@[destination] animated:YES];
+        [parent.menuDetailViewController setViewControllers:@[destination] animated:NO];
     }
 }
 
@@ -82,7 +82,7 @@
         self.view.frame = frame;
         
         frame = parent.menuDetailViewController.view.frame;
-        frame.origin.x = - self.view.frame.size.width;
+        frame.origin.y = self.view.frame.size.height;
         parent.menuDetailViewController.view.frame = frame;
     } completion:nil];
 }

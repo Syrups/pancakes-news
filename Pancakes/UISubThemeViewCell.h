@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UITextView *caption;
 
+@property (assign, nonatomic) BOOL *isIncluded;
 @property (weak, nonatomic) IBOutlet UIImageView *zigzag;
 @property (weak, nonatomic) IBOutlet UIView *selectedFilter;
 

@@ -17,15 +17,17 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+StackBlur.h"
 
-@interface ArticleViewController ()
-
-@end
+typedef enum  {
+    Displayed,
+    Hidden
+} BackButtonState;
 
 @implementation ArticleViewController {
     NSMutableArray* hiddenBlocks;
     UIImage *coverOriginalImage;
     UIImage *coverBlurredImage;
     BOOL titleCellAnimated;
+    BackButtonState backButtonState;
 }
 
 - (void)viewDidLoad {
@@ -42,6 +44,7 @@
     self.parser.delegate = self;
     
     self.articleCoverImage.image = self.cover;
+    self.articleCoverImage.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
     
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
     [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
@@ -95,7 +98,7 @@
     self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuView"];
     [self addChildViewController:self.menuViewController];
     self.menuViewController.view.frame = CGRectMake(self.view.frame.size.width, 0.0f, screenMidSize, self.view.frame.size.height);
-    
+    self.menuViewController.article = self.displayedArticle;
     
     [self.view addSubview:self.menuViewController.view];
     [self.menuViewController didMoveToParentViewController:self];
@@ -110,7 +113,6 @@
     [self addChildViewController:self.menuDetailViewController];
     self.menuDetailViewController.view.frame = CGRectMake(0.0f, self.view.frame.size.height, screenMidSize, self.view.frame.size.height);
     
-    
     [self.view addSubview:self.menuDetailViewController.view];
     [self.menuDetailViewController didMoveToParentViewController:self];
 }
@@ -122,10 +124,13 @@
 }
 
 - (IBAction)displayMenu:(id)sender {
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.menuViewController.view setFrame:CGRectMake(self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
-        [self.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
+        } completion:nil];
+    }];
 }
 
 #pragma mark - Helper view methods
@@ -263,14 +268,14 @@
             );
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)revealBlockAtIndexPath:(NSIndexPath *)indexPath {
     Block* block = [self blockAtIndexPath:indexPath];
     
     if ([hiddenBlocks indexOfObject:block] == NSNotFound) {
         return;
     }
     
-    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    SectionBlockCell* cell = (SectionBlockCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
     //        [self.collectionView.collectionViewLayout invalidateLayout];
     NSLog(@"%f", cell.frame.origin.y);
     [self.collectionView performBatchUpdates:^{
@@ -284,22 +289,42 @@
     }];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)closeBlockAtIndexPath:(NSIndexPath *)indexPath {
     Block* block = [self blockAtIndexPath:indexPath];
-    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
     
-    if (block == nil || [cell class] != [SectionBlockCell class]) return;
+    if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
+        return;
+    }
     
-    //    [self.collectionView.collectionViewLayout invalidateLayout];
+    SectionBlockCell* cell = (SectionBlockCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    //        [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView performBatchUpdates:^{
-        if ([hiddenBlocks indexOfObject:block] == NSNotFound) {
-            [hiddenBlocks addObject:block];
-            [cell closeWithAnimation];
-        }
-    } completion:^(BOOL finished) {
         
+        [hiddenBlocks addObject:block];
+        [cell closeWithAnimation];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y - 80.0f) animated:YES];
+        
+    } completion:^(BOOL finished) {
+        [cell layoutWithBlock:cell.block offsetY:0.0f];
     }];
 }
+
+//- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    Block* block = [self blockAtIndexPath:indexPath];
+//    SectionBlockCell* cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+//    
+//    if (block == nil || [cell class] != [SectionBlockCell class]) return;
+//    
+//    //    [self.collectionView.collectionViewLayout invalidateLayout];
+//    [self.collectionView performBatchUpdates:^{
+//        if ([hiddenBlocks indexOfObject:block] == NSNotFound) {
+//            [hiddenBlocks addObject:block];
+//            [cell closeWithAnimation];
+//        }
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//}
 
 #pragma mark - UIScrollViewDelegate
 
@@ -308,11 +333,20 @@
     if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
         
         [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.32) animated:YES];
-    }
-    if (scrollView.contentOffset.y <= 40.0f) {
+        
+        if (backButtonState == Displayed) {
+            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                CGRect f = self.backButton.frame;
+                f.origin.y -= 50.0f;
+                self.backButton.frame = f;
+            } completion:nil];
+            backButtonState = Hidden;
+        }
+        
+        }
+    if (scrollView.contentOffset.y <= 100.0f) {
         [self.collectionView setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
     }
-   
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -333,6 +367,17 @@
                 [self.articleCoverImage setImage:coverBlurredImage];
             });
         });
+    }
+    
+    if (scrollView.contentOffset.y <= 150.0f) {
+        if (backButtonState == Hidden) {
+            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                CGRect f = self.backButton.frame;
+                f.origin.y += 50.0f;
+                self.backButton.frame = f;
+            } completion:nil];
+            backButtonState = Displayed;
+        }
     }
 }
 

@@ -17,6 +17,9 @@
 @property (strong, nonatomic) UIView* titleBanner;
 @property (strong, nonatomic) UIImageView *coverImage;
 @property (strong, nonatomic) UIView* imageMask;
+@property (strong, nonatomic) UIButton* revealButton;
+@property (strong, nonatomic) UIButton* closeButton;
+@property (strong, nonatomic) UIView* storylineOpen;
 
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 - (void) openWithAnimation;

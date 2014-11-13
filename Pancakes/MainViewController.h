@@ -27,9 +27,4 @@
 
 @property (weak, nonatomic) IBOutlet UIView *menuItem;
 
-/** Designated initializer.
- @note The view controllers array cannot be changed after initialization.
- */
-- (instancetype)initWithViewControllers:(NSArray *)viewControllers;
-
 @end
