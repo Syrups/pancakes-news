@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView* tableView;
 
 @property (strong, nonatomic) NSMutableArray* data;
+@property (strong, nonatomic) NSMutableArray* subthemes;
 @property (strong, nonatomic) Article* article;
 
 @end

@@ -270,8 +270,21 @@
 - (void)blockButtonTapped:(UIView*)sender {
     NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
     
-    [self openEmbeddedBlockWithId:blockId completion:^{
-        // stuff
+    [self openEmbeddedBlockWithId:blockId completion:nil];
+    
+    // Move all the buttons like they're pushed by the opening block
+    DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
+    
+    [blockButtons enumerateKeysAndObjectsUsingBlock:^(id key, UIButton* btn, BOOL *stop) {
+        // If this button is ABOVE the tapped button,
+        // there's no need to move it down
+        if (btn.frame.origin.y > sender.frame.origin.y) {
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                CGRect f = btn.frame;
+                f.origin.y += blockView.frame.size.height;
+                btn.frame = f;
+            } completion:nil];
+        }
     }];
 }
 
@@ -292,7 +305,10 @@
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         UIView* line = [blockLines objectForKey:blockId];
         CGRect frame = line.frame;
+        CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];
+        NSLog(@"%@", blockView.cellIndexPath);
         frame.size.height = blockView.frame.size.height;
+        frame.origin.y = cellFrame.origin.y;
         line.frame = frame;
     } completion:nil];
 }
@@ -334,6 +350,10 @@
     UIView* v = [items objectAtIndex:indexPath.row];
     
     [cell.contentView addSubview:v];
+    
+    if ([v.class isSubclassOfClass:[DefinitionEmbeddedBlock class]]) {
+        [(DefinitionEmbeddedBlock*)v setCellIndexPath:indexPath];
+    }
     
     return cell;
 }

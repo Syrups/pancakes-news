@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIImageView *moreButtonBackground;
 @property (strong, nonatomic) ContentParser* parser;
+@property (strong, nonatomic) IBOutlet UIButton* backButton;
 
 @property (strong, nonatomic) UIImage *cover;
 @property (strong, nonatomic) IBOutlet UIImageView* articleCoverImage;

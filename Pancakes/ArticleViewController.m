@@ -17,15 +17,17 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+StackBlur.h"
 
-@interface ArticleViewController ()
-
-@end
+typedef enum  {
+    Displayed,
+    Hidden
+} BackButtonState;
 
 @implementation ArticleViewController {
     NSMutableArray* hiddenBlocks;
     UIImage *coverOriginalImage;
     UIImage *coverBlurredImage;
     BOOL titleCellAnimated;
+    BackButtonState backButtonState;
 }
 
 - (void)viewDidLoad {
@@ -331,11 +333,20 @@
     if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
         
         [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.32) animated:YES];
-    }
-    if (scrollView.contentOffset.y <= 40.0f) {
+        
+        if (backButtonState == Displayed) {
+            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                CGRect f = self.backButton.frame;
+                f.origin.y -= 50.0f;
+                self.backButton.frame = f;
+            } completion:nil];
+            backButtonState = Hidden;
+        }
+        
+        }
+    if (scrollView.contentOffset.y <= 100.0f) {
         [self.collectionView setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
     }
-   
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -356,6 +367,17 @@
                 [self.articleCoverImage setImage:coverBlurredImage];
             });
         });
+    }
+    
+    if (scrollView.contentOffset.y <= 150.0f) {
+        if (backButtonState == Hidden) {
+            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                CGRect f = self.backButton.frame;
+                f.origin.y += 50.0f;
+                self.backButton.frame = f;
+            } completion:nil];
+            backButtonState = Displayed;
+        }
     }
 }
 

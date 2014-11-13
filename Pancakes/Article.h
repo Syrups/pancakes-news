@@ -24,7 +24,9 @@
 @property (strong, nonatomic) NSString* coverImage;
 @property (strong, nonatomic) NSArray<Block>* blocks;
 @property (strong, nonatomic) NSArray<Comment>* comments;
-@property (strong, nonatomic) NSArray<SubThemeInterest>* subthemes;
+@property (strong, nonatomic) NSArray<SubThemeInterest, Optional, ConvertOnDemand>* subthemes;
 @property (strong, nonatomic) NSArray<Article, Optional, ConvertOnDemand>* related;
+
+- (BOOL)containsSubtheme:(SubThemeInterest*)subtheme;
 
 @end

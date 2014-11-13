@@ -67,7 +67,7 @@
     self.storylineOpen = storylineOpen;
     
     UIButton* closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 56, 20.0f, 40, 40)];
-    [closeButton setTitle:@"x" forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"block-close"] forState:UIControlStateNormal];
     closeButton.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
     closeButton.layer.cornerRadius = 20;
     closeButton.alpha = 0;
