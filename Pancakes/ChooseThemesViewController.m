@@ -12,6 +12,7 @@
 #import "Configuration.h"
 #import "UserDataHolder.h"
 #import "JSONModel/JSONModelNetworking/JSONHTTPClient.h"
+#import "PKCacheManager.h"
 
 @interface ChooseThemesViewController ()
 
@@ -278,6 +279,8 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         [sCell setSubTheme:sub];
         [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
         
+        
+    
     }
 }
 
@@ -286,6 +289,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         
         UISubThemeViewCell* cell = (UISubThemeViewCell *)[self.subThemesView cellForRowAtIndexPath:indexPath];
         [cell updateStatus];
+    
     }
 }
 
@@ -309,76 +313,39 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
 }
 
 - (void) loadThemesFromNetwork {
+    
+    // [[NSMutableArray alloc] init];
+    self.themesData = [[NSMutableArray alloc] init];
+    //[NSMutableArray arrayWithArray:[PKCacheManager loadInterestsFromCache]];
+    
+    
+    self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:[PKCacheManager loadInterestsFromCache]];
+ 
     [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
         
         if (json == nil) {
             return;
         }
         
-        NSLog(@"%@", json);
-        self.themesData = [[NSMutableArray alloc] init];
+        self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:json];
         
-        for (id j in json) {
-            
-            NSError* err = nil;
-            ThemeInterest *theme  =[[ThemeInterest alloc] initWithDictionary:j error:&err];
-            
-            [self.themesData addObject:theme];
-        }
-        
-        self.currentTheme = [self.themesData objectAtIndex:0];
-        self.currentThemeSubs =[self.currentTheme subthemes];
-        [self setSubthemesBackground];
-        
-        [self.subThemesView reloadInputViews];
-        [self.themesView reloadInputViews];
-        
-        [self.subThemesView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-        [self.themesView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-        
-        BOOL hasSubThemeInPreferences = [ThemeInterest themInterestIsOn:self.currentTheme forSubThemes: [[[UserDataHolder sharedInstance] user] interests]];
-        self.themeDescription.text = self.currentTheme.desc;
-        self.themeDescription.alpha = hasSubThemeInPreferences ? 0 : 1;
+        //Cache interests
+        [PKCacheManager cacheIntrests:self.themesData];
     }];
+    
+    self.currentTheme = [self.themesData objectAtIndex:0];
+    self.currentThemeSubs =[self.currentTheme subthemes];
+    [self setSubthemesBackground];
+    
+    [self.subThemesView reloadInputViews];
+    [self.themesView reloadInputViews];
+    
+    [self.subThemesView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    [self.themesView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+    
+    BOOL hasSubThemeInPreferences = [ThemeInterest themInterestIsOn:self.currentTheme forSubThemes: [[[UserDataHolder sharedInstance] user] interests]];
+    self.themeDescription.text = self.currentTheme.desc;
+    self.themeDescription.alpha = hasSubThemeInPreferences ? 0 : 1;
 }
 
-
-
-#pragma mark - Utils
-
--(UIColor*)colorWithHexString:(NSString*)hex
-{
-    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    
-    // String should be 6 or 8 characters
-    if ([cString length] < 6) return [UIColor grayColor];
-    
-    // strip 0X if it appears
-    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
-    
-    if ([cString length] != 6) return  [UIColor grayColor];
-    
-    // Separate into r, g, b substrings
-    NSRange range;
-    range.location = 0;
-    range.length = 2;
-    NSString *rString = [cString substringWithRange:range];
-    
-    range.location = 2;
-    NSString *gString = [cString substringWithRange:range];
-    
-    range.location = 4;
-    NSString *bString = [cString substringWithRange:range];
-    
-    // Scan values
-    unsigned int r, g, b;
-    [[NSScanner scannerWithString:rString] scanHexInt:&r];
-    [[NSScanner scannerWithString:gString] scanHexInt:&g];
-    [[NSScanner scannerWithString:bString] scanHexInt:&b];
-    
-    return [UIColor colorWithRed:((float) r / 255.0f)
-                           green:((float) g / 255.0f)
-                            blue:((float) b / 255.0f)
-                           alpha:1.0f];
-}
 @end

@@ -38,13 +38,17 @@
 
 - (void)updateThemeColor:(UIColor *) color isIncluded :(BOOL) isInclude{
     
-   
+    self.themeColor = color;
 
     [self.title setText:self.subTheme.title];
     [self.title setTextColor:[UIColor blackColor]];
     
-    [self.selectedFilter setBackgroundColor:color];
-    self.selectedFilter.alpha = isInclude ? 0.70 :0;
+    [self.selectedFilter setBackgroundColor:[color colorWithAlphaComponent:isInclude ? 0.70 :0]];
+    
+    
+    float transform = isInclude ? 1.0f : 5.0f;
+    self.check.transform = CGAffineTransformMakeScale(transform, transform);
+    self.check.alpha = isInclude ? 1 : 0;
     
     [self.zigzag setTintColor:color];
 
@@ -55,7 +59,9 @@
 
 - (void)updateStatus{
     
+    
     BOOL notIncluded = ![[[[UserDataHolder sharedInstance] user] interests] containsObject:self.subTheme._id];
+    float transformIn = notIncluded ? 1.0f : 5.0f;
     
     NSLog(@"before add %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
     
@@ -76,15 +82,16 @@
     
     
     [UIView animateWithDuration:0.3 animations:^() {
-        self.selectedFilter.alpha = notIncluded ? 0.70 :0;
+        self.selectedFilter.backgroundColor = [self.themeColor colorWithAlphaComponent:notIncluded ? 0.70 :0];
         self.backgroundColor = notIncluded ? [UIColor clearColor] : [UIColor whiteColor];
         [self.title setTextColor: notIncluded ? [UIColor whiteColor] : [UIColor blackColor]];
     }];
     
-   
-    
-    
-
+    //self.check.transform = CGAffineTransformMakeScale(5.0f, 5.0f);
+    [UIView animateWithDuration:0.2f animations:^{
+        self.check.transform = CGAffineTransformMakeScale(transformIn, transformIn);
+        self.check.alpha = notIncluded ? 1 : 0;
+    }];
 }
 
 /*

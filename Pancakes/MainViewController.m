@@ -119,7 +119,6 @@
 
 - (void)transitionToChildViewController:(UIViewController *)toViewController {
     
-    
     if (toViewController == self.currentViewController || ![self isViewLoaded]) {
         return;
     }
