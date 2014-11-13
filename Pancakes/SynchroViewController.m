@@ -13,8 +13,10 @@
     [super viewDidLoad];
     int screenMidSize = self.view.frame.size.width/2;
     
+    UIImageView* profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenMidSize, self.view.frame.size.height)];
+    profileImage.image = [UIImage imageNamed:@"glenn"];
+    profileImage.contentMode = UIViewContentModeScaleAspectFill;
     
-    self.synchroTable = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, self.view.frame.size.height)];
-    [self.view addSubview:self.synchroTable];
+    [self.view addSubview:profileImage];
 }
 @end

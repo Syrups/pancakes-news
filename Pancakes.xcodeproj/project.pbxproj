@@ -41,6 +41,7 @@
 		B39BC80319F2847600277370 /* BlockType.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7FD19F2847600277370 /* BlockType.m */; };
 		B39BC80419F2847600277370 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7FF19F2847600277370 /* Comment.m */; };
 		B39BC80519F2847600277370 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC80119F2847600277370 /* User.m */; };
+		B39C55611A14C7CD005550CC /* ArticleMenuCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C55601A14C7CD005550CC /* ArticleMenuCommentViewController.m */; };
 		B3A8B62A19FBF85B00D52EB6 /* ArticleLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */; };
 		B3A8B62B19FBF85B00D52EB6 /* ArticleRightMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */; };
 		B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */; };
@@ -142,6 +143,8 @@
 		B39BC7FF19F2847600277370 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		B39BC80019F2847600277370 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		B39BC80119F2847600277370 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		B39C555F1A14C7CD005550CC /* ArticleMenuCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuCommentViewController.h; sourceTree = "<group>"; };
+		B39C55601A14C7CD005550CC /* ArticleMenuCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuCommentViewController.m; sourceTree = "<group>"; };
 		B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleLeftMenu.xib; sourceTree = "<group>"; };
 		B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleRightMenu.xib; sourceTree = "<group>"; };
 		B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericBlockCell.xib; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 				B3E5397D1A110E5B006FF158 /* ArticleMenuShareViewController.m */,
 				B3E5397F1A110F84006FF158 /* ArticleMenuRelatedViewController.h */,
 				B3E539801A110F84006FF158 /* ArticleMenuRelatedViewController.m */,
+				B39C555F1A14C7CD005550CC /* ArticleMenuCommentViewController.h */,
+				B39C55601A14C7CD005550CC /* ArticleMenuCommentViewController.m */,
 			);
 			name = MenuDetail;
 			sourceTree = "<group>";
@@ -698,6 +703,7 @@
 			files = (
 				B34E701F1A02DA5A00C4ECA2 /* UIImage+StackBlur.m in Sources */,
 				73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */,
+				B39C55611A14C7CD005550CC /* ArticleMenuCommentViewController.m in Sources */,
 				B3E5397E1A110E5B006FF158 /* ArticleMenuShareViewController.m in Sources */,
 				B3E539811A110F84006FF158 /* ArticleMenuRelatedViewController.m in Sources */,
 				B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */,

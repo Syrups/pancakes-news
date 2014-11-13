@@ -35,7 +35,7 @@
     
     self.backgroundColor = kArticleViewBlockBackground;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, self.frame.size.width, self.frame.size.height)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;

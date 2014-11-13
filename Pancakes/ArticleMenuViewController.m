@@ -8,12 +8,15 @@
 
 #import "ArticleMenuViewController.h"
 #import "ArticleViewController.h"
+#import "Configuration.h"
 
 @interface ArticleMenuViewController ()
 
 @end
 
-@implementation ArticleMenuViewController
+@implementation ArticleMenuViewController {
+    NSInteger previousDetailViewTag;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,7 +72,21 @@
     sender.selected = YES;
     
     if (destination != nil) {
+        if (sender.tag == 40) { // comment view
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [parent.menuDetailViewController.view setFrame:parent.view.frame];
+                [self.view setBackgroundColor:[UIColor clearColor]];
+            } completion:nil];
+        } else if (previousDetailViewTag == 40) { // coming back from comment view
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [parent.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, parent.view.frame.size.width/2, parent.view.frame.size.height)];
+                [self.view setBackgroundColor:RgbaColor(0, 0, 0, 0.6f)];
+            } completion:nil];
+        }
+        
+        previousDetailViewTag = sender.tag;
         [parent.menuDetailViewController setViewControllers:@[destination] animated:NO];
+        [parent.view bringSubviewToFront:self.view];
     }
 }
 

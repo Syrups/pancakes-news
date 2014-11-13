@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SynchroViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UITableView *synchroTable;
+
 @end

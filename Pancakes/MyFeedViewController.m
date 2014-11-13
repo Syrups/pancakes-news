@@ -14,6 +14,7 @@
 #import "MainMenuViewController.h"
 #import "MainViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "Utils.h"
 
 @implementation MyFeedViewController {
     NSArray* feedArticles;
@@ -69,6 +70,10 @@
         // Reload table data on main thread to avoid problems
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.feedTableView reloadData];
+            NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+            [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
+            
         });
         
     }] resume];
@@ -157,6 +162,9 @@
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
     [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
+    
+    UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
+    themeTitle.textColor = [Utils colorWithHexString:article.color];
     
     UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 38.0f, 22.0f, 15.0f)];
     check.image = [UIImage imageNamed:@"check_item"];

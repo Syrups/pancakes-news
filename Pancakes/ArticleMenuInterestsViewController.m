@@ -41,19 +41,30 @@
         }
         
         self.subthemes = @[].mutableCopy;
+        NSMutableArray* alreadyRegistered = @[].mutableCopy;
         
         for (ThemeInterest* theme in self.data) {
             for (SubThemeInterest* subtheme in theme.subthemes) {
-                subtheme.color = theme.color;
-                subtheme.image = theme.coverImage;
-                [self.subthemes addObject:subtheme];
+                // avoid doublons
+                if ([alreadyRegistered indexOfObject:subtheme._id] == NSNotFound) {
+                    subtheme.color = theme.color;
+                    subtheme.image = theme.coverImage;
+                    [self.subthemes addObject:subtheme];
+                    [alreadyRegistered addObject:subtheme._id];
+                }
             }
         }
         
-        // Reload table data on main thread to avoid problems
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
+        NSString* subthemesUrl = [kApiRootUrl stringByAppendingString:[NSString stringWithFormat:@"/articles/%@/subthemes", self.article._id]];
+        [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:subthemesUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            NSError* err = nil;
+            self.article.subthemes = [SubThemeInterest arrayOfModelsFromData:data error:&err].copy;
+            
+            // Reload table data on main thread to avoid problems
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }] resume];
         
     }] resume];
 }
@@ -80,7 +91,6 @@
     SubThemeInterest* interest = [self.subthemes objectAtIndex:indexPath.row];
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:10];
-    themeTitle.textColor = [Utils colorWithHexString:interest.color];
     themeTitle.text = interest.title;
     
     UIImageView* themeThumb = (UIImageView*)[cell.contentView viewWithTag:20];
@@ -88,8 +98,13 @@
     themeThumb.image = [UIImage imageNamed:interest.image];
     themeThumb.clipsToBounds = YES;
     
+    UIImageView* wave = (UIImageView*)[cell.contentView viewWithTag:30];
+    wave.image = [wave.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [wave setTintColor:[Utils colorWithHexString:interest.color]];
+    
+    NSLog(@"%@", wave);
+    
     if ([self.article containsSubtheme:interest]) {
-        NSLog(@"FOUND");
         cell.contentView.backgroundColor = RgbColor(8, 8, 8);
         themeTitle.textColor = [UIColor whiteColor];
     }

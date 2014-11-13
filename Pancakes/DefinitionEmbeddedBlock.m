@@ -16,16 +16,13 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
-    self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
-    self.layer.borderWidth = 1.0f;
-    
     return self;
 }
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     
     self.block = block;
-    
+
     self.backgroundColor = [UIColor whiteColor];
     self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
     self.layer.borderWidth = 1.0f;
