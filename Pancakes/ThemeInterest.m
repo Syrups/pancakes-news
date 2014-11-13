@@ -10,4 +10,14 @@
 
 @implementation ThemeInterest
 
++ (BOOL) themInterestIsOn: (ThemeInterest *) theme forSubThemes :(NSArray *)subthemes{
+    for (int i = 0; i < theme.subthemes.count ; i++) {
+        SubThemeInterest *s = theme.subthemes[i];
+        if([subthemes containsObject:s._id]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end

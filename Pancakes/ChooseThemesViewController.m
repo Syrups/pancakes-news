@@ -33,9 +33,9 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     int screenHeight = self.view.frame.size.height;
     
     
-    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth)];
-    self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
-    self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, screenHeight)];
+    self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, screenMidSize, screenHeight - kMenuBarHeigth)];
+    self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
+    self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
     
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
@@ -43,8 +43,6 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     self.themeDescription.selectable = NO;
     
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    self.themeDescription.text = self.currentTheme.desc;
-    self.themeDescription.alpha = 0;
     
     
     [self.subThemesView setDelegate:self];
@@ -59,6 +57,16 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     [self.view addSubview: self.themeDescription];
     
     [self loadThemesFromNetwork];
+    
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.subThemesView.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
+        self.themeDescription.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
+            self.themesView.frame = CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth);
+            
+        } completion:nil];
+    }];
 }
 
 
@@ -249,7 +257,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     if(tableView == self.themesView){
         NSUInteger actualRow = indexPath.row % [self.themesData count];
         ThemeInterest *theme = [self.themesData objectAtIndex:actualRow];
-        
+        BOOL hasSubThemeInPreferences = [ThemeInterest themInterestIsOn:theme forSubThemes: [[[UserDataHolder sharedInstance] user] interests]];
         
         UIThemeView *tCell = (UIThemeView *)cell;
         
@@ -259,6 +267,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         
         [tCell updateCellWithImage:theme.coverImage];
         tCell.theme = theme;
+        [tCell.themeCheck setOn:hasSubThemeInPreferences];
         //[cell.backgroundImage setFrame:cell.frame];
         
     }else{
@@ -318,10 +327,15 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         [self.subThemesView reloadInputViews];
         [self.themesView reloadInputViews];
         
-        [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
-        [self.themesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.subThemesView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [self.themesView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        
+        BOOL hasSubThemeInPreferences = [ThemeInterest themInterestIsOn:self.currentTheme forSubThemes: [[[UserDataHolder sharedInstance] user] interests]];
+        self.themeDescription.text = self.currentTheme.desc;
+        self.themeDescription.alpha = hasSubThemeInPreferences ? 0 : 1;
     }];
 }
+
 
 
 #pragma mark - Utils

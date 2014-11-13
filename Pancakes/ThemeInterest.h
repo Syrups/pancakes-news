@@ -18,4 +18,7 @@
 @property (strong, nonatomic) NSString* desc;
 @property (strong, nonatomic) NSArray<SubThemeInterest>* subthemes;
 
+
++ (BOOL) themInterestIsOn: (ThemeInterest *) theme forSubThemes :(NSArray *)subthemes;
+
 @end
