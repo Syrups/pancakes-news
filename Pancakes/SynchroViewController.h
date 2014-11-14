@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SynchroViewController : UIViewController
+@interface SynchroViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *synchroTable;
 @property (weak, nonatomic) IBOutlet UIView *LeftInfoView;
 @property (weak, nonatomic) IBOutlet UIView *LeftNestedView;
@@ -19,5 +19,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintY;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrainHeigth;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundRight;
+@property (weak, nonatomic) IBOutlet UIButton *addTimeButton;
+@property (weak, nonatomic) IBOutlet UIView *pickerParent;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
+
+- (IBAction)addTimeAction:(id)sender;
 
 @end
