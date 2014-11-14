@@ -11,6 +11,8 @@
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
 		737668171A111379002ECAB5 /* UserDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 737668161A111379002ECAB5 /* UserDataHolder.m */; };
+		7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872B1A14DBE400AB74A6 /* PKCacheManager.m */; };
+		7388872F1A14DFA200AB74A6 /* PKNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */; };
 		7392284D1A0D12CA005F02E9 /* ThemeInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7392284C1A0D12CA005F02E9 /* ThemeInterest.m */; };
 		739228501A0D1301005F02E9 /* SubThemeInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7392284F1A0D1301005F02E9 /* SubThemeInterest.m */; };
 		739228541A0D14B3005F02E9 /* MyInterest.json in Resources */ = {isa = PBXBuildFile; fileRef = 739228521A0D14B3005F02E9 /* MyInterest.json */; };
@@ -92,6 +94,10 @@
 		7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubThemeViewCell.xib; sourceTree = "<group>"; };
 		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
 		737668161A111379002ECAB5 /* UserDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataHolder.m; sourceTree = "<group>"; };
+		7388872A1A14DBE400AB74A6 /* PKCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCacheManager.h; sourceTree = "<group>"; };
+		7388872B1A14DBE400AB74A6 /* PKCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCacheManager.m; sourceTree = "<group>"; };
+		7388872D1A14DFA200AB74A6 /* PKNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKNotificationManager.h; sourceTree = "<group>"; };
+		7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKNotificationManager.m; sourceTree = "<group>"; };
 		7392284B1A0D12CA005F02E9 /* ThemeInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeInterest.h; sourceTree = "<group>"; };
 		7392284C1A0D12CA005F02E9 /* ThemeInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeInterest.m; sourceTree = "<group>"; };
 		7392284E1A0D1301005F02E9 /* SubThemeInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubThemeInterest.h; sourceTree = "<group>"; };
@@ -242,6 +248,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		738887291A14DB8E00AB74A6 /* Interests */ = {
+			isa = PBXGroup;
+			children = (
+				73B33A7019F15CC600BFB546 /* UIThemeView.xib */,
+				73B33A7219F15DB700BFB546 /* UIThemeView.h */,
+				73B33A7319F15DB700BFB546 /* UIThemeView.m */,
+				7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */,
+				7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */,
+				7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */,
+			);
+			name = Interests;
+			sourceTree = "<group>";
+		};
 		739228511A0D1498005F02E9 /* Dummies */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,16 +272,11 @@
 		73B33A6D19F15AD600BFB546 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				738887291A14DB8E00AB74A6 /* Interests */,
 				B3D1631C1A13919500BCBE98 /* Layout */,
 				B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */,
 				B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */,
 				B375C0C619F46B4F002D7AE7 /* Blocks */,
-				73B33A7019F15CC600BFB546 /* UIThemeView.xib */,
-				73B33A7219F15DB700BFB546 /* UIThemeView.h */,
-				73B33A7319F15DB700BFB546 /* UIThemeView.m */,
-				7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */,
-				7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */,
-				7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -368,10 +382,16 @@
 		B375C0CA19F4704D002D7AE7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				737668151A111379002ECAB5 /* UserDataHolder.h */,
+				737668161A111379002ECAB5 /* UserDataHolder.m */,
 				B375C0CB19F47069002D7AE7 /* ContentParser.h */,
 				B375C0CC19F47069002D7AE7 /* ContentParser.m */,
 				B3CB88CD1A13A03A006DFF03 /* Utils.h */,
 				B3CB88CE1A13A03A006DFF03 /* Utils.m */,
+				7388872A1A14DBE400AB74A6 /* PKCacheManager.h */,
+				7388872B1A14DBE400AB74A6 /* PKCacheManager.m */,
+				7388872D1A14DFA200AB74A6 /* PKNotificationManager.h */,
+				7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -408,8 +428,6 @@
 				7392284C1A0D12CA005F02E9 /* ThemeInterest.m */,
 				7392284E1A0D1301005F02E9 /* SubThemeInterest.h */,
 				7392284F1A0D1301005F02E9 /* SubThemeInterest.m */,
-				737668151A111379002ECAB5 /* UserDataHolder.h */,
-				737668161A111379002ECAB5 /* UserDataHolder.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";

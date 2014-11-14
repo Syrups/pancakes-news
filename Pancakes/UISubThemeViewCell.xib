@@ -60,7 +60,7 @@
                             <constraint firstAttribute="width" constant="22" id="jWy-N9-NsR"/>
                         </constraints>
                     </imageView>
-                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UR-lz-yL1" userLabel="filter">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UR-lz-yL1" userLabel="filter">
                         <rect key="frame" x="215" y="-1" width="124" height="115"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="check_item" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-jp-97X">
@@ -180,6 +180,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="check" destination="cuW-jp-97X" id="ORr-x6-KYz"/>
                 <outlet property="picture" destination="Z3I-Q4-4ea" id="c8f-qT-K5c"/>
                 <outlet property="selectedFilter" destination="2UR-lz-yL1" id="Jw6-8z-u1o"/>
                 <outlet property="title" destination="iKm-Bo-y9K" id="6ka-K8-gpb"/>

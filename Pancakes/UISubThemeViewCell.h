@@ -20,6 +20,9 @@
 @property (assign, nonatomic) BOOL *isIncluded;
 @property (weak, nonatomic) IBOutlet UIImageView *zigzag;
 @property (weak, nonatomic) IBOutlet UIView *selectedFilter;
+@property (weak, nonatomic) IBOutlet UIImageView *check;
+
+@property(weak, nonatomic) UIColor* themeColor;
 
 
 - (void)updateThemeColor:(UIColor *) color isIncluded :(BOOL) included;

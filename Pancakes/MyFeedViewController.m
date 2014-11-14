@@ -203,6 +203,7 @@
     UIView* check = [overlay viewWithTag:50];
     check.transform = CGAffineTransformMakeScale(2.0f, 2.0f);
     
+    
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
         cell.backgroundColor = RgbaColor(0, 0, 0, 0);
