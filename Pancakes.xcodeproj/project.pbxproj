@@ -42,6 +42,9 @@
 		B39BC80419F2847600277370 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7FF19F2847600277370 /* Comment.m */; };
 		B39BC80519F2847600277370 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC80119F2847600277370 /* User.m */; };
 		B39C55611A14C7CD005550CC /* ArticleMenuCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C55601A14C7CD005550CC /* ArticleMenuCommentViewController.m */; };
+		B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C55661A150751005550CC /* UILabel+Lettrine.m */; };
+		B39C556A1A150AAA005550CC /* LettrineParagraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C55691A150AAA005550CC /* LettrineParagraph.m */; };
+		B39C556D1A160407005550CC /* DataEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C556C1A160407005550CC /* DataEmbeddedBlock.m */; };
 		B3A8B62A19FBF85B00D52EB6 /* ArticleLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */; };
 		B3A8B62B19FBF85B00D52EB6 /* ArticleRightMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */; };
 		B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */; };
@@ -145,6 +148,12 @@
 		B39BC80119F2847600277370 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B39C555F1A14C7CD005550CC /* ArticleMenuCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuCommentViewController.h; sourceTree = "<group>"; };
 		B39C55601A14C7CD005550CC /* ArticleMenuCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuCommentViewController.m; sourceTree = "<group>"; };
+		B39C55651A150751005550CC /* UILabel+Lettrine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Lettrine.h"; sourceTree = "<group>"; };
+		B39C55661A150751005550CC /* UILabel+Lettrine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Lettrine.m"; sourceTree = "<group>"; };
+		B39C55681A150AAA005550CC /* LettrineParagraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LettrineParagraph.h; sourceTree = "<group>"; };
+		B39C55691A150AAA005550CC /* LettrineParagraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LettrineParagraph.m; sourceTree = "<group>"; };
+		B39C556B1A160407005550CC /* DataEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEmbeddedBlock.h; sourceTree = "<group>"; };
+		B39C556C1A160407005550CC /* DataEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleLeftMenu.xib; sourceTree = "<group>"; };
 		B3A8B62819FBF85B00D52EB6 /* ArticleRightMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleRightMenu.xib; sourceTree = "<group>"; };
 		B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericBlockCell.xib; sourceTree = "<group>"; };
@@ -334,6 +343,8 @@
 				B35842011A069C4700A17468 /* DefinitionEmbeddedBlock.m */,
 				B33CCBC61A0905CC007766E4 /* MapEmbeddedBlock.h */,
 				B33CCBC71A0905CC007766E4 /* MapEmbeddedBlock.m */,
+				B39C556B1A160407005550CC /* DataEmbeddedBlock.h */,
+				B39C556C1A160407005550CC /* DataEmbeddedBlock.m */,
 			);
 			name = EmbeddedBlocks;
 			sourceTree = "<group>";
@@ -487,6 +498,10 @@
 			children = (
 				B3D1631D1A1391B100BCBE98 /* ArticleParagraphLayoutManager.h */,
 				B3D1631E1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m */,
+				B39C55651A150751005550CC /* UILabel+Lettrine.h */,
+				B39C55661A150751005550CC /* UILabel+Lettrine.m */,
+				B39C55681A150AAA005550CC /* LettrineParagraph.h */,
+				B39C55691A150AAA005550CC /* LettrineParagraph.m */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -724,6 +739,7 @@
 				739228501A0D1301005F02E9 /* SubThemeInterest.m in Sources */,
 				B37334611A0791C000FDBF70 /* EditorsBlockCell.m in Sources */,
 				7392284D1A0D12CA005F02E9 /* ThemeInterest.m in Sources */,
+				B39C556A1A150AAA005550CC /* LettrineParagraph.m in Sources */,
 				B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */,
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
@@ -731,10 +747,12 @@
 				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
+				B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,
 				B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */,
 				B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */,
+				B39C556D1A160407005550CC /* DataEmbeddedBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

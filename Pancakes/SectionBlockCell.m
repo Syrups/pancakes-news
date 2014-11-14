@@ -60,7 +60,7 @@
     storyline.backgroundColor = RgbColor(180, 180, 180);
     [self addSubview:storyline];
     
-    UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 38.0f, 0.0f, 3.0f, 0.0f)];
+    UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
     storylineOpen.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
     [self addSubview:storylineOpen];
     
@@ -150,10 +150,14 @@
             }];
         }];
     }];
+    
+    self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
+    self.layer.borderWidth = 1.0f;
 }
 
 - (void)closeWithAnimation {
     self.opened = false;
+    self.layer.borderWidth = 0.0f;
 }
 
 @end

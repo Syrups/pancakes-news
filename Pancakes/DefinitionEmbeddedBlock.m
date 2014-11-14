@@ -16,16 +16,16 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
+    self.layer.borderWidth = 1.0f;
+    
     return self;
 }
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     
     self.block = block;
-
-    self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
-    self.layer.borderWidth = 1.0f;
     
     // Create the cover image of the embedded block
     UIImageView* coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 160.0f)];
