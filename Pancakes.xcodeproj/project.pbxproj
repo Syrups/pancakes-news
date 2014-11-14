@@ -11,6 +11,7 @@
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
 		737668171A111379002ECAB5 /* UserDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 737668161A111379002ECAB5 /* UserDataHolder.m */; };
+		738510871A163CF60094056D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 738510891A163CF60094056D /* Localizable.strings */; };
 		7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872B1A14DBE400AB74A6 /* PKCacheManager.m */; };
 		7388872F1A14DFA200AB74A6 /* PKNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */; };
 		7392284D1A0D12CA005F02E9 /* ThemeInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7392284C1A0D12CA005F02E9 /* ThemeInterest.m */; };
@@ -94,6 +95,7 @@
 		7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubThemeViewCell.xib; sourceTree = "<group>"; };
 		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
 		737668161A111379002ECAB5 /* UserDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataHolder.m; sourceTree = "<group>"; };
+		738510881A163CF60094056D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7388872A1A14DBE400AB74A6 /* PKCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCacheManager.h; sourceTree = "<group>"; };
 		7388872B1A14DBE400AB74A6 /* PKCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCacheManager.m; sourceTree = "<group>"; };
 		7388872D1A14DFA200AB74A6 /* PKNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKNotificationManager.h; sourceTree = "<group>"; };
@@ -435,6 +437,7 @@
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
+				738510891A163CF60094056D /* Localizable.strings */,
 				73B33A6919F13D6000BFB546 /* PodFile */,
 				73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */,
 				B3B1D5AF19EEC499001E8BBF /* Pancakes */,
@@ -647,8 +650,8 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = B3B1D5A419EEC498001E8BBF;
 			productRefGroup = B3B1D5AE19EEC499001E8BBF /* Products */;
@@ -671,6 +674,7 @@
 				B3A8B62B19FBF85B00D52EB6 /* ArticleRightMenu.xib in Resources */,
 				B3183C3C19F68B90004C401F /* (null) in Resources */,
 				B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */,
+				738510871A163CF60094056D /* Localizable.strings in Resources */,
 				B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				739228541A0D14B3005F02E9 /* MyInterest.json in Resources */,
@@ -796,6 +800,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		738510891A163CF60094056D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				738510881A163CF60094056D /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B3B1D5BA19EEC499001E8BBF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

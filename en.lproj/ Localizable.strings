@@ -1,0 +1,9 @@
+/* 
+   Localizable.strings
+  Pancakes
+
+  Created by Glenn Sonna on 14/11/2014.
+  Copyright (c) 2014 Gobelins. All rights reserved.
+*/
+
+"SynchDescription" = "Synchronization allows you to automatically load your articles to set hours when you network. \n This then allows you to read news offline !";

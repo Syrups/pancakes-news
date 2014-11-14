@@ -10,4 +10,6 @@
 
 @interface PKNotificationManager : NSObject
 
+
+-(void)initSynchronisationNotificationWithDay : (NSDate *) date;
 @end
