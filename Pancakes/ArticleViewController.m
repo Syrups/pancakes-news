@@ -46,6 +46,8 @@ typedef enum  {
     self.articleCoverImage.image = self.cover;
     self.articleCoverImage.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
     
+    self.scrollListeners = @[].mutableCopy;
+    
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
     [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
     [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
@@ -378,6 +380,12 @@ typedef enum  {
             } completion:nil];
             backButtonState = Displayed;
         }
+    }
+    
+    for (GenericBlockCell* listener in self.scrollListeners) {
+        NSLog(@"SCROOOL");
+            [listener scrollViewDidScroll:scrollView];
+        
     }
 }
 

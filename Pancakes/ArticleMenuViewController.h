@@ -14,4 +14,6 @@
 @property (strong, nonatomic) NSDictionary* detailViewControllers;
 @property (strong, nonatomic) Article* article;
 
+- (IBAction)didSelectItem:(UIButton*)sender;
+
 @end

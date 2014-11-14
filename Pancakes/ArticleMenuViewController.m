@@ -72,14 +72,16 @@
     sender.selected = YES;
     
     if (destination != nil) {
-        if (sender.tag == 40) { // comment view
+        if (sender.tag == 40) { // to comment view
             [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 [parent.menuDetailViewController.view setFrame:parent.view.frame];
+                [self.view setFrame:CGRectMake(parent.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height)];
                 [self.view setBackgroundColor:[UIColor clearColor]];
             } completion:nil];
-        } else if (previousDetailViewTag == 40) { // coming back from comment view
+        } else if (previousDetailViewTag == 40) { // from comment view
             [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 [parent.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, parent.view.frame.size.width/2, parent.view.frame.size.height)];
+                [self.view setFrame:CGRectMake(parent.view.frame.size.width/2, 0, self.view.frame.size.width, self.view.frame.size.height)];
                 [self.view setBackgroundColor:RgbaColor(0, 0, 0, 0.6f)];
             } completion:nil];
         }

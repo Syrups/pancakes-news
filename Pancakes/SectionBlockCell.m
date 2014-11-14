@@ -93,6 +93,7 @@
     NSIndexPath* indexPath = [self.articleViewController.collectionView indexPathForCell:self];
     
     [self.articleViewController revealBlockAtIndexPath:indexPath];
+    [self.articleViewController.scrollListeners addObject:self];
 }
 
 - (void)close:(UIButton*)sender {
@@ -158,6 +159,14 @@
 - (void)closeWithAnimation {
     self.opened = false;
     self.layer.borderWidth = 0.0f;
+}
+
+#pragma mark - Scroll view listener
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGRect frame = self.closeButton.frame;
+    frame.origin.y = scrollView.contentOffset.y;
+    self.closeButton.frame = frame;
 }
 
 @end
