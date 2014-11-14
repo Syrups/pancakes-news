@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SynchroViewController : UIViewController
+
 @property (strong, nonatomic) IBOutlet UITableView *synchroTable;
 @property (weak, nonatomic) IBOutlet UIView *LeftInfoView;
 @property (weak, nonatomic) IBOutlet UIView *LeftNestedView;
@@ -19,4 +20,5 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintY;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrainHeigth;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
+
 @end

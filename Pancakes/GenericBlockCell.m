@@ -10,9 +10,11 @@
 #import "Macros.h"
 #import "Configuration.h"
 #import "MapEmbeddedBlock.h"
+#import "DataEmbeddedBlock.h"
 #import "DefinitionEmbeddedBlock.h"
 #import "ArticleParagraphLayoutManager.h"
 #import "Utils.h"
+#import "LettrineParagraph.h"
 
 @implementation GenericBlockCell {
     BOOL layouted;
@@ -35,7 +37,7 @@
     
     self.backgroundColor = kArticleViewBlockBackground;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 30.0f, self.frame.size.width, self.frame.size.height)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.scrollEnabled = NO;
@@ -50,6 +52,24 @@
     
     return self;
 }
+
+#pragma mark - Block instanciation
+
+- (DefinitionEmbeddedBlock*) instanciateBlockOfType:(NSString*)blockType withFrame:(CGRect)blockFrame {
+    DefinitionEmbeddedBlock* blockView = nil;
+    
+    if ([blockType isEqualToString:@"map"]) {
+        blockView = (MapEmbeddedBlock*)[[MapEmbeddedBlock alloc] initWithFrame:blockFrame];
+    } else if ([blockType isEqualToString:@"data"]) {
+        blockView = (DataEmbeddedBlock*)[[DataEmbeddedBlock alloc] initWithFrame:blockFrame];
+    } else {
+        blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:blockFrame];
+    }
+    
+    return blockView;
+}
+
+#pragma mark - Content building with block calls for generic content
 
 - (void)loadWithBlock:(Block*)block {
     
@@ -98,7 +118,14 @@
             
             label.attributedText = content;
             
-            [paragraphView addSubview:label];
+            // Make lettrine if it is the first paragraph
+            if ([block.paragraphs indexOfObject:p] == 0) {
+                LettrineParagraph* lettrineParagraph = [[LettrineParagraph alloc] initWithFrame:label.frame];
+                [lettrineParagraph layoutWithAttributedString:label.attributedText color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
+                [paragraphView addSubview:lettrineParagraph];
+            } else {
+                [paragraphView addSubview:label];
+            }
             
             // Confgure now paragraph view height
             frame = paragraphView.frame;
@@ -111,18 +138,9 @@
                 NSString* blockId = [call objectForKey:@"blockId"];
                 Block* child = [block childWithId:blockId];
                 
-                DefinitionEmbeddedBlock* blockView = nil;
-                
-//                CGRect blockFrame = CGRectMake(40.0f, 0.0f, self.frame.size.width-120.0f, 230.0f + child.paragraphs.count * 100.0f);
                 CGRect blockFrame = CGRectMake(40.0f, 0.0f, self.frame.size.width-120.0f, 0.0f);
-
-                if ([child.type.name isEqualToString:@"map"]) {
-                    blockView = (MapEmbeddedBlock*)[[MapEmbeddedBlock alloc] initWithFrame:blockFrame];
-                } else {
-                    blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:blockFrame];
-                }
+                DefinitionEmbeddedBlock* blockView = [self instanciateBlockOfType:child.type.name withFrame:blockFrame];
                 
-                NSLog(@"%@", block.type);
                 
                 [blockView layoutWithBlock:child offsetY:0.0f];
                 [blockView setClipsToBounds:YES];
@@ -163,6 +181,8 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - Block layouting for sections
+
 /*
  * Configures and layout the cell with block data from model
  */
@@ -193,26 +213,11 @@
             NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
             [style setLineSpacing:kArticleViewTextLineSpacing];
             
-            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, originY, self.frame.size.width - 140.0f, 120.0f)];
+            UIView* paragraphView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, originY, self.frame.size.width, 120.0f)];
+            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, self.frame.size.width - 140.0f, 120.0f)];
             
             label.numberOfLines = 0;
             label.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
-            
-            // For each call, underline the corresponding portion of
-            // text and (TODO) add a button for displaying the called block.
-            for (NSDictionary* call in calls) {
-                NSRange range;
-                [(NSValue*)[call objectForKey:@"textRange"] getValue:&range];
-                [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithFloat:1.0f] range:range];
-                [content addAttribute:NSUnderlineColorAttributeName value:kOrangeColor range:range];
-                
-                NSString* blockId = [call objectForKey:@"blockId"];
-                Block* child = [block childWithId:blockId];
-                                
-                if (child != nil) {
-                    [blocksToAppend addObject:child];
-                }
-            }
             
             // Finally set the label with attributes
             [content addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, content.length)];
@@ -226,36 +231,21 @@
             frame.size.height = exceptedSize.height + 60.0f;
             label.frame = frame;
             
-            [self.contentView addSubview:label];
+            // Make lettrine if it is the first paragraph
+            if ([block.paragraphs indexOfObject:p] == 0) {
+                LettrineParagraph* lettrineParagraph = [[LettrineParagraph alloc] initWithFrame:label.frame];
+                [lettrineParagraph layoutWithAttributedString:label.attributedText color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
+                [paragraphView addSubview:lettrineParagraph];
+            } else {
+                [paragraphView addSubview:label];
+            }
+            
+            [self.contentView addSubview:paragraphView];
             
             // Change the origin Y point for next paragraph
             originY += label.frame.size.height + 10.0f;
             
-//             Iterate now over each sub-block called by the current paragraph,
-//             and add each of them after it.
-            for (Block* block in blocksToAppend) {
-                originY += 20.0f;
-                
-                CGRect blockFrame = CGRectMake(40.0f, originY, self.frame.size.width-120.0f, 230.0f + block.paragraphs.count * 100.0f);
-//                CGRect blockFrame = CGRectMake(40.0f, originY, self.frame.size.width-120.0f, 0.0f);
-                
-                DefinitionEmbeddedBlock* blockView = nil;
-                
-                if ([block.type.name isEqualToString:@"map"]) {
-                    blockView = (MapEmbeddedBlock*)[[MapEmbeddedBlock alloc] initWithFrame:blockFrame];
-                } else {
-                    blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:blockFrame];
-                }
-                
-                [blockView layoutWithBlock:block offsetY:0.0f];
-                [blockView setClipsToBounds:YES];
-                [self.contentView addSubview:blockView];
-                
-                [embeddedBlocks setObject:blockView forKey:block.id];
-                
-                originY += blockView.frame.size.height + 20.0f;
-            }
-            
+
         }];
         
     }
@@ -308,8 +298,10 @@
         CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];
         NSLog(@"%@", blockView.cellIndexPath);
         frame.size.height = blockView.frame.size.height;
-        frame.origin.y = cellFrame.origin.y;
+        frame.origin.y = cellFrame.origin.y + 22.0f;
         line.frame = frame;
+        
+        [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y) animated:YES];
     } completion:nil];
 }
 

@@ -15,7 +15,7 @@
     [super viewDidLoad];
     int screenMidSize = self.view.frame.size.width/2;
     
-    
+
     self.synchroTable = [[UITableView alloc] initWithFrame:CGRectMake(screenMidSize, 0, screenMidSize, self.view.frame.size.height)];
     //self.background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"glenn"]];
     //self.background.frame = CGRectMake(0, kMenuBarHeigth, screenMidSize , self.view.frame.size.height - kMenuBarHeigth);
@@ -36,6 +36,7 @@
     //[self.view addSubview:self.infoText];
     
     self.constraintY.constant = kMenuBarHeigth;
+
 }
 
 @end

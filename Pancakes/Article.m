@@ -7,14 +7,15 @@
 //
 
 #import "Article.h"
+#import "Configuration.h"
 
 @implementation Article
 
 - (BOOL)containsSubtheme:(SubThemeInterest *)subtheme {
+
     NSArray* subthemes = self.subthemes;
     
-    NSLog(@"%@", subthemes);
-    NSLog(@"%@", subtheme);
+    NSLog(@"%@", self.subthemes);
     
     for (SubThemeInterest* s in subthemes) {
         if ([s respondsToSelector:@selector(_id)] && [subtheme._id isEqualToString:s._id]) {
