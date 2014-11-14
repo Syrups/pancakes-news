@@ -198,6 +198,7 @@
     // margin top
     __block NSInteger originY = offsetY;
     
+    
     // Iterate over each paragraph of the block
     
     for (NSString* p in block.paragraphs) {
@@ -232,7 +233,7 @@
             label.frame = frame;
             
             // Make lettrine if it is the first paragraph
-            if ([block.paragraphs indexOfObject:p] == 0) {
+            if ([block.paragraphs indexOfObject:p] == 0 && p.length > 121) {
                 LettrineParagraph* lettrineParagraph = [[LettrineParagraph alloc] initWithFrame:label.frame];
                 [lettrineParagraph layoutWithAttributedString:label.attributedText color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
                 [paragraphView addSubview:lettrineParagraph];

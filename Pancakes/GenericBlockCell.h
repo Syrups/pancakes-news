@@ -21,5 +21,6 @@
 - (void)loadWithBlock:(Block*)block;
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 - (void)openEmbeddedBlockWithId:(NSString*)blockId completion:(void(^)())completion;
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 
 @end

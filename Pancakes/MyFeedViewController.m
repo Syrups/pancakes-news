@@ -29,8 +29,8 @@
     
     self.feedTableView.layoutMargins = UIEdgeInsetsZero;
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.feedTableView setFrame:CGRectMake(0, kMenuBarHeigth, self.view.frame.size.width/2, self.view.frame.size.height - kMenuBarHeigth)];
     
+    self.constraintY.constant = kMenuBarHeigth;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

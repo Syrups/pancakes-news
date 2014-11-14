@@ -637,6 +637,7 @@
 				TargetAttributes = {
 					B3B1D5AC19EEC498001E8BBF = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 3RQFQA54Q5;
 					};
 					B3B1D5C519EEC499001E8BBF = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -907,9 +908,11 @@
 			baseConfigurationReference = 350E046FF2281BACA6E6CE33 /* Pods-Pancakes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Pancakes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -919,9 +922,11 @@
 			baseConfigurationReference = B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Pancakes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "${SRCROOT}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

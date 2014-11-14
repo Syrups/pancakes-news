@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) ArticleMenuViewController* menuViewController;
 @property (strong, nonatomic) UINavigationController* menuDetailViewController;
+@property (strong, nonatomic) NSMutableArray* scrollListeners;
 
 @property (strong, nonatomic) UIView* storyline;
 

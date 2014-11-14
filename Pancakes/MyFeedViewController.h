@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *articleExcerpt;
 @property (strong, nonatomic) IBOutlet UIButton *readButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintY;
 
 //@property (weak, nonatomic) IBOutlet MainMenuViewController *mainMenu;
 @end

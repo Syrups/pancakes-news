@@ -318,8 +318,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     self.themesData = [[NSMutableArray alloc] init];
     //[NSMutableArray arrayWithArray:[PKCacheManager loadInterestsFromCache]];
     
-    
-    self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:[PKCacheManager loadInterestsFromCache]];
+//    self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:[PKCacheManager loadInterestsFromCache]];
  
     [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
         

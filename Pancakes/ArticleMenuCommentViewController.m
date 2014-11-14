@@ -7,6 +7,7 @@
 //
 
 #import "ArticleMenuCommentViewController.h"
+#import "ArticleViewController.h"
 
 @interface ArticleMenuCommentViewController ()
 
@@ -20,5 +21,13 @@
     [self.commentField becomeFirstResponder];
 }
 
+- (IBAction)dismiss:(id)sender {
+    ArticleViewController* articleVc = (ArticleViewController*)self.navigationController.parentViewController;
+    // fake button call
+    UIButton *btn = [[UIButton alloc] init];
+    btn.tag = 10;
+    
+    [articleVc.menuViewController didSelectItem:btn];
+}
 
 @end
