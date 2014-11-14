@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SynchroViewController : UIViewController
-
-@property (strong, nonatomic) IBOutlet UITableView *synchroTable;
+@property (weak, nonatomic) IBOutlet UITableView *synchroTable;
 @property (weak, nonatomic) IBOutlet UIView *LeftInfoView;
 @property (weak, nonatomic) IBOutlet UIView *LeftNestedView;
 @property (strong, nonatomic) IBOutlet UILabel *infoText;
