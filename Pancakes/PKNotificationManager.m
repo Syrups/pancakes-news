@@ -7,7 +7,17 @@
 //
 
 #import "PKNotificationManager.h"
+@import UIKit;
 
 @implementation PKNotificationManager
+
+
+-(void)initSynchronisationNotificationWithDay : (NSDate *) date{
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    localNotif.fireDate = date;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    localNotif.repeatInterval = NSCalendarUnitDay;
+}
+
 
 @end

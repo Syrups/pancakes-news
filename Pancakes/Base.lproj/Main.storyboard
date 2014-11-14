@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BreeBold.otf">
@@ -21,8 +22,10 @@
             <string>Heuristica-Italic</string>
             <string>Heuristica-Italic</string>
             <string>Heuristica-Italic</string>
+            <string>Heuristica-Italic</string>
         </mutableArray>
         <mutableArray key="Heuristica-Regular.otf">
+            <string>Heuristica-Regular</string>
             <string>Heuristica-Regular</string>
         </mutableArray>
     </customFonts>
@@ -154,16 +157,80 @@
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Synchro" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytZ-fC-eV4">
-                                <rect key="frame" x="386" y="149" width="64" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLa-kC-55p" userLabel="LeftView">
+                                <rect key="frame" x="0.0" y="0.0" width="284" height="320"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="glenn" translatesAutoresizingMaskIntoConstraints="NO" id="3dB-4y-NVP">
+                                        <rect key="frame" x="0.0" y="0.0" width="284" height="320"/>
+                                    </imageView>
+                                    <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QiJ-NK-uZ8">
+                                        <rect key="frame" x="0.0" y="0.0" width="284" height="320"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="azdkjnazldaldzjdajazdkjnazldaldzjdajazdkjnazldaldzjdajazdkjnazldaldzjdajazdkjnazldaldzjdajazdkjnazldaldzjdajazdkjnazldaldzjdaj" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbL-vj-xxj">
+                                        <rect key="frame" x="35" y="40" width="214" height="101"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="101" id="uR4-8h-MnX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Heuristica-Regular" family="Heuristica" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cvb-oW-oZE">
+                                        <rect key="frame" x="35" y="255" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="OMJ-Tr-po7"/>
+                                            <constraint firstAttribute="width" constant="35" id="nQx-u0-cTc"/>
+                                        </constraints>
+                                        <state key="normal" image="article-menu-close"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not allow synchronization" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuz-9b-MVF">
+                                        <rect key="frame" x="78" y="253" width="160" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="Bo8-Q7-D7q"/>
+                                            <constraint firstAttribute="width" constant="160" id="xXp-ci-XUj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Heuristica-Italic" family="Heuristica" pointSize="13"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="tuz-9b-MVF" firstAttribute="centerY" secondItem="Cvb-oW-oZE" secondAttribute="centerY" constant="-0.5" id="0XQ-4i-Cxd"/>
+                                    <constraint firstItem="QiJ-NK-uZ8" firstAttribute="leading" secondItem="nLa-kC-55p" secondAttribute="leading" id="Atg-Ll-f7h"/>
+                                    <constraint firstItem="3dB-4y-NVP" firstAttribute="leading" secondItem="nLa-kC-55p" secondAttribute="leading" id="BBj-39-tnT"/>
+                                    <constraint firstAttribute="bottom" secondItem="3dB-4y-NVP" secondAttribute="bottom" id="C6H-6U-Liv"/>
+                                    <constraint firstItem="HbL-vj-xxj" firstAttribute="leading" secondItem="Cvb-oW-oZE" secondAttribute="leading" id="Dj3-P4-kR5"/>
+                                    <constraint firstItem="HbL-vj-xxj" firstAttribute="top" secondItem="nLa-kC-55p" secondAttribute="top" constant="40" id="F9h-Ff-0Ph"/>
+                                    <constraint firstItem="HbL-vj-xxj" firstAttribute="leading" secondItem="nLa-kC-55p" secondAttribute="leading" constant="35" id="FbX-8W-o6W"/>
+                                    <constraint firstAttribute="bottom" secondItem="QiJ-NK-uZ8" secondAttribute="bottom" id="MUT-el-fIl"/>
+                                    <constraint firstItem="QiJ-NK-uZ8" firstAttribute="top" secondItem="nLa-kC-55p" secondAttribute="top" id="Tay-nB-6J3"/>
+                                    <constraint firstAttribute="trailing" secondItem="HbL-vj-xxj" secondAttribute="trailing" constant="35" id="XSE-85-Cmd"/>
+                                    <constraint firstItem="3dB-4y-NVP" firstAttribute="top" secondItem="nLa-kC-55p" secondAttribute="top" id="dqj-Wg-wGG"/>
+                                    <constraint firstAttribute="bottom" secondItem="Cvb-oW-oZE" secondAttribute="bottom" constant="30" id="fH8-cD-buk"/>
+                                    <constraint firstItem="tuz-9b-MVF" firstAttribute="leading" secondItem="Cvb-oW-oZE" secondAttribute="trailing" constant="8" id="sdY-DG-Ll9"/>
+                                    <constraint firstAttribute="trailing" secondItem="3dB-4y-NVP" secondAttribute="trailing" id="urH-Am-Ebq"/>
+                                    <constraint firstAttribute="trailing" secondItem="QiJ-NK-uZ8" secondAttribute="trailing" id="z2X-91-BPT"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nLa-kC-55p" firstAttribute="width" secondItem="elb-3r-Z45" secondAttribute="width" multiplier="0.5" id="4Kb-yY-plV"/>
+                            <constraint firstItem="nLa-kC-55p" firstAttribute="top" secondItem="SEV-GW-OXP" secondAttribute="bottom" constant="-20" id="SoU-nP-0lf"/>
+                            <constraint firstItem="nLa-kC-55p" firstAttribute="leading" secondItem="elb-3r-Z45" secondAttribute="leadingMargin" constant="-16" id="W6F-Ci-88K"/>
+                            <constraint firstItem="wDz-ju-A1g" firstAttribute="top" secondItem="nLa-kC-55p" secondAttribute="bottom" id="s5v-HX-J0V"/>
+                        </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="background" destination="3dB-4y-NVP" id="gVC-W1-krX"/>
+                        <outlet property="constrainHeigth" destination="s5v-HX-J0V" id="txH-cg-u1y"/>
+                        <outlet property="constraintY" destination="SoU-nP-0lf" id="NGf-Nc-j1k"/>
+                        <outlet property="infoText" destination="HbL-vj-xxj" id="aHe-mF-U4T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ky-zZ-sfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
