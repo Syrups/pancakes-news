@@ -11,27 +11,38 @@
 
 @implementation EditorsBlockCell
 
-//- (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
-//    if (self.opened) return;
-//    
-//    UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 15.0f, self.frame.size.width + 2.0f, 50.0f)];
-//    titleBanner.backgroundColor = [UIColor whiteColor];
-//    titleBanner.layer.borderColor = kArticleViewSectionBannerBorderColor.CGColor;
-//    titleBanner.layer.borderWidth = 1.0f;
-//    [self addSubview:titleBanner];
-//    
-//    self.titleBanner = titleBanner;
-//    
-//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 15.0f, self.frame.size.width - 110.0f, 50.0f)];
-//    titleLabel.text = block.title;
-//    titleLabel.textAlignment = NSTextAlignmentRight;
-//    titleLabel.font = [UIFont fontWithName:kFontBreeBold size:24.0f];
-//    titleLabel.textColor = kOrangeColor;
-//    [self addSubview:titleLabel];
-//    
-//    self.titleLabel = titleLabel;
-//    
-//    [super layoutWithBlock:block offsetY:0];
-//}
+- (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
+    if (self.opened) return;
+    CGFloat y = 0;
+    
+    for (NSDictionary* editor in block.editors) {
+        UIImageView* cover = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 150.0f  )];
+        [cover setImage:[UIImage imageNamed:@"splash"]];
+        [self addSubview:cover];
+        
+        UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 65, y + 90, 130, 130)];
+        [image setImage:[UIImage imageNamed:@"glenn"]];
+        image.layer.cornerRadius = 65;
+        image.layer.masksToBounds = YES;
+        [self addSubview:image];
+        
+        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(30.0, y + 220, self.frame.size.width - 100.0f, 30)];
+        title.text = [editor objectForKey:@"title"];
+        title.textColor = RgbColor(51, 51, 51);
+        title.font = [UIFont fontWithName:kFontBreeBold size:20];
+        [self addSubview:title];
+        
+        UILabel* bio = [[UILabel alloc] initWithFrame:CGRectMake(30.0, y + 250, self.frame.size.width - 100.0f, 200)];
+        bio.text = [editor objectForKey:@"bio"];
+        bio.textColor = RgbColor(51, 51, 51);
+        bio.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
+        bio.numberOfLines = 0;
+        [self addSubview:bio];
+        
+        y += 450;
+    }
+    
+    [super layoutWithBlock:block offsetY:offsetY];
+}
 
 @end

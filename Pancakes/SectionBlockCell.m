@@ -111,15 +111,15 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             CGRect f = self.titleLabel.frame;
-            f.origin.y += 90.0f;
+            f.origin.y += 60.0f;
             self.titleLabel.frame = f;
             self.titleLabel.textColor = [UIColor whiteColor];
             
             f = self.revealButton.frame;
-            f.origin.y += 90.0f;
+            f.origin.y += 60.0f;
             self.revealButton.frame = f;
             f = self.closeButton.frame;
-            f.origin.y += 90.0f;
+            f.origin.y += 60.0f;
             self.closeButton.frame = f;
             self.closeButton.alpha = 1;
             self.revealButton.alpha = 0;
@@ -129,7 +129,7 @@
             f.origin.y += 350.0f;
             self.imageMask.frame = f;
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.contentView.alpha = 1.0f;
                 
                 CGRect f = self.titleLabel.frame;

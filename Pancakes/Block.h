@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSString<Optional>* image;
 @property (strong, nonatomic) NSArray* paragraphs;
 @property (strong, nonatomic) NSArray<Block, Optional>* children;
+@property (strong, nonatomic) NSArray<Optional>* editors;
 
 - (Block*)childWithId:(NSString*)blockId;
 

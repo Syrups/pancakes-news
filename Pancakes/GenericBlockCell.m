@@ -151,9 +151,14 @@
                 [items addObject:blockView];
                 
                 UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY + 20.0f, 60, 60)];
-                [blockButton setImage:[UIImage imageNamed:@"article-block-button-map"] forState:UIControlStateNormal];
+                [blockButton setImage:[self blockButtonImageForType:child.type] forState:UIControlStateNormal];
                 [blockButton addTarget:self action:@selector(blockButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 blockButton.tag = [child.id integerValue];
+                
+                [blockButtons setObject:blockButton forKey:child.id];
+                
+                [self addSubview:blockButton];
+                [self bringSubviewToFront:blockButton];
                 
                 // Storyline on side
                 UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 39, offsetY + 40.0f, 3.0f, 0)];
@@ -161,10 +166,6 @@
                 [self addSubview:storylineOpen];
                 
                 [blockLines setObject:storylineOpen forKey:child.id];
-                [blockButtons setObject:blockButton forKey:child.id];
-                
-                [self addSubview:blockButton];
-                [self bringSubviewToFront:blockButton];
                 
             }
             
@@ -280,6 +281,12 @@
 }
 
 #pragma mark - Helpers
+
+- (UIImage*)blockButtonImageForType:(BlockType*)type {
+//    return [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:type.name]];
+    return [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:@"map"]];
+
+}
 
 - (void)openEmbeddedBlockWithId:(NSString *)blockId completion:(void (^)())completion {
     DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];

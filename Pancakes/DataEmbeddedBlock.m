@@ -12,9 +12,10 @@
 @implementation DataEmbeddedBlock
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
-    UILabel* label = [[UILabel alloc] initWithFrame:self.frame];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 100.0f)];
     label.text = @"Data block";
     [self addSubview:label];
+    
 }
 
 @end

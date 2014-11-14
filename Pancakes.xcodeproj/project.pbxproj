@@ -29,6 +29,7 @@
 		B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B30ED5EB19FA8EC300DB2621 /* MyFeedViewController.m */; };
 		B3183C3C19F68B90004C401F /* (null) in Resources */ = {isa = PBXBuildFile; };
 		B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B33CCBC71A0905CC007766E4 /* MapEmbeddedBlock.m */; };
+		B347EE761A1652FC00F992B5 /* EditorsBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B347EE751A1652FC00F992B5 /* EditorsBlockCell.xib */; };
 		B34E701F1A02DA5A00C4ECA2 /* UIImage+StackBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = B34E701E1A02DA5A00C4ECA2 /* UIImage+StackBlur.m */; };
 		B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */ = {isa = PBXBuildFile; fileRef = B34E70221A02DEA200C4ECA2 /* UIImage+DSP.m */; };
 		B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B35841FB1A03DAC400A17468 /* SectionBlockCell.m */; };
@@ -125,6 +126,7 @@
 		B32A535E19FAE6ED00432378 /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Configuration.h; path = ../Configuration.h; sourceTree = "<group>"; };
 		B33CCBC61A0905CC007766E4 /* MapEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapEmbeddedBlock.h; sourceTree = "<group>"; };
 		B33CCBC71A0905CC007766E4 /* MapEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapEmbeddedBlock.m; sourceTree = "<group>"; };
+		B347EE751A1652FC00F992B5 /* EditorsBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorsBlockCell.xib; sourceTree = "<group>"; };
 		B34E701D1A02DA5A00C4ECA2 /* UIImage+StackBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StackBlur.h"; sourceTree = "<group>"; };
 		B34E701E1A02DA5A00C4ECA2 /* UIImage+StackBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StackBlur.m"; sourceTree = "<group>"; };
 		B34E70211A02DEA200C4ECA2 /* UIImage+DSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DSP.h"; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */,
 				B373345F1A0791C000FDBF70 /* EditorsBlockCell.h */,
 				B37334601A0791C000FDBF70 /* EditorsBlockCell.m */,
+				B347EE751A1652FC00F992B5 /* EditorsBlockCell.xib */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				739228541A0D14B3005F02E9 /* MyInterest.json in Resources */,
 				73DC79C51A0C28F700093265 /* glenn_test.jpg in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
+				B347EE761A1652FC00F992B5 /* EditorsBlockCell.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
 				73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */,
 				B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */,

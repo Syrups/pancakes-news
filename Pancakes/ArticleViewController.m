@@ -135,7 +135,7 @@ typedef enum  {
     }];
 }
 
-#pragma mark - Helper view methods
+#pragma mark - Helpers
 
 /**
  * Build the article title cell at the top of the view
@@ -214,6 +214,24 @@ typedef enum  {
     return block;
 }
 
+- (CGSize) sizeForBlock:(Block*)block {
+    CGFloat w = self.collectionView.frame.size.width;
+    
+    // If hidden block height is 0
+    if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
+        return CGSizeMake(w, 70.0f);
+    }
+    
+    if ([block.type.name isEqualToString:@"context"]) {
+        return CGSizeMake(w, block.paragraphs.count * 150 + block.children.count  * 200);
+    } else if ([block.type.name isEqualToString:@"editors"]) {
+        return CGSizeMake(w, block.editors.count * 450);
+    }
+    
+    // generic block of content
+    return CGSizeMake(w, block.paragraphs.count * 150 + block.children.count  * 200);
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -260,14 +278,7 @@ typedef enum  {
     
     Block* block = [self blockAtIndexPath:indexPath];
     
-    if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
-        return CGSizeMake(self.collectionView.frame.size.width, 70.0f);
-    }
-    
-    return CGSizeMake(
-                self.collectionView.frame.size.width,
-                [block.paragraphs count] * 250.0f + [block.children count] * 230.0f // This is dirty, we'll do something cleverer later :)
-            );
+    return [self sizeForBlock:block];
 }
 
 - (void)revealBlockAtIndexPath:(NSIndexPath *)indexPath {
