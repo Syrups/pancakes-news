@@ -18,7 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.commentField.borderStyle = UITextBorderStyleRoundedRect;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [self.commentField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.commentField resignFirstResponder];
 }
 
 - (IBAction)dismiss:(id)sender {
