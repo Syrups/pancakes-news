@@ -45,7 +45,8 @@ NSString * const PINTERESTS = @"PancakesIntrests";
 +(id) loadInterestsFromCache{
     if ([[NSUserDefaults standardUserDefaults] objectForKey:PINTERESTS]){
         
-        return  [[NSUserDefaults standardUserDefaults] objectForKey:PINTERESTS];
+        
+        return [ThemeInterest arrayOfModelsFromDictionaries:[[NSUserDefaults standardUserDefaults] objectForKey:PINTERESTS]];
     }else{
     
         return [[NSMutableArray alloc] init];

@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIView *pickerParent;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
+@property NSArray *notifications;
+
 
 - (IBAction)addTimeAction:(id)sender;
 

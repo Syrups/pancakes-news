@@ -12,5 +12,6 @@
 @interface Utils : NSObject
 
 + (UIColor*) colorWithHexString:(NSString*)hex;
++ (CGPoint) pointOnCircleWithCenter: (CGPoint) center  withRadius:(float)radius withAngle:(float)angle;
 
 @end

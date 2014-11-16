@@ -22,6 +22,7 @@
 		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
 		73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A7019F15CC600BFB546 /* UIThemeView.xib */; };
 		73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B33A7319F15DB700BFB546 /* UIThemeView.m */; };
+		73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C24E131A1938A40070C62D /* PKMenuItemCircle.m */; };
 		73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79BF1A0C245F00093265 /* MyProfileViewController.m */; };
 		73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79C21A0C25B100093265 /* SynchroViewController.m */; };
 		73DC79C51A0C28F700093265 /* glenn_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 73DC79C41A0C28F700093265 /* glenn_test.jpg */; };
@@ -111,6 +112,8 @@
 		73B33A7019F15CC600BFB546 /* UIThemeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIThemeView.xib; sourceTree = "<group>"; };
 		73B33A7219F15DB700BFB546 /* UIThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThemeView.h; sourceTree = "<group>"; };
 		73B33A7319F15DB700BFB546 /* UIThemeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIThemeView.m; sourceTree = "<group>"; };
+		73C24E121A1938A40070C62D /* PKMenuItemCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMenuItemCircle.h; sourceTree = "<group>"; };
+		73C24E131A1938A40070C62D /* PKMenuItemCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMenuItemCircle.m; sourceTree = "<group>"; };
 		73DC79BE1A0C245F00093265 /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
 		73DC79BF1A0C245F00093265 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		73DC79C11A0C25B100093265 /* SynchroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchroViewController.h; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 		73B33A6D19F15AD600BFB546 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				73C24E111A1938210070C62D /* Components */,
 				738887291A14DB8E00AB74A6 /* Interests */,
 				B3D1631C1A13919500BCBE98 /* Layout */,
 				B3A8B62719FBF85B00D52EB6 /* ArticleLeftMenu.xib */,
@@ -281,6 +285,15 @@
 				B375C0C619F46B4F002D7AE7 /* Blocks */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		73C24E111A1938210070C62D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				73C24E121A1938A40070C62D /* PKMenuItemCircle.h */,
+				73C24E131A1938A40070C62D /* PKMenuItemCircle.m */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 		73DC79B91A0C23A700093265 /* MyNews */ = {
@@ -769,6 +782,7 @@
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
 				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
+				73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
 				B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */,

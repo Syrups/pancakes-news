@@ -45,4 +45,14 @@
                            alpha:1.0f];
 }
 
+
++ (CGPoint) pointOnCircleWithCenter: (CGPoint) center  withRadius:(float)radius withAngle:(float)angle {
+    
+    CGFloat x = center.x + radius * cos(angle);
+    CGFloat y = center.y + radius * sin(angle);
+    
+    return CGPointMake(x, y);
+}
+
+
 @end

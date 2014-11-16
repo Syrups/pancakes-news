@@ -314,12 +314,16 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
 
 - (void) loadThemesFromNetwork {
     
-    // [[NSMutableArray alloc] init];
-    self.themesData = [[NSMutableArray alloc] init];
-    //[NSMutableArray arrayWithArray:[PKCacheManager loadInterestsFromCache]];
     
-//    self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:[PKCacheManager loadInterestsFromCache]];
- 
+    //Load from cache
+    self.themesData = [PKCacheManager loadInterestsFromCache]; // [[NSMutableArray alloc] init];
+    
+    if(self.themesData.count > 0){
+        [self initThemesForBegin];
+    }
+    
+    
+    //Try Loading from network then
     [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
         
         if (json == nil) {
@@ -328,10 +332,16 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
         
         self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:json];
         
+        [self initThemesForBegin];
+        
         //Cache interests
         [PKCacheManager cacheIntrests:self.themesData];
     }];
     
+    
+}
+
+- (void) initThemesForBegin {
     self.currentTheme = [self.themesData objectAtIndex:0];
     self.currentThemeSubs =[self.currentTheme subthemes];
     [self setSubthemesBackground];
