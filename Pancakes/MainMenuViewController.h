@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FXBlurView.h"
 
 // All view controllers that can display the main menu
 // must implement this procotol
@@ -34,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *interestsButton;
 @property (weak, nonatomic) UIView * toggleItem;
 @property (weak, nonatomic) IBOutlet UIButton *synchronizationButton;
+@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
+
+//FXBlurView
 
 - (IBAction)toggle:(id)sender;
 
