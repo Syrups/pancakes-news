@@ -8,6 +8,7 @@ pod 'AFNetworking', '~> 2.0'
 pod 'JSONModel'
 pod 'SDWebImage'
 pod 'pop', '~> 1.0'
+pod 'FXBlurView'
 end
 
 target 'PancakesTests' do

@@ -6,3 +6,8 @@
   Copyright (c) 2014 Gobelins. All rights reserved.
 */
 "SynchDescription" = "Synchronization allows you to automatically load your articles to set hours when you network.\nThis then allows you to read news offline !";
+
+"MenuNews" = "My News";
+"MenuProfile" = "My profile";
+"MenuInterests" = "My interests";
+"MenuSynchronization" = "Synchronization";

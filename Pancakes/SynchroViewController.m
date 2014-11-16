@@ -9,6 +9,7 @@
 #import "SynchroViewController.h"
 #import "Configuration.h"
 #import "UIImage+StackBlur.h"
+#import "PKNotificationManager.h"
 
 NSArray *vals ;
 
@@ -26,6 +27,7 @@ NSArray *vals ;
     
     vals = @[@"19:00", @"7:00"];
     
+    [self.datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
 
 }
 
@@ -34,7 +36,7 @@ NSArray *vals ;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [vals count];
+    return [self.notifications count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -47,44 +49,21 @@ NSArray *vals ;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SynchroCell"];
     }
     
-     UIButton *cellButton = (UIButton *)[cell.contentView viewWithTag:10];
-    /*
-    UIView* overlay = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height/3)];
-    overlay.tag = 5;
-    overlay.backgroundColor = RgbaColor(0, 0, 0, 0.6f);
-    overlay.hidden = YES;
-    [cell.contentView addSubview:overlay];
+    UILocalNotification *n = [self.notifications objectAtIndex:indexPath.row];
+    UILabel* cellTime = (UILabel*)[cell.contentView viewWithTag:10];
+    UIButton *cellButton = (UIButton *)[cell.contentView viewWithTag:20];
     
-    UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
-    feedCellTitle.text = article.title;
-    feedCellTitle.font = [UIFont fontWithName:kFontBreeBold size:15];
-    feedCellTitle.textColor = kFeedViewListTitleColor;
+    cellTime.text = [PKNotificationManager hourMinuteFormatForNotification: n];
     
-    UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
-    [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
-    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
-    feedCellThumb.clipsToBounds = YES;
+    cellButton.tag = indexPath.row;
+    [cellButton addTarget:self action:@selector(removeNotification:) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
-    themeTitle.textColor = [Utils colorWithHexString:article.color];
-    
-    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 38.0f, 22.0f, 15.0f)];
-    check.image = [UIImage imageNamed:@"check_item"];
-    check.tintColor = [UIColor whiteColor];
-    check.contentMode = UIViewContentModeScaleAspectFit;
-    check.tag = 50;
-    check.alpha = 0.0f;
-    
-    [overlay addSubview:check];
-    
-    [cell setNeedsLayout];
-    */
+    // [cell setNeedsLayout];
     return cell;
 }
 
 
 - (IBAction)addTimeAction:(id)sender {
-    
     
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
@@ -95,6 +74,23 @@ NSArray *vals ;
     } completion:^(BOOL finished) {
        
     }];
+}
+
+
+- (IBAction)addSynchroDate:(id)sender {
+    
+    [PKNotificationManager initSynchronisationNotificationWithDay:self.datePicker.date];
     
 }
+
+- (void) loadNotifications{
+
+    self.notifications = [PKNotificationManager loadSynchronisationNotifications];
+}
+
+- (void)removeNotification:(UIButton*)sender{
+    
+    [PKNotificationManager unloadSynchronisationNotifications:[self.notifications objectAtIndex:sender.tag]];
+}
+
 @end

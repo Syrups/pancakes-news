@@ -7,9 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 @interface PKNotificationManager : NSObject
 
 
--(void)initSynchronisationNotificationWithDay : (NSDate *) date;
++(void)initSynchronisationNotificationWithDay : (NSDate *) date;
+
++(id)loadSynchronisationNotifications;
++(void)unloadSynchronisationNotifications : (UILocalNotification *)notification ;
+
++ (NSString *) hourMinuteFormatForNotification : (UILocalNotification *)notif;
 @end
