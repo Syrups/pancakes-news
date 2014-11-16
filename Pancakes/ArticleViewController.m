@@ -14,6 +14,7 @@
 #import "GenericBlockCell.h"
 #import "SectionBlockCell.h"
 #import "EditorsBlockCell.h"
+#import "CommentsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+StackBlur.h"
 
@@ -51,6 +52,7 @@ typedef enum  {
     [self.collectionView registerClass:[GenericBlockCell class] forCellWithReuseIdentifier:@"GenericBlockCell"];
     [self.collectionView registerClass:[SectionBlockCell class] forCellWithReuseIdentifier:@"SectionBlockCell"];
     [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
+    [self.collectionView registerClass:[CommentsBlockCell class] forCellWithReuseIdentifier:@"CommentsBlockCell"];
     
     [self createMainMenu];
     [self createDetailMenu];
@@ -226,6 +228,8 @@ typedef enum  {
         return CGSizeMake(w, block.paragraphs.count * 150 + block.children.count  * 200);
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
+    } else if ([block.type.name isEqualToString:@"comments"]) {
+        return CGSizeMake(w, 600);
     }
     
     // generic block of content
@@ -253,6 +257,8 @@ typedef enum  {
     if (![block.type.name isEqualToString:@"generic"]) {
         if ([block.type.name isEqualToString:@"editors"]) {
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EditorsBlockCell" forIndexPath:indexPath];
+        } else if ([block.type.name isEqualToString:@"comments"]) {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CommentsBlockCell" forIndexPath:indexPath];
         } else {
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SectionBlockCell" forIndexPath:indexPath];
         }

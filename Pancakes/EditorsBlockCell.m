@@ -16,33 +16,49 @@
     CGFloat y = 0;
     
     for (NSDictionary* editor in block.editors) {
-        UIImageView* cover = [[UIImageView alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 150.0f  )];
+        UIView* editorView = [[UIView alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 450.0f)];
+        CALayer *upperBorder = [CALayer layer];
+        upperBorder.backgroundColor = RgbColor(223, 223, 223).CGColor;
+        upperBorder.frame = CGRectMake(0, CGRectGetHeight(editorView.frame) - 1, CGRectGetWidth(editorView.frame), 1.0f);
+        [editorView.layer addSublayer:upperBorder];
+        editorView.backgroundColor = [UIColor whiteColor];
+                              
+        UIImageView* cover = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f)];
         [cover setImage:[UIImage imageNamed:@"splash"]];
-        [self addSubview:cover];
+        [editorView addSubview:cover];
         
-        UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 65, y + 90, 130, 130)];
+        UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 65, 90, 130, 130)];
         [image setImage:[UIImage imageNamed:@"glenn"]];
         image.layer.cornerRadius = 65;
         image.layer.masksToBounds = YES;
-        [self addSubview:image];
+        [editorView addSubview:image];
         
-        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(30.0, y + 220, self.frame.size.width - 100.0f, 30)];
+        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 220, self.frame.size.width - 100.0f, 30)];
         title.text = [editor objectForKey:@"title"];
         title.textColor = RgbColor(51, 51, 51);
         title.font = [UIFont fontWithName:kFontBreeBold size:20];
-        [self addSubview:title];
+        [editorView addSubview:title];
         
-        UILabel* bio = [[UILabel alloc] initWithFrame:CGRectMake(30.0, y + 250, self.frame.size.width - 100.0f, 200)];
-        bio.text = [editor objectForKey:@"bio"];
+        UILabel* bio = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 250, self.frame.size.width - 100.0f, 200)];
+        NSMutableAttributedString* bioString = [[NSMutableAttributedString alloc] initWithString:[editor objectForKey:@"bio"]];
+        NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
+        [style setLineSpacing:6.0f];
+        [bioString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, bioString.length)];
+        
+        bio.attributedText = bioString;
         bio.textColor = RgbColor(51, 51, 51);
         bio.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
         bio.numberOfLines = 0;
-        [self addSubview:bio];
+        [editorView addSubview:bio];
         
-        y += 450;
+        [self addSubview:editorView];
+        
+        y += editorView.frame.size.height + 20.0f;
     }
     
     [super layoutWithBlock:block offsetY:offsetY];
+    
+    self.backgroundColor = kArticleViewBlockBackground;
 }
 
 @end
