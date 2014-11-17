@@ -12,6 +12,7 @@
 #import "Utils.h"
 #import "PKMenuItemCircle.h"
 
+
 @import CoreGraphics;
 @import UIKit;
 
@@ -74,7 +75,17 @@ PKMenuItemCircle *currentItem;
         [indicators addObject:indicator];
     }
     
-    currentItem = [indicators objectAtIndex:0];
+     currentItem = [indicators objectAtIndex:0];
+    
+    self.blurView.blurRadius = 40;
+    self.blurView.dynamic = NO;
+    //self.blurView.tintColor = [UIColor blackColor];
+    self.blurView.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.85];
+    //self.blurView.contentMode = UIViewContentModeBottom;
+  
+    //[self.view.window addSubview:self.blurView];
+    
+   
 }
 
 
@@ -85,6 +96,8 @@ PKMenuItemCircle *currentItem;
     for (int i = 0; i < angles.count; i++) {
         [self layoutButtonAtinddex:i];
     }
+    
+   
 }
 
 
