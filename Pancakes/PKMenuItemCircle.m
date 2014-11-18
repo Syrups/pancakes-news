@@ -10,6 +10,8 @@
 
 @implementation PKMenuItemCircle
 
+CGRect baseFrame;
+
 + (Class)layerClass {
     return [CAShapeLayer class];
 }
@@ -25,8 +27,12 @@
         self.check.image = [self.check.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [self.check setTintColor:[UIColor blackColor]] ;
         self.check.alpha = 0;
-        self.check.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y -20, self.bounds.size.width, self.bounds.size.height );
-    
+        
+        baseFrame = CGRectInset(self.bounds, -8, -5);
+        baseFrame.origin.y -= 20;
+        self.check.frame = baseFrame;
+        [self addSubview:self.check];
+
     }
     return self;
 }
@@ -40,7 +46,7 @@
     layer.path = [UIBezierPath bezierPathWithOvalInRect:self.bounds].CGPath;
     layer.fillColor = [UIColor whiteColor].CGColor;
     
-    [self addSubview:self.check];
+    
     //[self.check setTintColor: [UIColor blackColor]];
 }
 
@@ -57,11 +63,13 @@
 }
 
 
+
+
 - (CABasicAnimation *)animationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.autoreverses = NO;
     animation.repeatCount = 0;
-    animation.duration = 0.1f;
+    animation.duration = 0.2f;
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
     return animation;
@@ -71,29 +79,21 @@
 - (void)setSelected:(BOOL)selected completion: (void (^)(BOOL finished))completion NS_AVAILABLE_IOS(4_0);{
     
     int alpha = selected ? 1 :0;
-    int size = selected ? -5 : 5;
-    int yPosition = selected ? self.bounds.origin.y  :-20;
-    
+    int yPosition = selected ? baseFrame.origin.y + 20 :baseFrame.origin.y  ;
+  
     [CATransaction begin]; {
         [CATransaction setCompletionBlock:^{
             [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.check.alpha = alpha;
-                //self.check.frame = CGRectMake(0 -10, -10, 20, 20);
-                //self.check.frame = CGRectMake(0, yPosition, 20, 20);
-                CGRect e = CGRectMake(self.bounds.origin.x, yPosition, self.bounds.size.width, self.bounds.size.height);
-                self.check.frame = CGRectInset(e, size, size);
+                CGRect e = self.check.frame;
+                e.origin.y = yPosition;
+                self.check.frame = e;
                 
-            } completion:completion];
+            } completion:completion ? completion : ^(BOOL finished) {
+                
+            }];
         }];
         [self attacheSizeAnimationAsSelected:selected];
-    } [CATransaction commit];
-}
-
-
-- (void)setUnSelected: (void (^)(void))block;{
-    [CATransaction begin]; {
-        [CATransaction setCompletionBlock:block];
-        [self attacheSizeAnimationAsSelected:NO];
     } [CATransaction commit];
 }
 
