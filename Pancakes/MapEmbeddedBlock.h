@@ -12,4 +12,6 @@
 
 @interface MapEmbeddedBlock : DefinitionEmbeddedBlock
 
+@property (strong, nonatomic) UILabel* title;
+
 @end

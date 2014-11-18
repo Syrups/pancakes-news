@@ -24,6 +24,7 @@
     NSMutableArray* items;
     NSMutableDictionary* blockLines;
     NSMutableDictionary* blockButtons;
+    NSMutableDictionary* closeButtons;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -300,17 +301,34 @@
     }
     [self.tableView endUpdates];
     
+    CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];
+    
+    // Close button
+    UIButton* closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 56, cellFrame.origin.y + 35.0f, 40, 40)];
+    [closeButton setImage:[UIImage imageNamed:@"block-close"] forState:UIControlStateNormal];
+    closeButton.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+    closeButton.layer.cornerRadius = 20;
+    //        [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:closeButton];
+    
+    [closeButtons setObject:closeButton forKey:blockId];
+    
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         UIView* line = [blockLines objectForKey:blockId];
         CGRect frame = line.frame;
-        CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];
+
         NSLog(@"%@", blockView.cellIndexPath);
         frame.size.height = blockView.frame.size.height;
         frame.origin.y = cellFrame.origin.y + 22.0f;
         line.frame = frame;
         
+        
         [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y) animated:YES];
     } completion:nil];
+}
+
+- (void)closeBlockWithId:(NSString*)blockId {
+    
 }
 
 - (Block*) blockWithId:(NSString*)blockId {
