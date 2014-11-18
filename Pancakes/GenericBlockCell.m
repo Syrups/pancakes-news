@@ -151,7 +151,7 @@
                 [blockIndexPaths setObject:blockView forKey:[NSIndexPath indexPathForRow:items.count+1 inSection:0]];
                 [items addObject:blockView];
                 
-                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY + 20.0f, 60, 60)];
+                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY + 40.0f, 60, 60)];
                 [blockButton setImage:[self blockButtonImageForType:child.type] forState:UIControlStateNormal];
                 [blockButton addTarget:self action:@selector(blockButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 blockButton.tag = [child.id integerValue];
@@ -162,7 +162,7 @@
                 [self bringSubviewToFront:blockButton];
                 
                 // Storyline on side
-                UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 39, offsetY + 40.0f, 3.0f, 0)];
+                UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 39, blockView.frame.origin.y, 3.0f, 0)];
                 storylineOpen.backgroundColor = kOrangeColor;
                 [self addSubview:storylineOpen];
                 
@@ -276,6 +276,34 @@
                 CGRect f = btn.frame;
                 f.origin.y += blockView.frame.size.height;
                 btn.frame = f;
+            } completion:^(BOOL finished) {
+                [blockButtons setObject:btn forKey:key];
+            }];
+        }
+    }];
+}
+
+- (void)closeButtonTapped:(UIView*)sender {
+    NSString* blockId = [NSString stringWithFormat:@"%ld", (long)sender.tag];
+    
+    DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
+
+    CGFloat h = blockView.frame.size.height;
+    
+    [self closeEmbeddedBlockWithId:blockId];
+    
+    [sender removeFromSuperview];
+    
+    // Move all the buttons to their initial position
+    
+    [blockButtons enumerateKeysAndObjectsUsingBlock:^(id key, UIButton* btn, BOOL *stop) {
+        // If this button is ABOVE the tapped button,
+        // there's no need to move it up
+        if (btn.frame.origin.y > sender.frame.origin.y) {
+            [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                CGRect f = btn.frame;
+                f.origin.y -= h;
+                btn.frame = f;
             } completion:nil];
         }
     }];
@@ -304,11 +332,12 @@
     CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];
     
     // Close button
-    UIButton* closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 56, cellFrame.origin.y + 35.0f, 40, 40)];
+    UIButton* closeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 56, cellFrame.origin.y + 100.0f, 40, 40)];
     [closeButton setImage:[UIImage imageNamed:@"block-close"] forState:UIControlStateNormal];
     closeButton.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
     closeButton.layer.cornerRadius = 20;
-    //        [closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    closeButton.tag = blockId.integerValue;
+    [closeButton addTarget:self action:@selector(closeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:closeButton];
     
     [closeButtons setObject:closeButton forKey:blockId];
@@ -319,15 +348,34 @@
 
         NSLog(@"%@", blockView.cellIndexPath);
         frame.size.height = blockView.frame.size.height;
-        frame.origin.y = cellFrame.origin.y + 22.0f;
+        frame.origin.y = cellFrame.origin.y + 30.0f;
         line.frame = frame;
         
+        [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y - 40) animated:YES];
         
-        [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y) animated:YES];
     } completion:nil];
+    
 }
 
-- (void)closeBlockWithId:(NSString*)blockId {
+- (void)closeEmbeddedBlockWithId:(NSString*)blockId {
+    DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
+    
+    [self.tableView beginUpdates];
+    CGRect f = blockView.frame;
+    f.size.height = 0;
+    blockView.frame = f;
+    [self.tableView endUpdates];
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        UIView* line = [blockLines objectForKey:blockId];
+        CGRect frame = line.frame;
+        
+        frame.size.height = 0;
+        line.frame = frame;
+        
+        [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y - 200) animated:YES];
+
+    } completion:nil];
     
 }
 
