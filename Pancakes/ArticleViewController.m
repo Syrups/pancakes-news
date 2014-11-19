@@ -45,6 +45,7 @@ typedef enum  {
     
     //Blur radius init
     self.coverBlur.blurRadius = 0;
+    self.coverBlur.dynamic = YES;
     [self.coverBlur setTintColor:[UIColor clearColor]];
     
     
