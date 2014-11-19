@@ -25,13 +25,17 @@
 NSString * const themesUrl = kApiRootUrl @"/themes";
 NSString * const CellIdentifier = @"SubThemeViewCell";
 
+int screenMidSize;
+int screenHeight;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
     //InitScrollView and TableView
-    int screenMidSize = self.view.frame.size.width/2;
-    int screenHeight = self.view.frame.size.height;
+     screenMidSize = self.view.frame.size.width/2;
+        screenHeight = self.view.frame.size.height;
     
     
     self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, screenMidSize, screenHeight - kMenuBarHeigth)];
@@ -59,17 +63,30 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
     
     [self loadThemesFromNetwork];
     
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+   
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent{
+   
+    
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.subThemesView.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
         self.themeDescription.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
+        [UIView animateWithDuration:0.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
             self.themesView.frame = CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth);
             
         } completion:nil];
     }];
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent{
+    
+    
+    self.themesView.frame = CGRectMake(0, self.view.frame.size.height, screenMidSize, screenHeight - kMenuBarHeigth);
+    self.subThemesView.frame = CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight);
+    self.themeDescription.frame = CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight);
+}
 
 #pragma mark - UIScrollView
 
