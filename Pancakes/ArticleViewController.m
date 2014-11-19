@@ -44,9 +44,10 @@ typedef enum  {
     self.parser.delegate = self;
     
     //Blur radius init
-    self.coverBlur.blurRadius = 0;
+    
     self.coverBlur.dynamic = YES;
     [self.coverBlur setTintColor:[UIColor clearColor]];
+    self.coverBlur.blurRadius = 0;
     
     
     self.articleCoverImage.image = self.cover;
