@@ -16,7 +16,6 @@
 #import "EditorsBlockCell.h"
 #import "CommentsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "UIImage+StackBlur.h"
 
 typedef enum  {
     Displayed,
@@ -25,8 +24,8 @@ typedef enum  {
 
 @implementation ArticleViewController {
     NSMutableArray* hiddenBlocks;
-    UIImage *coverOriginalImage;
-    UIImage *coverBlurredImage;
+    //UIImage *coverOriginalImage;
+    //UIImage *coverBlurredImage;
     BOOL titleCellAnimated;
     BackButtonState backButtonState;
 }
@@ -43,6 +42,11 @@ typedef enum  {
     
     self.parser = [[ContentParser alloc] init];
     self.parser.delegate = self;
+    
+    //Blur radius init
+    self.coverBlur.blurRadius = 0;
+    [self.coverBlur setTintColor:[UIColor clearColor]];
+    
     
     self.articleCoverImage.image = self.cover;
     self.articleCoverImage.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
@@ -78,7 +82,7 @@ typedef enum  {
             }
         }
         
-        coverOriginalImage = self.articleCoverImage.image;
+        //coverOriginalImage = self.articleCoverImage.image;
         
         [self.collectionView reloadData];
     }];
@@ -370,23 +374,29 @@ typedef enum  {
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    
+    
+    self.coverBlur.blurRadius = self.collectionView.contentOffset.y / 7;
+    
     if (self.collectionView.contentOffset.y > self.articleCoverImage.frame.size.height/2 || self.collectionView.contentOffset.y <= 0) return;
     
     if (self.collectionView.contentOffset.y == 0) {
-        [self.articleCoverImage setImage:coverOriginalImage];
+        //[self.articleCoverImage setImage:coverOriginalImage];
     } else {
         int radius = self.collectionView.contentOffset.y / 7;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
-            coverBlurredImage = [coverOriginalImage stackBlur:radius];
+            //coverBlurredImage = [coverOriginalImage stackBlur:radius];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.articleCoverImage setImage:coverBlurredImage];
+                //[self.articleCoverImage setImage:coverBlurredImage];
             });
         });
     }
+    
+    
     
     if (scrollView.contentOffset.y <= 150.0f) {
         if (backButtonState == Hidden) {

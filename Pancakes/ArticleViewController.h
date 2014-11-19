@@ -10,6 +10,7 @@
 #import "Article.h"
 #import "ContentParser.h"
 #import "ArticleMenuViewController.h"
+#import "FXBlurView.h"
 
 @interface ArticleViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIButton* backButton;
 
 @property (strong, nonatomic) UIImage *cover;
+@property (weak, nonatomic) IBOutlet FXBlurView *coverBlur;
 @property (strong, nonatomic) IBOutlet UIImageView* articleCoverImage;
 
 @property (strong, nonatomic) ArticleMenuViewController* menuViewController;
