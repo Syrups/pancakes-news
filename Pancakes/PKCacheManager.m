@@ -9,6 +9,8 @@
 #import "PKCacheManager.h"
 #import "ThemeInterest.h"
 NSString * const PINTERESTS = @"PancakesIntrests";
+NSString * const PLASTREADS = @"PancakesLastReads";
+NSString * const PFEED = @"PancakesFeed";
 
 @implementation PKCacheManager
 
@@ -53,15 +55,50 @@ NSString * const PINTERESTS = @"PancakesIntrests";
     }
 }
 
-#pragma Articles
 
--(void) saveArticles{
+#pragma Articles - LastRead
++(void) saveLastReadArticle :(Article *) article{
     
+    NSMutableArray * lastReads = [PKCacheManager loadLastReadArticles];
+    [lastReads addObject:[article toDictionary]];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:lastReads forKey:PLASTREADS];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void) loadArticles{
++(NSMutableArray *) loadLastReadArticles{
     
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:PLASTREADS]){
+        
+        return [Article arrayOfModelsFromDictionaries:[[NSUserDefaults standardUserDefaults] objectForKey:PLASTREADS]];
+    }else{
+        
+        return [[NSMutableArray alloc] init];
+    }
 }
+
+
+#pragma Articles - Feed
+
++(void) cacheFeed :(NSArray *) feed{
+    
+    NSArray *toSave = [Article arrayOfDictionariesFromModels:feed];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:toSave forKey:PFEED];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++(NSArray *) loadCachedFeed{
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:PFEED]){
+        
+        return [Article arrayOfModelsFromDictionaries:[[NSUserDefaults standardUserDefaults] objectForKey:PFEED]];
+    }else{
+        
+        return [[NSArray alloc] init];
+    }
+}
+
 
 #pragma Synchro
 

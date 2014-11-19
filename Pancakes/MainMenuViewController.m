@@ -38,6 +38,8 @@ int const ARC_CENTER_X = -70;
 int const BUTONS_WIDTH = 130;
 int const BUTONS_HEIGHT = 30;
 
+BOOL flag_arc_loaded = false;
+
 NSArray *angles;
 NSArray *menuNames;
 NSMutableArray *labels;
@@ -77,11 +79,7 @@ PKMenuItemCircle *currentItem;
     
      currentItem = [indicators objectAtIndex:0];
     
-    self.blurView.blurRadius = 40;
-    self.blurView.dynamic = NO;
-    //self.blurView.tintColor = [UIColor blackColor];
-    self.blurView.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.85];
-    //self.blurView.contentMode = UIViewContentModeBottom;
+  
   
     //[self.view.window addSubview:self.blurView];
     
@@ -90,8 +88,11 @@ PKMenuItemCircle *currentItem;
 
 
 - (void)viewWillLayoutSubviews{
-
-    [self drawStyleArc];
+    
+    if(!flag_arc_loaded){
+        [self drawStyleArc];
+    }
+    
     
     for (int i = 0; i < angles.count; i++) {
         [self layoutButtonAtinddex:i];
@@ -143,13 +144,14 @@ PKMenuItemCircle *currentItem;
     showArcFillLayer.frame = drawArcView.layer.bounds;
     showArcFillLayer.path = arcPath;
     showArcFillLayer.strokeColor = nil;
-    showArcFillLayer.fillColor = [UIColor colorWithWhite:255 alpha:0.04].CGColor;
+    showArcFillLayer.fillColor = [UIColor colorWithWhite:255 alpha:0.06].CGColor;
     showArcFillLayer.lineWidth = 1.0;
     [drawArcView.layer addSublayer: showArcFillLayer];
     
     [self.view addSubview:drawArcView];
     
     CGPathRelease(arcPath);
+    flag_arc_loaded = true;
 }
 
 
@@ -218,7 +220,6 @@ PKMenuItemCircle *currentItem;
     for (int i = 0; i < angles.count; i++) {
         [self drawAnimationArcsWithEndAngleAtIndex:i];
     }
-    
 }
 
 
@@ -285,11 +286,14 @@ PKMenuItemCircle *currentItem;
 
 - (void)open {
     isOpen = !isOpen;
+    
+    float heightLessBar = self.view.frame.size.height - kMenuBarHeigth;
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = self.view.frame.size.width;
         self.toggleItem.frame = theFrame;
+        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, self.view.frame.size.width, heightLessBar);
         
     } completion:^(BOOL finished) {
         [self animateOpening];
@@ -298,11 +302,15 @@ PKMenuItemCircle *currentItem;
 
 - (void)close {
     isOpen = !isOpen;
+    
+    float heightLessBar = self.view.frame.size.height - kMenuBarHeigth;
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.frame = CGRectMake(-self.view.frame.size.width, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = 0;
         self.toggleItem.frame = theFrame;
+        
+        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, 0.0f, heightLessBar);
     } completion:^(BOOL finished) {
         [self animateClosing];
     }];

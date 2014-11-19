@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Article.h"
 
 @interface PKCacheManager : NSObject
 /*
@@ -18,8 +19,11 @@
 +(void) cacheIntrests: (NSArray *) interests;
 +(id) loadInterestsFromCache;
 
--(void) saveArticles;
--(void) loadArticles;
++(void) cacheFeed :(NSArray *) feed;
++(NSArray *) loadCachedFeed;
+
++(void) saveLastReadArticle :(Article *) article ;
++(NSMutableArray *) loadLastReadArticles;
 
 +(void) synchonizationRoutine;
 

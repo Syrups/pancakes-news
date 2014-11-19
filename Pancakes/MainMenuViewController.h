@@ -35,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *interestsButton;
 @property (weak, nonatomic) UIView * toggleItem;
 @property (weak, nonatomic) IBOutlet UIButton *synchronizationButton;
-@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
+@property (strong, nonatomic) IBOutlet FXBlurView *blurView;
 
 //FXBlurView
 
