@@ -13,17 +13,22 @@
 #import "ThemeInterest.h"
 #import "SubThemeInterest.h"
 #import "Utils.h"
+#import "PKCacheManager.h"
 
 @interface ArticleMenuInterestsViewController ()
 
 @end
 
-@implementation ArticleMenuInterestsViewController
+@implementation ArticleMenuInterestsViewController {
+    NSMutableArray* userInterests;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self fetchInterests];
+    
+    userInterests = [PKCacheManager loadInterestsFromCache];
     
     ArticleViewController* articleVc = (ArticleViewController*)self.parentViewController.parentViewController;
     
@@ -102,14 +107,91 @@
     wave.image = [wave.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [wave setTintColor:[Utils colorWithHexString:interest.color]];
     
+    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(30.0f, 35.0f, 22.0f, 15.0f)];
+    check.image = [UIImage imageNamed:@"check_item"];
+    check.tintColor = [UIColor whiteColor];
+    check.contentMode = UIViewContentModeScaleAspectFit;
+    check.tag = 50;
+    check.alpha = 0.0f;
+    [cell.contentView addSubview:check];
+    
     NSLog(@"%@", wave);
     
-    if ([self.article containsSubtheme:interest]) {
+    if ([userInterests indexOfObject:interest] != NSNotFound) {
         cell.contentView.backgroundColor = RgbColor(8, 8, 8);
         themeTitle.textColor = [UIColor whiteColor];
     }
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    SubThemeInterest* interest = [self.subthemes objectAtIndex:indexPath.row];
+    
+    if (![self isInUserInterests:interest]) { // toggle add
+        [userInterests addObject:interest];
+        [self toggleAddCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+    } else { // toggle remove
+        [self toggleRemove:[self.tableView cellForRowAtIndexPath:indexPath]];
+    }
+
+    // refresh interests in cache
+    [PKCacheManager cacheIntrests:userInterests];
+}
+
+- (void)toggleAddCell:(UITableViewCell*)cell {
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UIImageView* check = (UIImageView*)[cell.contentView viewWithTag:50];
+    check.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        cell.contentView.backgroundColor = RgbColor(8, 8, 8);
+        UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:10];
+        themeTitle.textColor = [UIColor whiteColor];
+        
+        check.alpha = 1;
+        check.transform = CGAffineTransformMakeScale(1, 1);
+    } completion:nil];
+}
+
+- (void)toggleRemove:(UITableViewCell*)cell {
+    UIImageView* check = (UIImageView*)[cell.contentView viewWithTag:50];
+    
+    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:10];
+        themeTitle.textColor = RgbColor(8, 8, 8);
+        
+        check.alpha = 0;
+        check.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
+    } completion:nil];
+}
+
+- (BOOL)isInUserInterests:(SubThemeInterest*)interest {
+    for (ThemeInterest* theme in userInterests) {
+        if (![theme respondsToSelector:@selector(subthemes)]) {
+            return NO;
+        }
+        
+        for (SubThemeInterest* subtheme in theme.subthemes) {
+            if ([interest._id isEqualToString:subtheme._id]) {
+                return YES;
+            }
+        }
+    }
+    
+    return NO;
+}
+
+
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+//    
+//    cell.contentView.backgroundColor = [UIColor whiteColor];
+//    UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:10];
+//    themeTitle.textColor = RgbColor(8, 8, 8);
+//}
 
 @end

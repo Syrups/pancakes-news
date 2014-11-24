@@ -13,9 +13,9 @@
 
 @property (strong, nonatomic) NSString* _id;
 @property (strong, nonatomic) NSString* title;
-@property (strong, nonatomic) NSString* coverImage;
+@property (strong, nonatomic) NSString<Optional>* coverImage;
 @property (strong, nonatomic) NSString* color;
-@property (strong, nonatomic) NSString* desc;
+@property (strong, nonatomic) NSString<Optional>* desc;
 @property (strong, nonatomic) NSArray<SubThemeInterest, Optional>* subthemes;
 
 

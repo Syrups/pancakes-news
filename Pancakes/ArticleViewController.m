@@ -231,11 +231,11 @@ typedef enum  {
     }
     
     if ([block.type.name isEqualToString:@"context"]) {
-        return CGSizeMake(w, block.paragraphs.count * 150 + block.children.count  * 200);
+        return CGSizeMake(w, block.paragraphs.count * 150 + 320.0f);
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
     } else if ([block.type.name isEqualToString:@"comments"]) {
-        return CGSizeMake(w, 600);
+        return CGSizeMake(w, 300 + self.displayedArticle.comments.count * 130.0f);
     }
     
     // generic block of content
