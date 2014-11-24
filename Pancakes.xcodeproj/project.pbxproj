@@ -40,6 +40,7 @@
 		B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */; };
 		B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0CC19F47069002D7AE7 /* ContentParser.m */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
+		B385A39D1A23825B00585C29 /* ArcImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B385A39C1A23825B00585C29 /* ArcImageView.m */; };
 		B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09BD19F13CB10013B920 /* ArticleViewController.m */; };
 		B38F09C219F13EEE0013B920 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09C119F13EEE0013B920 /* Article.m */; };
 		B39BC80219F2847600277370 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = B39BC7FB19F2847600277370 /* Block.m */; };
@@ -148,6 +149,8 @@
 		B375C0CC19F47069002D7AE7 /* ContentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentParser.m; sourceTree = "<group>"; };
 		B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseThemesViewController.h; sourceTree = "<group>"; };
 		B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseThemesViewController.m; sourceTree = "<group>"; };
+		B385A39B1A23825B00585C29 /* ArcImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArcImageView.h; sourceTree = "<group>"; };
+		B385A39C1A23825B00585C29 /* ArcImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArcImageView.m; sourceTree = "<group>"; };
 		B38F09BC19F13CB10013B920 /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
 		B38F09BD19F13CB10013B920 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
 		B38F09C019F13EEE0013B920 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 			children = (
 				73C24E121A1938A40070C62D /* PKMenuItemCircle.h */,
 				73C24E131A1938A40070C62D /* PKMenuItemCircle.m */,
+				B385A39B1A23825B00585C29 /* ArcImageView.h */,
+				B385A39C1A23825B00585C29 /* ArcImageView.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -794,6 +799,7 @@
 				B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */,
 				7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
+				B385A39D1A23825B00585C29 /* ArcImageView.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,
 				B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */,
 				B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */,

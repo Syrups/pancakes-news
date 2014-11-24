@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GenericBlockCell.h"
+#import "ArcImageView.h"
 
 @interface SectionBlockCell : GenericBlockCell
 
@@ -15,7 +16,7 @@
 
 @property (strong, nonatomic) UILabel* titleLabel;
 @property (strong, nonatomic) UIView* titleBanner;
-@property (strong, nonatomic) UIImageView *coverImage;
+@property (strong, nonatomic) ArcImageView *coverImage;
 @property (strong, nonatomic) UIView* imageMask;
 @property (strong, nonatomic) UIButton* revealButton;
 @property (strong, nonatomic) UIButton* closeButton;

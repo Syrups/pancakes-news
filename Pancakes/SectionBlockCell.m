@@ -11,6 +11,7 @@
 #import "Macros.h"
 #import "Utils.h"
 #import "UIImageView+WebCache.h"
+#import "ArcImageView.h"
 
 @implementation SectionBlockCell
 
@@ -32,7 +33,7 @@
     mask.path = path;
     CGPathRelease(path);
     
-    UIImageView *coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 240.0f)];
+    ArcImageView *coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 240.0f) fullSize:YES];
     coverImage.contentMode = UIViewContentModeScaleToFill;
     [coverImage sd_setImageWithURL:[NSURL URLWithString:block.image]];
 //    coverImage.layer.mask = mask;
@@ -137,6 +138,7 @@
             f.origin.y += 350.0f;
             self.imageMask.frame = f;
         } completion:^(BOOL finished) {
+            [self.coverImage bounce];
             [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.contentView.alpha = 1.0f;
                 

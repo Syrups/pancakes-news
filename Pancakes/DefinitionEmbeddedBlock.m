@@ -10,6 +10,7 @@
 #import "Configuration.h"
 #import "UIImageView+WebCache.h"
 #import "Utils.h"
+#import "ArcImageView.h"
 
 @implementation DefinitionEmbeddedBlock
 
@@ -28,7 +29,7 @@
     self.block = block;
     
     // Create the cover image of the embedded block
-    UIImageView* coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 160.0f)];
+    ArcImageView* coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 160.0f) fullSize:NO];
     [coverImage sd_setImageWithURL:[NSURL URLWithString:block.image]];
     [self addSubview:coverImage];
     
