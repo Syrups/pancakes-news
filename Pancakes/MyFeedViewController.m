@@ -186,6 +186,10 @@
     check.tag = 50;
     check.alpha = 0.0f;
     
+    UIImageView* zigzag = (UIImageView*)[cell.contentView viewWithTag:60];
+    zigzag.image = [zigzag.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [zigzag setTintColor:[Utils colorWithHexString:article.color]];
+    
     [overlay addSubview:check];
     
     [cell setNeedsLayout];

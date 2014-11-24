@@ -9,17 +9,37 @@
 #import "ArticleMenuViewController.h"
 #import "ArticleViewController.h"
 #import "Configuration.h"
+#import "PKMenuItemCircle.h"
+#import "Utils.h"
+
+#define BUTONS_WIDTH  130
+#define BUTONS_HEIGHT 30
 
 @interface ArticleMenuViewController ()
 
 @end
 
+
+
 @implementation ArticleMenuViewController {
     NSInteger previousDetailViewTag;
+    NSArray *angles;
+    
+    CGPoint arcStart;
+    CGPoint arcCenter;
+    CGFloat arcRadius;
+    
+    PKMenuItemCircle *currentItem;
+    
+    BOOL flag_arc_loaded;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    flag_arc_loaded = false;
+    
+    angles = @[@-45, @-20, @5, @30];
     
     self.detailViewControllers = @{
         @"10": [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuInterestsView"],
@@ -29,32 +49,109 @@
     };
 }
 
-- (void)animateOpen {
-    // Set up path movement
-    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    pathAnimation.calculationMode = kCAAnimationPaced;
-    pathAnimation.fillMode = kCAFillModeForwards;
-    pathAnimation.removedOnCompletion = NO;
-    
-    CGPoint startPoint = CGPointMake(120.0f, 15.0f);
-    CGPoint endPoint = CGPointMake(59.0f, 252.0f);
-    CGPoint arcCenter = CGPointMake(226.0f, 194.0f);
-    
-    CGMutablePathRef curvedPath = CGPathCreateMutable();
-    CGPathMoveToPoint(curvedPath, NULL, startPoint.x, startPoint.y);
-    CGPathAddArcToPoint(curvedPath, NULL, startPoint.x, startPoint.y, endPoint.x, endPoint.y, startPoint.y-arcCenter.y);
-    pathAnimation.path = curvedPath;
-    CGPathRelease(curvedPath);
-    
-    pathAnimation.duration = 2.0f;
-
-    for (UIView* v in self.view.subviews) {
-        if (v.class == [UIButton class]) {
-            [v.layer addAnimation:pathAnimation forKey:@"rotateAnimation"];
-        }
-    }
-
+- (void)viewDidLayoutSubviews {
+    [self drawStyleArc];
 }
+
+- (CGMutablePathRef)buildArcBaseWithEndAngle : (float)angle{
+    
+//    float radius = self.view.frame.size.width * 0.5;
+    arcStart = CGPointMake(self.view.bounds.size.width, 35.0f);
+    arcCenter = CGPointMake(self.view.bounds.size.width - 25.0f, 0.7 * self.view.bounds.size.height);
+    arcRadius =  self.view.frame.size.width * 0.7;
+    
+    CGMutablePathRef arcPath = CGPathCreateMutable();
+    CGPathMoveToPoint(arcPath, NULL, arcStart.x, arcStart.y);
+    CGPathAddArc(arcPath, NULL, arcCenter.x, arcCenter.y, arcRadius, DEGREES_TO_RADIANS(80), DEGREES_TO_RADIANS(angle), NO);
+    
+    return arcPath;
+}
+
+- (void) drawStyleArc{
+    
+    CGMutablePathRef arcPath = [self buildArcBaseWithEndAngle: -70];
+    
+    UIView* drawArcView = [[UIView alloc] initWithFrame: self.view.bounds];
+    
+    //Stroke
+    CAShapeLayer* showArcLayer = [[CAShapeLayer alloc] init];
+    showArcLayer.frame = drawArcView.layer.bounds;
+    showArcLayer.path = arcPath;
+    showArcLayer.strokeColor = [[UIColor whiteColor] CGColor];
+    showArcLayer.fillColor = nil;
+    showArcLayer.lineWidth = 0.5f;
+    //[drawArcView.layer addSublayer: showArcLayer];
+    
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = drawArcView.layer.bounds; //CGRectMake(ARC_CENTER_X,0,arcRadius,self.view.frame.size.height);
+    gradientLayer.colors = @[(__bridge id)[UIColor whiteColor].CGColor,(__bridge id)[UIColor clearColor].CGColor ];
+    gradientLayer.startPoint = CGPointMake(0.3,0.5);
+    gradientLayer.endPoint = CGPointMake(1.5,0.5);
+    [drawArcView.layer addSublayer:gradientLayer];
+    gradientLayer.mask = showArcLayer;
+    
+    //fill
+    CAShapeLayer* showArcFillLayer = [[CAShapeLayer alloc] init];
+    showArcFillLayer.frame = drawArcView.layer.bounds;
+    showArcFillLayer.path = arcPath;
+    showArcFillLayer.strokeColor = nil;
+    showArcFillLayer.fillColor = [UIColor colorWithWhite:255 alpha:0.06].CGColor;
+    showArcFillLayer.lineWidth = 1.0;
+    [drawArcView.layer addSublayer: showArcFillLayer];
+    
+    [self.view addSubview:drawArcView];
+    [self.view sendSubviewToBack:drawArcView];
+    
+    CGPathRelease(arcPath);
+    flag_arc_loaded = true;
+}
+
+//- (void) layoutButtonAtinddex : (int) index {
+//    float  angle = [[angles objectAtIndex:index] floatValue];
+//    
+//    CGPoint point = [Utils pointOnCircleWithCenter:arcCenter withRadius:arcRadius withAngle:DEGREES_TO_RADIANS(angle)];
+//    point.x += (BUTONS_WIDTH * 0.5) + 20;
+//    
+//    UIButton *menuButton = [labels objectAtIndex:index];
+//    menuButton.frame = CGRectMake(0, 0, BUTONS_WIDTH, BUTONS_HEIGHT);
+//    menuButton.center = point;
+//    menuButton.titleLabel.font = [UIFont fontWithName:@"Heuristica-Italic" size:15.5];
+//    
+//    [menuButton setTitle: NSLocalizedString(menuNames[index], nil) forState:UIControlStateNormal];
+//    [menuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    
+//    
+//    [self.view addSubview: [indicators objectAtIndex:index]];
+//    [self.view addSubview:menuButton];
+//    
+//}
+
+//- (void)animateOpen {
+//    // Set up path movement
+//    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+//    pathAnimation.calculationMode = kCAAnimationPaced;
+//    pathAnimation.fillMode = kCAFillModeForwards;
+//    pathAnimation.removedOnCompletion = NO;
+//    
+//    CGPoint startPoint = CGPointMake(120.0f, 15.0f);
+//    CGPoint endPoint = CGPointMake(59.0f, 252.0f);
+//    CGPoint arcCenter = CGPointMake(226.0f, 194.0f);
+//    
+//    CGMutablePathRef curvedPath = CGPathCreateMutable();
+//    CGPathMoveToPoint(curvedPath, NULL, startPoint.x, startPoint.y);
+//    CGPathAddArcToPoint(curvedPath, NULL, startPoint.x, startPoint.y, endPoint.x, endPoint.y, startPoint.y-arcCenter.y);
+//    pathAnimation.path = curvedPath;
+//    CGPathRelease(curvedPath);
+//    
+//    pathAnimation.duration = 2.0f;
+//
+//    for (UIView* v in self.view.subviews) {
+//        if (v.class == [UIButton class]) {
+//            [v.layer addAnimation:pathAnimation forKey:@"rotateAnimation"];
+//        }
+//    }
+//
+//}
 
 - (IBAction)didSelectItem:(UIButton*)sender {
     NSString* tag = [NSString stringWithFormat:@"%ld", (long)sender.tag];

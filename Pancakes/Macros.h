@@ -19,4 +19,7 @@ green:g/255.0f \
 blue:b/255.0f \
 alpha:a]
 
+// pi is approximately equal to 3.14159265359.
+#define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
+
 #endif

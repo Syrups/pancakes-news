@@ -8,6 +8,7 @@
 
 #import "EditorsBlockCell.h"
 #import "Configuration.h"
+#import "ArcImageView.h"
 
 @implementation EditorsBlockCell
 
@@ -23,11 +24,11 @@
         [editorView.layer addSublayer:upperBorder];
         editorView.backgroundColor = [UIColor whiteColor];
                               
-        UIImageView* cover = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f)];
+        ArcImageView* cover = [[ArcImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f) fullSize:YES];
         [cover setImage:[UIImage imageNamed:@"splash"]];
         [editorView addSubview:cover];
         
-        UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 65, 90, 130, 130)];
+        UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 65, 60, 130, 130)];
         [image setImage:[UIImage imageNamed:@"glenn"]];
         image.layer.cornerRadius = 65;
         image.layer.masksToBounds = YES;

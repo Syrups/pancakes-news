@@ -11,6 +11,7 @@
 #import "Macros.h"
 #import "Utils.h"
 #import "UIImageView+WebCache.h"
+#import "ArcImageView.h"
 
 @implementation SectionBlockCell
 
@@ -25,9 +26,17 @@
     
     if (self.opened) return;
     
-    UIImageView *coverImage = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 290.0f)];
-    coverImage.contentMode = UIViewContentModeScaleAspectFit;
+    CAShapeLayer* mask = [[CAShapeLayer alloc] init];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPoint arcCenter = CGPointMake(0, 220);
+    CGPathAddArc(path, NULL, arcCenter.x, arcCenter.y, 300, M_PI_2, -M_PI_2, NO);
+    mask.path = path;
+    CGPathRelease(path);
+    
+    ArcImageView *coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 240.0f) fullSize:YES];
+    coverImage.contentMode = UIViewContentModeScaleToFill;
     [coverImage sd_setImageWithURL:[NSURL URLWithString:block.image]];
+//    coverImage.layer.mask = mask;
     [self addSubview:coverImage];
     
     self.coverImage = coverImage;
@@ -84,7 +93,7 @@
     
     self.revealButton = button;
     
-    [super layoutWithBlock:block offsetY:300.0f];
+    [super layoutWithBlock:block offsetY:280.0f];
     
     self.contentView.backgroundColor = [UIColor whiteColor];
 }
@@ -109,7 +118,7 @@
         f.size.height = 0.0f;
         self.titleBanner.frame = f;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.25f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             CGRect f = self.titleLabel.frame;
             f.origin.y += 60.0f;
             self.titleLabel.frame = f;
@@ -129,7 +138,8 @@
             f.origin.y += 350.0f;
             self.imageMask.frame = f;
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.coverImage bounce];
+            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.contentView.alpha = 1.0f;
                 
                 CGRect f = self.titleLabel.frame;
