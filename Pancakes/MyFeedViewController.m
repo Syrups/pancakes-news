@@ -15,6 +15,7 @@
 #import "MainViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Utils.h"
+#import "UserDataHolder.h"
 
 @implementation MyFeedViewController {
     NSArray* feedArticles;
@@ -57,7 +58,18 @@
 }
 
 - (void)fetchFeed {
-    NSString *feedUrl = [kApiRootUrl stringByAppendingString:@"/feed"];
+    UserDataHolder* holder = [UserDataHolder sharedInstance];
+    [holder loadData];
+    
+    NSString* feedUrl = @"";
+    
+    if (holder.user._id != nil) {
+        NSString* userId = holder.user._id;
+        feedUrl = [kApiRootUrl stringByAppendingString:[NSString stringWithFormat:@"/user/%@/feed", userId]];
+    } else {
+        // if no user, use public articles feed
+        feedUrl = [kApiRootUrl stringByAppendingString:@"/articles"];
+    }
     
     [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:feedUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSError* err = nil;
