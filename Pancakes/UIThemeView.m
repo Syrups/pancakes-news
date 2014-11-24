@@ -25,8 +25,13 @@
     //self.caption.numberOfLines = 0;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    //Blur init
     
+    
+    //self.topBlurView.contentMode = UIViewContentModeRight;
+    //self.topBlurView.layer.contentsGravity = kCAGravityBottomLeft;
+    //[self.blurView setClipsToBounds:YES];
+   
 }
 
 -(void)updateCellWithImage: (NSString *)imageName {
@@ -34,18 +39,26 @@
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     [tempImageView setFrame:self.frame];
     self.backgroundView = tempImageView;
+        
 }
 
 
 
-- (void) updateAsNotfullyVisible{
+- (void) updateAsFullyVisible : (BOOL) visible{
+
+    float radius = visible ? 0 : 15;
     UIImage *baseImage = [UIImage imageNamed:self.theme.coverImage];
-    UIImage *blurImage = [baseImage stackBlur:20];
+    UIImage *blurImage = [baseImage stackBlur:radius];
     
     UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
     [tempImageView setFrame:self.frame];
     
-    self.backgroundView = tempImageView;
+    [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            
+        self.themeLabel.alpha = visible ? 1 : 0.4;
+        self.backgroundView = tempImageView;
+            
+    } completion:nil];
 }
 
 -(void) setSwitchReceiverSelector: (SEL)action{

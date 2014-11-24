@@ -13,10 +13,11 @@
 @interface UIThemeView : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
+//@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @property (weak, nonatomic) ThemeInterest *theme;
 
 - (void) setSwitchReceiverSelector: (SEL)action;
 - (void) updateCellWithImage :  (NSString *)imageName ;
-- (void) updateAsNotfullyVisible;
+- (void) updateAsFullyVisible : (BOOL) visible;
 
 @end

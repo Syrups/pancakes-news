@@ -191,7 +191,7 @@
     </objects>
     <resources>
         <image name="check_item" width="22" height="15"/>
-        <image name="glenn.jpg" width="48" height="48"/>
+        <image name="glenn.jpg" width="42" height="7"/>
         <image name="gouigoui" width="42" height="7"/>
     </resources>
 </document>

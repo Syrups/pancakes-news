@@ -184,9 +184,11 @@ int screenHeight;
         
         if (CGRectContainsRect(scrollView.frame, cellRect)){
             
-            NSLog(@"fully %@", cell.themeLabel.text);
+            //NSLog(@"fully %@", cell.themeLabel.text);
             [self updateThemeDataWithCell:cell];
+            [cell updateAsFullyVisible:YES];
         }else{
+            [cell updateAsFullyVisible:NO];
             //NSLog(@"not fully %@", cell.themeLabel.text);
         }
     }
@@ -204,13 +206,13 @@ int screenHeight;
             
             if (CGRectContainsRect(scrollView.frame, cellRect)){
                 
-                NSLog(@"fully %@", cell.themeLabel.text);
+                //NSLog(@"fully %@", cell.themeLabel.text);
                 [self updateThemeDataWithCell:cell];
                 
                 
             }else{
                 //NSLog(@"not fully %@", cell.themeLabel.text);
-               
+                //[cell updateAsNotfullyVisible];
             }
         }
     }
