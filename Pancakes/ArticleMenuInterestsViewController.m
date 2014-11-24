@@ -13,6 +13,7 @@
 #import "ThemeInterest.h"
 #import "SubThemeInterest.h"
 #import "Utils.h"
+#import "PKRestClient.h"
 
 @interface ArticleMenuInterestsViewController ()
 
@@ -31,8 +32,8 @@
 }
 
 - (void) fetchInterests {
-    NSString* themesUrl = [kApiRootUrl stringByAppendingString:@"/themes"];
-    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:themesUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+    /*[[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:themesUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSError* err = nil;
         self.data = [ThemeInterest arrayOfModelsFromData:data error:&err];
         
@@ -66,7 +67,7 @@
             });
         }] resume];
         
-    }] resume];
+    }] resume];*/
 }
 
 #pragma mark - UITableViewDataSource

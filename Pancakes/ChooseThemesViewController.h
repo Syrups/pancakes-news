@@ -17,6 +17,9 @@
 @property (strong, nonatomic) IBOutlet UITableView *themesView;
 @property (strong, nonatomic) IBOutlet UITableView *subThemesView;
 @property (strong, nonatomic) IBOutlet UITextView * themeDescription;
+@property (strong, nonatomic) IBOutlet FXBlurView *topBlurView;
+@property (strong, nonatomic) IBOutlet FXBlurView *bottomBlurView;
+
 @property (weak, nonatomic) IBOutlet UILabel *currentPageNum;
 //@property (nonatomic, retain) NSMutableArray* tableData;
 @property (nonatomic, retain) NSMutableArray* themesData;

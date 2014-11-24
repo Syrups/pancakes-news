@@ -11,6 +11,7 @@
 #import "Configuration.h"
 #import <JSONModel/JSONHTTPClient.h>
 #import "UserDataHolder.h"
+#import "PKRestClient.h"
 
 @interface ArticleMenuCommentViewController ()
 
@@ -40,7 +41,7 @@
     [articleVc.menuViewController didSelectItem:btn];
 }
 
-- (IBAction)postComment:(UITextField*)sender {
+- (IBAction)postComment:(UITextField*)sender  {
     
 //    NSString* userId = [[UserDataHolder sharedInstance] user]._id;
     NSString* userId = @"5440e462d1e57b5861b503d3";
@@ -53,16 +54,15 @@
     };
 
     //make post, get requests
-    [JSONHTTPClient postJSONFromURLWithString:[kApiRootUrl stringByAppendingString:[NSString stringWithFormat:@"/articles/%@/comments", articleVc.displayedArticle._id]]
-                                       params:params
-                                   completion:^(id json, JSONModelError *err) {
-                                       
-                                       NSLog(@"Response : %@", json);
-                                       
-                                       if (err == nil) {
-                                           [self dismiss:nil];
-                                       }
-                                       
+    
+    [PKRestClient sendCommentWithId:articleVc.displayedArticle._id params:params completion:^(id json, JSONModelError *err) {
+        
+        NSLog(@"Response : %@", json);
+        
+        if (err == nil) {
+            [self dismiss:nil];
+        }
+        
     }];
 }
 

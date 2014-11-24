@@ -16,6 +16,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "Utils.h"
 #import "UserDataHolder.h"
+#import "PKRestClient.h"
 
 @implementation MyFeedViewController {
     NSArray* feedArticles;
@@ -65,10 +66,10 @@
     
     if (holder.user._id != nil) {
         NSString* userId = holder.user._id;
-        feedUrl = [kApiRootUrl stringByAppendingString:[NSString stringWithFormat:@"/user/%@/feed", userId]];
+        feedUrl = [NSString stringWithFormat:[PKRestClient apiUrlWithRoute:@"/user/%@/feed"], userId];
     } else {
         // if no user, use public articles feed
-        feedUrl = [kApiRootUrl stringByAppendingString:@"/articles"];
+        feedUrl = [PKRestClient apiUrlWithRoute:@"/articles"];
     }
     
     [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:feedUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {

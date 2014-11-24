@@ -10,6 +10,7 @@
 		25D738D955411A703F52C406 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EC56249BB21E39D5D93BB /* libPods.a */; };
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
+		7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7352143A1A23688B00AFE840 /* PKRestClient.m */; };
 		737668171A111379002ECAB5 /* UserDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 737668161A111379002ECAB5 /* UserDataHolder.m */; };
 		738510871A163CF60094056D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 738510891A163CF60094056D /* Localizable.strings */; };
 		7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872B1A14DBE400AB74A6 /* PKCacheManager.m */; };
@@ -95,6 +96,8 @@
 		7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubThemeViewCell.h; sourceTree = "<group>"; };
 		7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubThemeViewCell.m; sourceTree = "<group>"; };
 		7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubThemeViewCell.xib; sourceTree = "<group>"; };
+		735214391A23688B00AFE840 /* PKRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRestClient.h; sourceTree = "<group>"; };
+		7352143A1A23688B00AFE840 /* PKRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRestClient.m; sourceTree = "<group>"; };
 		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
 		737668161A111379002ECAB5 /* UserDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataHolder.m; sourceTree = "<group>"; };
 		738510881A163CF60094056D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -412,6 +415,8 @@
 				7388872B1A14DBE400AB74A6 /* PKCacheManager.m */,
 				7388872D1A14DFA200AB74A6 /* PKNotificationManager.h */,
 				7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */,
+				735214391A23688B00AFE840 /* PKRestClient.h */,
+				7352143A1A23688B00AFE840 /* PKRestClient.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -768,6 +773,7 @@
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,
 				B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */,
 				B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */,
+				7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */,
 				73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */,
 				73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */,
 				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,

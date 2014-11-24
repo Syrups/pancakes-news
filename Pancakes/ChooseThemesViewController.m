@@ -11,8 +11,8 @@
 #import "Utils.h"
 #import "Configuration.h"
 #import "UserDataHolder.h"
-#import "JSONModel/JSONModelNetworking/JSONHTTPClient.h"
 #import "PKCacheManager.h"
+#import "PKRestClient.h"
 
 @interface ChooseThemesViewController ()
 
@@ -22,7 +22,7 @@
     NSMutableArray* categoriesViews;
 }
 
-NSString * const themesUrl = kApiRootUrl @"/themes";
+
 NSString * const CellIdentifier = @"SubThemeViewCell";
 
 int screenMidSize;
@@ -42,6 +42,8 @@ int screenHeight;
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
     
+    self.themesView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
     self.themeDescription.textColor = [Utils colorWithHexString:@"322e1d"];
@@ -60,6 +62,7 @@ int screenHeight;
     [self.view addSubview:self.themesView];
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
+    [self.view addSubview: self.topBlurView];
     
     [self loadThemesFromNetwork];
     
@@ -203,8 +206,11 @@ int screenHeight;
                 
                 NSLog(@"fully %@", cell.themeLabel.text);
                 [self updateThemeDataWithCell:cell];
+                
+                
             }else{
                 //NSLog(@"not fully %@", cell.themeLabel.text);
+               
             }
         }
     }
@@ -296,8 +302,6 @@ int screenHeight;
         [sCell setSubTheme:sub];
         [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
         
-        
-    
     }
 }
 
@@ -341,8 +345,8 @@ int screenHeight;
     
     
     //Try Loading from network then
-    [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:^(id json, JSONModelError *jsonError) {
-        
+    
+    [PKRestClient getAllThemesAndComplete:^(id json, JSONModelError *err) {
         if (json == nil) {
             return;
         }
@@ -354,8 +358,6 @@ int screenHeight;
         //Cache interests
         [PKCacheManager cacheIntrests:self.themesData];
     }];
-    
-    
 }
 
 - (void) initThemesForBegin {

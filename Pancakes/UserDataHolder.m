@@ -8,11 +8,11 @@
 
 #import "UserDataHolder.h"
 #import <UIKit/UIKit.h>
-#import "JSONModel/JSONModelNetworking/JSONHTTPClient.h"
 #import "Configuration.h"
+#import "PKRestClient.h"
 
 NSString * const PUSER = @"PancakesUser";
-NSString * const createUser = kApiRootUrl @"/user/create";
+
 
 @implementation UserDataHolder
 - (id) init
@@ -92,7 +92,7 @@ NSString * const createUser = kApiRootUrl @"/user/create";
     NSError* err ;
     
     //make post, get requests
-    [JSONHTTPClient postJSONFromURLWithString:createUser params:user completion:^(id json, JSONModelError *jsonError) {
+    [PKRestClient getUserWithUser:user :^(id json, JSONModelError *jsonError) {
         self.user  =[[User alloc] initWithDictionary:[json objectForKey:@"data"] error:&jsonError];
         
         if (err) {
@@ -100,6 +100,7 @@ NSString * const createUser = kApiRootUrl @"/user/create";
         }
         NSLog(@"user loaded from network %@", [self.user toJSONString]);
     }];
+    
 }
 
 @end

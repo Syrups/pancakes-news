@@ -16,6 +16,7 @@
 #import "EditorsBlockCell.h"
 #import "CommentsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "PKRestClient.h"
 
 typedef enum  {
     Displayed,
@@ -70,10 +71,10 @@ typedef enum  {
 //    self.displayedArticle._id = @"5440d1b7cd53de6649187c8b";
     // /TEST
     
-    NSString* articlePath = [NSString stringWithFormat:@"/articles/%@", self.displayedArticle._id];
-    NSString* articleUrl = [kApiRootUrl stringByAppendingString:articlePath];
+    //NSString* articlePath = [NSString stringWithFormat:@"/articles/%@", self.displayedArticle._id];
+    //NSString* articleUrl = [PKRestClient apiUrlWithRoute:articlePath];
     
-    [JSONHTTPClient getJSONFromURLWithString:articleUrl completion:^(NSDictionary *json, JSONModelError *err) {
+   [PKRestClient getArticleWithId:self.displayedArticle._id :^(id json, JSONModelError *err) {
         NSError* error = nil;
         self.displayedArticle = [[Article alloc] initWithDictionary:json error:&error];
         self.articleTitleLabel.text = self.displayedArticle.title;
@@ -88,7 +89,6 @@ typedef enum  {
         
         [self.collectionView reloadData];
     }];
-
 }
 
 - (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {

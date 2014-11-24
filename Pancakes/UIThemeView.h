@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ThemeInterest.h"
+#import "FXBlurView.h"
 
 @interface UIThemeView : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;

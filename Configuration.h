@@ -11,7 +11,6 @@
 
 #import "Macros.h"
 
-#define kApiRootUrl @"http://localhost:5000/api"
 
 // Colors
 
