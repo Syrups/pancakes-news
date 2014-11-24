@@ -46,6 +46,8 @@
     
     [super layoutWithBlock:block offsetY:offsetY];
     
+    self.titleLabel.text = [NSString stringWithFormat:@"%ld Comments", self.articleViewController.displayedArticle.comments.count];
+    
     self.backgroundColor = kArticleViewBlockBackground;
 }
 
