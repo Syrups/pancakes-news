@@ -24,7 +24,7 @@
         [editorView.layer addSublayer:upperBorder];
         editorView.backgroundColor = [UIColor whiteColor];
                               
-        ArcImageView* cover = [[ArcImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f) fullSize:YES];
+        ArcImageView* cover = [[ArcImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 180.0f) fullSize:YES];
         [cover setImage:[UIImage imageNamed:@"splash"]];
         [editorView addSubview:cover];
         

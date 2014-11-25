@@ -21,11 +21,13 @@
     CAShapeLayer* layer = [[CAShapeLayer alloc] init];
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, 0, 0);
-    CGPathAddLineToPoint(path, NULL, -1000, -100);
+    
     
     if (!full) {
+        CGPathAddLineToPoint(path, NULL, -2000, -200);
         CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, 160, self.frame.size.width+2000, -200, 1400);
     } else {
+        CGPathAddLineToPoint(path, NULL, -1000, -120);
         CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height, self.frame.size.width+1000, -120, 1400);
     }
 
@@ -46,9 +48,9 @@
     
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, 0, 0);
-    CGPathAddLineToPoint(path, NULL, -1000, -100);
+    CGPathAddLineToPoint(path, NULL, -1000, 0);
     
-    CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height-20.0f, self.frame.size.width+1000, -120, 1400);
+    CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height-20.0f, self.frame.size.width+1000, 0, 2400);
     
     
     CGPathAddLineToPoint(path, NULL, self.frame.size.width, 0);

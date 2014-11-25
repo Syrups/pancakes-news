@@ -193,7 +193,7 @@ PKMenuItemCircle *currentItem;
     // Animation
     CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     pathAnimation.calculationMode = kCAAnimationPaced;
-    pathAnimation.duration = 0.3f;
+    pathAnimation.duration = 0.15f;
     pathAnimation.path = arcPath;
     pathAnimation.removedOnCompletion = NO;
     pathAnimation.fillMode = kCAFillModeForwards;
@@ -226,7 +226,7 @@ PKMenuItemCircle *currentItem;
 - (void)animateButtonAtIndex :(int)index; {
     
     BOOL nextItemExist = index + 1 < labels.count ;
-    [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.08f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         UIButton *button = [labels objectAtIndex:index];
         button.alpha = 1;
@@ -288,7 +288,7 @@ PKMenuItemCircle *currentItem;
     isOpen = !isOpen;
     
     float heightLessBar = self.view.frame.size.height - kMenuBarHeigth;
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = self.view.frame.size.width;

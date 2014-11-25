@@ -49,7 +49,8 @@ typedef enum  {
     self.coverBlur.dynamic = YES;
     [self.coverBlur setTintColor:[UIColor clearColor]];
     self.coverBlur.blurRadius = 0;
-    
+//    self.coverBlur.blurEnabled = NO;
+    self.coverBlur.alpha = 0;
     
     self.articleCoverImage.image = self.cover;
     self.articleCoverImage.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
@@ -227,7 +228,7 @@ typedef enum  {
     
     // If hidden block height is 0
     if ([hiddenBlocks indexOfObject:block] != NSNotFound) {
-        return CGSizeMake(w, 70.0f);
+        return CGSizeMake(w, 60.0f);
     }
     
     if ([block.type.name isEqualToString:@"context"]) {
@@ -327,7 +328,7 @@ typedef enum  {
         
         [hiddenBlocks addObject:block];
         [cell closeWithAnimation];
-        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y - 80.0f) animated:YES];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y - self.view.bounds.size.height/2 + 30) animated:YES];
         
     } completion:^(BOOL finished) {
         [cell layoutWithBlock:cell.block offsetY:0.0f];
@@ -374,8 +375,11 @@ typedef enum  {
     }
 }
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"scroll.end" object:nil];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     
     
     self.coverBlur.blurRadius = self.collectionView.contentOffset.y / 7;
@@ -383,8 +387,9 @@ typedef enum  {
     if (self.collectionView.contentOffset.y > self.articleCoverImage.frame.size.height/2 || self.collectionView.contentOffset.y <= 0) return;
     
     if (self.collectionView.contentOffset.y == 0) {
-        //[self.articleCoverImage setImage:coverOriginalImage];
+        self.coverBlur.alpha = 0;
     } else {
+        self.coverBlur.alpha = 1;
         int radius = self.collectionView.contentOffset.y / 7;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{

@@ -83,7 +83,7 @@ CGRect baseFrame;
   
     [CATransaction begin]; {
         [CATransaction setCompletionBlock:^{
-            [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.check.alpha = alpha;
                 CGRect e = self.check.frame;
                 e.origin.y = yPosition;

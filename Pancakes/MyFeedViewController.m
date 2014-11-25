@@ -54,6 +54,7 @@
             f = self.feedTableView.frame;
             f.origin.x = 0.0f;
             self.feedTableView.frame = f;
+            self.readButton.alpha = 1;
         } completion:nil];
     }
 }
@@ -113,6 +114,7 @@
         [self.feedTableView setFrame:f];
         f = self.articleExcerpt.frame;
         f.origin.y = self.view.frame.size.height;
+        self.articleExcerpt.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
         [self.articleExcerpt setFrame:f];
         f = parent.menuTopBar.frame;
         f.origin.x -= self.view.frame.size.width/2;
@@ -120,6 +122,7 @@
         f = parent.menuItem.frame;
         f.origin.x -= self.view.frame.size.width/2;
         [parent.menuItem setFrame:f];
+        self.readButton.alpha = 0;
     } completion:^(BOOL finished) {
         
         ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
@@ -179,7 +182,7 @@
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
     themeTitle.textColor = [Utils colorWithHexString:article.color];
     
-    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 38.0f, 22.0f, 15.0f)];
+    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 40.0f, 22.0f, 15.0f)];
     check.image = [UIImage imageNamed:@"check_item"];
     check.tintColor = [UIColor whiteColor];
     check.contentMode = UIViewContentModeScaleAspectFit;
@@ -218,7 +221,7 @@
     
     UIView* overlay = [cell.contentView viewWithTag:5];
     UIView* check = [overlay viewWithTag:50];
-    check.transform = CGAffineTransformMakeScale(2.0f, 2.0f);
+    check.transform = CGAffineTransformMakeScale(4.0f, 4.0f);
     
     
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -231,6 +234,10 @@
         
         check.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
         check.alpha = 1.0f;
+        
+        UIImage* read = [self.readButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [self.readButton setImage:read forState:UIControlStateNormal];
+        [self.readButton setTintColor:[Utils colorWithHexString:article.color]];
     } completion:nil];
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];

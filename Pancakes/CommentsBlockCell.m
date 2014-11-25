@@ -11,13 +11,14 @@
 #import <FXBlurView/FXBlurView.h>
 #import "Configuration.h"
 #import "Comment.h"
+#import "ArcImageView.h"
 
 @implementation CommentsBlockCell
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     if (self.opened) return;
     
-    UIImageView* cover = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f)];
+    ArcImageView* cover = [[ArcImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f) fullSize:YES];
     [cover sd_setImageWithURL:[NSURL URLWithString:self.articleViewController.displayedArticle.coverImage]];
     [self addSubview:cover];
     
