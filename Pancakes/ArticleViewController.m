@@ -29,6 +29,7 @@ typedef enum  {
     //UIImage *coverBlurredImage;
     BOOL titleCellAnimated;
     BackButtonState backButtonState;
+    CGFloat lastContentOffset;
 }
 
 - (void)viewDidLoad {
@@ -90,6 +91,10 @@ typedef enum  {
         
         [self.collectionView reloadData];
     }];
+    
+    UISwipeGestureRecognizer *oneFingerSwipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
+    [oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self view] addGestureRecognizer:oneFingerSwipeUp];
 }
 
 - (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {
@@ -131,7 +136,14 @@ typedef enum  {
 #pragma mark - Actions
 
 - (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.coverBlur setBlurEnabled:NO];
+    [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [self.collectionView setFrame:CGRectMake(self.view.frame.size.width, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height)];
+ 
+    } completion:^(BOOL finished) {
+        
+        [self.navigationController popViewControllerAnimated:NO];
+    }];
 }
 
 - (IBAction)displayMenu:(id)sender {
@@ -234,7 +246,7 @@ typedef enum  {
     }
     
     if ([block.type.name isEqualToString:@"context"]) {
-        return CGSizeMake(w, block.paragraphs.count * 150 + 320.0f);
+        return CGSizeMake(w, block.paragraphs.count * 100 + 250.0f);
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
     } else if ([block.type.name isEqualToString:@"comments"]) {
@@ -383,6 +395,16 @@ typedef enum  {
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    if (scrollView.contentOffset.y < lastContentOffset && backButtonState == Hidden) {
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            CGRect f = self.backButton.frame;
+            f.origin.y += 50.0f;
+            self.backButton.frame = f;
+        } completion:nil];
+        backButtonState = Displayed;
+    }
+    
+    lastContentOffset = scrollView.contentOffset.y;
     
     self.coverBlur.blurRadius = self.collectionView.contentOffset.y / 7;
     
@@ -403,19 +425,6 @@ typedef enum  {
                 //[self.articleCoverImage setImage:coverBlurredImage];
             });
         });
-    }
-    
-    
-    
-    if (scrollView.contentOffset.y <= 150.0f) {
-        if (backButtonState == Hidden) {
-            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                CGRect f = self.backButton.frame;
-                f.origin.y += 50.0f;
-                self.backButton.frame = f;
-            } completion:nil];
-            backButtonState = Displayed;
-        }
     }
     
     for (GenericBlockCell* listener in self.scrollListeners) {

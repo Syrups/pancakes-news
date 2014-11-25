@@ -134,7 +134,7 @@
         self.titleBanner.frame = f;
         self.imageMask.alpha = 0;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.15f delay:0.2f options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGRect f = self.titleLabel.frame;
             f.origin.y += 65.0f;
             self.titleLabel.frame = f;
@@ -155,7 +155,7 @@
             self.imageMask.frame = f;
         } completion:^(BOOL finished) {
             [self.coverImage bounce];
-            [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.contentView.alpha = 1.0f;
                 
                 CGRect f = self.titleLabel.frame;
