@@ -23,7 +23,7 @@
     [self addSubview:cover];
     
     FXBlurView* blur = [[FXBlurView alloc] initWithFrame:cover.frame];
-    [blur setBlurRadius:10.0f];
+    [blur setBlurRadius:8.0f];
     [self addSubview:blur];
     
     offsetY += 130.0f;

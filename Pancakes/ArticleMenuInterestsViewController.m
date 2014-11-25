@@ -40,9 +40,10 @@
 
 - (void) fetchInterests {
     
-    /*[[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:themesUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError* err = nil;
-        self.data = [ThemeInterest arrayOfModelsFromData:data error:&err];
+    [PKRestClient getAllThemesAndComplete:^(id json, JSONModelError *err) {
+        NSLog(@"%@", json);
+        
+        self.data = [ThemeInterest arrayOfModelsFromDictionaries:json error:&err];
         
         if (err != nil) {
             NSLog(@"%@", err);
@@ -53,7 +54,7 @@
         
         for (ThemeInterest* theme in self.data) {
             for (SubThemeInterest* subtheme in theme.subthemes) {
-                // avoid doublons
+                //avoid doublons
                 if ([alreadyRegistered indexOfObject:subtheme._id] == NSNotFound) {
                     subtheme.color = theme.color;
                     subtheme.image = theme.coverImage;
@@ -63,7 +64,7 @@
             }
         }
         
-        NSString* subthemesUrl = [kApiRootUrl stringByAppendingString:[NSString stringWithFormat:@"/articles/%@/subthemes", self.article._id]];
+        NSString* subthemesUrl = [PKRestClient apiUrlWithRoute:[NSString stringWithFormat:@"/articles/%@/subthemes", self.article._id]];
         [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:subthemesUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSError* err = nil;
             self.article.subthemes = [SubThemeInterest arrayOfModelsFromData:data error:&err].copy;
@@ -73,8 +74,7 @@
                 [self.tableView reloadData];
             });
         }] resume];
-        
-    }] resume];*/
+    }];
 }
 
 #pragma mark - UITableViewDataSource

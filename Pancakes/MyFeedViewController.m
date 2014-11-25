@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
     [self fetchFeed];
-    [self.view bringSubviewToFront:self.feedTableView];
+//    [self.view bringSubviewToFront:self.feedTableView];
     
     self.feedTableView.layoutMargins = UIEdgeInsetsZero;
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
@@ -43,6 +43,9 @@
         CGRect f = self.feedTableView.frame;
         f.origin.x = - self.view.frame.size.width/2;
         self.feedTableView.frame = f;
+        f = self.articleExcerpt.frame;
+        f.origin.y += 200;
+        self.articleExcerpt.frame = f;
         
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = parent.menuTopBar.frame;
@@ -55,6 +58,9 @@
             f.origin.x = 0.0f;
             self.feedTableView.frame = f;
             self.readButton.alpha = 1;
+            f = self.articleExcerpt.frame;
+            f.origin.y -= 200;
+            self.articleExcerpt.frame = f;
         } completion:nil];
     }
 }
@@ -114,7 +120,7 @@
         [self.feedTableView setFrame:f];
         f = self.articleExcerpt.frame;
         f.origin.y = self.view.frame.size.height;
-        self.articleExcerpt.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
+//        self.articleExcerpt.transform = CGAffineTransformMakeScale(1.3f, 1.3f);
         [self.articleExcerpt setFrame:f];
         f = parent.menuTopBar.frame;
         f.origin.x -= self.view.frame.size.width/2;
@@ -221,8 +227,14 @@
     
     UIView* overlay = [cell.contentView viewWithTag:5];
     UIView* check = [overlay viewWithTag:50];
-    check.transform = CGAffineTransformMakeScale(4.0f, 4.0f);
     
+    // don't allow touching again if animation not performed
+    if (check.transform.a > 1.0f) {
+        return;
+    }
+    
+    check.transform = CGAffineTransformMakeScale(4.0f, 4.0f);
+    check.alpha = 1;
     
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.05f, 1.05f);

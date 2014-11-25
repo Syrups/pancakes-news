@@ -60,8 +60,8 @@
                                         <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tgY-0T-9ng" id="grM-rT-7XC">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rC-EF-tNR">
-                                                    <rect key="frame" x="0.0" y="-1" width="95" height="111"/>
+                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5rC-EF-tNR">
+                                                    <rect key="frame" x="0.0" y="-1" width="95" height="110"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="95" id="sbq-w0-UXx"/>
                                                     </constraints>
@@ -523,7 +523,7 @@
                                 <rect key="frame" x="507" y="20" width="48" height="48"/>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEr-ms-3dg">
-                                <rect key="frame" x="523" y="35" width="16" height="16"/>
+                                <rect key="frame" x="507" y="20" width="48" height="48"/>
                                 <state key="normal" image="article-more-plus">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -532,10 +532,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRW-gZ-Lrg">
-                                <rect key="frame" x="20" y="40" width="9" height="15"/>
+                                <rect key="frame" x="5" y="10" width="36" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="pVx-O7-hC6"/>
-                                    <constraint firstAttribute="width" constant="9" id="qgk-dr-kIa"/>
+                                    <constraint firstAttribute="height" constant="36" id="pVx-O7-hC6"/>
+                                    <constraint firstAttribute="width" constant="36" id="qgk-dr-kIa"/>
                                 </constraints>
                                 <state key="normal" image="article-back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -550,12 +550,12 @@
                             <constraint firstAttribute="height" secondItem="0Ws-Kg-Hbu" secondAttribute="height" id="0I3-EL-4mc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="n4u-hu-pZ4" secondAttribute="trailing" constant="-16" id="6Xh-bQ-sDd"/>
                             <constraint firstAttribute="width" secondItem="0Ws-Kg-Hbu" secondAttribute="width" id="J3E-ph-NrP"/>
-                            <constraint firstItem="bRW-gZ-Lrg" firstAttribute="top" secondItem="UID-BW-YLR" secondAttribute="bottom" constant="20" id="L2o-8O-amd"/>
                             <constraint firstItem="0Ws-Kg-Hbu" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-16" id="NNS-eU-BUe"/>
-                            <constraint firstItem="bRW-gZ-Lrg" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="4" id="Os2-aI-BjS"/>
                             <constraint firstItem="n4u-hu-pZ4" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-16" id="dz4-PB-cWf"/>
                             <constraint firstItem="n4u-hu-pZ4" firstAttribute="top" secondItem="UID-BW-YLR" secondAttribute="bottom" constant="-20" id="frz-fZ-6ZN"/>
                             <constraint firstItem="0Ws-Kg-Hbu" firstAttribute="top" secondItem="UID-BW-YLR" secondAttribute="bottom" constant="-20" id="nQ2-6E-ebI"/>
+                            <constraint firstItem="bRW-gZ-Lrg" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-11" id="nZ8-LE-OnP"/>
+                            <constraint firstItem="7FO-GD-eTy" firstAttribute="top" secondItem="bRW-gZ-Lrg" secondAttribute="bottom" constant="274" id="t3v-ge-SEZ"/>
                             <constraint firstItem="7FO-GD-eTy" firstAttribute="top" secondItem="n4u-hu-pZ4" secondAttribute="bottom" id="yk4-ep-x89"/>
                         </constraints>
                     </view>
@@ -644,6 +644,12 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="288" height="320"/>
+                    <connections>
+                        <outletCollection property="items" destination="rkV-KV-m3j" id="C1z-OS-yj7"/>
+                        <outletCollection property="items" destination="Yye-J9-sNH" id="1AZ-cN-Eic"/>
+                        <outletCollection property="items" destination="STo-ED-1tP" id="o0G-Pd-Vpf"/>
+                        <outletCollection property="items" destination="85K-0G-11f" id="zLz-Ff-Vob"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SBL-fa-pR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -830,7 +836,7 @@
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C8470003-B7FF-4DFE-BD09-6DDB0A86F2AB" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
+                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5D9DAB77-2475-4FF0-B738-A0AA86298742" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
                                                     <rect key="frame" x="96" y="41" width="24" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="frl-TR-xTE"/>
@@ -1057,7 +1063,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C8470003-B7FF-4DFE-BD09-6DDB0A86F2AB" width="42" height="7">
+        <image name="5D9DAB77-2475-4FF0-B738-A0AA86298742" width="42" height="7">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1147,7 +1153,7 @@ EvES+BMAEw0TEhMUExYTGxMjEyYTKxMzEzYTSBNLE1AAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAA
 AAATUg
 </mutableData>
         </image>
-        <image name="article-back" width="18" height="33"/>
+        <image name="article-back" width="75" height="75"/>
         <image name="article-menu-bg" width="225" height="287"/>
         <image name="article-menu-close" width="48" height="48"/>
         <image name="article-menu-comment" width="47" height="47"/>
@@ -1159,7 +1165,7 @@ AAATUg
         <image name="article-menu-share" width="47" height="47"/>
         <image name="article-menu-share-on" width="47" height="47"/>
         <image name="article-more-bg" width="48" height="48"/>
-        <image name="article-more-plus" width="16" height="16"/>
+        <image name="article-more-plus" width="48" height="48"/>
         <image name="feed-topbar-border" width="286" height="1"/>
         <image name="glenn" width="591" height="640"/>
         <image name="gouigoui" width="42" height="7"/>

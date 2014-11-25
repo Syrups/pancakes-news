@@ -138,10 +138,12 @@ typedef enum  {
     [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.menuViewController.view setFrame:CGRectMake(self.view.frame.size.width/2, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [self.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
-        } completion:nil];
     }];
+    
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.menuDetailViewController.view setFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height)];
+    } completion:nil];
+
 }
 
 #pragma mark - Helpers
@@ -176,12 +178,12 @@ typedef enum  {
             f.origin.y = 15.0f;
             self.moreButtonBackground.frame = f;
             self.moreButtonBackground.alpha = 1.0f;
-            self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI );
+            self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI);
         } completion:NULL];
         
         [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             CGRect f = self.moreButton.frame;
-            f.origin.y = 30.0f;
+            f.origin.y = 15.0f;
             self.moreButton.frame = f;
             self.moreButton.alpha = 1.0f;
         } completion:NULL];
@@ -240,7 +242,7 @@ typedef enum  {
     }
     
     // generic block of content
-    return CGSizeMake(w, block.paragraphs.count * 150 + block.children.count  * 200);
+    return CGSizeMake(w, block.paragraphs.count * 100 + block.children.count  * 200);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -308,7 +310,7 @@ typedef enum  {
         
         [hiddenBlocks removeObject:block];
         [cell openWithAnimation];
-        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y + 8.0f) animated:YES];
+        [self.collectionView setContentOffset:CGPointMake(0.0f, cell.frame.origin.y - 1) animated:YES];
         
     } completion:^(BOOL finished) {
         

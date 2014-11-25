@@ -21,6 +21,8 @@
     self = [super initWithFrame:frame];
 //    self.backgroundColor = [UIColor whiteColor];
     
+    self.opened = false;
+    
     return self;
 }
 
@@ -49,7 +51,7 @@
     
     FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
     imageMask.blurRadius = 8.0f;
-    [self addSubview:imageMask];
+//    [self addSubview:imageMask];
     
     self.imageMask = imageMask;
      
@@ -183,8 +185,15 @@
 }
 
 - (void)closeWithAnimation {
-    self.opened = false;
-    self.layer.borderWidth = 0.0f;
+//    self.opened = false;
+    
+    [self.titleLabel setFrame:CGRectMake(20.0f, 5.0f, self.frame.size.width - 110.0f, 50.0f)];
+    [self.revealButton setFrame:CGRectMake(self.frame.size.width - 62.0f, 5.0f, 50, 50)];
+    [self.closeButton setFrame:CGRectMake(self.frame.size.width - 56, 20.0f, 40, 40)];
+    self.revealButton.alpha = 1;
+    self.revealButton.transform = CGAffineTransformMakeRotation(0);
+    [self.storylineOpen setFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
+    self.closeButton.alpha = 0;
 }
 
 #pragma mark - Scroll view listener

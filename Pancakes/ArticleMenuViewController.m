@@ -39,7 +39,7 @@
     
     flag_arc_loaded = false;
     
-    angles = @[@-45, @-20, @5, @30];
+    angles = @[@245, @220, @195, @170];
     
     self.detailViewControllers = @{
         @"10": [self.storyboard instantiateViewControllerWithIdentifier:@"ArticleMenuInterestsView"],
@@ -51,6 +51,10 @@
 
 - (void)viewDidLayoutSubviews {
     [self drawStyleArc];
+    
+    for (int i = 0; i < angles.count; i++) {
+        [self drawAnimationArcForButton:[self.items objectAtIndex:i] withEndAngleAtIndex:i];
+    }
 }
 
 - (CGMutablePathRef)buildArcBaseWithEndAngle : (float)angle{
@@ -86,7 +90,7 @@
     gradientLayer.frame = drawArcView.layer.bounds; //CGRectMake(ARC_CENTER_X,0,arcRadius,self.view.frame.size.height);
     gradientLayer.colors = @[(__bridge id)[UIColor whiteColor].CGColor,(__bridge id)[UIColor clearColor].CGColor ];
     gradientLayer.startPoint = CGPointMake(0.3,0.5);
-    gradientLayer.endPoint = CGPointMake(1.5,0.5);
+    gradientLayer.endPoint = CGPointMake(0.8,0.5);
     [drawArcView.layer addSublayer:gradientLayer];
     gradientLayer.mask = showArcLayer;
     
@@ -105,6 +109,37 @@
     CGPathRelease(arcPath);
     flag_arc_loaded = true;
 }
+
+- (void) drawAnimationArcForButton:(UIButton*)button withEndAngleAtIndex:(int) index {
+    
+    float  angle = [[angles objectAtIndex:index] floatValue];
+    arcStart = CGPointMake(self.view.bounds.size.width, self.view.bounds.size.height+30);
+    arcCenter = CGPointMake(self.view.bounds.size.width - 25.0f, 0.7 * self.view.bounds.size.height);
+    arcRadius =  self.view.frame.size.width * 0.7;
+    
+    CGMutablePathRef arcPath = CGPathCreateMutable();
+    CGPathMoveToPoint(arcPath, NULL, arcStart.x, arcStart.y);
+    CGPathAddArc(arcPath, NULL, arcCenter.x, arcCenter.y, arcRadius, DEGREES_TO_RADIANS(80), DEGREES_TO_RADIANS(angle), NO);
+    
+    
+    // Animation
+    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pathAnimation.duration = 0.5f;
+    pathAnimation.path = arcPath;
+    pathAnimation.removedOnCompletion = NO;
+    pathAnimation.fillMode = kCAFillModeForwards;
+    CGPathRelease(arcPath);
+    
+    // Add the animation and reset the state so we can run again.
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+    }];
+    [button.layer addAnimation:pathAnimation forKey:@"arc"];
+    [CATransaction commit];
+}
+
 
 //- (void) layoutButtonAtinddex : (int) index {
 //    float  angle = [[angles objectAtIndex:index] floatValue];

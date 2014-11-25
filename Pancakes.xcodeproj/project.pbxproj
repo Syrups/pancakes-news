@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25D738D955411A703F52C406 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EC56249BB21E39D5D93BB /* libPods.a */; };
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
 		7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7352143A1A23688B00AFE840 /* PKRestClient.m */; };
@@ -233,7 +232,6 @@
 				B3A8B63219FBF9D200D52EB6 /* MapKit.framework in Frameworks */,
 				B3A8B63019FBF9CB00D52EB6 /* Accelerate.framework in Frameworks */,
 				D801CAA315D503C752005C10 /* libPods-Pancakes.a in Frameworks */,
-				25D738D955411A703F52C406 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,6 +898,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -935,6 +934,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -950,7 +950,10 @@
 				INFOPLIST_FILE = Pancakes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/**";
+				LIBRARY_SEARCH_PATHS = (
+					"${SRCROOT}/**",
+					"$(PROJECT_DIR)/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -964,7 +967,10 @@
 				INFOPLIST_FILE = Pancakes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/**";
+				LIBRARY_SEARCH_PATHS = (
+					"${SRCROOT}/**",
+					"$(PROJECT_DIR)/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
