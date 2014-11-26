@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface MyProfileViewController : UIViewController
+@interface MyProfileViewController : UIViewController  <FBLoginViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *synchroTable;
-@property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePicture;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+- (IBAction)loginButtonTouched:(id)sender;
 @end

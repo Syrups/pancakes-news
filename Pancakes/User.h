@@ -16,7 +16,10 @@
 
 //@property (strong, nonatomic) NSString* username;
 @property (strong, nonatomic) NSString<Optional>* _id;
+@property (strong, nonatomic) NSString<Optional>* facebookId;
 @property (strong, nonatomic) NSString* phantomId;
 @property (strong, nonatomic) NSMutableArray<Optional>* interests;
+
+
 @end
 
