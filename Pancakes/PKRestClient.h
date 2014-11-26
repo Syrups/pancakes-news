@@ -10,7 +10,7 @@
 #import "JSONModel/JSONHTTPClient.h"
 
 #define kApiRootUrl @"http://localhost:5000/api"
-#define kMediaRootUrl @"http://192.168.2.2:5000/media"
+#define kMediaRootUrl @"http://localhost:5000/media" //http://192.168.2.2
 
 
 @interface PKRestClient : NSObject
@@ -25,4 +25,6 @@
 
 
 + (NSString *) apiUrlWithRoute : (NSString *)route;
++ (NSString *) mediaUrl : (NSString *)mediaName;
++ (NSString *) mediaUrl : (NSString *)mediaName withRoute : (NSString *)route;
 @end

@@ -49,4 +49,12 @@ NSString * const articles = kApiRootUrl @"/articles";
     return[kApiRootUrl stringByAppendingString:route];
 }
 
++ (NSString *) mediaUrl : (NSString *)mediaName{
+    return[kMediaRootUrl stringByAppendingString:[NSString stringWithFormat:@"/%@", mediaName]];
+}
+
++ (NSString *) mediaUrl : (NSString *)mediaName withRoute : (NSString *)route{
+    return[kMediaRootUrl stringByAppendingString:[NSString stringWithFormat:@"/%@/%@",route, mediaName]];
+}
+
 @end
