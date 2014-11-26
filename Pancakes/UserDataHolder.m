@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "Configuration.h"
 #import "PKRestClient.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 NSString * const PUSER = @"PancakesUser";
 
@@ -101,6 +102,24 @@ NSString * const PUSER = @"PancakesUser";
         NSLog(@"user loaded from network %@", [self.user toJSONString]);
     }];
     
+}
+
+- (void) loadFBUser{
+    [[FBRequest requestForMe] startWithCompletionHandler:
+     ^(FBRequestConnection *connection,
+       NSDictionary<FBGraphUser> *user,
+       NSError *error) {
+         if (!error) {
+             self.fbUSer = user;
+         }
+     }];
+}
+
+- (void) loggoutFBUser{
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession close];
+    [FBSession setActiveSession:nil];
+    self.fbUSer = nil;
 }
 
 @end

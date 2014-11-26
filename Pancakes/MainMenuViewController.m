@@ -78,12 +78,8 @@ PKMenuItemCircle *currentItem;
     }
     
      currentItem = [indicators objectAtIndex:0];
-    
-  
-  
+      
     //[self.view.window addSubview:self.blurView];
-    
-   
 }
 
 
@@ -240,10 +236,6 @@ PKMenuItemCircle *currentItem;
         [currentItem setSelected:YES completion:nil];
     }];
 }
-
-
-
-
 
 - (void)animateClosing {
     

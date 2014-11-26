@@ -8,14 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface UserDataHolder : NSObject
 
 + (UserDataHolder *)sharedInstance;
 
 @property (strong) User *user;
+@property (strong) NSDictionary<FBGraphUser> *fbUSer;
 
--(void) saveData;
--(void) loadData;
+- (void) saveData;
+- (void) loadData;
+- (void) loadFBUser;
+- (void) loggoutFBUser;
 
 @end
