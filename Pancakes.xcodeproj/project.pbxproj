@@ -75,6 +75,8 @@
 		B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695D1A03D35D00150BF7 /* Heuristica-Italic.otf */; };
 		B3EF69621A03D35D00150BF7 /* Heuristica-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695E1A03D35D00150BF7 /* Heuristica-Regular.otf */; };
 		B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */; };
+		B3F0BD071A2613DB00615279 /* AudioEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F0BD061A2613DB00615279 /* AudioEmbeddedBlock.m */; };
+		B3F0BD091A261BD200615279 /* test_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3F0BD081A261BD200615279 /* test_audio.mp3 */; };
 		B3F82C351A0387CE0038D763 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C341A0387CE0038D763 /* CoreMedia.framework */; };
 		B3F82C371A0387D30038D763 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C361A0387D30038D763 /* CoreVideo.framework */; };
 		B3F82C391A0387D70038D763 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C381A0387D70038D763 /* OpenGLES.framework */; };
@@ -213,6 +215,9 @@
 		B3EF695E1A03D35D00150BF7 /* Heuristica-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heuristica-Regular.otf"; sourceTree = "<group>"; };
 		B3F0BD021A24F3F100615279 /* ArticleMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuItem.h; sourceTree = "<group>"; };
 		B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuItem.m; sourceTree = "<group>"; };
+		B3F0BD051A2613DB00615279 /* AudioEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEmbeddedBlock.h; sourceTree = "<group>"; };
+		B3F0BD061A2613DB00615279 /* AudioEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioEmbeddedBlock.m; sourceTree = "<group>"; };
+		B3F0BD081A261BD200615279 /* test_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test_audio.mp3; sourceTree = "<group>"; };
 		B3F82C341A0387CE0038D763 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B3F82C361A0387D30038D763 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B3F82C381A0387D70038D763 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -393,6 +398,8 @@
 				B33CCBC71A0905CC007766E4 /* MapEmbeddedBlock.m */,
 				B39C556B1A160407005550CC /* DataEmbeddedBlock.h */,
 				B39C556C1A160407005550CC /* DataEmbeddedBlock.m */,
+				B3F0BD051A2613DB00615279 /* AudioEmbeddedBlock.h */,
+				B3F0BD061A2613DB00615279 /* AudioEmbeddedBlock.m */,
 			);
 			name = EmbeddedBlocks;
 			sourceTree = "<group>";
@@ -473,6 +480,7 @@
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
+				B3F0BD081A261BD200615279 /* test_audio.mp3 */,
 				738510891A163CF60094056D /* Localizable.strings */,
 				73B33A6919F13D6000BFB546 /* PodFile */,
 				73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */,
@@ -714,6 +722,7 @@
 				B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				739228541A0D14B3005F02E9 /* MyInterest.json in Resources */,
+				B3F0BD091A261BD200615279 /* test_audio.mp3 in Resources */,
 				73DC79C51A0C28F700093265 /* glenn_test.jpg in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
@@ -787,6 +796,7 @@
 				B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */,
 				B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */,
 				7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */,
+				B3F0BD071A2613DB00615279 /* AudioEmbeddedBlock.m in Sources */,
 				73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */,
 				73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */,
 				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,

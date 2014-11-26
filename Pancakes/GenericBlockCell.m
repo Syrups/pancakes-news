@@ -11,6 +11,7 @@
 #import "Configuration.h"
 #import "MapEmbeddedBlock.h"
 #import "DataEmbeddedBlock.h"
+#import "AudioEmbeddedBlock.h"
 #import "DefinitionEmbeddedBlock.h"
 #import "ArticleParagraphLayoutManager.h"
 #import "Utils.h"
@@ -64,9 +65,13 @@
         blockView = (MapEmbeddedBlock*)[[MapEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else if ([blockType isEqualToString:@"data"]) {
         blockView = (DataEmbeddedBlock*)[[DataEmbeddedBlock alloc] initWithFrame:blockFrame];
+    } else if ([blockType isEqualToString:@"audio"]) {
+        blockView = (AudioEmbeddedBlock*)[[AudioEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else {
         blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:blockFrame];
     }
+    
+    blockView.article = self.articleViewController.displayedArticle;
     
     return blockView;
 }

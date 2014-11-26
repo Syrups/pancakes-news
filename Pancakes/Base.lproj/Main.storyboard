@@ -717,11 +717,15 @@
                                 <color key="backgroundColor" red="0.039215686270000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05i-RB-fHO">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05i-RB-fHO">
                                 <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BM8-hR-MOR">
-                                        <rect key="frame" x="13" y="11" width="16" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BM8-hR-MOR">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="43" id="RGR-iU-2Wj"/>
+                                            <constraint firstAttribute="width" constant="43" id="ZIb-n3-dZv"/>
+                                        </constraints>
                                         <state key="normal" image="menu-icon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -731,6 +735,22 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="top" secondItem="05i-RB-fHO" secondAttribute="top" id="0Ph-hy-FxF"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="centerX" secondItem="05i-RB-fHO" secondAttribute="centerX" id="1oD-a3-J7E"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="leading" secondItem="05i-RB-fHO" secondAttribute="leading" id="AiH-1a-6EJ"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="leading" secondItem="05i-RB-fHO" secondAttribute="leading" id="OQ8-M8-uAp"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="leading" secondItem="05i-RB-fHO" secondAttribute="leading" id="R9H-tM-EKM"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="top" secondItem="05i-RB-fHO" secondAttribute="top" id="VVj-WB-dNw"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="top" secondItem="05i-RB-fHO" secondAttribute="top" id="Zh3-6s-DzX"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="top" secondItem="05i-RB-fHO" secondAttribute="top" id="a4G-CC-BqE"/>
+                                    <constraint firstAttribute="trailing" secondItem="BM8-hR-MOR" secondAttribute="trailing" id="kg6-6T-DuD"/>
+                                    <constraint firstAttribute="trailing" secondItem="BM8-hR-MOR" secondAttribute="trailing" id="lcA-hj-Ql8"/>
+                                    <constraint firstAttribute="bottom" secondItem="BM8-hR-MOR" secondAttribute="bottom" id="seM-wY-WbZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="BM8-hR-MOR" secondAttribute="bottom" id="seO-DO-0N7"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="leading" secondItem="05i-RB-fHO" secondAttribute="leading" id="t2U-p3-hE5"/>
+                                    <constraint firstItem="BM8-hR-MOR" firstAttribute="centerY" secondItem="05i-RB-fHO" secondAttribute="centerY" id="uD7-EQ-CLJ"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -828,7 +848,7 @@
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="08E5F19F-9F55-4A9A-BF08-0E50BC16A39A" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
+                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="555A8DF3-543B-48BB-8232-A8A46C7530CE" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
                                                     <rect key="frame" x="96" y="41" width="24" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="frl-TR-xTE"/>
@@ -1055,7 +1075,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="08E5F19F-9F55-4A9A-BF08-0E50BC16A39A" width="42" height="7">
+        <image name="555A8DF3-543B-48BB-8232-A8A46C7530CE" width="42" height="7">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
