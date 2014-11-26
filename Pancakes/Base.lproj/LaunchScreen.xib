@@ -45,8 +45,10 @@
             <constraints>
                 <constraint firstItem="HSJ-Nf-UML" firstAttribute="leading" secondItem="eQw-Ji-qq0" secondAttribute="leading" id="CRd-MS-we8"/>
                 <constraint firstItem="eQw-Ji-qq0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="120" id="KKL-Us-gsz"/>
+                <constraint firstAttribute="bottom" secondItem="Xmp-fP-JVd" secondAttribute="bottom" id="Vvp-sV-JLz"/>
                 <constraint firstItem="Xmp-fP-JVd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WV2-Ep-pHe"/>
                 <constraint firstItem="eQw-Ji-qq0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="206" id="bO0-fQ-vmI"/>
+                <constraint firstAttribute="trailing" secondItem="Xmp-fP-JVd" secondAttribute="trailing" id="kPN-St-djX"/>
                 <constraint firstItem="eQw-Ji-qq0" firstAttribute="trailing" secondItem="HSJ-Nf-UML" secondAttribute="trailing" id="lch-uP-kbF"/>
                 <constraint firstItem="Xmp-fP-JVd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oES-IE-3aA"/>
                 <constraint firstItem="HSJ-Nf-UML" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="155" id="vjm-Ds-5hO"/>

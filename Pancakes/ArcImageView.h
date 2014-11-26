@@ -12,5 +12,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame fullSize:(BOOL)full;
 - (void)bounce;
+- (void)reset;
 
 @end

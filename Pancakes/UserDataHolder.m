@@ -39,7 +39,7 @@ NSString * const PUSER = @"PancakesUser";
 
 -(void)saveData
 {
-    NSString *userAsJson = [ self.user toJSONString];
+    NSString *userAsJson = [self.user toJSONString];
     [[NSUserDefaults standardUserDefaults]setObject:userAsJson forKey:PUSER];
     
     NSLog(@"saving %@", userAsJson);

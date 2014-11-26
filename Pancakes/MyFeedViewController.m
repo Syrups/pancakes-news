@@ -35,6 +35,25 @@
     self.constraintY.constant = kMenuBarHeigth;
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent{
+    
+    CGRect f1 = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width/2, self.view.frame.size.height);
+    CGRect f2 = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
+    CGRect f3 = CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height);
+    CGRect f4 = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    
+//    self.feedTableView.frame = f1;
+//    self.selectedArticleCover.frame = f2;
+    
+//    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//        self.feedTableView.frame = f3;
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
+//            self.selectedArticleCover.frame = f4;
+//        } completion:nil];
+//    }];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
     
@@ -184,6 +203,7 @@
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
     [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
+    feedCellThumb.layer.masksToBounds = YES;
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
     themeTitle.textColor = [Utils colorWithHexString:article.color];

@@ -49,12 +49,18 @@
 //    imageMask.backgroundColor = kArticleViewBlockBackground;
 //    [self addSubview:imageMask];
     
-    FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
-    imageMask.blurRadius = 8.0f;
+//    FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
+//    imageMask.blurRadius = 8.0f;
 //    [self addSubview:imageMask];
     
-    self.imageMask = imageMask;
-     
+    CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    [gaussianBlurFilter setDefaults];
+    [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[coverImage.image CGImage]] forKey:kCIInputImageKey];
+    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:20.0f] forKey:kCIInputRadiusKey];
+    [coverImage setImage:[UIImage imageWithCIImage:[gaussianBlurFilter outputImage]]];
+    
+//    self.imageMask = imageMask;
+    
     UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 15.0f, self.frame.size.width + 2.0f, 50.0f)];
     titleBanner.backgroundColor = [UIColor whiteColor];
     titleBanner.layer.borderColor = kArticleViewSectionBannerBorderColor.CGColor;
@@ -194,6 +200,8 @@
     self.revealButton.transform = CGAffineTransformMakeRotation(0);
     [self.storylineOpen setFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
     self.closeButton.alpha = 0;
+    
+    [self.coverImage reset];
 }
 
 #pragma mark - Scroll view listener

@@ -15,8 +15,6 @@
 
     NSArray* subthemes = self.subthemes;
     
-    NSLog(@"%@", self.subthemes);
-    
     for (SubThemeInterest* s in subthemes) {
         if ([s respondsToSelector:@selector(_id)] && [subtheme._id isEqualToString:s._id]) {
             return YES;
