@@ -6,13 +6,9 @@
 //  Copyright (c) 2014 Gobelins. All rights reserved.
 //
 
-#import "GenericBlockCell.h"
 #import "Macros.h"
 #import "Configuration.h"
-#import "MapEmbeddedBlock.h"
-#import "DataEmbeddedBlock.h"
-#import "AudioEmbeddedBlock.h"
-#import "DefinitionEmbeddedBlock.h"
+#import "Blocks.h"
 #import "ArticleParagraphLayoutManager.h"
 #import "Utils.h"
 #import "LettrineParagraph.h"

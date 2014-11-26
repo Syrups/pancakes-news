@@ -9,6 +9,7 @@ target :Pancakes do
     pod 'SDWebImage'
     pod 'pop', '~> 1.0'
     pod 'FXBlurView'
+    pod 'Mapbox-iOS-SDK'
 end
 
 
