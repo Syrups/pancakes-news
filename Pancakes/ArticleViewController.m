@@ -29,6 +29,7 @@ typedef enum  {
     //UIImage *coverBlurredImage;
     BOOL titleCellAnimated;
     BackButtonState backButtonState;
+    CGFloat lastContentOffset;
 }
 
 - (void)viewDidLoad {
@@ -90,6 +91,10 @@ typedef enum  {
         
         [self.collectionView reloadData];
     }];
+    
+    UISwipeGestureRecognizer *oneFingerSwipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
+    [oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self view] addGestureRecognizer:oneFingerSwipeUp];
 }
 
 - (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {
@@ -131,7 +136,24 @@ typedef enum  {
 #pragma mark - Actions
 
 - (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:NO];
+    self.coverBlur.blurEnabled = NO;
+    self.coverBlur.blurRadius = 0;
+    [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [self.collectionView setFrame:CGRectMake(self.view.frame.size.width, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height)];
+        CGRect f = self.moreButtonBackground.frame;
+        f.origin.x = self.view.frame.size.width + 100;
+        self.moreButtonBackground.frame = f;
+        f = self.moreButton.frame;
+        f.origin.x = self.view.frame.size.width + 100;
+        self.moreButton.frame = f;
+        
+        f = self.backButton.frame;
+        f.origin.y = -100;
+        self.backButton.frame = f;
+    } completion:^(BOOL finished) {
+        
+        [self.navigationController popViewControllerAnimated:NO];
+    }];
 }
 
 - (IBAction)displayMenu:(id)sender {
@@ -234,7 +256,7 @@ typedef enum  {
     }
     
     if ([block.type.name isEqualToString:@"context"]) {
-        return CGSizeMake(w, block.paragraphs.count * 150 + 320.0f);
+        return CGSizeMake(w, block.paragraphs.count * 100 + 250.0f);
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
     } else if ([block.type.name isEqualToString:@"comments"]) {
@@ -280,8 +302,8 @@ typedef enum  {
         [cell loadWithBlock:block];
     }
     
-    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, (long)indexPath.row);
-    
+//    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, (long)indexPath.row);
+//    
     return cell;
 }
 
@@ -305,7 +327,7 @@ typedef enum  {
     
     SectionBlockCell* cell = (SectionBlockCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
     //        [self.collectionView.collectionViewLayout invalidateLayout];
-    NSLog(@"%f", cell.frame.origin.y);
+
     [self.collectionView performBatchUpdates:^{
         
         [hiddenBlocks removeObject:block];
@@ -357,7 +379,7 @@ typedef enum  {
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    NSLog(@"%f", scrollView.contentOffset.y);
+
     if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
         
         [self.collectionView setContentOffset:CGPointMake(0.0f, self.view.frame.size.height*1.32) animated:YES];
@@ -383,6 +405,16 @@ typedef enum  {
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    if (scrollView.contentOffset.y < lastContentOffset && backButtonState == Hidden) {
+        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            CGRect f = self.backButton.frame;
+            f.origin.y += 50.0f;
+            self.backButton.frame = f;
+        } completion:nil];
+        backButtonState = Displayed;
+    }
+    
+    lastContentOffset = scrollView.contentOffset.y;
     
     self.coverBlur.blurRadius = self.collectionView.contentOffset.y / 7;
     
@@ -405,21 +437,8 @@ typedef enum  {
         });
     }
     
-    
-    
-    if (scrollView.contentOffset.y <= 150.0f) {
-        if (backButtonState == Hidden) {
-            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                CGRect f = self.backButton.frame;
-                f.origin.y += 50.0f;
-                self.backButton.frame = f;
-            } completion:nil];
-            backButtonState = Displayed;
-        }
-    }
-    
     for (GenericBlockCell* listener in self.scrollListeners) {
-        NSLog(@"SCROOOL");
+
             [listener scrollViewDidScroll:scrollView];
         
     }

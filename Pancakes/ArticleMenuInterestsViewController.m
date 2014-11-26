@@ -13,7 +13,7 @@
 #import "ThemeInterest.h"
 #import "SubThemeInterest.h"
 #import "Utils.h"
-
+#import "UserDataHolder.h"
 #import "PKRestClient.h"
 #import "PKCacheManager.h"
 
@@ -31,7 +31,7 @@
     
     [self fetchInterests];
     
-    userInterests = [PKCacheManager loadInterestsFromCache];
+    userInterests = [[[UserDataHolder sharedInstance] user] interests];
     
     ArticleViewController* articleVc = (ArticleViewController*)self.parentViewController.parentViewController;
     
@@ -41,7 +41,6 @@
 - (void) fetchInterests {
     
     [PKRestClient getAllThemesAndComplete:^(id json, JSONModelError *err) {
-        NSLog(@"%@", json);
         
         self.data = [ThemeInterest arrayOfModelsFromDictionaries:json error:&err];
         
@@ -118,9 +117,8 @@
     check.alpha = 0.0f;
     [cell.contentView addSubview:check];
     
-    NSLog(@"%@", wave);
-    
-    if ([userInterests indexOfObject:interest] != NSNotFound) {
+    if ([userInterests indexOfObject:interest._id] != NSNotFound) {
+        check.alpha = 1;
         cell.contentView.backgroundColor = RgbColor(8, 8, 8);
         themeTitle.textColor = [UIColor whiteColor];
     }
@@ -132,15 +130,15 @@
     
     SubThemeInterest* interest = [self.subthemes objectAtIndex:indexPath.row];
     
-    if (![self isInUserInterests:interest]) { // toggle add
-        [userInterests addObject:interest];
+    if ([userInterests indexOfObject:interest._id] == NSNotFound) { // toggle add
+        [userInterests addObject:interest._id];
+        [[UserDataHolder sharedInstance].user.interests addObject:interest._id];
         [self toggleAddCell:[self.tableView cellForRowAtIndexPath:indexPath]];
     } else { // toggle remove
         [self toggleRemove:[self.tableView cellForRowAtIndexPath:indexPath]];
+        [userInterests removeObject:interest._id];
+        [[UserDataHolder sharedInstance].user.interests removeObject:interest._id];
     }
-
-    // refresh interests in cache
-    [PKCacheManager cacheIntrests:userInterests];
 }
 
 - (void)toggleAddCell:(UITableViewCell*)cell {
@@ -171,23 +169,6 @@
         check.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
     } completion:nil];
 }
-
-- (BOOL)isInUserInterests:(SubThemeInterest*)interest {
-    for (ThemeInterest* theme in userInterests) {
-        if (![theme respondsToSelector:@selector(subthemes)]) {
-            return NO;
-        }
-        
-        for (SubThemeInterest* subtheme in theme.subthemes) {
-            if ([interest._id isEqualToString:subtheme._id]) {
-                return YES;
-            }
-        }
-    }
-    
-    return NO;
-}
-
 
 //- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];

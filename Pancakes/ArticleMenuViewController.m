@@ -50,11 +50,14 @@
 }
 
 - (void)viewDidLayoutSubviews {
+    
+    
     [self drawStyleArc];
     
     for (int i = 0; i < angles.count; i++) {
         [self drawAnimationArcForButton:[self.items objectAtIndex:i] withEndAngleAtIndex:i];
     }
+    
 }
 
 - (CGMutablePathRef)buildArcBaseWithEndAngle : (float)angle{
@@ -107,7 +110,7 @@
     [self.view sendSubviewToBack:drawArcView];
     
     CGPathRelease(arcPath);
-    flag_arc_loaded = true;
+    
 }
 
 - (void) drawAnimationArcForButton:(UIButton*)button withEndAngleAtIndex:(int) index {
@@ -140,6 +143,34 @@
     [CATransaction commit];
 }
 
+- (void) drawCloseAnimationArcForButton:(UIButton*)button withEndAngleAtIndex:(int) index {
+    float angle = [[angles objectAtIndex:index] floatValue];
+    arcStart = button.frame.origin;
+    arcCenter = CGPointMake(self.view.bounds.size.width - 25.0f, 0.7 * self.view.bounds.size.height);
+    arcRadius =  self.view.frame.size.width * 0.7;
+    
+    CGMutablePathRef arcPath = CGPathCreateMutable();
+    CGPathMoveToPoint(arcPath, NULL, arcStart.x, arcStart.y);
+    CGPathAddArc(arcPath, NULL, arcCenter.x, arcCenter.y, arcRadius, DEGREES_TO_RADIANS(angle), DEGREES_TO_RADIANS(150), YES);
+    
+    
+    // Animation
+    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    pathAnimation.duration = 0.5f;
+    pathAnimation.path = arcPath;
+    pathAnimation.removedOnCompletion = NO;
+    pathAnimation.fillMode = kCAFillModeForwards;
+    CGPathRelease(arcPath);
+    
+    // Add the animation and reset the state so we can run again.
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+    }];
+    [button.layer addAnimation:pathAnimation forKey:@"arc"];
+    [CATransaction commit];
+}
 
 //- (void) layoutButtonAtinddex : (int) index {
 //    float  angle = [[angles objectAtIndex:index] floatValue];
@@ -219,7 +250,7 @@
         }
         
         previousDetailViewTag = sender.tag;
-        [parent.menuDetailViewController setViewControllers:@[destination] animated:NO];
+        [parent.menuDetailViewController setViewControllers:@[destination] animated:YES];
         [parent.view bringSubviewToFront:self.view];
     }
 }
@@ -227,7 +258,11 @@
 - (IBAction)closeMenu:(id)sender {
     ArticleViewController* parent = (ArticleViewController*)self.parentViewController;
     
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//    for (int i = 0; i < angles.count; i++) {
+//        [self drawCloseAnimationArcForButton:[self.items objectAtIndex:i] withEndAngleAtIndex:i];
+//    }
+    
+    [UIView animateWithDuration:0.3f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.view.frame;
         frame.origin.x = parent.view.frame.size.width;
         self.view.frame = frame;
@@ -235,6 +270,8 @@
         frame = parent.menuDetailViewController.view.frame;
         frame.origin.y = self.view.frame.size.height;
         parent.menuDetailViewController.view.frame = frame;
+        
+        
     } completion:nil];
 }
 

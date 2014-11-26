@@ -78,4 +78,22 @@
     CGPathRelease(path);
 }
 
+- (void)reset {
+    if (!isFullSize) return;
+    
+    CAShapeLayer* layer = [[CAShapeLayer alloc] init];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL, -1000, -120);
+    CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height, self.frame.size.width+1000, -120, 1400);
+    
+    CGPathAddLineToPoint(path, NULL, self.frame.size.width, 0);
+    CGPathAddLineToPoint(path, NULL, 0, 0);
+    layer.path = path;
+    CGPathRelease(path);
+    
+    self.layer.mask = layer;
+    self.layer.masksToBounds = YES;
+}
+
 @end

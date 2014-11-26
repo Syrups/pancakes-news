@@ -74,6 +74,7 @@
 		B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695B1A03D35D00150BF7 /* BreeRegular.otf */; };
 		B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695D1A03D35D00150BF7 /* Heuristica-Italic.otf */; };
 		B3EF69621A03D35D00150BF7 /* Heuristica-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695E1A03D35D00150BF7 /* Heuristica-Regular.otf */; };
+		B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */; };
 		B3F82C351A0387CE0038D763 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C341A0387CE0038D763 /* CoreMedia.framework */; };
 		B3F82C371A0387D30038D763 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C361A0387D30038D763 /* CoreVideo.framework */; };
 		B3F82C391A0387D70038D763 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C381A0387D70038D763 /* OpenGLES.framework */; };
@@ -210,6 +211,8 @@
 		B3EF695B1A03D35D00150BF7 /* BreeRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BreeRegular.otf; sourceTree = "<group>"; };
 		B3EF695D1A03D35D00150BF7 /* Heuristica-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heuristica-Italic.otf"; sourceTree = "<group>"; };
 		B3EF695E1A03D35D00150BF7 /* Heuristica-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heuristica-Regular.otf"; sourceTree = "<group>"; };
+		B3F0BD021A24F3F100615279 /* ArticleMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuItem.h; sourceTree = "<group>"; };
+		B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuItem.m; sourceTree = "<group>"; };
 		B3F82C341A0387CE0038D763 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B3F82C361A0387D30038D763 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B3F82C381A0387D70038D763 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -306,6 +309,8 @@
 				B385A39C1A23825B00585C29 /* ArcImageView.m */,
 				B37703FE1A249422006A66F4 /* BlockButton.h */,
 				B37703FF1A249422006A66F4 /* BlockButton.m */,
+				B3F0BD021A24F3F100615279 /* ArticleMenuItem.h */,
+				B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -799,6 +804,7 @@
 				B39C556A1A150AAA005550CC /* LettrineParagraph.m in Sources */,
 				B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */,
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
+				B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
 				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
