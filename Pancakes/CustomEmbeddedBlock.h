@@ -10,4 +10,6 @@
 
 @interface CustomEmbeddedBlock : DefinitionEmbeddedBlock
 
+@property (strong, nonatomic) UIWebView* webview;
+
 @end

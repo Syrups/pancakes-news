@@ -63,6 +63,8 @@
         blockView = (DataEmbeddedBlock*)[[DataEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else if ([blockType isEqualToString:@"audio"]) {
         blockView = (AudioEmbeddedBlock*)[[AudioEmbeddedBlock alloc] initWithFrame:blockFrame];
+    } else if ([blockType isEqualToString:@"custom"]) {
+        blockView = (CustomEmbeddedBlock*)[[CustomEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else {
         blockView = [[DefinitionEmbeddedBlock alloc] initWithFrame:blockFrame];
     }
@@ -325,7 +327,7 @@
     CGRect f = blockView.frame;
     f.size.height = blockView.block.paragraphs.count * 100.0f + 230.0f;
     blockView.frame = f;
-    if (blockView.class == [MapEmbeddedBlock class]) {
+    if (blockView.class == [MapEmbeddedBlock class] || blockView.class == [CustomEmbeddedBlock class]) {
         [blockView layoutWithBlock:blockView.block offsetY:0.0f];
     }
     [self.tableView endUpdates];
