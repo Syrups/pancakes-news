@@ -15,6 +15,7 @@
 #import "ArticleParagraphLayoutManager.h"
 #import "Utils.h"
 #import "LettrineParagraph.h"
+#import "BlockButton.h"
 
 @implementation GenericBlockCell {
     BOOL layouted;
@@ -47,7 +48,7 @@
     
     [self addSubview:self.tableView];
     
-    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 38.0f, 0.0f, 1.0f, self.frame.size.height)];
+    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 37.0f, 0.0f, 1.0f, self.frame.size.height)];
     storyline.backgroundColor = RgbColor(180, 180, 180);
     [self addSubview:storyline];
     
@@ -151,8 +152,7 @@
                 [blockIndexPaths setObject:blockView forKey:[NSIndexPath indexPathForRow:items.count+1 inSection:0]];
                 [items addObject:blockView];
                 
-                UIButton *blockButton = [[UIButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 67.0f, offsetY + 40.0f, 60, 60)];
-                [blockButton setImage:[self blockButtonImageForType:child.type] forState:UIControlStateNormal];
+                BlockButton *blockButton = [[BlockButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 62.0f, offsetY + 40.0f, 50, 50) blockType:child.type color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
                 [blockButton addTarget:self action:@selector(blockButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 blockButton.tag = [child.id integerValue];
                 
@@ -162,7 +162,7 @@
                 [self bringSubviewToFront:blockButton];
                 
                 // Storyline on side
-                UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 39, blockView.frame.origin.y, 3.0f, 0)];
+                UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 38, blockView.frame.origin.y, 3.0f, 0)];
                 storylineOpen.backgroundColor = kOrangeColor;
                 [self addSubview:storylineOpen];
                 
@@ -312,8 +312,8 @@
 #pragma mark - Helpers
 
 - (UIImage*)blockButtonImageForType:(BlockType*)type {
-//    return [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:type.name]];
-    return [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:@"map"]];
+    return [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:type.name]];
+//    return [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:@"map"]];
 
 }
 

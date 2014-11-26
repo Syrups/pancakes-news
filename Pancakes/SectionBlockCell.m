@@ -12,12 +12,16 @@
 #import "Utils.h"
 #import "UIImageView+WebCache.h"
 #import "ArcImageView.h"
+#import <FXBlurView/FXBlurView.h>
+#import "BlockButton.h"
 
 @implementation SectionBlockCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
 //    self.backgroundColor = [UIColor whiteColor];
+    
+    self.opened = false;
     
     return self;
 }
@@ -33,7 +37,7 @@
     mask.path = path;
     CGPathRelease(path);
     
-    ArcImageView *coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 8.0f, self.frame.size.width, 240.0f) fullSize:YES];
+    ArcImageView *coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 240.0f) fullSize:YES];
     coverImage.contentMode = UIViewContentModeScaleToFill;
     [coverImage sd_setImageWithURL:[NSURL URLWithString:block.image]];
 //    coverImage.layer.mask = mask;
@@ -41,9 +45,13 @@
     
     self.coverImage = coverImage;
     
-    UIView *imageMask = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 290.0f)];
-    imageMask.backgroundColor = kArticleViewBlockBackground;
-    [self addSubview:imageMask];
+//    UIView *imageMask = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 290.0f)];
+//    imageMask.backgroundColor = kArticleViewBlockBackground;
+//    [self addSubview:imageMask];
+    
+    FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
+    imageMask.blurRadius = 8.0f;
+//    [self addSubview:imageMask];
     
     self.imageMask = imageMask;
      
@@ -51,23 +59,30 @@
     titleBanner.backgroundColor = [UIColor whiteColor];
     titleBanner.layer.borderColor = kArticleViewSectionBannerBorderColor.CGColor;
     titleBanner.layer.borderWidth = 1.0f;
-    [self addSubview:titleBanner];
+//    [self addSubview:titleBanner];
     
     self.titleBanner = titleBanner;
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 15.0f, self.frame.size.width - 110.0f, 50.0f)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 5.0f, self.frame.size.width - 110.0f, 50.0f)];
     titleLabel.text = block.title;
     titleLabel.textAlignment = NSTextAlignmentRight;
     titleLabel.font = [UIFont fontWithName:kFontBreeBold size:24.0f];
-    titleLabel.textColor = [Utils colorWithHexString:[self.articleViewController.displayedArticle color]];
+//    titleLabel.textColor = [Utils colorWithHexString:[self.articleViewController.displayedArticle color]];
+    titleLabel.textColor = [UIColor whiteColor];
     NSLog(@"%@", self.articleViewController.displayedArticle.color);
     [self addSubview:titleLabel];
     
     self.titleLabel = titleLabel;
     
-    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 38.0f, 0.0f, 1.0f, self.frame.size.height)];
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = RgbColor(35, 36, 32).CGColor;
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(coverImage.frame), 1.0f);
+    [self.layer addSublayer:upperBorder];
+    
+    UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 37.0f, 0.0f, 1.0f, self.frame.size.height)];
     storyline.backgroundColor = RgbColor(180, 180, 180);
     [self addSubview:storyline];
+    
     
     UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
     storylineOpen.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
@@ -86,14 +101,14 @@
     
     self.closeButton = closeButton;
     
-    UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 67.0f, 10.0f, 60, 60)];
-    [button setImage:[UIImage imageNamed:@"article-block-button-map"] forState:UIControlStateNormal];
+    BlockButton* button = [[BlockButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 62.0f, 5.0f, 50, 50) blockType:block.type color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
     [button addTarget:self action:@selector(reveal:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self addSubview:button];
     
     self.revealButton = button;
     
-    [super layoutWithBlock:block offsetY:280.0f];
+    [super layoutWithBlock:block offsetY:200.0f];
     
     self.contentView.backgroundColor = [UIColor whiteColor];
 }
@@ -112,15 +127,16 @@
 }
 
 - (void)openWithAnimation {
-    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect f = self.titleBanner.frame;
         f.origin.y += f.size.height;
         f.size.height = 0.0f;
         self.titleBanner.frame = f;
+        self.imageMask.alpha = 0;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             CGRect f = self.titleLabel.frame;
-            f.origin.y += 60.0f;
+            f.origin.y += 65.0f;
             self.titleLabel.frame = f;
             self.titleLabel.textColor = [UIColor whiteColor];
             
@@ -139,7 +155,7 @@
             self.imageMask.frame = f;
         } completion:^(BOOL finished) {
             [self.coverImage bounce];
-            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.contentView.alpha = 1.0f;
                 
                 CGRect f = self.titleLabel.frame;
@@ -156,19 +172,28 @@
                 f.size.height = self.frame.size.height;
                 self.storylineOpen.frame = f;
                 
+                CALayer *lowerBorder = [CALayer layer];
+                lowerBorder.backgroundColor = RgbColor(183, 183, 183).CGColor;
+                lowerBorder.frame = CGRectMake(0, self.frame.size.height-1, CGRectGetWidth(self.frame), 1.0f);
+                [self.layer addSublayer:lowerBorder];
+                
             } completion:^(BOOL finished) {
                 self.opened = true;
             }];
         }];
     }];
-    
-    self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
-    self.layer.borderWidth = 1.0f;
 }
 
 - (void)closeWithAnimation {
-    self.opened = false;
-    self.layer.borderWidth = 0.0f;
+//    self.opened = false;
+    
+    [self.titleLabel setFrame:CGRectMake(20.0f, 5.0f, self.frame.size.width - 110.0f, 50.0f)];
+    [self.revealButton setFrame:CGRectMake(self.frame.size.width - 62.0f, 5.0f, 50, 50)];
+    [self.closeButton setFrame:CGRectMake(self.frame.size.width - 56, 20.0f, 40, 40)];
+    self.revealButton.alpha = 1;
+    self.revealButton.transform = CGAffineTransformMakeRotation(0);
+    [self.storylineOpen setFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
+    self.closeButton.alpha = 0;
 }
 
 #pragma mark - Scroll view listener

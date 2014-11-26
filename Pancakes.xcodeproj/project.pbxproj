@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25D738D955411A703F52C406 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EC56249BB21E39D5D93BB /* libPods.a */; };
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
 		7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7352143A1A23688B00AFE840 /* PKRestClient.m */; };
@@ -40,6 +39,7 @@
 		B37334611A0791C000FDBF70 /* EditorsBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37334601A0791C000FDBF70 /* EditorsBlockCell.m */; };
 		B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */; };
 		B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0CC19F47069002D7AE7 /* ContentParser.m */; };
+		B37704001A249422006A66F4 /* BlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B37703FF1A249422006A66F4 /* BlockButton.m */; };
 		B38554E619F11B2E00AB8459 /* ChooseThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */; };
 		B385A39D1A23825B00585C29 /* ArcImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B385A39C1A23825B00585C29 /* ArcImageView.m */; };
 		B38F09BE19F13CB10013B920 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B38F09BD19F13CB10013B920 /* ArticleViewController.m */; };
@@ -150,6 +150,8 @@
 		B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericBlockCell.m; sourceTree = "<group>"; };
 		B375C0CB19F47069002D7AE7 /* ContentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentParser.h; sourceTree = "<group>"; };
 		B375C0CC19F47069002D7AE7 /* ContentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentParser.m; sourceTree = "<group>"; };
+		B37703FE1A249422006A66F4 /* BlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockButton.h; sourceTree = "<group>"; };
+		B37703FF1A249422006A66F4 /* BlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockButton.m; sourceTree = "<group>"; };
 		B38554E419F11B2E00AB8459 /* ChooseThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseThemesViewController.h; sourceTree = "<group>"; };
 		B38554E519F11B2E00AB8459 /* ChooseThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseThemesViewController.m; sourceTree = "<group>"; };
 		B385A39B1A23825B00585C29 /* ArcImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArcImageView.h; sourceTree = "<group>"; };
@@ -230,7 +232,6 @@
 				B3A8B63219FBF9D200D52EB6 /* MapKit.framework in Frameworks */,
 				B3A8B63019FBF9CB00D52EB6 /* Accelerate.framework in Frameworks */,
 				D801CAA315D503C752005C10 /* libPods-Pancakes.a in Frameworks */,
-				25D738D955411A703F52C406 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +304,8 @@
 				73C24E131A1938A40070C62D /* PKMenuItemCircle.m */,
 				B385A39B1A23825B00585C29 /* ArcImageView.h */,
 				B385A39C1A23825B00585C29 /* ArcImageView.m */,
+				B37703FE1A249422006A66F4 /* BlockButton.h */,
+				B37703FF1A249422006A66F4 /* BlockButton.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
+				B37704001A249422006A66F4 /* BlockButton.m in Sources */,
 				B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */,
 				7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
@@ -894,6 +898,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -929,6 +934,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -944,7 +950,10 @@
 				INFOPLIST_FILE = Pancakes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/**";
+				LIBRARY_SEARCH_PATHS = (
+					"${SRCROOT}/**",
+					"$(PROJECT_DIR)/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -958,7 +967,10 @@
 				INFOPLIST_FILE = Pancakes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "${SRCROOT}/**";
+				LIBRARY_SEARCH_PATHS = (
+					"${SRCROOT}/**",
+					"$(PROJECT_DIR)/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

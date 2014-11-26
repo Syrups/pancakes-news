@@ -10,7 +10,7 @@
 
 
 @implementation PKRestClient
-#define kApiRootUrl @"http://localhost:5000/api"
+
 NSString * const themesUrl = kApiRootUrl @"/themes";
 NSString * const createUser = kApiRootUrl @"/user/create";
 NSString * const article = kApiRootUrl @"/articles/%@";
@@ -29,13 +29,13 @@ NSString * const articles = kApiRootUrl @"/articles";
 
 +(void) getAllThemesAndComplete :(JSONObjectBlock)completeBlock{
     
-    [JSONHTTPClient getJSONFromURLWithString:[kApiRootUrl stringByAppendingString:themesUrl] completion:completeBlock];
+    [JSONHTTPClient getJSONFromURLWithString:themesUrl completion:completeBlock];
 }
 
 
 + (void) getUserWithUser : (NSDictionary *) user :(JSONObjectBlock)completeBlock{
     //make post, get requests
-    [JSONHTTPClient postJSONFromURLWithString:[kApiRootUrl stringByAppendingString:createUser] params:user completion:completeBlock];
+    [JSONHTTPClient postJSONFromURLWithString:createUser params:user completion:completeBlock];
 }
 
 + (void)getArticleWithId : (NSString *)articleId :(JSONObjectBlock)completeBlock{
@@ -48,6 +48,5 @@ NSString * const articles = kApiRootUrl @"/articles";
 + (NSString *) apiUrlWithRoute : (NSString *)route{
     return[kApiRootUrl stringByAppendingString:route];
 }
-
 
 @end

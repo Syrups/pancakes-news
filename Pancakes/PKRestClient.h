@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "JSONModel/JSONHTTPClient.h"
 
+#define kApiRootUrl @"http://localhost:5000/api"
+#define kMediaRootUrl @"http://192.168.2.2:5000/media"
 
 
 @interface PKRestClient : NSObject
