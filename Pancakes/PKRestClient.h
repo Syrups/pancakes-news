@@ -25,4 +25,6 @@
 
 
 + (NSString *) apiUrlWithRoute : (NSString *)route;
++ (NSString *) mediaUrl : (NSString *)mediaName;
++ (NSString *) mediaUrl : (NSString *)mediaName withRoute : (NSString *)route;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ChooseThemesViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+StackBlur.h"
 #import "Utils.h"
 #import "Configuration.h"
@@ -64,14 +65,11 @@ int screenHeight;
     [self.view addSubview: self.themeDescription];
     [self.view addSubview: self.topBlurView];
     
-    [self loadThemesFromNetwork];
-    
-   
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
    
-    
+    [self loadThemesFromNetwork];
     [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.subThemesView.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
         self.themeDescription.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
@@ -301,6 +299,9 @@ int screenHeight;
         BOOL isInclude = [[[[UserDataHolder sharedInstance] user] interests] containsObject:sub._id];
         
         UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
+        NSString *url = [PKRestClient mediaUrl:sub.image withRoute:@"subthemes"];
+        NSLog(@"url : %@", url);
+        [sCell.picture sd_setImageWithURL:[NSURL URLWithString:url]];
         [sCell setSubTheme:sub];
         [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
         
@@ -352,6 +353,8 @@ int screenHeight;
         if (json == nil) {
             return;
         }
+        
+        NSLog(@"in network");
         
         self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:json];
         
