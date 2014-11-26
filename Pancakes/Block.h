@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSArray* paragraphs;
 @property (strong, nonatomic) NSArray<Block, Optional>* children;
 @property (strong, nonatomic) NSArray<Optional>* editors;
+@property (strong, nonatomic) NSString<Optional>* url;
 
 - (Block*)childWithId:(NSString*)blockId;
 

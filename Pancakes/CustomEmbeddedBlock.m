@@ -16,6 +16,8 @@
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://webglmol.sourceforge.jp/glmol/viewer.html"]]];
     
     [self addSubview:self.webview];
+    
+    [self.webview stringByEvaluatingJavaScriptFromString:@"Pancakes.initCustomBlock()"];
 }
 
 @end

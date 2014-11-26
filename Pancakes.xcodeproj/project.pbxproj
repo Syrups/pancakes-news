@@ -76,7 +76,6 @@
 		B3EF69621A03D35D00150BF7 /* Heuristica-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3EF695E1A03D35D00150BF7 /* Heuristica-Regular.otf */; };
 		B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */; };
 		B3F0BD071A2613DB00615279 /* AudioEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F0BD061A2613DB00615279 /* AudioEmbeddedBlock.m */; };
-		B3F0BD091A261BD200615279 /* test_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3F0BD081A261BD200615279 /* test_audio.mp3 */; };
 		B3F0BD0C1A26252000615279 /* CustomEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3F0BD0B1A26252000615279 /* CustomEmbeddedBlock.m */; };
 		B3F82C351A0387CE0038D763 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C341A0387CE0038D763 /* CoreMedia.framework */; };
 		B3F82C371A0387D30038D763 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C361A0387D30038D763 /* CoreVideo.framework */; };
@@ -743,7 +742,6 @@
 				B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				739228541A0D14B3005F02E9 /* MyInterest.json in Resources */,
-				B3F0BD091A261BD200615279 /* test_audio.mp3 in Resources */,
 				73DC79C51A0C28F700093265 /* glenn_test.jpg in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,

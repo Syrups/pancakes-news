@@ -10,6 +10,7 @@ target :Pancakes do
     pod 'pop', '~> 1.0'
     pod 'FXBlurView'
     pod 'Mapbox-iOS-SDK'
+    pod 'Facebook-iOS-SDK'
 end
 
 
