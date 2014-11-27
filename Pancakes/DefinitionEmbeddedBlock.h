@@ -16,6 +16,7 @@
 @property (weak, nonatomic) Article* article;
 @property (strong, nonatomic) UIView* storyline;
 @property (strong, nonatomic) NSIndexPath* cellIndexPath;
+@property (assign, nonatomic) BOOL layouted;
 
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
 

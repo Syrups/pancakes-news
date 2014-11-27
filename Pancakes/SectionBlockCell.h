@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UIView* titleBanner;
 @property (strong, nonatomic) ArcImageView *coverImage;
 @property (strong, nonatomic) UIView* imageMask;
+@property (strong, nonatomic) UIImageView* blurImage;
 @property (strong, nonatomic) UIButton* revealButton;
 @property (strong, nonatomic) UIButton* closeButton;
 @property (strong, nonatomic) UIView* storylineOpen;
