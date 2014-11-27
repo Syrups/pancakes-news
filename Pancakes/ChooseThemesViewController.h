@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIThemeView.h"
 #import "UISubThemeViewCell.h"
-#import "SubThemeInterest.h"
-#import "ThemeInterest.h"
+#import "Models.h"
 
 @interface ChooseThemesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 

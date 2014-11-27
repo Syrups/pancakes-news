@@ -11,9 +11,9 @@
 #import "UIImage+StackBlur.h"
 #import "Utils.h"
 #import "Configuration.h"
-#import "UserDataHolder.h"
-#import "PKCacheManager.h"
-#import "PKRestClient.h"
+#import "Models.h"
+#import "Services.h"
+
 
 @interface ChooseThemesViewController ()
 
