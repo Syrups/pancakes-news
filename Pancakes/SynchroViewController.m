@@ -8,8 +8,8 @@
 
 #import "SynchroViewController.h"
 #import "Configuration.h"
-#import "UIImage+StackBlur.h"
 #import "PKNotificationManager.h"
+#import "FXBlurView.h"
 
 NSArray *vals ;
 
@@ -21,8 +21,8 @@ NSArray *vals ;
 
 
     self.infoText.text = NSLocalizedString(@"SynchDescription", nil);
-    self.background.image = [[UIImage imageNamed:@"glenn"] stackBlur:20];
-    self.backgroundRight.image = [[UIImage imageNamed:@"glenn"] stackBlur:20];
+    self.background.image = [[UIImage imageNamed:@"glenn"]  blurredImageWithRadius:20.0f iterations:5 tintColor:[UIColor clearColor]];
+    self.backgroundRight.image = [[UIImage imageNamed:@"glenn"] blurredImageWithRadius:20.0f iterations:1 tintColor:[UIColor blackColor]];
     self.constraintY.constant = kMenuBarHeigth;
     
     vals = @[@"19:00", @"7:00"];

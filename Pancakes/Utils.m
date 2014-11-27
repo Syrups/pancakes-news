@@ -7,6 +7,10 @@
 //
 
 #import "Utils.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+//#import "UIImage+StackBlur.h"
+#import "FXBlurView.h"
 
 @implementation Utils
 
@@ -52,6 +56,44 @@
     CGFloat y = center.y + radius * sin(angle);
     
     return CGPointMake(x, y);
+}
+
++ (NSURL *) fetchFacebookUserProfilePictureURL : (id<FBGraphUser>) user{
+    NSString *imageUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=350&height=350", user.objectID];
+    return [NSURL URLWithString:imageUrl];
+
+}
+
++ (void ) setImageWithFacebook : (id<FBGraphUser>) user imageview:(UIImageView*)imageView blur:(BOOL)blur{
+    
+    NSLog(@"%@", user.objectID);
+    [imageView sd_setImageWithURL:[Utils fetchFacebookUserProfilePictureURL:user]
+                 placeholderImage:[UIImage imageNamed:@"default_place-folder.jpg"]
+                          options:SDWebImageRefreshCached
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            if(image && blur){
+                                
+                                UIImage *blurImage = [image blurredImageWithRadius:30.0f iterations:5 tintColor:[UIColor clearColor]];
+                                imageView.image = blurImage;
+                            }
+                        }
+     
+     
+     ];
+}
+
+
++ (void ) setPlaceHolderImage : (UIImageView*)imageView blur:(BOOL)blur{
+    
+    UIImage *baseImage = [UIImage imageNamed:@"default_place-folder.jpg"];
+    
+    if(blur){
+        UIImage *baseImage = imageView.image;
+        UIImage *blurImage = [baseImage blurredImageWithRadius:30.0f iterations:5 tintColor:[UIColor clearColor]];
+        imageView.image = blurImage;
+    }else{
+        imageView.image = baseImage;
+    }
 }
 
 
