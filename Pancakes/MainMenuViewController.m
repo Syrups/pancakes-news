@@ -212,7 +212,6 @@ PKMenuItemCircle *currentItem;
 
 - (void)animateOpening {
     
-    
     for (int i = 0; i < angles.count; i++) {
         [self drawAnimationArcsWithEndAngleAtIndex:i];
     }
