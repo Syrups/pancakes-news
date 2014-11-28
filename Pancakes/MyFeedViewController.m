@@ -254,7 +254,7 @@
     }
     
     check.transform = CGAffineTransformMakeScale(4.0f, 4.0f);
-    check.alpha = 1;
+    check.alpha = 0;
     
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.05f, 1.05f);

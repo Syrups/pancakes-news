@@ -44,9 +44,12 @@
                              };
     
     [self createMainMenu];
-    [self displayContentController : [self.viewControllers objectForKey:@"10"]];
     
+    if (self.initialViewController == nil) {
+        self.initialViewController = [self.viewControllers objectForKey:@"10"];
+    }
     
+    [self displayContentController:self.initialViewController];
 }
 
 

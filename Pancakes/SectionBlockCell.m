@@ -61,7 +61,7 @@
     [gaussianBlurFilter setValue:[NSNumber numberWithFloat:20.0f] forKey:kCIInputRadiusKey];
     [blur setImage:[UIImage imageWithCIImage:[gaussianBlurFilter outputImage]]];
     self.blurImage = blur;
-    [self addSubview:self.blurImage];
+//    [self addSubview:self.blurImage];
     
 //    self.imageMask = imageMask;
     
