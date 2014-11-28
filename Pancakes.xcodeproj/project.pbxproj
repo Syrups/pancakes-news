@@ -82,6 +82,7 @@
 		B3F82C391A0387D70038D763 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C381A0387D70038D763 /* OpenGLES.framework */; };
 		B3F82C3B1A0387DF0038D763 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C3A1A0387DF0038D763 /* AVFoundation.framework */; };
 		B3F82C3D1A0387E40038D763 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C3C1A0387E40038D763 /* QuartzCore.framework */; };
+		B3FE8B9D1A28823300CF5435 /* TutoThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8B9C1A28823300CF5435 /* TutoThemesViewController.m */; };
 		D801CAA315D503C752005C10 /* libPods-Pancakes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9407447283D9666076675468 /* libPods-Pancakes.a */; };
 /* End PBXBuildFile section */
 
@@ -229,6 +230,8 @@
 		B3F82C3A1A0387DF0038D763 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B3F82C3C1A0387E40038D763 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B3FB2D3819F9A56000DF09D8 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		B3FE8B9B1A28823300CF5435 /* TutoThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutoThemesViewController.h; sourceTree = "<group>"; };
+		B3FE8B9C1A28823300CF5435 /* TutoThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutoThemesViewController.m; sourceTree = "<group>"; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -451,6 +454,7 @@
 		B38554E319F11B0800AB8459 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B3FE8B9A1A287ABF00CF5435 /* Tutorial */,
 				B3B9375E1A0A41A800584843 /* Menu */,
 				73DC79BA1A0C23BB00093265 /* MyInterest */,
 				73DC79BC1A0C23E100093265 /* Profile */,
@@ -639,6 +643,15 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
+		B3FE8B9A1A287ABF00CF5435 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				B3FE8B9B1A28823300CF5435 /* TutoThemesViewController.h */,
+				B3FE8B9C1A28823300CF5435 /* TutoThemesViewController.m */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		EF8C83CFC8F3D0303706B267 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +820,7 @@
 				7388872F1A14DFA200AB74A6 /* PKNotificationManager.m in Sources */,
 				B3E5397E1A110E5B006FF158 /* ArticleMenuShareViewController.m in Sources */,
 				B3E539811A110F84006FF158 /* ArticleMenuRelatedViewController.m in Sources */,
+				B3FE8B9D1A28823300CF5435 /* TutoThemesViewController.m in Sources */,
 				B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */,
 				B30E53611A16CA3C0030181F /* CommentsBlockCell.m in Sources */,
 				B38F09C219F13EEE0013B920 /* Article.m in Sources */,

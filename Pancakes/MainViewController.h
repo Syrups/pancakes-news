@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *childsContainer;
 @property (nonatomic, copy) NSDictionary *viewControllers;
 
+@property (strong, nonatomic) UIViewController* initialViewController;
 
 /// The currently selected and visible child view controller.
 @property (nonatomic, assign) UIViewController *currentViewController;

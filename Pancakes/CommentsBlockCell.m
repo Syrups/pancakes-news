@@ -29,7 +29,7 @@
     offsetY += 130.0f;
     
     for (Comment* comment in self.articleViewController.displayedArticle.comments) {
-        UIView* commentBlock = [[UIView alloc] initWithFrame:CGRectMake(25.0f, offsetY, self.bounds.size.width - 80.0f, 100.0f)];
+        UIView* commentBlock = [[UIView alloc] initWithFrame:CGRectMake(30.0f, offsetY, self.bounds.size.width - 110.0f, 100.0f)];
         commentBlock.backgroundColor = RgbColor(253, 253, 253);
         commentBlock.layer.borderColor = RgbColor(222, 222, 222).CGColor;
         commentBlock.layer.borderWidth = 1.0f;

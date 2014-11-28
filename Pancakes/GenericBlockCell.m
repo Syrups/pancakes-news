@@ -146,8 +146,10 @@
                 CGRect blockFrame = CGRectMake(40.0f, 0.0f, self.frame.size.width-120.0f, 0.0f);
                 DefinitionEmbeddedBlock* blockView = [self instanciateBlockOfType:child.type.name withFrame:blockFrame];
                 
+                if (blockView.class == [DefinitionEmbeddedBlock class]) {
+                    [blockView layoutWithBlock:child offsetY:0.0f];
+                }
                 
-                [blockView layoutWithBlock:child offsetY:0.0f];
                 [blockView setClipsToBounds:YES];
                 blockView.article = self.articleViewController.displayedArticle;
                 
@@ -327,9 +329,8 @@
     CGRect f = blockView.frame;
     f.size.height = blockView.block.paragraphs.count * 100.0f + 230.0f;
     blockView.frame = f;
-    if (blockView.class == [MapEmbeddedBlock class] || blockView.class == [CustomEmbeddedBlock class]) {
-        [blockView layoutWithBlock:blockView.block offsetY:0.0f];
-    }
+    [blockView layoutWithBlock:blockView.block offsetY:0.0f];
+
     [self.tableView endUpdates];
     
     CGRect cellFrame = [self.tableView rectForRowAtIndexPath:blockView.cellIndexPath];

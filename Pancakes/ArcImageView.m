@@ -50,7 +50,7 @@
     CGPathMoveToPoint(path, NULL, 0, 0);
     CGPathAddLineToPoint(path, NULL, -1000, 0);
     
-    CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height-20.0f, self.frame.size.width+1000, 0, 2400);
+    CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height-20.0f, self.frame.size.width+1000, 0, 3000);
     
     
     CGPathAddLineToPoint(path, NULL, self.frame.size.width, 0);
@@ -65,7 +65,7 @@
     CABasicAnimation* bounceAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     bounceAnimation.fromValue = [NSValue value:oldPath withObjCType:@encode(CGPathRef)];
     bounceAnimation.toValue = [NSValue value:path withObjCType:@encode(CGPathRef)];
-    bounceAnimation.duration = 0.2f;
+    bounceAnimation.duration = 0.15f;
     bounceAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     
     [(CAShapeLayer*)self.layer.mask addAnimation:bounceAnimation forKey:@"path"];

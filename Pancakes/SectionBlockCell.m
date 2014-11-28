@@ -53,11 +53,15 @@
 //    imageMask.blurRadius = 8.0f;
 //    [self addSubview:imageMask];
     
+    UIImageView* blur = [[UIImageView alloc] initWithFrame:coverImage.frame];
+    
     CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
     [gaussianBlurFilter setDefaults];
     [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[coverImage.image CGImage]] forKey:kCIInputImageKey];
     [gaussianBlurFilter setValue:[NSNumber numberWithFloat:20.0f] forKey:kCIInputRadiusKey];
-    [coverImage setImage:[UIImage imageWithCIImage:[gaussianBlurFilter outputImage]]];
+    [blur setImage:[UIImage imageWithCIImage:[gaussianBlurFilter outputImage]]];
+    self.blurImage = blur;
+//    [self addSubview:self.blurImage];
     
 //    self.imageMask = imageMask;
     
@@ -139,6 +143,7 @@
         f.size.height = 0.0f;
         self.titleBanner.frame = f;
         self.imageMask.alpha = 0;
+        self.blurImage.alpha = 0;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.15f delay:0.2f options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGRect f = self.titleLabel.frame;

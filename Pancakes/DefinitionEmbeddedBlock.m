@@ -20,13 +20,17 @@
     self.backgroundColor = [UIColor whiteColor];
     self.layer.borderColor = kArticleEmbeddedBlockBorderColor.CGColor;
     self.layer.borderWidth = 1.0f;
+    self.layouted = NO;
     
     return self;
 }
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     
+    if (self.layouted) return;
+    
     self.block = block;
+    self.layouted = YES;
     
     // Create the cover image of the embedded block
     ArcImageView* coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 160.0f) fullSize:NO];
