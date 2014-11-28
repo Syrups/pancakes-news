@@ -120,7 +120,7 @@
 - (void) displayContentController: (UIViewController*) content;
 {
     [self addChildViewController:content];                 // 1
-    //content.view.frame = [self.childsContainer frame];      // 2
+    content.view.frame = [self.childsContainer frame];      // 2
     [self.childsContainer addSubview:content.view];
     [content didMoveToParentViewController:self];          // 3
     self.currentViewController = content;
