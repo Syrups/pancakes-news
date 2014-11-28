@@ -86,10 +86,12 @@
     
     items = @[].mutableCopy;
     
-    for (NSString* p in block.paragraphs) {
+    for (NSDictionary* p in block.paragraphs) {
         
-        [parser parseCallsFromString:p withBlock:^(NSArray *calls) {
-            NSString* clean = [parser getCleanedString:p];
+        NSString* pString = [p objectForKey:@"content"];
+        
+        [parser parseCallsFromString:pString withBlock:^(NSArray *calls) {
+            NSString* clean = [parser getCleanedString:pString];
             NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:clean];
             
             NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -208,14 +210,16 @@
     
     // Iterate over each paragraph of the block
     
-    for (NSString* p in block.paragraphs) {
+    for (NSDictionary* p in block.paragraphs) {
+        
+        NSString* pString = [p objectForKey:@"content"];
         
         __block NSMutableArray* blocksToAppend = [NSMutableArray array];
         
         // Parse eventual block calls
-        [parser parseCallsFromString:p withBlock:^(NSArray *calls) {
+        [parser parseCallsFromString:pString withBlock:^(NSArray *calls) {
             
-            NSString* clean = [parser getCleanedString:p];
+            NSString* clean = [parser getCleanedString:pString];
             NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:clean];
             
             NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -240,7 +244,7 @@
             label.frame = frame;
             
             // Make lettrine if it is the first paragraph
-            if ([block.paragraphs indexOfObject:p] == 0 && p.length > 121) {
+            if ([block.paragraphs indexOfObject:p] == 0 && pString.length > 121) {
                 LettrineParagraph* lettrineParagraph = [[LettrineParagraph alloc] initWithFrame:label.frame];
                 [lettrineParagraph layoutWithAttributedString:label.attributedText color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
                 [paragraphView addSubview:lettrineParagraph];

@@ -239,7 +239,9 @@
     
     // ... Yes, that's dirty
     Block* firstBlock = (Block*)article.blocks[1];
-    NSString* content = firstBlock.paragraphs[0];
+    NSDictionary* paragraph = firstBlock.paragraphs[0];
+    NSString* content = [paragraph objectForKey:@"content"];
+    
     ContentParser* parser = [[ContentParser alloc] init];
     self.articleExcerpt.text = [self excerptOfContent:[parser getCleanedString:content] firstWordsCount:22];
     self.articleExcerpt.transform = CGAffineTransformMakeScale(0.9f, 0.9f);
