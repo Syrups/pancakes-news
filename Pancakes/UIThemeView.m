@@ -8,8 +8,10 @@
 
 #import "UIThemeView.h"
 #import "UIImage+StackBlur.h"
+#import "FXBlurView.h"
 
 @implementation UIThemeView
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -36,29 +38,35 @@
 
 -(void)updateCellWithImage: (NSString *)imageName {
     
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    [tempImageView setFrame:self.frame];
-    self.backgroundView = tempImageView;
-        
+    UIImage *blurImage = [[UIImage imageNamed:imageName] blurredImageWithRadius:15 iterations:1 tintColor:[UIColor clearColor]];
+    
+    self.bgImageView = [[UIImageView alloc] initWithImage:blurImage];
+    [self.bgImageView setFrame:self.frame];
+    
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"gif"];
+    NSData *gif = [NSData dataWithContentsOfFile:filePath];
+    
+    self.webViewBG = [[UIWebView alloc] initWithFrame:self.frame];
+    [self.webViewBG loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+    self.webViewBG.userInteractionEnabled = NO;
+    
+
+    self.backgroundView = self.webViewBG;
 }
 
 
 
 - (void) updateAsFullyVisible : (BOOL) visible{
 
-    float radius = visible ? 0 : 15;
-    UIImage *baseImage = [UIImage imageNamed:self.theme.coverImage];
-    UIImage *blurImage = [baseImage stackBlur:radius];
-    
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
-    [tempImageView setFrame:self.frame];
-    
+
     [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
         self.themeLabel.alpha = visible ? 1 : 0.4;
-        self.backgroundView = tempImageView;
-            
-    } completion:nil];
+        
+    } completion:^(BOOL finished) {
+        self.backgroundView = visible ? self.webViewBG : self.bgImageView;
+    }];
 }
 
 -(void) setSwitchReceiverSelector: (SEL)action{

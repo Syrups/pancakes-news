@@ -6,11 +6,15 @@
 //  Copyright (c) 2014 Gobelins. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import MediaPlayer;
+@import UIKit;
+
 #import "ThemeInterest.h"
 #import "FXBlurView.h"
 
 @interface UIThemeView : UITableViewCell
+@property (strong, nonatomic) UIImageView *bgImageView;
+@property (strong, nonatomic) UIWebView *webViewBG;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
 //@property (weak, nonatomic) IBOutlet FXBlurView *blurView;

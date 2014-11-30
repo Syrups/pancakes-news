@@ -27,6 +27,13 @@
 		73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79C21A0C25B100093265 /* SynchroViewController.m */; };
 		73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 73DC79C41A0C28F700093265 /* default_place-folder.jpg */; };
 		73FB80471A0BD09900CCA3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FB80461A0BD09900CCA3F1 /* MainViewController.m */; };
+		73FC077E1A2BDA83006A57E1 /* video in Resources */ = {isa = PBXBuildFile; fileRef = 73FC077D1A2BDA83006A57E1 /* video */; };
+		73FC07801A2BDDE0006A57E1 /* climate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC077F1A2BDDE0006A57E1 /* climate.gif */; };
+		73FC07861A2BE44B006A57E1 /* climate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07811A2BE44B006A57E1 /* climate.gif */; };
+		73FC07871A2BE44B006A57E1 /* corruption.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07821A2BE44B006A57E1 /* corruption.gif */; };
+		73FC07881A2BE44B006A57E1 /* food.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07831A2BE44B006A57E1 /* food.gif */; };
+		73FC07891A2BE44B006A57E1 /* humanitarian.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07841A2BE44B006A57E1 /* humanitarian.gif */; };
+		73FC078A1A2BE44B006A57E1 /* womens.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07851A2BE44B006A57E1 /* womens.gif */; };
 		B30E53611A16CA3C0030181F /* CommentsBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B30E53601A16CA3C0030181F /* CommentsBlockCell.m */; };
 		B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B30ED5EB19FA8EC300DB2621 /* MyFeedViewController.m */; };
 		B3183C3C19F68B90004C401F /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -130,6 +137,13 @@
 		73DC79C41A0C28F700093265 /* default_place-folder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default_place-folder.jpg"; sourceTree = "<group>"; };
 		73FB80451A0BD09900CCA3F1 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		73FB80461A0BD09900CCA3F1 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		73FC077D1A2BDA83006A57E1 /* video */ = {isa = PBXFileReference; lastKnownFileType = folder; path = video; sourceTree = "<group>"; };
+		73FC077F1A2BDDE0006A57E1 /* climate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = climate.gif; path = ../climate.gif; sourceTree = "<group>"; };
+		73FC07811A2BE44B006A57E1 /* climate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = climate.gif; sourceTree = "<group>"; };
+		73FC07821A2BE44B006A57E1 /* corruption.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = corruption.gif; sourceTree = "<group>"; };
+		73FC07831A2BE44B006A57E1 /* food.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = food.gif; sourceTree = "<group>"; };
+		73FC07841A2BE44B006A57E1 /* humanitarian.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = humanitarian.gif; sourceTree = "<group>"; };
+		73FC07851A2BE44B006A57E1 /* womens.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = womens.gif; sourceTree = "<group>"; };
 		924EC56249BB21E39D5D93BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9407447283D9666076675468 /* libPods-Pancakes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pancakes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30E535F1A16CA3C0030181F /* CommentsBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsBlockCell.h; sourceTree = "<group>"; };
@@ -514,6 +528,12 @@
 		B3B1D5AF19EEC499001E8BBF /* Pancakes */ = {
 			isa = PBXGroup;
 			children = (
+				73FC07811A2BE44B006A57E1 /* climate.gif */,
+				73FC07821A2BE44B006A57E1 /* corruption.gif */,
+				73FC07831A2BE44B006A57E1 /* food.gif */,
+				73FC07841A2BE44B006A57E1 /* humanitarian.gif */,
+				73FC07851A2BE44B006A57E1 /* womens.gif */,
+				73FC077D1A2BDA83006A57E1 /* video */,
 				B3F0BD0D1A26254400615279 /* Headers */,
 				739228531A0D14B3005F02E9 /* TemplateIcon2x.png */,
 				739228511A0D1498005F02E9 /* Dummies */,
@@ -600,6 +620,7 @@
 		B3EF69571A03D35D00150BF7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73FC077F1A2BDDE0006A57E1 /* climate.gif */,
 				B3EF69581A03D35D00150BF7 /* font */,
 			);
 			path = Resources;
@@ -751,17 +772,24 @@
 				B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */,
 				738510871A163CF60094056D /* Localizable.strings in Resources */,
 				B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */,
+				73FC07871A2BE44B006A57E1 /* corruption.gif in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				739228541A0D14B3005F02E9 /* MyInterest.json in Resources */,
 				73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
 				73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */,
+				73FC07861A2BE44B006A57E1 /* climate.gif in Resources */,
 				B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */,
 				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
 				B3EF69621A03D35D00150BF7 /* Heuristica-Regular.otf in Resources */,
+				73FC07891A2BE44B006A57E1 /* humanitarian.gif in Resources */,
 				B3EF695F1A03D35D00150BF7 /* BreeBold.otf in Resources */,
+				73FC078A1A2BE44B006A57E1 /* womens.gif in Resources */,
+				73FC07801A2BDDE0006A57E1 /* climate.gif in Resources */,
+				73FC077E1A2BDA83006A57E1 /* video in Resources */,
+				73FC07881A2BE44B006A57E1 /* food.gif in Resources */,
 				739228551A0D14B3005F02E9 /* TemplateIcon2x.png in Resources */,
 				B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */,
 			);
