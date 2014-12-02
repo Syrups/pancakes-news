@@ -26,6 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadWaitingScreen];
+    
     [self fetchFeed];
 //    [self.view bringSubviewToFront:self.feedTableView];
     
@@ -84,6 +86,13 @@
     }
 }
 
+- (void)loadWaitingScreen {
+    UIView* screen = [[[NSBundle mainBundle] loadNibNamed:@"LoadingScreen" owner:self options:0] objectAtIndex:0];
+    [self.view addSubview:screen];
+    
+    self.waitingScreen = screen;
+}
+
 - (void)fetchFeed {
     UserDataHolder* holder = [UserDataHolder sharedInstance];
     [holder loadData];
@@ -104,18 +113,26 @@
         
         if (err != nil) {
             NSLog(@"%@", err);
+            // schedule another fetch later
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self scheduleNewFetch];
+            });
+        } else {
+            // Reload table data on main thread to avoid problems
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.feedTableView reloadData];
+                NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
+                [self.waitingScreen removeFromSuperview];
+            });
         }
         
-        // Reload table data on main thread to avoid problems
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.feedTableView reloadData];
-            NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-            [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-            [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
-            
-        });
-        
     }] resume];
+}
+
+- (void)scheduleNewFetch {
+    [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(fetchFeed) userInfo:nil repeats:NO];
 }
 
 #pragma mark - Helpers
