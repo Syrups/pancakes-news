@@ -8,27 +8,33 @@
 
 #import "MapEmbeddedBlock.h"
 #import "Configuration.h"
-#import <Mapbox-iOS-SDK/RMMapView.h>
+#import <Mapbox-iOS-SDK/Mapbox.h>
 
 @implementation MapEmbeddedBlock
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
+    
 
     // Embedded map
-    RMMapView* map = [[RMMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:@"leoht.kcag6ani"];
+    RMMapView* map = [[RMMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) andTilesource:tileSource];
+
     map.centerCoordinate = CLLocationCoordinate2DMake([block.latitude floatValue], [block.longitude floatValue]);
-    map.zoom = 5.0f;
+    map.zoom = 1.0f;
+    map.userInteractionEnabled = NO;
+    
     [self addSubview:map];
     
     // Embedded block title
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(30.0f, 20.0f, self.frame.size.width - 60.0f, 30.0f)];
-    title.textColor = kOrangeColor;
+    title.textColor = [UIColor whiteColor];
     title.font = [UIFont fontWithName:kFontBreeBold size:24.0f];
     title.textAlignment = NSTextAlignmentRight;
-    title.text = block.title;
+    title.text = block.title != nil ? block.title : @"Map";
+
     [self addSubview:title];
+    [self bringSubviewToFront:title];
     
-    if (self.frame.size.height == 0.0f) return;
 
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 //        

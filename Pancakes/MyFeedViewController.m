@@ -200,7 +200,7 @@
     feedCellTitle.textColor = kFeedViewListTitleColor;
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
-    [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
+//    [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
     [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
     feedCellThumb.layer.masksToBounds = YES;

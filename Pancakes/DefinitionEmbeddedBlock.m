@@ -50,12 +50,13 @@
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:kArticleViewTextLineSpacing];
     
-    for (NSString* p in block.paragraphs) {
+    for (NSDictionary* p in block.paragraphs) {
+        NSString* pString = [p objectForKey:@"content"];
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, offsetY, contentView.frame.size.width, 120.0f)];
         label.numberOfLines = 0;
         label.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
         
-        NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:p];
+        NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:pString];
         
         [content addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, content.length)];
         
