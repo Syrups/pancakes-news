@@ -27,12 +27,12 @@
 		73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79C21A0C25B100093265 /* SynchroViewController.m */; };
 		73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 73DC79C41A0C28F700093265 /* default_place-folder.jpg */; };
 		73FB80471A0BD09900CCA3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FB80461A0BD09900CCA3F1 /* MainViewController.m */; };
-		73FC07801A2BDDE0006A57E1 /* climate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC077F1A2BDDE0006A57E1 /* climate.gif */; };
 		73FC07861A2BE44B006A57E1 /* climate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07811A2BE44B006A57E1 /* climate.gif */; };
 		73FC07871A2BE44B006A57E1 /* corruption.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07821A2BE44B006A57E1 /* corruption.gif */; };
 		73FC07881A2BE44B006A57E1 /* food.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07831A2BE44B006A57E1 /* food.gif */; };
 		73FC07891A2BE44B006A57E1 /* humanitarian.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07841A2BE44B006A57E1 /* humanitarian.gif */; };
 		73FC078A1A2BE44B006A57E1 /* womens.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07851A2BE44B006A57E1 /* womens.gif */; };
+		B302F9341A2F14E00096BF9B /* TutoSynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B302F9331A2F14E00096BF9B /* TutoSynchroViewController.m */; };
 		B30E53611A16CA3C0030181F /* CommentsBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B30E53601A16CA3C0030181F /* CommentsBlockCell.m */; };
 		B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B30ED5EB19FA8EC300DB2621 /* MyFeedViewController.m */; };
 		B3183C3C19F68B90004C401F /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -143,6 +143,8 @@
 		73FC07851A2BE44B006A57E1 /* womens.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = womens.gif; sourceTree = "<group>"; };
 		924EC56249BB21E39D5D93BB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9407447283D9666076675468 /* libPods-Pancakes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Pancakes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B302F9321A2F14E00096BF9B /* TutoSynchroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutoSynchroViewController.h; sourceTree = "<group>"; };
+		B302F9331A2F14E00096BF9B /* TutoSynchroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutoSynchroViewController.m; sourceTree = "<group>"; };
 		B30E535F1A16CA3C0030181F /* CommentsBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsBlockCell.h; sourceTree = "<group>"; };
 		B30E53601A16CA3C0030181F /* CommentsBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsBlockCell.m; sourceTree = "<group>"; };
 		B30ED5EA19FA8EC300DB2621 /* MyFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFeedViewController.h; sourceTree = "<group>"; };
@@ -663,6 +665,8 @@
 			children = (
 				B3FE8B9B1A28823300CF5435 /* TutoThemesViewController.h */,
 				B3FE8B9C1A28823300CF5435 /* TutoThemesViewController.m */,
+				B302F9321A2F14E00096BF9B /* TutoSynchroViewController.h */,
+				B302F9331A2F14E00096BF9B /* TutoSynchroViewController.m */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -780,7 +784,6 @@
 				73FC07891A2BE44B006A57E1 /* humanitarian.gif in Resources */,
 				B3EF695F1A03D35D00150BF7 /* BreeBold.otf in Resources */,
 				73FC078A1A2BE44B006A57E1 /* womens.gif in Resources */,
-				73FC07801A2BDDE0006A57E1 /* climate.gif in Resources */,
 				73FC07881A2BE44B006A57E1 /* food.gif in Resources */,
 				739228551A0D14B3005F02E9 /* TemplateIcon2x.png in Resources */,
 				B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */,
@@ -877,6 +880,7 @@
 				B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */,
 				7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
+				B302F9341A2F14E00096BF9B /* TutoSynchroViewController.m in Sources */,
 				B385A39D1A23825B00585C29 /* ArcImageView.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,
 				B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */,

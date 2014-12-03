@@ -35,4 +35,8 @@
 #define kArticleViewTextLineSpacing             6.0f
 #define kMenuBarHeigth                          43
 
+// Keys
+
+#define kPancakesTutoThemesCookie               @"PancakesTutoChooseThemes"
+
 #endif
