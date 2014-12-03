@@ -19,5 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *readButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintY;
 
+@property (strong, nonatomic) UIView* waitingScreen;
+
 //@property (weak, nonatomic) IBOutlet MainMenuViewController *mainMenu;
 @end

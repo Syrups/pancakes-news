@@ -32,12 +32,14 @@
     PKMenuItemCircle *currentItem;
     
     BOOL flag_arc_loaded;
+    BOOL closing;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     flag_arc_loaded = false;
+    closing = NO;
     
     angles = @[@245, @220, @195, @170];
     
@@ -50,7 +52,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    
+    if (closing) return;
     
     [self drawStyleArc];
     
@@ -151,7 +153,7 @@
     
     CGMutablePathRef arcPath = CGPathCreateMutable();
     CGPathMoveToPoint(arcPath, NULL, arcStart.x, arcStart.y);
-    CGPathAddArc(arcPath, NULL, arcCenter.x, arcCenter.y, arcRadius, DEGREES_TO_RADIANS(angle), DEGREES_TO_RADIANS(150), YES);
+    CGPathAddArc(arcPath, NULL, arcCenter.x, arcCenter.y, arcRadius, DEGREES_TO_RADIANS(angle), DEGREES_TO_RADIANS(0), YES);
     
     
     // Animation
@@ -257,11 +259,12 @@
 
 - (IBAction)closeMenu:(id)sender {
     ArticleViewController* parent = (ArticleViewController*)self.parentViewController;
+    closing = YES;
     
 //    for (int i = 0; i < angles.count; i++) {
 //        [self drawCloseAnimationArcForButton:[self.items objectAtIndex:i] withEndAngleAtIndex:i];
 //    }
-    
+
     [UIView animateWithDuration:0.3f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.view.frame;
         frame.origin.x = parent.view.frame.size.width;
