@@ -14,7 +14,7 @@
 
 @interface UIThemeView : UITableViewCell
 @property (strong, nonatomic) UIImageView *bgImageView;
-@property (strong, nonatomic) UIWebView *webViewBG;
+@property (weak, nonatomic) IBOutlet UIWebView *webViewBG;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
 //@property (weak, nonatomic) IBOutlet FXBlurView *blurView;

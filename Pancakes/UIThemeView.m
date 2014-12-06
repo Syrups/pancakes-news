@@ -12,6 +12,8 @@
 
 @implementation UIThemeView
 
+bool loaded = NO;
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -38,21 +40,26 @@
 
 -(void)updateCellWithImage: (NSString *)imageName {
     
-    UIImage *blurImage = [[UIImage imageNamed:imageName] blurredImageWithRadius:15 iterations:1 tintColor:[UIColor clearColor]];
-    
-    self.bgImageView = [[UIImageView alloc] initWithImage:blurImage];
-    [self.bgImageView setFrame:self.frame];
-    
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"gif"];
-    NSData *gif = [NSData dataWithContentsOfFile:filePath];
-    
-    self.webViewBG = [[UIWebView alloc] initWithFrame:self.frame];
-    [self.webViewBG loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    self.webViewBG.userInteractionEnabled = NO;
-    
-
-    self.backgroundView = self.webViewBG;
+    if(!self.bgImageView){
+        NSLog(@"reload ain");
+        UIImage *blurImage = [[UIImage imageNamed:imageName] blurredImageWithRadius:15 iterations:1 tintColor:[UIColor clearColor]];
+        
+        self.bgImageView = [[UIImageView alloc] initWithImage:blurImage];
+        [self.bgImageView setFrame:self.frame];
+        
+        
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"gif"];
+        NSData *gif = [NSData dataWithContentsOfFile:filePath];
+        
+        [self.webViewBG loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+        self.webViewBG.userInteractionEnabled = NO;
+        //self.webViewBG.hidden = YES;
+        
+        
+        //self.backgroundView = self.bgImageView;
+        
+        loaded = YES;
+    }
 }
 
 
@@ -62,10 +69,11 @@
 
     [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
-        self.themeLabel.alpha = visible ? 1 : 0.4;
+        //self.themeLabel.alpha = visible ? 1 : 0.4;
         
     } completion:^(BOOL finished) {
-        self.backgroundView = visible ? self.webViewBG : self.bgImageView;
+        //self.webViewBG.hidden = visible ? NO : YES;
+        //self.backgroundView.hidden = visible ? YES : NO;
     }];
 }
 

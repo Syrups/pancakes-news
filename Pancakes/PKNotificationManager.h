@@ -12,7 +12,7 @@
 @interface PKNotificationManager : NSObject
 
 
-+(void)initSynchronisationNotificationWithDay : (NSDate *) date;
++(UILocalNotification *)initSynchronisationNotificationWithDay : (NSDate *) date;
 
 +(id)loadSynchronisationNotifications;
 +(void)unloadSynchronisationNotifications : (UILocalNotification *)notification ;
