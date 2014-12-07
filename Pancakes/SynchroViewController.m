@@ -29,10 +29,14 @@ NSArray *vals ;
     
     vals = @[@"19:00", @"7:00"];
     
+    
      [self loadNotifications];
     //[self.datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
 
 }
+
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -93,14 +97,14 @@ NSArray *vals ;
     //BOOL
     self.pickerContainer.hidden = NO;
     
-    //[self.view layoutIfNeeded];
+    
     [self.pickerContainer.superview layoutIfNeeded];
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         //Update
         
         [self.cancelButtonTopSpace setConstant:30];
-        [self.synchroTableTopSpace setConstant:-self.synchroTable.bounds.size.height + 250];
+        [self.synchroTableTopSpace setConstant:self.view.window.frame.size.height - 150];
         [self.pickerContainerTopSpace setConstant:90];
         
         //layout
