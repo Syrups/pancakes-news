@@ -21,12 +21,19 @@
 @property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundRight;
 @property (weak, nonatomic) IBOutlet UIButton *addTimeButton;
-@property (weak, nonatomic) IBOutlet UIView *pickerParent;
+@property (weak, nonatomic) IBOutlet UIView *pickerContainer;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
-@property NSArray *notifications;
+@property (weak, nonatomic) IBOutlet UIView *rightView;
 
+//Constraints
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerContainerTopSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *synchroTableTopSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelButtonTopSpace;
+
+@property NSMutableArray *notifications;
 
 - (IBAction)addTimeAction:(id)sender;
+- (IBAction)cancelTransaction:(id)sender;
 
 @end

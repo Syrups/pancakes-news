@@ -7,10 +7,13 @@
 //
 
 #import "UIThemeView.h"
-#import "UIImage+StackBlur.h"
+#import "FLAnimatedImageView.h"
+#import "FLAnimatedImage.h"
 #import "FXBlurView.h"
 
 @implementation UIThemeView
+
+
 
 
 /*
@@ -27,6 +30,7 @@
     //self.caption.numberOfLines = 0;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.loaded = NO;
     //Blur init
     
     
@@ -36,37 +40,30 @@
    
 }
 
--(void)updateCellWithImage: (NSString *)imageName {
+-(void)updateCellWithImage {
     
-    UIImage *blurImage = [[UIImage imageNamed:imageName] blurredImageWithRadius:15 iterations:1 tintColor:[UIColor clearColor]];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:self.theme.coverImage ofType:@"gif"];
+        NSData *gif = [NSData dataWithContentsOfFile:filePath];
     
-    self.bgImageView = [[UIImageView alloc] initWithImage:blurImage];
-    [self.bgImageView setFrame:self.frame];
-    
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"gif"];
-    NSData *gif = [NSData dataWithContentsOfFile:filePath];
-    
-    self.webViewBG = [[UIWebView alloc] initWithFrame:self.frame];
-    [self.webViewBG loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    self.webViewBG.userInteractionEnabled = NO;
-    
-
-    self.backgroundView = self.webViewBG;
+        self.backgroundImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData : gif];
 }
 
 
 
 - (void) updateAsFullyVisible : (BOOL) visible{
 
-
     [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
         self.themeLabel.alpha = visible ? 1 : 0.4;
         
     } completion:^(BOOL finished) {
-        self.backgroundView = visible ? self.webViewBG : self.bgImageView;
+        if(visible){
+            [self.backgroundImageView startAnimating];
+        }else{
+            [self.backgroundImageView stopAnimating];
+        }
     }];
+    
 }
 
 -(void) setSwitchReceiverSelector: (SEL)action{

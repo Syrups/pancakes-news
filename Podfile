@@ -11,6 +11,7 @@ target :Pancakes do
     pod 'FXBlurView'
     pod 'Mapbox-iOS-SDK'
     pod 'Facebook-iOS-SDK'
+    pod 'FLAnimatedImage', '~> 1.0'
 end
 
 

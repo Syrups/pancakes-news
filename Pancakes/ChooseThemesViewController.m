@@ -28,6 +28,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
 
 int screenMidSize;
 int screenHeight;
+float percent20;
 
 
 - (void)viewDidLoad {
@@ -35,13 +36,15 @@ int screenHeight;
     
     
     //InitScrollView and TableView
-     screenMidSize = self.view.frame.size.width/2;
-        screenHeight = self.view.frame.size.height;
+    screenMidSize = self.view.frame.size.width/2;
+    screenHeight = self.view.frame.size.height;
     
     
     self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, screenMidSize, screenHeight - kMenuBarHeigth)];
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
+    
+    percent20 = self.themesView.frame.size.height - (self.themesView.frame.size.height/3);
     
     self.themesView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -52,7 +55,7 @@ int screenHeight;
     
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    
+    //self.themesView.pagingEnabled = YES;
     [self.subThemesView setDelegate:self];
     [self.themesView setDelegate:self];
     
@@ -93,7 +96,6 @@ int screenHeight;
 
 
 -(void) updateThemeDataWithCell : (UIThemeView *) cell{
-    //[self.subThemesView reloadData];
     // The key is repositioning without animation
     
     self.currentTheme = cell.theme;
@@ -109,12 +111,11 @@ int screenHeight;
         UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
         [tempImageView setFrame:self.subThemesView.frame];
         self.subThemesView.backgroundView = tempImageView;
-        
     }];
-    
     
     [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
 }
+
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -137,84 +138,62 @@ int screenHeight;
         }
         
         if(scrollView.isDecelerating){
-            //[self centerTableWithScrollView: scrollView ];
+            [self centerTable];
         }
     }
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
-    
-    NSLog(@"scrollViewWillEndDragging");
-    if (scrollView == self.themesView) {
-        [self centerTableWithScrollView: scrollView updateData:false ];
-    }
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    // if decelerating, let scrollViewDidEndDecelerating: handle it
-    //ecelerate == NO &&
     
-    NSLog(@"scrollViewDidEndDragging");
     
-    if (decelerate == NO && scrollView == self.themesView) {
-        [self centerTableWithScrollView: scrollView updateData : false];
+    if (scrollView == self.themesView) {
+        [self centerTable];
     }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     
-    //NSLog(@"scrollViewDidEndDecelerating");
     if (scrollView == self.themesView) {
-        [self centerTableWithScrollView: scrollView updateData : true];
+        [self centerTable];
     }
 }
 
 
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    //NSLog(@"scrollViewDidEndScrollingAnimation");
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    //[self centerTableWithScrollView: scrollView updateData : true];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+   
+    //TODO : reset LOOP
     
     for (UIThemeView *cell in self.themesView.visibleCells) {
+   
+        //UIThemeView *cell = (UIThemeView *)[self.themesView cellForRowAtIndexPath:pathForCenterCell];
+        
         CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
         
         if (CGRectContainsRect(scrollView.frame, cellRect)){
             
-            //NSLog(@"fully %@", cell.themeLabel.text);
             [self updateThemeDataWithCell:cell];
             [cell updateAsFullyVisible:YES];
         }else{
             [cell updateAsFullyVisible:NO];
-            //NSLog(@"not fully %@", cell.themeLabel.text);
         }
     }
+  
+    //NSUInteger actualIndex = pathForCenterCell.row % [self.themesData count];
+    //ThemeInterest *i = cell.theme;
+    //NSLog(@"scrollViewDidEndScrollingAnimation %i, %@ ", actualIndex, i.title);
 }
 
-- (void)centerTableWithScrollView : (UIScrollView *) scrollView updateData:(BOOL)update{
+- (NSIndexPath *)centerTable {
     NSIndexPath *pathForCenterCell = [self.themesView indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.themesView.bounds), CGRectGetMidY(self.themesView.bounds))];
     
-    [self.themesView scrollToRowAtIndexPath:pathForCenterCell atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    
-    
-    if(update){
-        for (UIThemeView *cell in self.themesView.visibleCells) {
-            CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
-            
-            if (CGRectContainsRect(scrollView.frame, cellRect)){
-                
-                //NSLog(@"fully %@", cell.themeLabel.text);
-                [self updateThemeDataWithCell:cell];
-                
-                
-            }else{
-                //NSLog(@"not fully %@", cell.themeLabel.text);
-                //[cell updateAsNotfullyVisible];
-            }
-        }
-    }
+    [self.themesView scrollToRowAtIndexPath:pathForCenterCell atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+    return pathForCenterCell;
 }
+
 
 - (void)setSubthemesBackground {
     
@@ -233,10 +212,13 @@ int screenHeight;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if(tableView == self.themesView){
-        return [self.themesData count] * 10;
+        
+        return [self.themesData count] * 2;
         
     }else{
+        
         return [self.currentThemeSubs count];
+  
     }
 }
 
@@ -289,9 +271,10 @@ int screenHeight;
         [tCell.themeLabel setTextColor: [Utils colorWithHexString: theme.color]];
         [tCell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
         
-        [tCell updateCellWithImage:theme.coverImage];
         tCell.theme = theme;
         [tCell.themeCheck setOn:hasSubThemeInPreferences];
+        
+         [tCell updateCellWithImage];
         //[cell.backgroundImage setFrame:cell.frame];
         
     }else{
@@ -300,7 +283,7 @@ int screenHeight;
         
         UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
         NSString *url = [PKRestClient mediaUrl:sub.image withRoute:@"subthemes"];
-        NSLog(@"url : %@", url);
+        //NSLog(@"url : %@", url);
         [sCell.picture sd_setImageWithURL:[NSURL URLWithString:url]];
         [sCell setSubTheme:sub];
         [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
@@ -320,7 +303,7 @@ int screenHeight;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView == self.themesView){
-        float percent20 = tableView.frame.size.height - (tableView.frame.size.height/3);
+        
         return percent20;
     }else{
         return 100;
