@@ -162,23 +162,25 @@ float percent20;
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     
-    NSIndexPath *pathForCenterCell = [self.themesView indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.themesView.bounds), CGRectGetMidY(self.themesView.bounds))];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
    
     //TODO : reset LOOP
     
-    UIThemeView *cell = (UIThemeView *)[self.themesView cellForRowAtIndexPath:pathForCenterCell];
-    
-    CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
-    
-    if (CGRectContainsRect(scrollView.frame, cellRect)){
+    for (UIThemeView *cell in self.themesView.visibleCells) {
+   
+        //UIThemeView *cell = (UIThemeView *)[self.themesView cellForRowAtIndexPath:pathForCenterCell];
         
-        [self updateThemeDataWithCell:cell];
-        [cell updateAsFullyVisible:YES];
-    }else{
-        [cell updateAsFullyVisible:NO];
+        CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
+        
+        if (CGRectContainsRect(scrollView.frame, cellRect)){
+            
+            [self updateThemeDataWithCell:cell];
+            [cell updateAsFullyVisible:YES];
+        }else{
+            [cell updateAsFullyVisible:NO];
+        }
     }
-    
+  
     //NSUInteger actualIndex = pathForCenterCell.row % [self.themesData count];
     //ThemeInterest *i = cell.theme;
     //NSLog(@"scrollViewDidEndScrollingAnimation %i, %@ ", actualIndex, i.title);
@@ -269,9 +271,10 @@ float percent20;
         [tCell.themeLabel setTextColor: [Utils colorWithHexString: theme.color]];
         [tCell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
         
-        [tCell updateCellWithImage:theme.coverImage];
         tCell.theme = theme;
         [tCell.themeCheck setOn:hasSubThemeInPreferences];
+        
+         [tCell updateCellWithImage];
         //[cell.backgroundImage setFrame:cell.frame];
         
     }else{

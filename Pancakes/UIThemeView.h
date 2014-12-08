@@ -11,17 +11,19 @@
 
 #import "ThemeInterest.h"
 #import "FXBlurView.h"
+#import "FLAnimatedImageView.h"
 
 @interface UIThemeView : UITableViewCell
-@property (strong, nonatomic) UIImageView *bgImageView;
-@property (weak, nonatomic) IBOutlet UIWebView *webViewBG;
+@property (weak, nonatomic) IBOutlet FLAnimatedImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
 //@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @property (weak, nonatomic) ThemeInterest *theme;
+@property BOOL loaded;
 
 - (void) setSwitchReceiverSelector: (SEL)action;
-- (void) updateCellWithImage :  (NSString *)imageName ;
+- (void) updateCellWithImage;
+//- (void) updateCellWithImage :  (NSString *)imageName ;
 - (void) updateAsFullyVisible : (BOOL) visible;
 
 @end

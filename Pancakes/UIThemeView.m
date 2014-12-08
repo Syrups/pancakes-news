@@ -7,12 +7,13 @@
 //
 
 #import "UIThemeView.h"
-#import "UIImage+StackBlur.h"
+#import "FLAnimatedImageView.h"
+#import "FLAnimatedImage.h"
 #import "FXBlurView.h"
 
 @implementation UIThemeView
 
-bool loaded = NO;
+
 
 
 /*
@@ -29,6 +30,7 @@ bool loaded = NO;
     //self.caption.numberOfLines = 0;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.loaded = NO;
     //Blur init
     
     
@@ -38,43 +40,30 @@ bool loaded = NO;
    
 }
 
--(void)updateCellWithImage: (NSString *)imageName {
+-(void)updateCellWithImage {
     
-    if(!self.bgImageView){
-        NSLog(@"reload ain");
-        UIImage *blurImage = [[UIImage imageNamed:imageName] blurredImageWithRadius:15 iterations:1 tintColor:[UIColor clearColor]];
-        
-        self.bgImageView = [[UIImageView alloc] initWithImage:blurImage];
-        [self.bgImageView setFrame:self.frame];
-        
-        
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"gif"];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:self.theme.coverImage ofType:@"gif"];
         NSData *gif = [NSData dataWithContentsOfFile:filePath];
-        
-        [self.webViewBG loadData:gif MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-        self.webViewBG.userInteractionEnabled = NO;
-        //self.webViewBG.hidden = YES;
-        
-        
-        //self.backgroundView = self.bgImageView;
-        
-        loaded = YES;
-    }
+    
+        self.backgroundImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData : gif];
 }
 
 
 
 - (void) updateAsFullyVisible : (BOOL) visible{
 
-
     [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
-        //self.themeLabel.alpha = visible ? 1 : 0.4;
+        self.themeLabel.alpha = visible ? 1 : 0.4;
         
     } completion:^(BOOL finished) {
-        //self.webViewBG.hidden = visible ? NO : YES;
-        //self.backgroundView.hidden = visible ? YES : NO;
+        if(visible){
+            [self.backgroundImageView startAnimating];
+        }else{
+            [self.backgroundImageView stopAnimating];
+        }
     }];
+    
 }
 
 -(void) setSwitchReceiverSelector: (SEL)action{

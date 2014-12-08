@@ -23,6 +23,7 @@ PODS:
   - Bolts (1.1.3)
   - Facebook-iOS-SDK (3.20.0):
     - Bolts (~> 1.0)
+  - FLAnimatedImage (1.0.7)
   - FMDB (2.3):
     - FMDB/standard
   - FMDB/common (2.3)
@@ -46,6 +47,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - Facebook-iOS-SDK
+  - FLAnimatedImage (~> 1.0)
   - FXBlurView
   - JSONModel
   - Mapbox-iOS-SDK
@@ -56,6 +58,7 @@ SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   Facebook-iOS-SDK: 5854404b4b651f612a8ef79ca06d766858f4cb8e
+  FLAnimatedImage: d9e8422a9e1d8ee9a657b7433b4a9b073ef3efb3
   FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
   GRMustache: ab96109b7ba4b9568425bea40d6cd2cdc7582b6c
