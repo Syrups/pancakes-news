@@ -267,6 +267,69 @@ typedef enum  {
     return CGSizeMake(w, block.paragraphs.count * 100 + block.children.count  * 200);
 }
 
+
+/*- (UICollectionViewCell*) articleTitleCell {
+    
+    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
+    UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    articleTitle.text = self.displayedArticle.title;
+    articleTitle.textColor = [UIColor whiteColor];
+    articleTitle.font = [UIFont fontWithName:kFontBreeBold size:32];
+    
+    UILabel* creditsLabel = (UILabel*)[cell.contentView viewWithTag:20];
+    creditsLabel.text = self.displayedArticle.credits;
+    creditsLabel.textColor = [UIColor whiteColor];
+    creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
+    
+    if (!titleCellAnimated) {
+        CGRect f = self.moreButtonBackground.frame;
+        f.origin.y = -60.0f;
+        self.moreButtonBackground.frame = f;
+        f = self.moreButton.frame;
+        f.origin.y = -50.0f;
+        self.moreButton.frame = f;
+        
+        [UIView animateWithDuration:0.6f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = self.moreButtonBackground.frame;
+            f.origin.y = 15.0f;
+            self.moreButtonBackground.frame = f;
+            self.moreButtonBackground.alpha = 1.0f;
+            self.moreButtonBackground.transform = CGAffineTransformMakeRotation(M_PI);
+        } completion:NULL];
+        
+        [UIView animateWithDuration:0.5f delay:0.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect f = self.moreButton.frame;
+            f.origin.y = 15.0f;
+            self.moreButton.frame = f;
+            self.moreButton.alpha = 1.0f;
+        } completion:NULL];
+        
+        [UIView animateWithDuration:0.6f delay:0.2f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            CGRect frame = articleTitle.frame;
+            frame.origin.y += self.view.frame.size.height;
+            articleTitle.frame = frame;
+            [articleTitle setAlpha:1.0f];
+            frame = creditsLabel.frame;
+            frame.origin.y += self.view.frame.size.height;
+            creditsLabel.frame = frame;
+            [creditsLabel setAlpha:1.0f];
+            
+            UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.moreButtonBackground.frame.origin.x + self.moreButtonBackground.frame.size.width/2, self.moreButtonBackground.frame.origin.y + self.moreButtonBackground.frame.size.height, 1.0f, 0.0f)];
+            storyline.backgroundColor = RgbColor(180, 180, 180);
+            [cell addSubview:storyline];
+            
+            frame = storyline.frame;
+            frame.size.height = self.view.frame.size.height * 1.75f
+            ;
+            storyline.frame = frame;
+        } completion:^(BOOL finished) {
+            titleCellAnimated = YES;
+        }];
+    }
+    
+    return cell;
+}*/
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
