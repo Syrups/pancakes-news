@@ -15,5 +15,6 @@
 #import "PKCacheManager.h"
 #import "PKNotificationManager.h"
 #import "PKRestClient.h"
+#import "PKAIDecoder.h"
 
 #endif

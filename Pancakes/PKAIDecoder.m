@@ -44,32 +44,20 @@
     for (NSString *base64String in bas64Images) {
         
         if(base64String != nil && base64String.length > 3){
-            //NSLog(@"%@",base64String);
-            
+          
             NSArray* words = [base64String componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             NSString* nospacestring = [words componentsJoinedByString:@""];
             
-            //NSURL *url = [NSURL URLWithString:[@"data:image/png;base64," stringByAppendingString:nospacestring]];
-            //NSData *imageData = [NSData dataWithContentsOfURL:url];
-            
-            //NSLog(@"%@",imageData);
-            
             NSData* data = [[NSData alloc] initWithBase64EncodedString:nospacestring options:0];
-            //NSLog(@"%lu",(unsigned long)base64String.length);
-           
-            
+     
+
             if(data != nil ){
                 UIImage* image = [UIImage imageWithData:data];
                 [images addObject:image];
                 
-                // NSLog(@"%@",image);
             }
         }
     }
-    
-     //NSLog(@"%@",path);
-    
-    
     
     return  images;
 }
