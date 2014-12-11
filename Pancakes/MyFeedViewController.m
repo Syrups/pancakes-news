@@ -8,15 +8,14 @@
 
 #import "MyFeedViewController.h"
 #import <JSONModel/JSONHTTPClient.h>
-#import "Article.h"
 #import "Configuration.h"
 #import "ArticleViewController.h"
 #import "MainMenuViewController.h"
 #import "MainViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "Utils.h"
 #import "UserDataHolder.h"
-#import "PKRestClient.h"
+#import "Services.h"
+#import "Models.h"
 
 @implementation MyFeedViewController {
     NSArray* feedArticles;
@@ -35,6 +34,8 @@
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
     
     self.constraintY.constant = kMenuBarHeigth;
+    
+    [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto"];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{

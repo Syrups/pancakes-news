@@ -15,6 +15,7 @@
 @interface Block : JSONModel
 
 @property (strong, nonatomic) NSString* id;
+@property (strong, nonatomic) NSString<Optional>* _id;
 @property (strong, nonatomic) BlockType* type;
 @property (strong, nonatomic) NSString<Optional>* content;
 @property (strong, nonatomic) NSString<Optional>* title;

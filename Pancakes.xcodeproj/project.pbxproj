@@ -11,6 +11,9 @@
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
 		7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7352143A1A23688B00AFE840 /* PKRestClient.m */; };
 		737668171A111379002ECAB5 /* UserDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 737668161A111379002ECAB5 /* UserDataHolder.m */; };
+		738168E41A38CBB0006B5F8C /* PKAIDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 738168E31A38CBB0006B5F8C /* PKAIDecoder.m */; };
+		738168E71A38CD30006B5F8C /* lunette-picto.pkai in Resources */ = {isa = PBXBuildFile; fileRef = 738168E61A38CD30006B5F8C /* lunette-picto.pkai */; };
+		738168EB1A38D5F4006B5F8C /* PKSandBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 738168EA1A38D5F4006B5F8C /* PKSandBoxViewController.m */; };
 		738510871A163CF60094056D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 738510891A163CF60094056D /* Localizable.strings */; };
 		7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872B1A14DBE400AB74A6 /* PKCacheManager.m */; };
 		7388872F1A14DFA200AB74A6 /* PKNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */; };
@@ -110,6 +113,11 @@
 		7352143A1A23688B00AFE840 /* PKRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRestClient.m; sourceTree = "<group>"; };
 		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
 		737668161A111379002ECAB5 /* UserDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataHolder.m; sourceTree = "<group>"; };
+		738168E21A38CBB0006B5F8C /* PKAIDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAIDecoder.h; sourceTree = "<group>"; };
+		738168E31A38CBB0006B5F8C /* PKAIDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAIDecoder.m; sourceTree = "<group>"; };
+		738168E61A38CD30006B5F8C /* lunette-picto.pkai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lunette-picto.pkai"; sourceTree = "<group>"; };
+		738168E91A38D5F4006B5F8C /* PKSandBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSandBoxViewController.h; sourceTree = "<group>"; };
+		738168EA1A38D5F4006B5F8C /* PKSandBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSandBoxViewController.m; sourceTree = "<group>"; };
 		738510881A163CF60094056D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7388872A1A14DBE400AB74A6 /* PKCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCacheManager.h; sourceTree = "<group>"; };
 		7388872B1A14DBE400AB74A6 /* PKCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCacheManager.m; sourceTree = "<group>"; };
@@ -291,6 +299,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		738168E51A38CD27006B5F8C /* PKAI */ = {
+			isa = PBXGroup;
+			children = (
+				738168E61A38CD30006B5F8C /* lunette-picto.pkai */,
+			);
+			name = PKAI;
+			sourceTree = "<group>";
+		};
+		738168E81A38D5D6006B5F8C /* sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				738168E91A38D5F4006B5F8C /* PKSandBoxViewController.h */,
+				738168EA1A38D5F4006B5F8C /* PKSandBoxViewController.m */,
+			);
+			name = sandbox;
+			sourceTree = "<group>";
+		};
 		738887291A14DB8E00AB74A6 /* Interests */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +483,8 @@
 				7388872E1A14DFA200AB74A6 /* PKNotificationManager.m */,
 				735214391A23688B00AFE840 /* PKRestClient.h */,
 				7352143A1A23688B00AFE840 /* PKRestClient.m */,
+				738168E21A38CBB0006B5F8C /* PKAIDecoder.h */,
+				738168E31A38CBB0006B5F8C /* PKAIDecoder.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -465,6 +492,7 @@
 		B38554E319F11B0800AB8459 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				738168E81A38D5D6006B5F8C /* sandbox */,
 				B3FE8B9A1A287ABF00CF5435 /* Tutorial */,
 				B3B9375E1A0A41A800584843 /* Menu */,
 				73DC79BA1A0C23BB00093265 /* MyInterest */,
@@ -525,6 +553,7 @@
 		B3B1D5AF19EEC499001E8BBF /* Pancakes */ = {
 			isa = PBXGroup;
 			children = (
+				738168E51A38CD27006B5F8C /* PKAI */,
 				73FC07811A2BE44B006A57E1 /* climate.gif */,
 				73FC07821A2BE44B006A57E1 /* corruption.gif */,
 				73FC07831A2BE44B006A57E1 /* food.gif */,
@@ -786,6 +815,7 @@
 				73FC078A1A2BE44B006A57E1 /* womens.gif in Resources */,
 				73FC07881A2BE44B006A57E1 /* food.gif in Resources */,
 				739228551A0D14B3005F02E9 /* TemplateIcon2x.png in Resources */,
+				738168E71A38CD30006B5F8C /* lunette-picto.pkai in Resources */,
 				B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -854,6 +884,7 @@
 				73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */,
 				73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */,
 				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,
+				738168EB1A38D5F4006B5F8C /* PKSandBoxViewController.m in Sources */,
 				B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */,
 				B3D1631F1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m in Sources */,
 				B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */,
@@ -876,6 +907,7 @@
 				73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,
 				B39BC80319F2847600277370 /* BlockType.m in Sources */,
+				738168E41A38CBB0006B5F8C /* PKAIDecoder.m in Sources */,
 				B37704001A249422006A66F4 /* BlockButton.m in Sources */,
 				B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */,
 				7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */,
