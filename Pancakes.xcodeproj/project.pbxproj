@@ -74,6 +74,8 @@
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
 		B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CB88CE1A13A03A006DFF03 /* Utils.m */; };
 		B3D1631F1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D1631E1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m */; };
+		B3DBD2CB1A3F3B5D0013493C /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B3DBD2CA1A3F3B5D0013493C /* AudioPlayer.m */; };
+		B3DBD2CD1A3F46400013493C /* test_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B3DBD2CC1A3F46400013493C /* test_audio.mp3 */; };
 		B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */; };
 		B3E5397B1A110C27006FF158 /* ArticleMenuInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5397A1A110C27006FF158 /* ArticleMenuInterestsViewController.m */; };
 		B3E5397E1A110E5B006FF158 /* ArticleMenuShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E5397D1A110E5B006FF158 /* ArticleMenuShareViewController.m */; };
@@ -227,6 +229,9 @@
 		B3CB88CE1A13A03A006DFF03 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		B3D1631D1A1391B100BCBE98 /* ArticleParagraphLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleParagraphLayoutManager.h; sourceTree = "<group>"; };
 		B3D1631E1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleParagraphLayoutManager.m; sourceTree = "<group>"; };
+		B3DBD2C91A3F3B5D0013493C /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		B3DBD2CA1A3F3B5D0013493C /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		B3DBD2CC1A3F46400013493C /* test_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test_audio.mp3; sourceTree = "<group>"; };
 		B3E539751A10FEC0006FF158 /* ArticleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuViewController.h; sourceTree = "<group>"; };
 		B3E539761A10FEC0006FF158 /* ArticleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleMenuViewController.m; sourceTree = "<group>"; };
 		B3E539791A110C27006FF158 /* ArticleMenuInterestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleMenuInterestsViewController.h; sourceTree = "<group>"; };
@@ -375,6 +380,8 @@
 				B37703FF1A249422006A66F4 /* BlockButton.m */,
 				B3F0BD021A24F3F100615279 /* ArticleMenuItem.h */,
 				B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */,
+				B3DBD2C91A3F3B5D0013493C /* AudioPlayer.h */,
+				B3DBD2CA1A3F3B5D0013493C /* AudioPlayer.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -545,6 +552,7 @@
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
+				B3DBD2CC1A3F46400013493C /* test_audio.mp3 */,
 				738510891A163CF60094056D /* Localizable.strings */,
 				73B33A6919F13D6000BFB546 /* PodFile */,
 				73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */,
@@ -826,6 +834,7 @@
 				B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */,
 				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
 				B3FE6FFF1A3EF9EA0071413B /* video.pkai in Resources */,
+				B3DBD2CD1A3F46400013493C /* test_audio.mp3 in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
 				B3EF69621A03D35D00150BF7 /* Heuristica-Regular.otf in Resources */,
 				73FC07891A2BE44B006A57E1 /* humanitarian.gif in Resources */,
@@ -922,6 +931,7 @@
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
 				B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
+				B3DBD2CB1A3F3B5D0013493C /* AudioPlayer.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
 				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
 				73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */,

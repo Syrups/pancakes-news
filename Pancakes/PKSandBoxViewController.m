@@ -8,7 +8,7 @@
 
 #import "PKSandBoxViewController.h"
 #import "PKAIDecoder.h"
-
+#import "AudioPlayer.h"
 
 @interface PKSandBoxViewController ()
 
@@ -22,6 +22,9 @@
     
     [PKAIDecoder builAnimatedImageIn:self.pkaImageTest fromFile:@"lunette-picto"];
     [PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
+    
+    [self.view addSubview:[[AudioPlayer alloc] initWithFrame:CGRectMake(50, 50, 200, 200)]];
+     
 }
 
 - (void)didReceiveMemoryWarning {
