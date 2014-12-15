@@ -90,6 +90,11 @@
 		B3F82C391A0387D70038D763 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C381A0387D70038D763 /* OpenGLES.framework */; };
 		B3F82C3B1A0387DF0038D763 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C3A1A0387DF0038D763 /* AVFoundation.framework */; };
 		B3F82C3D1A0387E40038D763 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3F82C3C1A0387E40038D763 /* QuartzCore.framework */; };
+		B3FE6FFB1A3EF9EA0071413B /* comments.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3FE6FF61A3EF9EA0071413B /* comments.pkai */; };
+		B3FE6FFC1A3EF9EA0071413B /* context.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3FE6FF71A3EF9EA0071413B /* context.pkai */; };
+		B3FE6FFD1A3EF9EA0071413B /* map.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3FE6FF81A3EF9EA0071413B /* map.pkai */; };
+		B3FE6FFE1A3EF9EA0071413B /* audio.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3FE6FF91A3EF9EA0071413B /* audio.pkai */; };
+		B3FE6FFF1A3EF9EA0071413B /* video.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3FE6FFA1A3EF9EA0071413B /* video.pkai */; };
 		B3FE8B9D1A28823300CF5435 /* TutoThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FE8B9C1A28823300CF5435 /* TutoThemesViewController.m */; };
 		D801CAA315D503C752005C10 /* libPods-Pancakes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9407447283D9666076675468 /* libPods-Pancakes.a */; };
 /* End PBXBuildFile section */
@@ -250,6 +255,11 @@
 		B3F82C3A1A0387DF0038D763 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B3F82C3C1A0387E40038D763 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B3FB2D3819F9A56000DF09D8 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		B3FE6FF61A3EF9EA0071413B /* comments.pkai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = comments.pkai; sourceTree = "<group>"; };
+		B3FE6FF71A3EF9EA0071413B /* context.pkai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.pkai; sourceTree = "<group>"; };
+		B3FE6FF81A3EF9EA0071413B /* map.pkai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.pkai; sourceTree = "<group>"; };
+		B3FE6FF91A3EF9EA0071413B /* audio.pkai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = audio.pkai; sourceTree = "<group>"; };
+		B3FE6FFA1A3EF9EA0071413B /* video.pkai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.pkai; sourceTree = "<group>"; };
 		B3FE8B9B1A28823300CF5435 /* TutoThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutoThemesViewController.h; sourceTree = "<group>"; };
 		B3FE8B9C1A28823300CF5435 /* TutoThemesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutoThemesViewController.m; sourceTree = "<group>"; };
 		B5AD2A8D2E1335559E7681B7 /* Pods-Pancakes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pancakes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pancakes/Pods-Pancakes.release.xcconfig"; sourceTree = "<group>"; };
@@ -302,6 +312,11 @@
 		738168E51A38CD27006B5F8C /* PKAI */ = {
 			isa = PBXGroup;
 			children = (
+				B3FE6FF61A3EF9EA0071413B /* comments.pkai */,
+				B3FE6FF71A3EF9EA0071413B /* context.pkai */,
+				B3FE6FF81A3EF9EA0071413B /* map.pkai */,
+				B3FE6FF91A3EF9EA0071413B /* audio.pkai */,
+				B3FE6FFA1A3EF9EA0071413B /* video.pkai */,
 				738168E61A38CD30006B5F8C /* lunette-picto.pkai */,
 			);
 			name = PKAI;
@@ -520,8 +535,8 @@
 				B38F09C019F13EEE0013B920 /* Article.h */,
 				B38F09C119F13EEE0013B920 /* Article.m */,
 				7392284B1A0D12CA005F02E9 /* ThemeInterest.h */,
-				7392284C1A0D12CA005F02E9 /* ThemeInterest.m */,
 				7392284E1A0D1301005F02E9 /* SubThemeInterest.h */,
+				7392284C1A0D12CA005F02E9 /* ThemeInterest.m */,
 				7392284F1A0D1301005F02E9 /* SubThemeInterest.m */,
 			);
 			name = Models;
@@ -793,6 +808,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */,
+				B3FE6FFD1A3EF9EA0071413B /* map.pkai in Resources */,
 				B3183C3C19F68B90004C401F /* (null) in Resources */,
 				B3EF69611A03D35D00150BF7 /* Heuristica-Italic.otf in Resources */,
 				738510871A163CF60094056D /* Localizable.strings in Resources */,
@@ -800,6 +816,7 @@
 				73FC07871A2BE44B006A57E1 /* corruption.gif in Resources */,
 				B3B1D5BC19EEC499001E8BBF /* Main.storyboard in Resources */,
 				739228541A0D14B3005F02E9 /* MyInterest.json in Resources */,
+				B3FE6FFB1A3EF9EA0071413B /* comments.pkai in Resources */,
 				73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
 				73B33A6B19F13D6000BFB546 /* PodFile in Resources */,
@@ -808,11 +825,14 @@
 				73FC07861A2BE44B006A57E1 /* climate.gif in Resources */,
 				B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */,
 				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
+				B3FE6FFF1A3EF9EA0071413B /* video.pkai in Resources */,
 				B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */,
 				B3EF69621A03D35D00150BF7 /* Heuristica-Regular.otf in Resources */,
 				73FC07891A2BE44B006A57E1 /* humanitarian.gif in Resources */,
+				B3FE6FFE1A3EF9EA0071413B /* audio.pkai in Resources */,
 				B3EF695F1A03D35D00150BF7 /* BreeBold.otf in Resources */,
 				73FC078A1A2BE44B006A57E1 /* womens.gif in Resources */,
+				B3FE6FFC1A3EF9EA0071413B /* context.pkai in Resources */,
 				73FC07881A2BE44B006A57E1 /* food.gif in Resources */,
 				739228551A0D14B3005F02E9 /* TemplateIcon2x.png in Resources */,
 				738168E71A38CD30006B5F8C /* lunette-picto.pkai in Resources */,

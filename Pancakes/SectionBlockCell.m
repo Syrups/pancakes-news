@@ -14,6 +14,7 @@
 #import "ArcImageView.h"
 #import <FXBlurView/FXBlurView.h>
 #import "BlockButton.h"
+#import "PKAIDecoder.h"
 
 @implementation SectionBlockCell
 
@@ -114,6 +115,8 @@
     BlockButton* button = [[BlockButton alloc] initWithFrame:CGRectMake(self.frame.size.width - 62.0f, 5.0f, 50, 50) blockType:block.type color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
     [button addTarget:self action:@selector(reveal:) forControlEvents:UIControlEventTouchUpInside];
     
+    NSLog(block.type.name);
+    
     [self addSubview:button];
     
     self.revealButton = button;
@@ -161,6 +164,8 @@
             self.revealButton.alpha = 0;
             self.revealButton.transform = CGAffineTransformMakeRotation(M_PI);
             
+//            self.closeButton.transform = CGAffineTransformMakeScale(0, 0);
+            
             f = self.imageMask.frame;
             f.origin.y += 350.0f;
             self.imageMask.frame = f;
@@ -178,6 +183,8 @@
                 self.closeButton.frame = f;
                 self.closeButton.titleLabel.alpha = 1;
                 self.imageMask.alpha = 0.0f;
+                
+//                self.closeButton.transform = CGAffineTransformMakeScale(1, 1);
                 
                 f = self.storylineOpen.frame;
                 f.size.height = self.frame.size.height;

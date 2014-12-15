@@ -11,6 +11,9 @@
 
 @interface BlockButton : UIButton
 
+@property (strong, nonatomic) BlockType* type;
+@property (strong, nonatomic) UIColor* color;
+
 - (instancetype) initWithFrame:(CGRect)frame blockType:(BlockType*)type color:(UIColor*)color;
 
 @end

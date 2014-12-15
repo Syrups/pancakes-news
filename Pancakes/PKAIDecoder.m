@@ -75,11 +75,32 @@
     
     NSArray *images = [PKAIDecoder decodeImageFromFile:file];
     
-    [button setImage:[images objectAtIndex:0] forState:UIControlStateNormal];
+    if (images.count == 0) {
+        NSLog(@"PKAIDecoder : wrong filename (no .pkai file found with such name : %@)", file);
+        return;
+    }
+    
+    [button setImage:[images objectAtIndex:images.count-1] forState:UIControlStateNormal];
     
     [button.imageView setAnimationImages:[images copy]];
-    [button.imageView setAnimationDuration:1.5f];
+    [button.imageView setAnimationDuration:1.3f];
+    [button.imageView setAnimationRepeatCount:1];
+    
+    
+    [UIView setAnimationDelegate:self];
+    
     [button.imageView startAnimating];
+    
+//
+//    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
+//    animation.calculationMode = kCAAnimationDiscrete;
+//    animation.duration = images.count / 24.0; // 24 frames per second
+//    animation.values = images;
+//    animation.repeatCount = 1;
+//    animation.removedOnCompletion = NO;
+//    animation.fillMode = kCAFillModeForwards;
+//    [button.imageView.layer addAnimation:animation forKey:@"animation"];
 }
+
 
 @end
