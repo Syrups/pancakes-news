@@ -10,6 +10,8 @@
 
 @interface AudioPlayer : UIView
 
+@property (strong, nonatomic) UIImageView* wave;
+
 - (instancetype)initWithFrame:(CGRect)frame totalDuration:(CGFloat)total;
 - (void)update;
 

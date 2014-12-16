@@ -8,6 +8,7 @@
 
 #import "AudioPlayer.h"
 #import "Configuration.h"
+#import "PKAIDecoder.h"
 
 @implementation AudioPlayer {
     CGFloat currentTime;
@@ -20,6 +21,13 @@
     
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
+    
+    UIImageView* wave = [[UIImageView alloc] initWithFrame:CGRectMake(-130, -50, 441, 232)];
+    [PKAIDecoder builAnimatedImageIn:wave fromFile:@"audio_wave"];
+    [wave setContentMode:UIViewContentModeScaleAspectFit];
+    
+    self.wave = wave;
+    [self addSubview:wave];
     
     [self setContentMode:UIViewContentModeRedraw];
     
@@ -36,26 +44,32 @@
     
     // outer circle
     CGContextBeginPath(ctx);
-    CGContextAddArc(ctx, center.x, center.y, center.x - self.frame.origin.x, 0, [self getAnglePercent], 0);
+    CGContextAddArc(ctx, center.x, center.y, self.frame.size.width/2.5f - 11, -M_PI_2, [self getAnglePercent], 0);
     CGContextSetStrokeColorWithColor(ctx, RgbaColor(255, 255, 255, 0.2f).CGColor);
-    CGContextSetLineWidth(ctx, 16.0f);
+    CGContextSetLineWidth(ctx, 12.0f);
     CGContextStrokePath(ctx);
     
     NSLog(@"%f", [self getAnglePercent]);
     
     // inner circle
+//    CGContextBeginPath(ctx);
+//    CGContextAddArc(ctx, center.x, center.y, self.frame.size.width/2.5f - 16 , 0, 2*M_PI, 0);
+//    CGContextSetStrokeColorWithColor(ctx, RgbaColor(255, 255, 255, 0.3f).CGColor);
+//    CGContextSetLineWidth(ctx, 3.0f);
+//    CGContextStrokePath(ctx);
+    
+    // bg
     CGContextBeginPath(ctx);
-    CGContextAddArc(ctx, center.x, center.y, center.x - self.frame.origin.x + 10, 0, 2*M_PI, 0);
-    CGContextSetStrokeColorWithColor(ctx, RgbaColor(255, 255, 255, 0.3f).CGColor);
-    CGContextSetLineWidth(ctx, 3.0f);
-    CGContextStrokePath(ctx);
+    CGContextAddArc(ctx, center.x, center.y, self.frame.size.width/2.5f - 18 , 0, 2*M_PI, 0);
+    CGContextSetFillColorWithColor(ctx, RgbaColor(255, 255, 255, 0.6f).CGColor);
+    CGContextFillPath(ctx);
     
     [super drawRect:rect];
     
 }
 
 - (CGFloat)getAnglePercent {
-    return (M_PI*2 * currentTime) / totalDuration;
+    return -M_PI_2 + (M_PI*2 * currentTime) / totalDuration;
 }
 
 - (void)update {

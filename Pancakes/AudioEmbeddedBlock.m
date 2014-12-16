@@ -45,18 +45,14 @@
     
     [self loadAudioPlayer];
     
-    AudioPlayer* player = [[AudioPlayer alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 100, self.frame.size.height/2-100, 200, 200) totalDuration:self.audioPlayer.duration];
+    AudioPlayer* player = [[AudioPlayer alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 80, 45, 160, 160) totalDuration:self.audioPlayer.duration];
+//    player.backgroundColor = [UIColor redColor];
     [self addSubview:player];
     self.playerView = player;
     
-    UIButton* playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 30, 100, 60, 30)];
-    [playButton setTitle:@"Play" forState:UIControlStateNormal];
-    [playButton addTarget:self action:@selector(togglePlayPause:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:playButton];
-    [self bringSubviewToFront:playButton];
     
     [self setNeedsDisplay];
-    
+    [self togglePlayPause:nil];
     
 }
 

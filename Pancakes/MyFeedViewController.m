@@ -290,7 +290,7 @@
         [self.readButton setImage:read forState:UIControlStateNormal];
         [self.readButton setTintColor:[Utils colorWithHexString:article.color]];
         
-        [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto"];
+        [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto" withColor:[Utils colorWithHexString:article.color]];
     } completion:nil];
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];

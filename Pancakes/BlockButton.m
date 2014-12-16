@@ -19,7 +19,7 @@
     self.type = type;
     self.color = color;
     
-    [PKAIDecoder builAnimatedImageInButton:self fromFile:type.name];
+    [PKAIDecoder builAnimatedImageInButton:self fromFile:type.name withColor:color];
     
     UIImageView* background = [[UIImageView alloc] initWithFrame:frame];
     background.image = [UIImage imageNamed:@"article-block-button"];

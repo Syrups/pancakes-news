@@ -71,7 +71,7 @@
     [imageView startAnimating];
 }
 
-+ (void) builAnimatedImageInButton:(UIButton *) button  fromFile:(NSString *)file{
++ (void) builAnimatedImageInButton:(UIButton *) button  fromFile:(NSString *)file withColor:(UIColor*)color {
     
     NSArray *images = [PKAIDecoder decodeImageFromFile:file];
     
@@ -79,6 +79,18 @@
         NSLog(@"PKAIDecoder : wrong filename (no .pkai file found with such name : %@)", file);
         return;
     }
+    
+    if (color != nil) {
+        NSMutableArray* imgs = @[].mutableCopy;
+        for (UIImage* img in images) {
+            UIImage* newImg = [img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [imgs addObject:newImg];
+        }
+        
+        images = imgs.copy;
+        [button.imageView setTintColor:color];
+    }
+    
     
     [button setImage:[images objectAtIndex:images.count-1] forState:UIControlStateNormal];
     

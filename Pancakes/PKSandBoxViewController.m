@@ -20,8 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [PKAIDecoder builAnimatedImageIn:self.pkaImageTest fromFile:@"lunette-picto"];
-    [PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
+//    [PKAIDecoder builAnimatedImageIn:self.pkaImageTest fromFile:@"lunette-picto"];
+//    [PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
     
     [self.view addSubview:[[AudioPlayer alloc] initWithFrame:CGRectMake(50, 50, 200, 200)]];
      
