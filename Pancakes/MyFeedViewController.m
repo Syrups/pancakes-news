@@ -35,7 +35,6 @@
     
     self.constraintY.constant = kMenuBarHeigth;
     
-    [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto"];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
@@ -290,6 +289,8 @@
         UIImage* read = [self.readButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [self.readButton setImage:read forState:UIControlStateNormal];
         [self.readButton setTintColor:[Utils colorWithHexString:article.color]];
+        
+        [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto" withColor:[Utils colorWithHexString:article.color]];
     } completion:nil];
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];

@@ -8,14 +8,25 @@
 
 #import "AudioEmbeddedBlock.h"
 #import "Configuration.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/SDWebImageManager.h>
+#import "StackBlur/UIImage+StackBlur.h"
 
-@implementation AudioEmbeddedBlock
+@implementation AudioEmbeddedBlock {
+    NSTimer* playTimer;
+    BOOL isPlaying;
+}
 
 - (void)layoutWithBlock:(Block *)block offsetY:(CGFloat)offsetY {
     
+    isPlaying = NO;
+    
     UIImageView* background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 230)];
-    [background sd_setImageWithURL:[NSURL URLWithString:self.article.coverImage]];
+    
+    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:self.article.coverImage] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        if (image) {
+            [background setImage:[image stackBlur:8.0f]];
+        }
+    }];
     
     [self addSubview:background];
     
@@ -28,16 +39,21 @@
     title.textColor = [UIColor whiteColor];
     title.font = [UIFont fontWithName:kFontBreeBold size:24.0f];
     title.textAlignment = NSTextAlignmentRight;
-    title.text = block.title;
+    title.text = @"Audio";
     [self addSubview:title];
+    [self bringSubviewToFront:title];
     
     [self loadAudioPlayer];
     
-    UIButton* playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 30, 100, 60, 30)];
-    [playButton setTitle:@"Play" forState:UIControlStateNormal];
-    [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:playButton];
-    [self bringSubviewToFront:playButton];
+    AudioPlayer* player = [[AudioPlayer alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 80, 45, 160, 160) totalDuration:self.audioPlayer.duration];
+//    player.backgroundColor = [UIColor redColor];
+    [self addSubview:player];
+    self.playerView = player;
+    
+    
+    [self setNeedsDisplay];
+    [self togglePlayPause:nil];
+    
 }
 
 - (void)loadAudioPlayer {
@@ -48,14 +64,27 @@
     NSError* err = nil;
     
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:&err];
+    self.audioPlayer.delegate = self;
     
     if (err != nil) {
         NSLog(@"%@", err);
     }
 }
 
-- (IBAction)play:(id)sender {
-    [self.audioPlayer play];
+- (IBAction)togglePlayPause:(id)sender {
+    if (playTimer) {
+        [self.audioPlayer pause];
+        [playTimer invalidate];
+        playTimer = nil;
+    } else {
+        NSLog(@"PLAY");
+        [self.audioPlayer play];
+        playTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateAudioPlayer) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)updateAudioPlayer {
+    [self.playerView update];
 }
 
 @end

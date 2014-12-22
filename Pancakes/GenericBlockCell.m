@@ -171,8 +171,10 @@
                 
                 // Storyline on side
                 UIView *storylineOpen = [[UIView alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 38, blockView.frame.origin.y, 3.0f, 0)];
-                storylineOpen.backgroundColor = kOrangeColor;
+                storylineOpen.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
                 [self addSubview:storylineOpen];
+                
+                
                 
                 [blockLines setObject:storylineOpen forKey:child.id];
                 
@@ -359,6 +361,16 @@
         frame.size.height = blockView.frame.size.height;
         frame.origin.y = cellFrame.origin.y + 30.0f;
         line.frame = frame;
+        
+        UIView *firstBullet = [[UIView alloc] initWithFrame:CGRectMake(-2, -2, 7, 7)];
+        [firstBullet.layer setCornerRadius:3.0f];
+        firstBullet.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+        [line addSubview:firstBullet];
+        
+        UIView *secondBullet = [[UIView alloc] initWithFrame:CGRectMake(-2, line.frame.size.height, 7, 7)];
+        [secondBullet.layer setCornerRadius:3.0f];
+        secondBullet.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+        [line addSubview:secondBullet];
         
         [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y - 40) animated:YES];
         

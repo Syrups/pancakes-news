@@ -7,6 +7,7 @@
 //
 
 #import "BlockButton.h"
+#import "PKAIDecoder.h"
 
 @implementation BlockButton {
     BOOL isAnimatingAfterScroll;
@@ -14,6 +15,11 @@
 
 - (instancetype) initWithFrame:(CGRect)frame blockType:(BlockType*)type color:(UIColor*)color {
     self = [super initWithFrame:frame];
+    
+    self.type = type;
+    self.color = color;
+    
+    [PKAIDecoder builAnimatedImageInButton:self fromFile:type.name withColor:color];
     
     UIImageView* background = [[UIImageView alloc] initWithFrame:frame];
     background.image = [UIImage imageNamed:@"article-block-button"];
@@ -23,28 +29,30 @@
     [self setImage:[picto imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self setTintColor:color];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"scroll.end" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        isAnimatingAfterScroll = YES;
-        __block CGRect originalFrame = self.imageView.frame;
-
-        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            CGRect f = self.imageView.frame;
-            f.origin.y += 5.0f;
-            [self.imageView setFrame:f];
-
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                CGRect f = self.imageView.frame;
-                f.origin.y -= 5.0f;
-                [self.imageView setFrame:f];
-            } completion:^(BOOL finished) {
-                [self.imageView setFrame:originalFrame];
-                isAnimatingAfterScroll = NO;
-            }];
-        }];
-    }];
+    [NSTimer scheduledTimerWithTimeInterval:1.3f target:self selector:@selector(reset) userInfo:nil repeats:NO];
+    
+//    [[NSNotificationCenter defaultCenter] addObserverForName:@"scroll.end" object:nil queue:nil usingBlock:^(NSNotification *note) {
+//        
+//        if (!isAnimatingAfterScroll) {
+//            
+//        }
+//        
+//    }];
     
     return self;
+}
+
+- (void) reset {
+
+    NSArray* images = [PKAIDecoder decodeImageFromFile:self.type.name];
+    
+    if (images.count > 0) {
+        UIImage* picto = [images objectAtIndex:images.count-1];
+        [self setImage:[picto imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [self setTintColor:self.color];
+    }
+    
+
 }
 
 @end

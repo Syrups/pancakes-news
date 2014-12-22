@@ -15,5 +15,5 @@
 + (NSArray *) decodeImageFromFile: (NSString *)file;
 
 + (void) builAnimatedImageIn:(UIImageView *) imageView  fromFile:(NSString *)file;
-+ (void) builAnimatedImageInButton:(UIButton *) button  fromFile:(NSString *)file;
++ (void) builAnimatedImageInButton:(UIButton *) button  fromFile:(NSString *)file withColor:(UIColor*)color;
 @end

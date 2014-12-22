@@ -7,10 +7,12 @@
 //
 
 #import "DefinitionEmbeddedBlock.h"
+#import "AudioPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface AudioEmbeddedBlock : DefinitionEmbeddedBlock
+@interface AudioEmbeddedBlock : DefinitionEmbeddedBlock <AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) AVAudioPlayer* audioPlayer;
+@property (strong, nonatomic) AudioPlayer* playerView;
 
 @end

@@ -253,7 +253,7 @@
         
         previousDetailViewTag = sender.tag;
         [parent.menuDetailViewController setViewControllers:@[destination] animated:YES];
-        [parent.view bringSubviewToFront:self.view];
+//        [parent.view bringSubviewToFront:self.view];
     }
 }
 

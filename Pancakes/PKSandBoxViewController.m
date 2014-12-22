@@ -8,7 +8,7 @@
 
 #import "PKSandBoxViewController.h"
 #import "PKAIDecoder.h"
-
+#import "AudioPlayer.h"
 
 @interface PKSandBoxViewController ()
 
@@ -20,8 +20,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+
     [PKAIDecoder builAnimatedImageIn:self.pkaImageTest fromFile:@"lunette-picto"];
-    [PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
+    //[PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
     self.pksyrupButtontest.innerColor = [UIColor blackColor];
     
     [self.pksyrupButtontest addTarget:self
@@ -32,6 +33,12 @@
 - (void)syrupButtonValueChanged:(PKSyrupButton *)button
 {
     NSLog(@"Value : %d", button.isOn);
+
+//    [PKAIDecoder builAnimatedImageIn:self.pkaImageTest fromFile:@"lunette-picto"];
+//    [PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
+    
+    [self.view addSubview:[[AudioPlayer alloc] initWithFrame:CGRectMake(50, 50, 200, 200)]];
+    
 }
 
 
