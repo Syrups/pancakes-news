@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */; };
 		7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */; };
+		73315B1F1A3AFFEF005B7567 /* PKSyrupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 73315B1E1A3AFFEF005B7567 /* PKSyrupButton.m */; };
 		7352143B1A23688B00AFE840 /* PKRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7352143A1A23688B00AFE840 /* PKRestClient.m */; };
 		737668171A111379002ECAB5 /* UserDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 737668161A111379002ECAB5 /* UserDataHolder.m */; };
 		738168E41A38CBB0006B5F8C /* PKAIDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 738168E31A38CBB0006B5F8C /* PKAIDecoder.m */; };
@@ -109,6 +110,8 @@
 		7324CFB619F83D4C004E2065 /* UISubThemeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISubThemeViewCell.h; sourceTree = "<group>"; };
 		7324CFB719F83D4C004E2065 /* UISubThemeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISubThemeViewCell.m; sourceTree = "<group>"; };
 		7324CFB819F83D4C004E2065 /* UISubThemeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubThemeViewCell.xib; sourceTree = "<group>"; };
+		73315B1D1A3AFFEF005B7567 /* PKSyrupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSyrupButton.h; sourceTree = "<group>"; };
+		73315B1E1A3AFFEF005B7567 /* PKSyrupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSyrupButton.m; sourceTree = "<group>"; };
 		735214391A23688B00AFE840 /* PKRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRestClient.h; sourceTree = "<group>"; };
 		7352143A1A23688B00AFE840 /* PKRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRestClient.m; sourceTree = "<group>"; };
 		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 		73C24E111A1938210070C62D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				73315B1D1A3AFFEF005B7567 /* PKSyrupButton.h */,
+				73315B1E1A3AFFEF005B7567 /* PKSyrupButton.m */,
 				73C24E121A1938A40070C62D /* PKMenuItemCircle.h */,
 				73C24E131A1938A40070C62D /* PKMenuItemCircle.m */,
 				B385A39B1A23825B00585C29 /* ArcImageView.h */,
@@ -903,6 +908,7 @@
 				B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
+				73315B1F1A3AFFEF005B7567 /* PKSyrupButton.m in Sources */,
 				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
 				73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,

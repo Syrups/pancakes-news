@@ -36,25 +36,28 @@
                             </mask>
                         </variation>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Uq2-lC-wzF">
-                        <rect key="frame" x="135" y="158" width="51" height="31"/>
-                    </switch>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pbj-el-iBJ" customClass="PKSyrupButton">
+                        <rect key="frame" x="140" y="149" width="40" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="E0y-IP-6Aa"/>
+                            <constraint firstAttribute="height" constant="40" id="MJu-OD-r1N"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" id="5Dx-fV-YrG"/>
-                    <constraint firstItem="Uq2-lC-wzF" firstAttribute="bottom" secondItem="MXL-td-rEm" secondAttribute="bottomMargin" constant="-20" id="5MB-bd-dnp"/>
                     <constraint firstItem="qf7-5h-wuh" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leading" constant="111" id="88V-6R-1CS"/>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leadingMargin" id="Bag-JV-8XJ"/>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" constant="-9" id="GQX-Tg-xMh"/>
                     <constraint firstItem="qf7-5h-wuh" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" constant="10" id="GXC-hU-fpd"/>
-                    <constraint firstItem="qf7-5h-wuh" firstAttribute="centerY" secondItem="Uq2-lC-wzF" secondAttribute="centerY" id="HQk-Oa-M7c"/>
                     <constraint firstAttribute="bottomMargin" secondItem="e9J-Hb-BBK" secondAttribute="bottom" constant="-8" id="JQe-JQ-LTv"/>
                     <constraint firstAttribute="centerX" secondItem="qf7-5h-wuh" secondAttribute="centerX" constant="0.5" id="N2H-pv-c0o"/>
-                    <constraint firstItem="Uq2-lC-wzF" firstAttribute="centerX" secondItem="qf7-5h-wuh" secondAttribute="centerX" id="XRT-Vr-hxQ"/>
+                    <constraint firstAttribute="centerX" secondItem="Pbj-el-iBJ" secondAttribute="centerX" id="PvI-DN-b2s"/>
                     <constraint firstAttribute="trailingMargin" secondItem="e9J-Hb-BBK" secondAttribute="trailing" id="ZfT-ce-9eQ"/>
-                    <constraint firstItem="Uq2-lC-wzF" firstAttribute="top" secondItem="qf7-5h-wuh" secondAttribute="bottom" constant="8" symbolic="YES" id="cSd-S8-bwM"/>
                     <constraint firstAttribute="bottomMargin" secondItem="e9J-Hb-BBK" secondAttribute="bottom" id="hdg-bo-X8C"/>
                     <constraint firstAttribute="trailingMargin" secondItem="e9J-Hb-BBK" secondAttribute="trailing" constant="-8" id="hf0-kJ-Plj"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Pbj-el-iBJ" secondAttribute="bottom" constant="20" id="jTy-U4-J1H"/>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leadingMargin" constant="-8" id="tBk-Dx-aev"/>
                 </constraints>
                 <variation key="default">
@@ -64,14 +67,12 @@
                         <exclude reference="ZfT-ce-9eQ"/>
                         <exclude reference="hdg-bo-X8C"/>
                         <exclude reference="88V-6R-1CS"/>
-                        <exclude reference="HQk-Oa-M7c"/>
-                        <exclude reference="cSd-S8-bwM"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImageView" destination="e9J-Hb-BBK" id="zb6-he-NJP"/>
-                <outlet property="themeCheck" destination="Uq2-lC-wzF" id="eAU-hb-n6y"/>
+                <outlet property="themeCheck" destination="Pbj-el-iBJ" id="DDv-28-q0x"/>
                 <outlet property="themeLabel" destination="qf7-5h-wuh" id="tml-4G-tqN"/>
             </connections>
             <point key="canvasLocation" x="519" y="757"/>

@@ -46,6 +46,7 @@
         NSData *gif = [NSData dataWithContentsOfFile:filePath];
     
         self.backgroundImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData : gif];
+    
 }
 
 

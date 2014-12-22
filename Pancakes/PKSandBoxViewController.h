@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PKSyrupButton.h"
 
 @interface PKSandBoxViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *pkaImageTest;
 @property (weak, nonatomic) IBOutlet UIButton *pkaImgeButtonTest;
+@property (weak, nonatomic) IBOutlet PKSyrupButton *pksyrupButtontest;
 
 @end

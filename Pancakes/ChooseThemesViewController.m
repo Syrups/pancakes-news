@@ -267,12 +267,18 @@ float percent20;
         
         UIThemeView *tCell = (UIThemeView *)cell;
         
+        UIColor *themeColor = [Utils colorWithHexString: theme.color];
         [tCell.themeLabel setText:theme.title];
-        [tCell.themeLabel setTextColor: [Utils colorWithHexString: theme.color]];
+        [tCell.themeLabel setTextColor: themeColor];
+        
+        
+        tCell.themeCheck.innerColor = [UIColor colorWithWhite:1 alpha:0];
+        tCell.themeCheck.innerImageColor = themeColor;
+        tCell.themeCheck.borderColor = themeColor;
         [tCell.themeCheck addTarget:self action:@selector(setThemeState:) forControlEvents:UIControlEventValueChanged];
         
         tCell.theme = theme;
-        [tCell.themeCheck setOn:hasSubThemeInPreferences];
+        [tCell.themeCheck setIsOn:!hasSubThemeInPreferences];
         
          [tCell updateCellWithImage];
         //[cell.backgroundImage setFrame:cell.frame];

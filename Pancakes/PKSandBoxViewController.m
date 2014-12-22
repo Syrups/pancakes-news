@@ -22,7 +22,18 @@
     
     [PKAIDecoder builAnimatedImageIn:self.pkaImageTest fromFile:@"lunette-picto"];
     [PKAIDecoder builAnimatedImageInButton:self.pkaImgeButtonTest fromFile:@"lunette-picto"];
+    self.pksyrupButtontest.innerColor = [UIColor blackColor];
+    
+    [self.pksyrupButtontest addTarget:self
+                     action:@selector(syrupButtonValueChanged:)
+           forControlEvents:UIControlEventValueChanged];
+   
 }
+- (void)syrupButtonValueChanged:(PKSyrupButton *)button
+{
+    NSLog(@"Value : %d", button.isOn);
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

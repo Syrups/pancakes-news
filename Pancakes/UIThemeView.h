@@ -12,11 +12,12 @@
 #import "ThemeInterest.h"
 #import "FXBlurView.h"
 #import "FLAnimatedImageView.h"
+#import "PKSyrupButton.h"
 
 @interface UIThemeView : UITableViewCell
 @property (weak, nonatomic) IBOutlet FLAnimatedImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *themeCheck;
+@property (weak, nonatomic) IBOutlet PKSyrupButton *themeCheck;
 //@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @property (weak, nonatomic) ThemeInterest *theme;
 @property BOOL loaded;
