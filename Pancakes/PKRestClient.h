@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "JSONModel/JSONHTTPClient.h"
 
-#define kApiRootUrl @"http://localhost:5000/api"
-#define kMediaRootUrl @"http://localhost:5000/media" //http://192.168.2.2
+#define kApiRootUrl @"http://pancakes-back.herokuapp.com/api"
+#define kMediaRootUrl @"http://pancakes-back.herokuapp.com/media"
+
+//http://pancakes-back.herokuapp.com/
+//localhost:5000
+//http://192.168.2.2
 
 
 @interface PKRestClient : NSObject
