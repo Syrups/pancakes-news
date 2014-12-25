@@ -88,6 +88,7 @@
 
 - (void)loadWaitingScreen {
     UIView* screen = [[[NSBundle mainBundle] loadNibNamed:@"LoadingScreen" owner:self options:0] objectAtIndex:0];
+    screen.frame = self.view.frame;
     [self.view addSubview:screen];
     
     self.waitingScreen = screen;

@@ -19,5 +19,6 @@
 @property (assign, nonatomic) BOOL layouted;
 
 - (void)layoutWithBlock:(Block*)block offsetY:(CGFloat)offsetY;
+- (void)willClose;
 
 @end

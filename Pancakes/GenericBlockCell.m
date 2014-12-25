@@ -381,6 +381,8 @@
 - (void)closeEmbeddedBlockWithId:(NSString*)blockId {
     DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
     
+    [blockView willClose];
+    
     [self.tableView beginUpdates];
     CGRect f = blockView.frame;
     f.size.height = 0;

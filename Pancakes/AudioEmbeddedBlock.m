@@ -87,4 +87,8 @@
     [self.playerView update];
 }
 
+- (void)willClose {
+    [self togglePlayPause:nil];
+}
+
 @end
