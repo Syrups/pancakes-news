@@ -13,10 +13,9 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-   
-    if (self) {
+    if (self = [super initWithFrame:frame]) {
         [self setUp];
+        
     }
     
     return self;
@@ -30,13 +29,8 @@
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
-    self.layer.borderColor = self.borderColor.CGColor;
-    
+  
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextClearRect(context, rect);
-    
-    CGContextSetFillColorWithColor(context, self.innerColor.CGColor);
-    CGContextFillRect(context, rect);
     
     //Lines
     CGContextSetStrokeColorWithColor(context, self.innerImageColor.CGColor);
@@ -66,15 +60,13 @@
     self.innerImageColor = RGB(255, 109, 12);
     self.borderColor = RGB(255, 109, 12);;
     
-    self.layer.borderColor = self.borderColor.CGColor;
-    
     self.layer.cornerRadius = self.frame.size.width / 2;
     self.layer.borderWidth = 2.f;
     
     self.clipsToBounds = YES;
     self.switchMode = YES;
-    self.isOn = NO;
     
+    [self setOpaque:NO];
     [self setNeedsDisplay];
 }
 
@@ -83,11 +75,12 @@
     
     _innerImageType = innerImageType;
     [self setNeedsDisplay];
-    
 }
 
 -(void)setBorderColor:(UIColor *)borderColor{
     _borderColor = borderColor;
+    
+    self.layer.borderColor = self.borderColor.CGColor;
     [self setNeedsDisplay];
 }
 
@@ -95,6 +88,8 @@
 - (void)setInnerColor:(UIColor *)innerColor{
     
     _innerColor = innerColor;
+    
+    [self setBackgroundColor:self.innerColor];
     [self setNeedsDisplay];
 }
 
@@ -118,7 +113,6 @@
 
 -(void)drawButtonTypeX:(CGRect)rect withContext: (CGContextRef) context {
 
-    
     //First Line
     CGContextMoveToPoint(context, kInnerPadding, kInnerPadding); //start at this point
     CGContextAddLineToPoint(context, rect.size.width - kInnerPadding, rect.size.height - kInnerPadding);
@@ -134,7 +128,6 @@
 
 -(void)drawButtonTypePlus:(CGRect)rect withContext: (CGContextRef) context{
    
-    
     //First Line : vertical
     CGContextMoveToPoint(context, rect.size.width * 0.5, kInnerPadding); //start at this point
     CGContextAddLineToPoint(context, rect.size.width * 0.5, rect.size.height - kInnerPadding);

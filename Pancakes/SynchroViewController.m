@@ -104,7 +104,7 @@ NSArray *vals ;
         //Update
         
         [self.cancelButtonTopSpace setConstant:30];
-        [self.synchroTableTopSpace setConstant:self.view.window.frame.size.height - 150];
+        [self.synchroTableTopSpace setConstant:self.synchroTable.superview.frame.size.height - 200];
         [self.pickerContainerTopSpace setConstant:90];
         
         //layout

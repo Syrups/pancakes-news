@@ -103,7 +103,7 @@ float percent20;
     self.themeDescription.text = self.currentTheme.desc;
     
     [UIView animateWithDuration:0.3 animations:^() {
-        self.themeDescription.alpha =  cell.self.themeCheck.isOn ? 0 : 1.0;
+        self.themeDescription.alpha =  cell.self.themeCheck.isOn ? 1.0 : 0;
         //[self.themeDescription setHidden:view.self.themeCheck.isOn];
         UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
         UIImage *blurImage = [baseImage stackBlur:20];
@@ -154,7 +154,7 @@ float percent20;
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     
     if (scrollView == self.themesView) {
-        [self centerTable];
+        //[self centerTable];
     }
 }
 
@@ -167,19 +167,21 @@ float percent20;
     //TODO : reset LOOP
     
     for (UIThemeView *cell in self.themesView.visibleCells) {
-   
-        //UIThemeView *cell = (UIThemeView *)[self.themesView cellForRowAtIndexPath:pathForCenterCell];
-        
         CGRect cellRect = [scrollView convertRect:cell.frame toView:scrollView.superview];
         
-        if (CGRectContainsRect(scrollView.frame, cellRect)){
+        float cellY = roundf(cellRect.origin.y);
+        if (kMenuBarHeigth == cellY){
             
             [self updateThemeDataWithCell:cell];
             [cell updateAsFullyVisible:YES];
+            //NSLog(@"updateAsFullyVisible : YES : %@ : %f", cell.themeLabel.text, cellY);
         }else{
             [cell updateAsFullyVisible:NO];
+            //NSLog(@"updateAsFullyVisible : NO : %@ : %f", cell.themeLabel.text, cellY);
         }
     }
+    
+    //NSLog(@"___________________________");
   
     //NSUInteger actualIndex = pathForCenterCell.row % [self.themesData count];
     //ThemeInterest *i = cell.theme;
@@ -190,7 +192,8 @@ float percent20;
     NSIndexPath *pathForCenterCell = [self.themesView indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.themesView.bounds), CGRectGetMidY(self.themesView.bounds))];
     
     [self.themesView scrollToRowAtIndexPath:pathForCenterCell atScrollPosition:UITableViewScrollPositionTop animated:YES];
-
+    
+    //NSLog(@"_____GO Center_______");
     return pathForCenterCell;
 }
 
@@ -280,7 +283,7 @@ float percent20;
         tCell.theme = theme;
         [tCell.themeCheck setIsOn:!hasSubThemeInPreferences];
         
-         [tCell updateCellWithImage];
+        [tCell updateCellWithImage];
         //[cell.backgroundImage setFrame:cell.frame];
         
     }else{
@@ -289,7 +292,7 @@ float percent20;
         
         UISubThemeViewCell *sCell = (UISubThemeViewCell *)cell;
         NSString *url = [PKRestClient mediaUrl:sub.image withRoute:@"subthemes"];
-        //NSLog(@"url : %@", url);
+        
         [sCell.picture sd_setImageWithURL:[NSURL URLWithString:url]];
         [sCell setSubTheme:sub];
         [sCell updateThemeColor: [Utils colorWithHexString: self.currentTheme.color] isIncluded:isInclude] ;
@@ -321,7 +324,7 @@ float percent20;
     BOOL state = [sender isOn];
     //[self.themeDescription setHidden:state];
     [UIView animateWithDuration:0.3 animations:^() {
-        self.themeDescription.alpha = state ? 0 : 1.0;
+        self.themeDescription.alpha = state ? 1.0 : 0;
     }];
 }
 
