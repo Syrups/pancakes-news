@@ -21,8 +21,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e9J-Hb-BBK" customClass="FLAnimatedImageView">
                         <rect key="frame" x="0.0" y="-1" width="320" height="218"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghi-Pn-Ehj" customClass="FXBlurView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf7-5h-wuh">
-                        <rect key="frame" x="111" y="18" width="97" height="79"/>
+                        <rect key="frame" x="111" y="54" width="97" height="79"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="79" id="CeX-D2-LSt"/>
                             <constraint firstAttribute="height" constant="79" id="qiq-9L-50L"/>
@@ -37,11 +42,11 @@
                         </variation>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pbj-el-iBJ" customClass="PKSyrupButton">
-                        <rect key="frame" x="140" y="149" width="40" height="40"/>
+                        <rect key="frame" x="138" y="134" width="45" height="45"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="E0y-IP-6Aa"/>
-                            <constraint firstAttribute="height" constant="40" id="MJu-OD-r1N"/>
+                            <constraint firstAttribute="width" constant="45" id="E0y-IP-6Aa"/>
+                            <constraint firstAttribute="height" constant="45" id="MJu-OD-r1N"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -49,16 +54,23 @@
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" id="5Dx-fV-YrG"/>
                     <constraint firstItem="qf7-5h-wuh" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leading" constant="111" id="88V-6R-1CS"/>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leadingMargin" id="Bag-JV-8XJ"/>
+                    <constraint firstAttribute="centerY" secondItem="qf7-5h-wuh" secondAttribute="centerY" id="BfG-6c-55T"/>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" constant="-9" id="GQX-Tg-xMh"/>
                     <constraint firstItem="qf7-5h-wuh" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" constant="10" id="GXC-hU-fpd"/>
+                    <constraint firstItem="Pbj-el-iBJ" firstAttribute="top" secondItem="qf7-5h-wuh" secondAttribute="bottom" constant="-4" id="Ivd-nL-a91"/>
                     <constraint firstAttribute="bottomMargin" secondItem="e9J-Hb-BBK" secondAttribute="bottom" constant="-8" id="JQe-JQ-LTv"/>
+                    <constraint firstItem="ghi-Pn-Ehj" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leadingMargin" constant="-8" id="LPn-MQ-0XD"/>
                     <constraint firstAttribute="centerX" secondItem="qf7-5h-wuh" secondAttribute="centerX" constant="0.5" id="N2H-pv-c0o"/>
                     <constraint firstAttribute="centerX" secondItem="Pbj-el-iBJ" secondAttribute="centerX" id="PvI-DN-b2s"/>
                     <constraint firstAttribute="trailingMargin" secondItem="e9J-Hb-BBK" secondAttribute="trailing" id="ZfT-ce-9eQ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ghi-Pn-Ehj" secondAttribute="trailing" constant="-8" id="bqJ-1Q-tNu"/>
                     <constraint firstAttribute="bottomMargin" secondItem="e9J-Hb-BBK" secondAttribute="bottom" id="hdg-bo-X8C"/>
                     <constraint firstAttribute="trailingMargin" secondItem="e9J-Hb-BBK" secondAttribute="trailing" constant="-8" id="hf0-kJ-Plj"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Pbj-el-iBJ" secondAttribute="bottom" constant="20" id="jTy-U4-J1H"/>
+                    <constraint firstAttribute="centerY" secondItem="qf7-5h-wuh" secondAttribute="centerY" constant="15" id="jKS-q7-voh"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Pbj-el-iBJ" secondAttribute="bottom" constant="30" id="jTy-U4-J1H"/>
+                    <constraint firstItem="ghi-Pn-Ehj" firstAttribute="top" secondItem="MXL-td-rEm" secondAttribute="topMargin" constant="-8" id="rgW-qb-8G3"/>
                     <constraint firstItem="e9J-Hb-BBK" firstAttribute="leading" secondItem="MXL-td-rEm" secondAttribute="leadingMargin" constant="-8" id="tBk-Dx-aev"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ghi-Pn-Ehj" secondAttribute="bottom" constant="-8" id="zrm-ku-2fp"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -67,11 +79,15 @@
                         <exclude reference="ZfT-ce-9eQ"/>
                         <exclude reference="hdg-bo-X8C"/>
                         <exclude reference="88V-6R-1CS"/>
+                        <exclude reference="BfG-6c-55T"/>
+                        <exclude reference="GXC-hU-fpd"/>
+                        <exclude reference="Ivd-nL-a91"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImageView" destination="e9J-Hb-BBK" id="zb6-he-NJP"/>
+                <outlet property="blurView" destination="ghi-Pn-Ehj" id="4FL-L3-DZ9"/>
                 <outlet property="themeCheck" destination="Pbj-el-iBJ" id="DDv-28-q0x"/>
                 <outlet property="themeLabel" destination="qf7-5h-wuh" id="tml-4G-tqN"/>
             </connections>

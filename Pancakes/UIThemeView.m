@@ -30,9 +30,12 @@
     //self.caption.numberOfLines = 0;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.loaded = NO;
-    //Blur init
     
+    //Blur init
+    [self.blurView updateAsynchronously:YES completion:^{
+        self.blurView.blurRadius = 0;
+    }];
+   
     
     //self.topBlurView.contentMode = UIViewContentModeRight;
     //self.topBlurView.layer.contentsGravity = kCAGravityBottomLeft;
@@ -52,10 +55,12 @@
 
 
 - (void) updateAsFullyVisible : (BOOL) visible{
-
-    [UIView animateWithDuration:0.1f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    
+    [UIView animateWithDuration:0.1f delay:.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
         self.themeLabel.alpha = visible ? 1 : 0.4;
+        self.blurView.blurRadius = visible ? 0 : 40;
+        
         
     } completion:^(BOOL finished) {
         if(visible){

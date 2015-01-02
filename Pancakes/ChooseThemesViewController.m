@@ -8,11 +8,11 @@
 
 #import "ChooseThemesViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "UIImage+StackBlur.h"
 #import "Utils.h"
 #import "Configuration.h"
 #import "Models.h"
 #import "Services.h"
+#import "FXBlurView.h"
 
 
 @interface ChooseThemesViewController ()
@@ -28,7 +28,7 @@ NSString * const CellIdentifier = @"SubThemeViewCell";
 
 int screenMidSize;
 int screenHeight;
-float percent20;
+float themeCellHeight;
 
 
 - (void)viewDidLoad {
@@ -44,7 +44,7 @@ float percent20;
     self.subThemesView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
     self.themeDescription = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, 0, screenMidSize, screenHeight)];
     
-    percent20 = self.themesView.frame.size.height - (self.themesView.frame.size.height/3);
+    themeCellHeight = self.themesView.frame.size.height / 1.3f;
     
     self.themesView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -66,7 +66,6 @@ float percent20;
     [self.view addSubview:self.themesView];
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
-    [self.view addSubview: self.topBlurView];
     
 }
 
@@ -104,16 +103,10 @@ float percent20;
     
     [UIView animateWithDuration:0.3 animations:^() {
         self.themeDescription.alpha =  cell.self.themeCheck.isOn ? 1.0 : 0;
-        //[self.themeDescription setHidden:view.self.themeCheck.isOn];
-        UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
-        UIImage *blurImage = [baseImage stackBlur:20];
-        
-        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
-        [tempImageView setFrame:self.subThemesView.frame];
-        self.subThemesView.backgroundView = tempImageView;
+        [self setSubthemesBackground];
     }];
     
-    [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+    [self.subThemesView  reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 
@@ -200,11 +193,12 @@ float percent20;
 
 - (void)setSubthemesBackground {
     
-    UIImage *baseImage = [UIImage imageNamed:self.currentTheme.coverImage];
-    UIImage *blurImage = [baseImage stackBlur:20];
+    UIImage *baseImage  = [[UIImage imageNamed:self.currentTheme.coverImage] blurredImageWithRadius:20 iterations:1 tintColor:[UIColor clearColor]];
     
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:blurImage];
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:baseImage];
     [tempImageView setFrame:self.subThemesView.frame];
+    tempImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
     self.subThemesView.backgroundView = tempImageView;
 }
 
@@ -313,9 +307,9 @@ float percent20;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView == self.themesView){
         
-        return percent20;
+        return themeCellHeight;
     }else{
-        return 100;
+        return 85;
     }
 }
 

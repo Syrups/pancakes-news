@@ -63,11 +63,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UR-lz-yL1" userLabel="filter">
                         <rect key="frame" x="215" y="-1" width="124" height="115"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="check_item" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-jp-97X">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_item" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-jp-97X">
                                 <rect key="frame" x="0.0" y="0.0" width="124" height="115"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cuW-jp-97X" secondAttribute="trailing" id="FSS-6I-U5g"/>
+                            <constraint firstAttribute="bottom" secondItem="cuW-jp-97X" secondAttribute="bottom" id="JQ0-JY-xsc"/>
+                            <constraint firstItem="cuW-jp-97X" firstAttribute="top" secondItem="2UR-lz-yL1" secondAttribute="top" id="K8m-t0-Z5D"/>
+                            <constraint firstItem="cuW-jp-97X" firstAttribute="leading" secondItem="2UR-lz-yL1" secondAttribute="leading" id="x3h-gD-VKw"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
