@@ -11,7 +11,6 @@
 #import "PKNotificationManager.h"
 #import "FXBlurView.h"
 
-NSArray *vals ;
 
 @implementation SynchroViewController
 
@@ -27,10 +26,22 @@ NSArray *vals ;
     
     [self.pickerContainerTopSpace setConstant:self.view.frame.size.height];
     
-    vals = @[@"19:00", @"7:00"];
+    
+    self.addTimeButton.switchMode = NO;
+    [self.addTimeButton setInnerImageColor:[UIColor whiteColor]];
+    [self.addTimeButton setBackgroundColor:RGB(255, 109, 12)];
+    [self.addTimeButton setInnerImageType:PKSyrupButtonTypePlus];
+    
+    //SynchButton style
+    [self.synchButton setInnerImageColor:[UIColor whiteColor]];
+    [self.synchButton setBackgroundColor:[UIColor clearColor] ];
+    [self.synchButton setBorderColor:RGB(255, 109, 12)];
     
     
-     [self loadNotifications];
+    
+    //ff6d0c
+    
+    [self loadNotifications];
     //[self.datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
 
 }
@@ -60,7 +71,15 @@ NSArray *vals ;
     
     
     UILabel* cellTime = (UILabel*)[cell.contentView viewWithTag:10];
-    UIButton *cellButton = (UIButton *)[cell.contentView viewWithTag:20];
+    PKSyrupButton *cellButton = (PKSyrupButton *)[cell.contentView viewWithTag:20];
+    
+    
+    cellButton.switchMode = NO;
+    
+    [cellButton setBorderColor:[UIColor whiteColor]];
+    [cellButton setBackgroundColor:[UIColor whiteColor]];
+    [cellButton setInnerImageColor:[UIColor blackColor]];
+    [cellButton setInnerImageType:PKSyrupButtonTypeX];
     
     cellTime.text = [PKNotificationManager hourMinuteFormatForNotification: n];
     
@@ -98,14 +117,25 @@ NSArray *vals ;
     self.pickerContainer.hidden = NO;
     
     
+    
     [self.pickerContainer.superview layoutIfNeeded];
+    
+    
+    NSInteger factor = [self.notifications count] * 60;
+    int headerHeight = 80;
+    //([self.notifications count] * 60) ;
+    
+    NSLog(@"factor : %ld, notif : %ld", (long)factor, [self.notifications count]);
+    
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         //Update
         
-        [self.cancelButtonTopSpace setConstant:30];
-        [self.synchroTableTopSpace setConstant:self.synchroTable.superview.frame.size.height - 200];
+        [self.cancelButtonTopSpace setConstant:15];
+        [self.synchroTableTopSpace setConstant:headerHeight + factor]; // - factor - 60
         [self.pickerContainerTopSpace setConstant:90];
+        
+        NSLog(@"factor : %f", self.synchroTable.superview.frame.size.height);
         
         //layout
         [self.pickerContainer.superview layoutIfNeeded];

@@ -36,9 +36,16 @@
     CGContextSetStrokeColorWithColor(context, self.innerImageColor.CGColor);
     
     // Draw them with a 2.0 stroke width so they are a bit more visible.
-    CGContextSetLineWidth(context, 2.0f);
+    CGContextSetLineWidth(context, 1.f);
     
-    if(!self.switchMode){
+    
+    if(self.switchMode){
+        self.innerImageType = self.isOn ? PKSyrupButtonTypePlus : PKSyrupButtonTypeX;
+    }
+    
+    [self drawButtonType:rect withContext:context];
+
+    /*if(!self.switchMode){
         [self drawButtonType:rect withContext:context];
         
     }else{
@@ -48,7 +55,7 @@
         }else{
             [self drawButtonTypeX:rect withContext:context];
         }
-    }
+    }*/
 }
 
 
@@ -58,7 +65,7 @@
     
     self.innerColor = [UIColor clearColor];
     self.innerImageColor = RGB(255, 109, 12);
-    self.borderColor = RGB(255, 109, 12);;
+    self.borderColor = RGB(255, 109, 12);
     
     self.layer.cornerRadius = self.frame.size.width / 2;
     self.layer.borderWidth = 2.f;

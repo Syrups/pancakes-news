@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PKSyrupButton.h"
 
 @interface SynchroViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *synchroTable;
@@ -14,13 +15,14 @@
 @property (weak, nonatomic) IBOutlet UIView *LeftNestedView;
 @property (strong, nonatomic) IBOutlet UILabel *infoText;
 
-@property (strong, nonatomic) IBOutlet UIButton *synchButton;
+
+@property (weak, nonatomic) IBOutlet PKSyrupButton *synchButton;
 @property (strong, nonatomic) IBOutlet UILabel *synchButtonLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintY;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrainHeigth;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundRight;
-@property (weak, nonatomic) IBOutlet UIButton *addTimeButton;
+@property (weak, nonatomic) IBOutlet PKSyrupButton *addTimeButton;
 @property (weak, nonatomic) IBOutlet UIView *pickerContainer;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 

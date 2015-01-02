@@ -5,7 +5,7 @@
   Created by Glenn Sonna on 14/11/2014.
   Copyright (c) 2014 Gobelins. All rights reserved.
 */
-"SynchDescription" = "Synchronization allows you to automatically load your articles to set hours when you network.\nThis then allows you to read news offline !";
+"SynchDescription" = "By allowing synchronization you'll be notified for retriving the most recent news and read it offline";
 
 "MenuNews" = "My News";
 "MenuProfile" = "My profile";
