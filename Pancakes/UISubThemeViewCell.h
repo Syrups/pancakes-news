@@ -22,7 +22,10 @@
 @property (weak, nonatomic) IBOutlet UIView *selectedFilter;
 @property (weak, nonatomic) IBOutlet UIImageView *check;
 
+@property (weak, nonatomic) IBOutlet UIView *cBack;
+@property (weak, nonatomic) IBOutlet UIView *separator;
 @property(weak, nonatomic) UIColor* themeColor;
+
 
 
 - (void)updateThemeColor:(UIColor *) color isIncluded :(BOOL) included;

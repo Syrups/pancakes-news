@@ -18,4 +18,6 @@
 
 + (void ) setImageWithFacebook : (id<FBGraphUser>) user imageview:(UIImageView*)imageView blur:(BOOL)blur;
 + (void ) setPlaceHolderImage : (UIImageView*)imageView blur:(BOOL)blur;
+
++ (UIView*) addDropShadowToView: (UIView *)view ;
 @end

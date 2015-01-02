@@ -26,6 +26,7 @@
 		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
 		73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A7019F15CC600BFB546 /* UIThemeView.xib */; };
 		73B33A7419F15DB700BFB546 /* UIThemeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B33A7319F15DB700BFB546 /* UIThemeView.m */; };
+		73C0C9F51A56B431002F2C81 /* pkpoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 73C0C9F41A56B431002F2C81 /* pkpoint.png */; };
 		73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C24E131A1938A40070C62D /* PKMenuItemCircle.m */; };
 		73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79BF1A0C245F00093265 /* MyProfileViewController.m */; };
 		73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79C21A0C25B100093265 /* SynchroViewController.m */; };
@@ -185,6 +186,7 @@
 		73B33A7019F15CC600BFB546 /* UIThemeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIThemeView.xib; sourceTree = "<group>"; };
 		73B33A7219F15DB700BFB546 /* UIThemeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThemeView.h; sourceTree = "<group>"; };
 		73B33A7319F15DB700BFB546 /* UIThemeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIThemeView.m; sourceTree = "<group>"; };
+		73C0C9F41A56B431002F2C81 /* pkpoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pkpoint.png; path = ../pkpoint.png; sourceTree = "<group>"; };
 		73C24E121A1938A40070C62D /* PKMenuItemCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKMenuItemCircle.h; sourceTree = "<group>"; };
 		73C24E131A1938A40070C62D /* PKMenuItemCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKMenuItemCircle.m; sourceTree = "<group>"; };
 		73DC79BE1A0C245F00093265 /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
@@ -805,6 +807,7 @@
 		B3EF69571A03D35D00150BF7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73C0C9F41A56B431002F2C81 /* pkpoint.png */,
 				73FC077F1A2BDDE0006A57E1 /* climate.gif */,
 				B3EF69581A03D35D00150BF7 /* font */,
 			);
@@ -1012,6 +1015,7 @@
 				B3CC2E081A3F9A2700899F11 /* bloc_son_trait_00035.png in Resources */,
 				B3FE6FFC1A3EF9EA0071413B /* context.pkai in Resources */,
 				B3CC2DF91A3F9A2700899F11 /* bloc_son_trait_00020.png in Resources */,
+				73C0C9F51A56B431002F2C81 /* pkpoint.png in Resources */,
 				73FC07881A2BE44B006A57E1 /* food.gif in Resources */,
 				B3CC2DBE1A3F938300899F11 /* audio_wave.pkai in Resources */,
 				B3CC2E021A3F9A2700899F11 /* bloc_son_trait_00029.png in Resources */,
