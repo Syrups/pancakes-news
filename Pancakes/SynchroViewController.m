@@ -74,10 +74,12 @@
     PKSyrupButton *cellButton = (PKSyrupButton *)[cell.contentView viewWithTag:20];
     
     
+    cellButton.switchMode = NO;
     
     [cellButton setBorderColor:[UIColor whiteColor]];
     [cellButton setBackgroundColor:[UIColor whiteColor]];
     [cellButton setInnerImageColor:[UIColor blackColor]];
+    [cellButton setInnerImageType:PKSyrupButtonTypeX];
     
     cellTime.text = [PKNotificationManager hourMinuteFormatForNotification: n];
     

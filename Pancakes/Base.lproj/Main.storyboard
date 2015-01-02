@@ -454,7 +454,7 @@
                                         <rect key="frame" x="0.0" y="100" width="284" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dx2-hb-nb7">
-                                                <rect key="frame" x="0.0" y="0.0" width="284" height="208"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="284" height="180"/>
                                                 <subviews>
                                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="wNi-18-BQp">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -468,6 +468,7 @@
                                             </view>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="dx2-hb-nb7" firstAttribute="height" secondItem="pTM-f7-dSt" secondAttribute="height" multiplier="0.9" id="5Oe-I6-O4I"/>
                                             <constraint firstAttribute="trailing" secondItem="dx2-hb-nb7" secondAttribute="trailing" id="RZY-1p-TTL"/>
                                             <constraint firstItem="dx2-hb-nb7" firstAttribute="top" secondItem="pTM-f7-dSt" secondAttribute="top" id="dI5-YH-jYX"/>
                                             <constraint firstItem="dx2-hb-nb7" firstAttribute="leading" secondItem="pTM-f7-dSt" secondAttribute="leading" id="xBt-cg-DLb"/>
@@ -515,7 +516,6 @@
                             <constraint firstItem="3Bz-0N-8Uf" firstAttribute="top" secondItem="SEV-GW-OXP" secondAttribute="bottom" id="Flc-OR-cYl"/>
                             <constraint firstItem="nLa-kC-55p" firstAttribute="top" secondItem="SEV-GW-OXP" secondAttribute="bottom" constant="-20" id="SoU-nP-0lf"/>
                             <constraint firstItem="nLa-kC-55p" firstAttribute="leading" secondItem="elb-3r-Z45" secondAttribute="leadingMargin" constant="-16" id="W6F-Ci-88K"/>
-                            <constraint firstItem="dx2-hb-nb7" firstAttribute="height" secondItem="elb-3r-Z45" secondAttribute="height" multiplier="0.65" id="Xq8-Ac-OYm"/>
                             <constraint firstItem="3Bz-0N-8Uf" firstAttribute="width" secondItem="elb-3r-Z45" secondAttribute="width" multiplier="0.5" id="lh4-dP-sxK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Bz-0N-8Uf" secondAttribute="trailing" constant="-16" id="qyq-WW-yUv"/>
                             <constraint firstItem="wDz-ju-A1g" firstAttribute="top" secondItem="nLa-kC-55p" secondAttribute="bottom" id="s5v-HX-J0V"/>
@@ -1139,7 +1139,7 @@
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="41BF84EF-A292-434B-B694-38BD97C916E5" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
+                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="35023B53-B05C-4AF3-8B85-1CA520E8510E" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
                                                     <rect key="frame" x="96" y="41" width="24" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="frl-TR-xTE"/>
@@ -1497,7 +1497,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="41BF84EF-A292-434B-B694-38BD97C916E5" width="42" height="7">
+        <image name="35023B53-B05C-4AF3-8B85-1CA520E8510E" width="42" height="7">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
