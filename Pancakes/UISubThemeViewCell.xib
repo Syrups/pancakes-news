@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="-1" width="334" height="113"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKm-Bo-y9K">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKm-Bo-y9K">
                         <rect key="frame" x="169" y="48" width="36" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="59" id="SXG-Lg-ndz"/>
@@ -58,7 +58,7 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gouigoui" translatesAutoresizingMaskIntoConstraints="NO" id="cpq-MZ-Kzt">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="gouigoui" translatesAutoresizingMaskIntoConstraints="NO" id="cpq-MZ-Kzt">
                         <rect key="frame" x="147" y="69" width="22" height="5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="jWy-N9-NsR"/>

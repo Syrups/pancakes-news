@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "PKSyrupButton.h"
 
 @interface MyProfileViewController : UIViewController  <UITableViewDelegate, UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UITableView *feedTableView;
-@property (strong, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet UITableView *feedTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet UIView *profilePictureOverlay;
 @property (weak, nonatomic) IBOutlet UIImageView *profileAsRightBackground;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet PKSyrupButton *loginButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *tableViewTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signInOutLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *profileAsRightBackgroundY;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTitleLabelHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *profilePictureConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *feedArticleTrailingConstraint;
 - (IBAction)loginButtonTouched:(id)sender;
 @end

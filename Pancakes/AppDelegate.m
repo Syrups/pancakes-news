@@ -115,7 +115,7 @@
         NSLog(@"Session opened");
         // Show the user the logged-in UI
         [self userLoggedIn];
-        return;
+        //return;
     }
     if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
         // If the session is closed
