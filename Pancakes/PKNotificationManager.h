@@ -18,5 +18,7 @@
 +(void)unloadSynchronisationNotifications : (UILocalNotification *)notification ;
 
 + (NSString *) hourMinuteFormatForNotification : (UILocalNotification *)notif;
++ (UIMutableUserNotificationCategory *) withDefaultCategory;
++ (void) handleActionWithIdentifier: (NSString *)identifier ;
 
 @end

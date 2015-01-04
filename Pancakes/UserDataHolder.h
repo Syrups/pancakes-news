@@ -21,5 +21,7 @@
 - (void) loadData;
 - (void) loadFBUser;
 - (void) loggoutFBUser;
++ (void) allowSynchronisation :(BOOL) allow;
++ (BOOL) isSyncAllowed ;
 
 @end

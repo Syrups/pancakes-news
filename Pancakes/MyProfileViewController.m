@@ -18,6 +18,7 @@
 @implementation MyProfileViewController {
     NSArray* feedArticles;
     Article* selectedArticle;
+    UIView *profilePictureShadow;
 }
 
 - (void)viewDidLoad {
@@ -32,14 +33,20 @@
     self.tableViewTitleLabelHeightConstraint.constant = kMenuBarHeigth;
     
     self.feedTableView.backgroundColor = [UIColor clearColor];
+    self.feedTableView.separatorColor = [UIColor clearColor];
     
     
     NSNotificationCenter *userFB = [NSNotificationCenter defaultCenter];
     [userFB addObserver:self selector:@selector(setUpFacebookUserInfo:) name:@"FBUserLoaded" object:nil];
     [userFB addObserver:self selector:@selector(setUpFacebookUserNil:) name:@"FBUserLoggetOut" object:nil];
-    
-    [Utils addDropShadowToView:self.profilePicture];
 
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if(!profilePictureShadow){
+        profilePictureShadow = [Utils addDropShadowToView:self.profilePicture];
+    }
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
@@ -51,7 +58,6 @@
         
         [self setUpFacebookUserNil];
     }
-    
     
     [self.profilePictureConstraint setConstant:self.view.frame.size.height];
     [self.feedArticleTrailingConstraint setConstant:-self.view.frame.size.width * 0.5];
@@ -67,6 +73,7 @@
         [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
             
             [self.profilePictureConstraint setConstant:kMenuBarHeigth];
+            
             [self.view layoutIfNeeded];
         } completion:nil];
         
@@ -94,8 +101,7 @@
     [Utils setImageWithFacebook:user imageview:self.profilePicture blur:NO] ;
     [Utils setImageWithFacebook:user imageview:self.profileAsRightBackground blur:YES] ;
     self.userName.text = user.name;
-    
-    NSLog(@"%@", user.description);
+
     [self.signInOutLabel  setText:@"Sign out"];
     self.loginButton.innerImageType = PKSyrupButtonTypeX;
 }
@@ -104,7 +110,6 @@
     [Utils setPlaceHolderImage:self.profilePicture blur:NO];
     [Utils setPlaceHolderImage:self.profileAsRightBackground blur:YES] ;
     self.userName.text = @"Loggin";
-   //NSLocalizedString(LastViewedTitle, nil)
     
     [self.signInOutLabel  setText:@"Sign in"];
     self.loginButton.innerImageType = PKSyrupButtonTypePlus;

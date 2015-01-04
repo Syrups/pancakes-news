@@ -13,7 +13,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 NSString * const PUSER = @"PancakesUser";
-
+NSString * const PSYNC = @"PancakesSync";
 
 @implementation UserDataHolder
 - (id) init
@@ -43,7 +43,7 @@ NSString * const PUSER = @"PancakesUser";
     NSString *userAsJson = [self.user toJSONString];
     [[NSUserDefaults standardUserDefaults]setObject:userAsJson forKey:PUSER];
     
-    NSLog(@"saving %@", userAsJson);
+    //NSLog(@"saving %@", userAsJson);
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -101,12 +101,8 @@ NSString * const PUSER = @"PancakesUser";
         }
         NSLog(@"user loaded from network %@", [self.user toJSONString]);
     }];
-    
 }
 
-- (void) viewReceivedFBUser :(NSNotification *)note{
-   
-}
 
 - (void) loadFBUser{
     
@@ -134,6 +130,20 @@ NSString * const PUSER = @"PancakesUser";
     self.fbUSer = nil;
     
     [note postNotificationName:@"FBUserLoggetOut" object:self.fbUSer];
+}
+
++ (void) allowSynchronisation :(BOOL) allow{
+    
+    [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithBool:allow] forKey:PSYNC];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) isSyncAllowed {
+    
+    NSNumber *value =  [[NSUserDefaults standardUserDefaults] objectForKey:PSYNC];
+    BOOL isAllowed = [value boolValue];
+    
+    return isAllowed;
 }
 
 @end

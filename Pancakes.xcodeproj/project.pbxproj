@@ -163,6 +163,7 @@
 		73315B1E1A3AFFEF005B7567 /* PKSyrupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSyrupButton.m; sourceTree = "<group>"; };
 		735214391A23688B00AFE840 /* PKRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKRestClient.h; sourceTree = "<group>"; };
 		7352143A1A23688B00AFE840 /* PKRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKRestClient.m; sourceTree = "<group>"; };
+		73700B431A59DBDB000A06E7 /* PKUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKUI.h; sourceTree = "<group>"; };
 		737668151A111379002ECAB5 /* UserDataHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataHolder.h; sourceTree = "<group>"; };
 		737668161A111379002ECAB5 /* UserDataHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataHolder.m; sourceTree = "<group>"; };
 		738168E21A38CBB0006B5F8C /* PKAIDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAIDecoder.h; sourceTree = "<group>"; };
@@ -339,7 +340,6 @@
 		B3F0BD0A1A26252000615279 /* CustomEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomEmbeddedBlock.h; sourceTree = "<group>"; };
 		B3F0BD0B1A26252000615279 /* CustomEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3F0BD0E1A26256100615279 /* Blocks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Blocks.h; sourceTree = "<group>"; };
-		B3F0BD0F1A2625F400615279 /* Components.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Components.h; sourceTree = "<group>"; };
 		B3F0BD101A26261600615279 /* Models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
 		B3F0BD111A26266900615279 /* Services.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Services.h; sourceTree = "<group>"; };
 		B3F82C341A0387CE0038D763 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -845,9 +845,9 @@
 			isa = PBXGroup;
 			children = (
 				B3F0BD0E1A26256100615279 /* Blocks.h */,
-				B3F0BD0F1A2625F400615279 /* Components.h */,
 				B3F0BD101A26261600615279 /* Models.h */,
 				B3F0BD111A26266900615279 /* Services.h */,
+				73700B431A59DBDB000A06E7 /* PKUI.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";

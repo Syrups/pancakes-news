@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UserDataHolder.h"
+#import "Services.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface AppDelegate ()
@@ -28,6 +29,14 @@
             //NSLog(@"  %@", name);
         }
     }*/
+    
+    
+    UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    NSSet *categories = [NSSet setWithObjects:[PKNotificationManager withDefaultCategory], nil];
+    
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+    [application registerUserNotificationSettings:mySettings];
     
     
     // Whenever a person opens the app, check for a cached session
@@ -68,10 +77,9 @@
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler{
     
-    if ([identifier isEqualToString: @"ACCEPT_IDENTIFIER"]) {
-        NSLog(@"synchro routine");
-    }
+    NSLog(@"handleActionWithIdentifier : %@", identifier);
     
+    [PKNotificationManager handleActionWithIdentifier:identifier];
     // Must be called when finished
     completionHandler();
 }
@@ -193,7 +201,7 @@
 
 
 - (void)allowDisallowNotification{
- //[[UIApplication sharedApplication] can];
+ //[[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 @end

@@ -11,10 +11,10 @@
 
 #import "UserDataHolder.h"
 #import "ContentParser.h"
-#import "Utils.h"
 #import "PKCacheManager.h"
 #import "PKNotificationManager.h"
 #import "PKRestClient.h"
 #import "PKAIDecoder.h"
+#import "Utils.h"
 
 #endif

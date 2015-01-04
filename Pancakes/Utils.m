@@ -99,8 +99,8 @@
 
 + (UIView*) addDropShadowToView: (UIView *)view {
     
-    UIView* backView = [[UIView alloc] initWithFrame:view.frame];
-    backView.backgroundColor = [UIColor whiteColor];
+    UIView* backView = [[UIView alloc] initWithFrame:view.bounds];
+    backView.backgroundColor = [UIColor clearColor];
     backView.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:backView.bounds];
