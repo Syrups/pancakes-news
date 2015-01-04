@@ -39,7 +39,6 @@
     NSNotificationCenter *userFB = [NSNotificationCenter defaultCenter];
     [userFB addObserver:self selector:@selector(setUpFacebookUserInfo:) name:@"FBUserLoaded" object:nil];
     [userFB addObserver:self selector:@selector(setUpFacebookUserNil:) name:@"FBUserLoggetOut" object:nil];
-
 }
 
 - (void)viewDidLayoutSubviews {
