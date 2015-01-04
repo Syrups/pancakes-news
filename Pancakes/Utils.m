@@ -98,8 +98,11 @@
 
 
 + (UIView*) addDropShadowToView: (UIView *)view {
+    
     UIView* backView = [[UIView alloc] initWithFrame:view.frame];
     backView.backgroundColor = [UIColor whiteColor];
+    backView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:backView.bounds];
     
     [backView.layer setShadowColor:[[UIColor blackColor] CGColor]];
@@ -114,8 +117,33 @@
     backView.layer.shouldRasterize = YES;
     backView.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
-    [view.superview addSubview:backView];
-    [view.superview bringSubviewToFront:view];
+    [view.superview insertSubview:backView belowSubview:view];
+    
+    //Size constraint
+    [view.superview addConstraint:[NSLayoutConstraint
+                              constraintWithItem:backView
+                              attribute:NSLayoutAttributeWidth
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:view
+                              attribute:NSLayoutAttributeWidth
+                              multiplier:1
+                              constant:0.0]];
+    
+    [view.superview addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:backView
+                                       attribute:NSLayoutAttributeHeight
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:view
+                                       attribute:NSLayoutAttributeHeight
+                                       multiplier:1
+                                       constant:0.0]];
+    
+    //Position constraint
+    NSLayoutConstraint *xCenterConstraint = [NSLayoutConstraint constraintWithItem:backView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    [view.superview addConstraint:xCenterConstraint];
+    
+    NSLayoutConstraint *yCenterConstraint = [NSLayoutConstraint constraintWithItem:backView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+    [view.superview addConstraint:yCenterConstraint];
     
     return backView;
 }

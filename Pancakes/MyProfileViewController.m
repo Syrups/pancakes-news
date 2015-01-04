@@ -31,11 +31,15 @@
 
     self.tableViewTitleLabelHeightConstraint.constant = kMenuBarHeigth;
     
-    self.feedTableView.delegate = self;
-    self.feedTableView.dataSource = self;
     self.feedTableView.backgroundColor = [UIColor clearColor];
     
     
+    NSNotificationCenter *userFB = [NSNotificationCenter defaultCenter];
+    [userFB addObserver:self selector:@selector(setUpFacebookUserInfo:) name:@"FBUserLoaded" object:nil];
+    [userFB addObserver:self selector:@selector(setUpFacebookUserNil:) name:@"FBUserLoggetOut" object:nil];
+    
+    [Utils addDropShadowToView:self.profilePicture];
+
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
@@ -50,23 +54,23 @@
     
     
     [self.profilePictureConstraint setConstant:self.view.frame.size.height];
-    [self.feedArticleTrailingConstraint setConstant:-self.view.frame.size.width];
+    [self.feedArticleTrailingConstraint setConstant:-self.view.frame.size.width * 0.5];
     
+    [self.view layoutIfNeeded];
+    
+    [UIView animateWithDuration:.4f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        [self.feedArticleTrailingConstraint setConstant:-16];
+        
         [self.view layoutIfNeeded];
-
-        [UIView animateWithDuration:.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-    
-            [self.feedArticleTrailingConstraint setConstant:-16];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
             
+            [self.profilePictureConstraint setConstant:kMenuBarHeigth];
             [self.view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
-                
-                [self.profilePictureConstraint setConstant:kMenuBarHeigth];
-                [self.view layoutIfNeeded];
-            } completion:nil];
-            
-        }];
+        } completion:nil];
+        
+    }];
     
     [self.profilePicture.superview layoutIfNeeded];
     
@@ -76,8 +80,16 @@
 
 #pragma Facebook
 
-// This method will be called when the user information has been fetched
 - (void)setUpFacebookUserInfo{
+    [self setUpFacebookUserInfo:nil];
+}
+
+- (void)setUpFacebookUserNil{
+    [self setUpFacebookUserNil: nil];
+}
+
+// This method will be called when the user information has been fetched
+- (void)setUpFacebookUserInfo :(NSNotification *)note{
     NSDictionary<FBGraphUser> *user  = [UserDataHolder sharedInstance].fbUSer;
     [Utils setImageWithFacebook:user imageview:self.profilePicture blur:NO] ;
     [Utils setImageWithFacebook:user imageview:self.profileAsRightBackground blur:YES] ;
@@ -88,7 +100,7 @@
     self.loginButton.innerImageType = PKSyrupButtonTypeX;
 }
 
-- (void)setUpFacebookUserNil{
+- (void)setUpFacebookUserNil:(NSNotification *)note{
     [Utils setPlaceHolderImage:self.profilePicture blur:NO];
     [Utils setPlaceHolderImage:self.profileAsRightBackground blur:YES] ;
     self.userName.text = @"Loggin";
@@ -123,7 +135,7 @@
              // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
              [appDelegate sessionStateChanged:session state:state error:error];
              
-             if (!error && state == FBSessionStateOpen){
+             /*if (!error && state == FBSessionStateOpen){
                  NSLog(@"Profile opened");
                  // Show the user the logged-in UI
                  //[[UserDataHolder sharedInstance] loadFBUser];
@@ -136,7 +148,7 @@
                  //[[UserDataHolder sharedInstance] loggoutFBUser];
                  // Show the user the logged-out UI
                  [self setUpFacebookUserNil];
-             }
+             }*/
          }];
     }
 }

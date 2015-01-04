@@ -104,22 +104,36 @@ NSString * const PUSER = @"PancakesUser";
     
 }
 
+- (void) viewReceivedFBUser :(NSNotification *)note{
+   
+}
+
 - (void) loadFBUser{
+    
+    NSNotificationCenter *note = [NSNotificationCenter defaultCenter];
+    //[note addObserver:self selector:@selector(viewReceivedFBUser:) name:@"FBUserLoaded" object:nil];
+
     [[FBRequest requestForMe] startWithCompletionHandler:
      ^(FBRequestConnection *connection,
        NSDictionary<FBGraphUser> *user,
        NSError *error) {
          if (!error) {
              self.fbUSer = user;
+             [note postNotificationName:@"FBUserLoaded" object:user];
          }
      }];
 }
 
 - (void) loggoutFBUser{
+    NSNotificationCenter *note = [NSNotificationCenter defaultCenter];
+    //[note addObserver:self selector:@selector(viewReceivedFBUser:) name:@"FBUserLoggetOut" object:nil];
+    
     [FBSession.activeSession closeAndClearTokenInformation];
     [FBSession.activeSession close];
     [FBSession setActiveSession:nil];
     self.fbUSer = nil;
+    
+    [note postNotificationName:@"FBUserLoggetOut" object:self.fbUSer];
 }
 
 @end

@@ -69,70 +69,31 @@ float themeCellHeight;
     [self.subThemesView setDataSource:self];
     [self.themesView setDataSource:self];
     
-    
-   
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
     //Shadow first
     
     [self.view addSubview:self.themesView];
-    [self addDropShadowToView:self.themesView];
+    //[self addDropShadowToView:self.themesView];
+    [Utils addDropShadowToView:self.themesView];
     
-    
-}
-
-/*
-- (UIView*) addShadow {
-    UIView* backView = [[UIView alloc] initWithFrame:self.themesView.frame];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:backView.bounds];
-    backView.layer.masksToBounds = NO;
-    backView.layer.shadowColor = [UIColor blackColor].CGColor;
-    backView.layer.shadowOpacity = 1;
-    backView.layer.shadowOffset = CGSizeMake(-5,-5);
-    backView.layer.shadowRadius = 20;
-    backView.layer.shadowPath = path.CGPath;
-    backView.layer.shouldRasterize = YES;
-    [self.view addSubview:backView];
-    [self.view bringSubviewToFront:self];
-    return backView;
-}*/
-
-- (UIView*) addDropShadowToView: (UIView *)view {
-    UIView* backView = [[UIView alloc] initWithFrame:view.frame];
-    backView.backgroundColor = [UIColor whiteColor];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:backView.bounds];
-
-    [backView.layer setShadowColor:[[UIColor blackColor] CGColor]];
-    [backView.layer setShadowOffset:CGSizeMake(5, 0)];
-    [backView.layer setShadowRadius:20.f];
-    [backView.layer setShadowOpacity:1];
-    
-    backView.clipsToBounds = NO;
-    backView.layer.masksToBounds = NO;
-    
-    backView.layer.shadowPath = path.CGPath;
-    backView.layer.shouldRasterize = YES;
-    backView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    
-    [self.view addSubview:backView];
-    [self.view bringSubviewToFront:view];
-    
-    return backView;
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
    
     [self loadThemesFromNetwork];
+    [self.view layoutIfNeeded];
+    
     [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.subThemesView.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
         self.themeDescription.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
         
         
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
+        [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
             self.themesView.frame = CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth);
- 
-            [Utils addDropShadowToView:self.themesView];
+            
+            [self.view layoutIfNeeded];
         } completion:nil];
     }];
 }

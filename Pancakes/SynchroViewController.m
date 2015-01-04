@@ -8,8 +8,8 @@
 
 #import "SynchroViewController.h"
 #import "Configuration.h"
-#import "PKNotificationManager.h"
 #import "FXBlurView.h"
+#import "Services.h"
 
 
 @implementation SynchroViewController
@@ -45,7 +45,8 @@
     
     [self loadNotifications];
     //[self.datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
-
+    
+    [Utils addDropShadowToView:self.background];
 }
 
 
