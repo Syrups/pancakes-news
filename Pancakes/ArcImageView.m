@@ -24,11 +24,11 @@
     
     
     if (!full) {
-        CGPathAddLineToPoint(path, NULL, -2000, -200);
-        CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, 160, self.frame.size.width+2000, -200, 1400);
+        CGPathAddLineToPoint(path, NULL, -1500, -200);
+        CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, 160, self.frame.size.width+1500, -200, 1400);
     } else {
-        CGPathAddLineToPoint(path, NULL, -1000, -120);
-        CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height, self.frame.size.width+1000, -120, 1400);
+        CGPathAddLineToPoint(path, NULL, -800, -120);
+        CGPathAddArcToPoint(path, NULL, self.frame.size.width/2, self.bounds.size.height, self.frame.size.width+800, -120, 1400);
     }
 
     CGPathAddLineToPoint(path, NULL, self.frame.size.width, 0);

@@ -240,7 +240,7 @@ typedef enum  {
             creditsLabel.frame = frame;
             [creditsLabel setAlpha:1.0f];
             
-            UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.moreButtonBackground.frame.origin.x + self.moreButtonBackground.frame.size.width/2, self.moreButtonBackground.frame.origin.y + self.moreButtonBackground.frame.size.height, 1.0f, 0.0f)];
+            UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.moreButtonBackground.frame.origin.x + self.moreButtonBackground.frame.size.width/2, self.moreButtonBackground.frame.origin.y + self.moreButtonBackground.frame.size.height+15.0f, 1.0f, 0.0f)];
             storyline.backgroundColor = RgbColor(180, 180, 180);
             [cell addSubview:storyline];
             
@@ -409,6 +409,7 @@ typedef enum  {
     }
     
     SectionBlockCell* cell = (SectionBlockCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    [self.scrollListeners addObject:cell];
     //        [self.collectionView.collectionViewLayout invalidateLayout];
 
     [self.collectionView performBatchUpdates:^{
@@ -461,6 +462,7 @@ typedef enum  {
 
 #pragma mark - UIScrollViewDelegate
 
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 
     if (scrollView.contentOffset.y >= 120.0f && scrollView.contentOffset.y < self.view.frame.size.height + self.view.frame.size.height/2) {
@@ -488,6 +490,10 @@ typedef enum  {
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
+    for (GenericBlockCell* listener in self.scrollListeners) {
+        [listener scrollViewDidScroll:scrollView];
+    }
+    
     if (scrollView.contentOffset.y < lastContentOffset && backButtonState == Hidden) {
         [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGRect f = self.backButton.frame;
@@ -496,6 +502,7 @@ typedef enum  {
         } completion:nil];
         backButtonState = Displayed;
     }
+
     
     lastContentOffset = scrollView.contentOffset.y;
     
@@ -520,12 +527,9 @@ typedef enum  {
         });
     }
     
-    for (GenericBlockCell* listener in self.scrollListeners) {
-
-            [listener scrollViewDidScroll:scrollView];
-        
-    }
+    
 }
+
 
 
 @end

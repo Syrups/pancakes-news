@@ -58,6 +58,7 @@
     
     for (int i = 0; i < angles.count; i++) {
         [self drawAnimationArcForButton:[self.items objectAtIndex:i] withEndAngleAtIndex:i];
+        [self.view bringSubviewToFront:(UIView*)[self.items objectAtIndex:i]];
     }
     
 }

@@ -35,9 +35,23 @@
     
     self.constraintY.constant = kMenuBarHeigth;
     
-    UISwipeGestureRecognizer* swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipe];
+//    UISwipeGestureRecognizer* swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+//    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+//    [self.view addGestureRecognizer:swipe];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint touchLocation = [touch locationInView:self.view];
+    
+    for (UIView *view in self.view.subviews)
+    {
+        if (view.tag == 60 &&
+            CGRectContainsPoint(view.frame, touchLocation))
+        {
+            [self displaySelectedArticle:nil];
+        }
+    }
 }
 
 - (void)didSwipe:(UISwipeGestureRecognizer*)swipeRecognizer {
