@@ -29,4 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIView *menuItem;
 @property (strong, nonatomic) IBOutlet FXBlurView *blurView;
 
+- (void) displayContentController: (UIViewController*) content;
+- (IBAction)toggleMainMenu:(id)sender;
+
 @end

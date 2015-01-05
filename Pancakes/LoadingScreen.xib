@@ -37,7 +37,7 @@
                     <color key="textColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="PCU-zg-ORD">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="PCU-zg-ORD">
                     <rect key="frame" x="367" y="157" width="20" height="20"/>
                 </activityIndicatorView>
             </subviews>
@@ -45,7 +45,9 @@
             <constraints>
                 <constraint firstItem="6EJ-sF-nFd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1gm-f7-5BD"/>
                 <constraint firstItem="IXi-Cr-7lH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="138" id="FR5-rv-d77"/>
-                <constraint firstAttribute="bottom" secondItem="6EJ-sF-nFd" secondAttribute="bottom" constant="127" id="VkD-qA-nao"/>
+                <constraint firstItem="PCU-zg-ORD" firstAttribute="leading" secondItem="IXi-Cr-7lH" secondAttribute="trailing" constant="8" id="OgQ-3c-uyX"/>
+                <constraint firstItem="PCU-zg-ORD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="157" id="SNM-MG-KD2"/>
+                <constraint firstItem="6EJ-sF-nFd" firstAttribute="top" secondItem="IXi-Cr-7lH" secondAttribute="bottom" constant="-4" id="Smm-ZA-TLw"/>
                 <constraint firstItem="IXi-Cr-7lH" firstAttribute="leading" secondItem="6EJ-sF-nFd" secondAttribute="leading" id="fHu-ev-Ngp"/>
                 <constraint firstItem="IXi-Cr-7lH" firstAttribute="trailing" secondItem="6EJ-sF-nFd" secondAttribute="trailing" id="qdS-pn-Dsp"/>
             </constraints>

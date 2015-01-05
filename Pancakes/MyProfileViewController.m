@@ -13,6 +13,8 @@
 #import "Configuration.h"
 #import "UserDataHolder.h"
 #import "Services.h"
+#import "ArticleViewController.h"
+#import "MainViewController.h"
 #import <UIImageView+WebCache.h>
 
 @implementation MyProfileViewController {
@@ -35,6 +37,7 @@
     self.feedTableView.backgroundColor = [UIColor clearColor];
     self.feedTableView.separatorColor = [UIColor clearColor];
     
+    feedArticles = [PKCacheManager loadLastReadArticles].copy;
     
     NSNotificationCenter *userFB = [NSNotificationCenter defaultCenter];
     [userFB addObserver:self selector:@selector(setUpFacebookUserInfo:) name:@"FBUserLoaded" object:nil];
@@ -108,7 +111,7 @@
 - (void)setUpFacebookUserNil:(NSNotification *)note{
     [Utils setPlaceHolderImage:self.profilePicture blur:NO];
     [Utils setPlaceHolderImage:self.profileAsRightBackground blur:YES] ;
-    self.userName.text = @"Loggin";
+    self.userName.text = @"Log in";
     
     [self.signInOutLabel  setText:@"Sign in"];
     self.loginButton.innerImageType = PKSyrupButtonTypePlus;
@@ -161,8 +164,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
-    //[feedArticles count];
+    return [feedArticles count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -179,7 +181,7 @@
     UITableViewCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"FeedArticleCell"];
     cell.contentView.backgroundColor = kArticleViewBlockBackground;
     
-    //Article* article = [feedArticles objectAtIndex:[indexPath row]];
+    Article* article = [feedArticles objectAtIndex:[indexPath row]];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedArticleCell"];
@@ -192,18 +194,18 @@
     [cell.contentView addSubview:overlay];
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
-    //feedCellTitle.text = article.title;
+    feedCellTitle.text = article.title;
     feedCellTitle.font = [UIFont fontWithName:kFontBreeBold size:15];
     feedCellTitle.textColor = kFeedViewListTitleColor;
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
-    //[feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
     feedCellThumb.layer.masksToBounds = YES;
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
-    //themeTitle.textColor = [Utils colorWithHexString:article.color];
+    themeTitle.textColor = [Utils colorWithHexString:article.color];
     
     UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 40.0f, 22.0f, 15.0f)];
     check.image = [UIImage imageNamed:@"check_item"];
@@ -214,7 +216,7 @@
     
     UIImageView* zigzag = (UIImageView*)[cell.contentView viewWithTag:60];
     zigzag.image = [zigzag.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    //[zigzag setTintColor:[Utils colorWithHexString:article.color]];
+    [zigzag setTintColor:[Utils colorWithHexString:article.color]];
     
     [overlay addSubview:check];
     
@@ -222,6 +224,40 @@
     
     return cell;
 
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Article* article = [feedArticles objectAtIndex:[indexPath row]];
+
+    [self displaySelectedArticle:article];
+}
+
+
+- (void)displaySelectedArticle:(Article*)article {
+    
+    MainViewController* parent = (MainViewController*)self.parentViewController; // get the main view controller
+    
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect f = parent.menuTopBar.frame;
+        f.origin.x -= self.view.frame.size.width/2;
+        [parent.menuTopBar setFrame:f];
+        f = parent.menuItem.frame;
+        f.origin.x -= self.view.frame.size.width/2;
+        [parent.menuItem setFrame:f];
+    } completion:^(BOOL finished) {
+        
+        ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
+        vc.displayedArticle = article;
+        vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
+        [vc.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:selectedArticle.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image != nil) {
+                UINavigationController* feedVc = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MyFeedView"];
+//                [feedVc setViewControllers:@[vc]];
+                
+                [parent displayContentController:feedVc];
+            }
+        }];
+    }];
 }
 
 

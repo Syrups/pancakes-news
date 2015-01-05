@@ -73,4 +73,8 @@
 
 }
 
+- (void)willClose {
+    
+}
+
 @end

@@ -25,6 +25,8 @@
     background.image = [UIImage imageNamed:@"article-block-button"];
     self.backgroundColor = [UIColor colorWithPatternImage:background.image];
     
+     [self setImageEdgeInsets:UIEdgeInsetsMake(6, 6, 6, 6)];
+    
     UIImage* picto = [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:type.name]];
     [self setImage:[picto imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [self setTintColor:color];

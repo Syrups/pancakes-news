@@ -20,6 +20,8 @@
     
     isPlaying = NO;
     
+    self.block = block;
+    
     UIImageView* background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 230)];
     
     [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:self.article.coverImage] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
@@ -43,32 +45,33 @@
     [self addSubview:title];
     [self bringSubviewToFront:title];
     
-    [self loadAudioPlayer];
+    NSURL *soundUrl = [NSURL URLWithString:self.block.url];
     
-    AudioPlayer* player = [[AudioPlayer alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 80, 45, 160, 160) totalDuration:self.audioPlayer.duration];
-//    player.backgroundColor = [UIColor redColor];
-    [self addSubview:player];
-    self.playerView = player;
-    
-    
-    [self setNeedsDisplay];
-    [self togglePlayPause:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self loadAudioPlayerWithUrl:soundUrl];
+    });
     
 }
 
-- (void)loadAudioPlayer {
+- (void)loadAudioPlayerWithUrl:(NSURL*)url {
     // Construct URL to sound file
 //    NSString *path = [NSBundle pathForResource:@"test_audio" ofType:@"mp3" inDirectory:nil];
-    NSURL *soundUrl = [[NSBundle mainBundle] URLForResource:@"test_audio" withExtension:@"mp3"];
+//    NSURL *soundUrl = [[NSBundle mainBundle] URLForResource:@"test_audio" withExtension:@"mp3"];
     
-    NSError* err = nil;
     
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:&err];
-    self.audioPlayer.delegate = self;
+    AVPlayerItem* item = [[AVPlayerItem alloc] initWithURL:url];
     
-    if (err != nil) {
-        NSLog(@"%@", err);
-    }
+    self.audioPlayer = [[AVPlayer alloc] initWithPlayerItem:item];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AudioPlayer* player = [[AudioPlayer alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 80, 45, 160, 160) totalDuration:CMTimeGetSeconds(self.audioPlayer.currentItem.asset.duration)];
+        [self addSubview:player];
+        self.playerView = player;
+        
+        [self setNeedsDisplay];
+        
+        [self togglePlayPause:nil];
+    });
 }
 
 - (IBAction)togglePlayPause:(id)sender {
@@ -85,6 +88,10 @@
 
 - (void)updateAudioPlayer {
     [self.playerView update];
+}
+
+- (void)willClose {
+    [self togglePlayPause:nil];
 }
 
 @end

@@ -12,7 +12,7 @@
 
 @interface AudioEmbeddedBlock : DefinitionEmbeddedBlock <AVAudioPlayerDelegate>
 
-@property (strong, nonatomic) AVAudioPlayer* audioPlayer;
+@property (strong, nonatomic) AVPlayer* audioPlayer;
 @property (strong, nonatomic) AudioPlayer* playerView;
 
 @end

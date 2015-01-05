@@ -135,7 +135,24 @@ NSString * const PFEED = @"PancakesFeed";
 #pragma Synchro
 
 +(void) synchonizationRoutine {
+    UserDataHolder* holder = [UserDataHolder sharedInstance];
+    [holder loadData];
     
+    NSString* feedUrl = @"";
+    
+    if (holder.user._id != nil) {
+        NSString* userId = holder.user._id;
+        feedUrl = [NSString stringWithFormat:[PKRestClient apiUrlWithRoute:@"/user/%@/feed"], userId];
+    } else {
+        // if no user, use public articles feed
+        feedUrl = [PKRestClient apiUrlWithRoute:@"/articles"];
+    }
+    
+    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:feedUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSError* err = nil;
+        NSArray* feedArticles = [Article arrayOfModelsFromData:data error:&err];
+        [self cacheFeed:feedArticles];
+    }] resume];
 }
 
 +(NSString *)pathFormPlitsWithName: (NSString *) name {

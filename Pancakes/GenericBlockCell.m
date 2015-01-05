@@ -54,8 +54,10 @@
 
 #pragma mark - Block instanciation
 
-- (DefinitionEmbeddedBlock*) instanciateBlockOfType:(NSString*)blockType withFrame:(CGRect)blockFrame {
+- (DefinitionEmbeddedBlock*) instanciateBlock:(Block*)block withFrame:(CGRect)blockFrame {
     DefinitionEmbeddedBlock* blockView = nil;
+    
+    NSString* blockType = block.type.name;
     
     if ([blockType isEqualToString:@"map"]) {
         blockView = (MapEmbeddedBlock*)[[MapEmbeddedBlock alloc] initWithFrame:blockFrame];
@@ -147,7 +149,7 @@
                 Block* child = [block childWithId:blockId];
                 
                 CGRect blockFrame = CGRectMake(40.0f, 0.0f, self.frame.size.width-120.0f, 0.0f);
-                DefinitionEmbeddedBlock* blockView = [self instanciateBlockOfType:child.type.name withFrame:blockFrame];
+                DefinitionEmbeddedBlock* blockView = [self instanciateBlock:child withFrame:blockFrame];
                 
                 if (blockView.class == [DefinitionEmbeddedBlock class]) {
                     [blockView layoutWithBlock:child offsetY:0.0f];
@@ -365,11 +367,13 @@
         UIView *firstBullet = [[UIView alloc] initWithFrame:CGRectMake(-2, -2, 7, 7)];
         [firstBullet.layer setCornerRadius:3.0f];
         firstBullet.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+        firstBullet.tag = 10;
         [line addSubview:firstBullet];
         
         UIView *secondBullet = [[UIView alloc] initWithFrame:CGRectMake(-2, line.frame.size.height, 7, 7)];
         [secondBullet.layer setCornerRadius:3.0f];
         secondBullet.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
+        secondBullet.tag = 20;
         [line addSubview:secondBullet];
         
         [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y - 40) animated:YES];
@@ -380,6 +384,8 @@
 
 - (void)closeEmbeddedBlockWithId:(NSString*)blockId {
     DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
+    
+    [blockView willClose];
     
     [self.tableView beginUpdates];
     CGRect f = blockView.frame;
@@ -393,6 +399,9 @@
         
         frame.size.height = 0;
         line.frame = frame;
+        
+        [[line viewWithTag:10] removeFromSuperview];
+        [[line viewWithTag:20] removeFromSuperview];
         
         [self.articleViewController.collectionView setContentOffset:CGPointMake(0, self.frame.origin.y + frame.origin.y - 200) animated:YES];
 

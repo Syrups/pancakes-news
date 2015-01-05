@@ -35,6 +35,13 @@
     
     self.constraintY.constant = kMenuBarHeigth;
     
+    UISwipeGestureRecognizer* swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipe];
+}
+
+- (void)didSwipe:(UISwipeGestureRecognizer*)swipeRecognizer {
+    [self displaySelectedArticle:swipeRecognizer];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
@@ -88,6 +95,7 @@
 
 - (void)loadWaitingScreen {
     UIView* screen = [[[NSBundle mainBundle] loadNibNamed:@"LoadingScreen" owner:self options:0] objectAtIndex:0];
+    screen.frame = self.view.frame;
     [self.view addSubview:screen];
     
     self.waitingScreen = screen;
@@ -113,10 +121,24 @@
         
         if (err != nil) {
             NSLog(@"%@", err);
-            // schedule another fetch later
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self scheduleNewFetch];
-            });
+            
+            // do we have a cached feed ?
+            feedArticles = [PKCacheManager loadCachedFeed];
+            
+            if (feedArticles.count > 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.feedTableView reloadData];
+                    NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                    [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                    [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
+                    [self.waitingScreen removeFromSuperview];
+                });
+            } else {
+                // schedule another fetch later
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self scheduleNewFetch];
+                });
+            }
         } else {
             // Reload table data on main thread to avoid problems
             dispatch_async(dispatch_get_main_queue(), ^{

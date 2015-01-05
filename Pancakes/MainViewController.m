@@ -50,6 +50,8 @@
     }
     
     [self displayContentController:self.initialViewController];
+    
+    
 }
 
 
@@ -117,7 +119,7 @@
 
 #pragma mark - Show/hide logic
 
-- (void) displayContentController: (UIViewController*) content;
+- (void) displayContentController: (UIViewController*) content
 {
     [self addChildViewController:content];                 // 1
     content.view.frame = [self.childsContainer frame];      // 2
