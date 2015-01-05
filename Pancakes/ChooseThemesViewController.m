@@ -347,7 +347,6 @@ float themeCellHeight;
         [self initThemesForBegin];
     }
     
-    
     //Try Loading from network then
     
     [PKRestClient getAllThemesAndComplete:^(id json, JSONModelError *err) {
@@ -355,14 +354,14 @@ float themeCellHeight;
             return;
         }
         
-        NSLog(@"in network");
+        NSLog(@"in network : %@", json);
         
         self.themesData = [ThemeInterest arrayOfModelsFromDictionaries:json];
         
         [self initThemesForBegin];
         
         //Cache interests
-        [PKCacheManager cacheIntrests:self.themesData];
+        [PKCacheManager cacheIntrests:json];
     }];
 }
 
