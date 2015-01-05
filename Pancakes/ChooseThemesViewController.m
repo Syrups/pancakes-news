@@ -46,13 +46,20 @@ float themeCellHeight;
     
     themeCellHeight = self.themesView.frame.size.height / 1.3f;
     
-    self.themesView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    //Styles
+    
+    //themesView -> Performance issues
+    
+     self.themesView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   
     
     self.themeDescription.textContainerInset = UIEdgeInsetsMake(30, 30, 30, 30);
     self.themeDescription.font = [UIFont fontWithName:@"Heuristica-Regular" size:15.5];
     self.themeDescription.textColor = [Utils colorWithHexString:@"322e1d"];
     self.themeDescription.selectable = NO;
     
+    //subThemesView
     [self.subThemesView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     //self.themesView.pagingEnabled = YES;
@@ -62,23 +69,31 @@ float themeCellHeight;
     [self.subThemesView setDataSource:self];
     [self.themesView setDataSource:self];
     
-    
-    [self.view addSubview:self.themesView];
     [self.view addSubview:self.subThemesView];
     [self.view addSubview: self.themeDescription];
+    //Shadow first
+    
+    [self.view addSubview:self.themesView];
+    //[self addDropShadowToView:self.themesView];
+    [Utils addDropShadowToView:self.themesView];
     
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
    
     [self loadThemesFromNetwork];
+    [self.view layoutIfNeeded];
+    
     [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.subThemesView.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
         self.themeDescription.frame = CGRectMake(screenMidSize, 0, screenMidSize, screenHeight);
+        
+        
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
+        [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
             self.themesView.frame = CGRectMake(0, kMenuBarHeigth, screenMidSize, screenHeight - kMenuBarHeigth);
             
+            [self.view layoutIfNeeded];
         } completion:nil];
     }];
 }
@@ -309,7 +324,7 @@ float themeCellHeight;
         
         return themeCellHeight;
     }else{
-        return 85;
+        return 90;
     }
 }
 

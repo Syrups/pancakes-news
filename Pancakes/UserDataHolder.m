@@ -13,7 +13,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 NSString * const PUSER = @"PancakesUser";
-
+NSString * const PSYNC = @"PancakesSync";
 
 @implementation UserDataHolder
 - (id) init
@@ -43,7 +43,7 @@ NSString * const PUSER = @"PancakesUser";
     NSString *userAsJson = [self.user toJSONString];
     [[NSUserDefaults standardUserDefaults]setObject:userAsJson forKey:PUSER];
     
-    NSLog(@"saving %@", userAsJson);
+    //NSLog(@"saving %@", userAsJson);
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -101,25 +101,49 @@ NSString * const PUSER = @"PancakesUser";
         }
         NSLog(@"user loaded from network %@", [self.user toJSONString]);
     }];
-    
 }
 
+
 - (void) loadFBUser{
+    
+    NSNotificationCenter *note = [NSNotificationCenter defaultCenter];
+    //[note addObserver:self selector:@selector(viewReceivedFBUser:) name:@"FBUserLoaded" object:nil];
+
     [[FBRequest requestForMe] startWithCompletionHandler:
      ^(FBRequestConnection *connection,
        NSDictionary<FBGraphUser> *user,
        NSError *error) {
          if (!error) {
              self.fbUSer = user;
+             [note postNotificationName:@"FBUserLoaded" object:user];
          }
      }];
 }
 
 - (void) loggoutFBUser{
+    NSNotificationCenter *note = [NSNotificationCenter defaultCenter];
+    //[note addObserver:self selector:@selector(viewReceivedFBUser:) name:@"FBUserLoggetOut" object:nil];
+    
     [FBSession.activeSession closeAndClearTokenInformation];
     [FBSession.activeSession close];
     [FBSession setActiveSession:nil];
     self.fbUSer = nil;
+    
+    [note postNotificationName:@"FBUserLoggetOut" object:self.fbUSer];
+}
+
++ (void) allowSynchronisation :(BOOL) allow{
+    
+    [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithBool:allow] forKey:PSYNC];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL) isSyncAllowed {
+    
+    NSNumber *value =  [[NSUserDefaults standardUserDefaults] objectForKey:PSYNC];
+    BOOL isAllowed = [value boolValue];
+    
+    return isAllowed;
 }
 
 @end

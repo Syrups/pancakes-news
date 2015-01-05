@@ -1,13 +1,13 @@
 //
-//  Components.h
+//  PKUI.h
 //  Pancakes
 //
-//  Created by Leo on 26/11/2014.
-//  Copyright (c) 2014 Gobelins. All rights reserved.
+//  Created by Glenn Sonna on 04/01/2015.
+//  Copyright (c) 2015 Gobelins. All rights reserved.
 //
 
-#ifndef Pancakes_Components_h
-#define Pancakes_Components_h
+#ifndef Pancakes_PKUI_h
+#define Pancakes_PKUI_h
 
 #import "PKMenuItemCircle.h"
 #import "ArcImageView.h"

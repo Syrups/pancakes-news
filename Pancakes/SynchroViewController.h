@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @property (weak, nonatomic) IBOutlet UIView *rightView;
+@property (weak, nonatomic) IBOutlet UIView *leftViewOverlay;
 
 //Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerContainerTopSpace;
@@ -37,5 +38,6 @@
 
 - (IBAction)addTimeAction:(id)sender;
 - (IBAction)cancelTransaction:(id)sender;
+- (IBAction)allowDisallowSync:(id)sender;
 
 @end

@@ -17,6 +17,7 @@
     //self.caption.lineBreakMode = NSLineBreakByWordWrapping;
     //self.caption.numberOfLines = 0;
     
+    self.clipsToBounds = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor clearColor];
     self.picture.contentMode = UIViewContentModeScaleAspectFill;
@@ -52,8 +53,10 @@
     
     [self.zigzag setTintColor:color];
 
-    self.backgroundColor = isInclude ? [UIColor clearColor] : [UIColor whiteColor];
+    self.cBack.backgroundColor = isInclude ? [UIColor clearColor] : [UIColor whiteColor];
     [self.title setTextColor: isInclude ? [UIColor whiteColor] : [UIColor blackColor]];
+    
+    self.separator.backgroundColor = isInclude ? [UIColor whiteColor] : [UIColor clearColor];
 }
 
 
@@ -63,7 +66,7 @@
     BOOL notIncluded = ![[[[UserDataHolder sharedInstance] user] interests] containsObject:self.subTheme._id];
     float transformIn = notIncluded ? 1.0f : 5.0f;
     
-    NSLog(@"before add %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
+    //NSLog(@"before add %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
     
     
     if(notIncluded){
@@ -76,15 +79,17 @@
          [[[[UserDataHolder sharedInstance] user] interests] removeObject:self.subTheme._id];
     }
     
-    NSLog (notIncluded ? @"Adding : %@" : @"removing : %@", self.subTheme._id);
+    //NSLog (notIncluded ? @"Adding : %@" : @"removing : %@", self.subTheme._id);
     
-    NSLog(notIncluded ?  @"after add : %@ " : @"after rem : %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
+    //NSLog(notIncluded ?  @"after add : %@ " : @"after rem : %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
     
     
     [UIView animateWithDuration:0.3 animations:^() {
         self.selectedFilter.backgroundColor = [self.themeColor colorWithAlphaComponent:notIncluded ? 0.70 :0];
-        self.backgroundColor = notIncluded ? [UIColor clearColor] : [UIColor whiteColor];
+        self.cBack.backgroundColor = notIncluded ? [UIColor clearColor] : [UIColor whiteColor];
         [self.title setTextColor: notIncluded ? [UIColor whiteColor] : [UIColor blackColor]];
+        
+         self.separator.backgroundColor = notIncluded ? [UIColor whiteColor] : [UIColor clearColor];
     }];
     
     //self.check.transform = CGAffineTransformMakeScale(5.0f, 5.0f);

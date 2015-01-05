@@ -226,11 +226,8 @@
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
     themeTitle.textColor = [Utils colorWithHexString:article.color];
     
-    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 40.0f, 22.0f, 15.0f)];
-    check.image = [UIImage imageNamed:@"check_item"];
+    UIImageView* check = (UIImageView*)[cell.contentView viewWithTag:77];
     check.tintColor = [UIColor whiteColor];
-    check.contentMode = UIViewContentModeScaleAspectFit;
-    check.tag = 50;
     check.alpha = 0.0f;
     
     UIImageView* zigzag = (UIImageView*)[cell.contentView viewWithTag:60];
@@ -266,7 +263,7 @@
     self.articleExcerpt.alpha = 0.0f;
     
     UIView* overlay = [cell.contentView viewWithTag:5];
-    UIView* check = [overlay viewWithTag:50];
+    UIView* check = [overlay viewWithTag:77];
     
     // don't allow touching again if animation not performed
     if (check.transform.a > 1.0f) {

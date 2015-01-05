@@ -15,81 +15,104 @@
 #import "Services.h"
 #import <UIImageView+WebCache.h>
 
-
-
 @implementation MyProfileViewController {
     NSArray* feedArticles;
     Article* selectedArticle;
+    UIView *profilePictureShadow;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    int screenMidSize = self.view.frame.size.width/2;
-    
-    self.profilePicture  = [[UIImageView alloc] initWithFrame:CGRectMake(0, kMenuBarHeigth + self.view.frame.size.height, screenMidSize, self.view.frame.size.height - kMenuBarHeigth)];
     
     self.profilePicture.contentMode = UIViewContentModeScaleAspectFill;
     self.profilePicture.clipsToBounds = YES;
     
-    self.feedTableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.frame.size.width, kMenuBarHeigth, screenMidSize, self.view.frame.size.height)];
-    
+    self.loginButton.switchMode = NO;
+    self.loginButton.innerImageColor = [UIColor whiteColor];
+
     self.tableViewTitleLabelHeightConstraint.constant = kMenuBarHeigth;
     
-    self.feedTableView.delegate = self;
-    self.feedTableView.dataSource = self;
     self.feedTableView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.profilePicture];
-    [self.view addSubview:self.feedTableView];
+    self.feedTableView.separatorColor = [UIColor clearColor];
     
+    
+    NSNotificationCenter *userFB = [NSNotificationCenter defaultCenter];
+    [userFB addObserver:self selector:@selector(setUpFacebookUserInfo:) name:@"FBUserLoaded" object:nil];
+    [userFB addObserver:self selector:@selector(setUpFacebookUserNil:) name:@"FBUserLoggetOut" object:nil];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if(!profilePictureShadow){
+        profilePictureShadow = [Utils addDropShadowToView:self.profilePicture];
+    }
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
     
     if( [UserDataHolder sharedInstance].fbUSer) {
+        
         [self setUpFacebookUserInfo];
     }else{
-         [self setUpFacebookUserNil];
+        
+        [self setUpFacebookUserNil];
     }
     
-    int screenMidSize = self.view.frame.size.width/2;
-    self.profilePicture.frame = CGRectMake(0, kMenuBarHeigth + self.view.frame.size.height, screenMidSize, self.view.frame.size.height - kMenuBarHeigth);
-    self.feedTableView.frame = CGRectMake(self.view.frame.size.width, kMenuBarHeigth, screenMidSize, self.view.frame.size.height);
+    [self.profilePictureConstraint setConstant:self.view.frame.size.height];
+    [self.feedArticleTrailingConstraint setConstant:-self.view.frame.size.width * 0.5];
     
-    CGRect f1 = CGRectMake(0, kMenuBarHeigth, self.view.frame.size.width/2, self.view.frame.size.height - kMenuBarHeigth);
-    CGRect f2 = CGRectMake(screenMidSize, kMenuBarHeigth, self.view.frame.size.width/2, self.view.frame.size.height - kMenuBarHeigth);
-
-        [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.feedTableView.frame = f2;
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
-                self.profilePicture.frame = f1;
-            } completion:nil];
-        }];
+    [self.view layoutIfNeeded];
+    
+    [UIView animateWithDuration:.4f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        [self.feedArticleTrailingConstraint setConstant:-16];
+        
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
+            
+            [self.profilePictureConstraint setConstant:kMenuBarHeigth];
+            
+            [self.view layoutIfNeeded];
+        } completion:nil];
+        
+    }];
+    
+    [self.profilePicture.superview layoutIfNeeded];
     
     self.tableViewTitleLabel.text = NSLocalizedString(@"LastViewedTitle", nil);
-    [self.view bringSubviewToFront: self.loginButton];
-    [self.view bringSubviewToFront: self.userName];
+    
 }
 
 #pragma Facebook
 
-// This method will be called when the user information has been fetched
 - (void)setUpFacebookUserInfo{
+    [self setUpFacebookUserInfo:nil];
+}
+
+- (void)setUpFacebookUserNil{
+    [self setUpFacebookUserNil: nil];
+}
+
+// This method will be called when the user information has been fetched
+- (void)setUpFacebookUserInfo :(NSNotification *)note{
     NSDictionary<FBGraphUser> *user  = [UserDataHolder sharedInstance].fbUSer;
     [Utils setImageWithFacebook:user imageview:self.profilePicture blur:NO] ;
     [Utils setImageWithFacebook:user imageview:self.profileAsRightBackground blur:YES] ;
     self.userName.text = user.name;
-    
-    [self.loginButton  setTitle: @"loggOut" forState:UIControlStateNormal];
+
+    [self.signInOutLabel  setText:@"Sign out"];
+    self.loginButton.innerImageType = PKSyrupButtonTypeX;
 }
 
-- (void)setUpFacebookUserNil{
+- (void)setUpFacebookUserNil:(NSNotification *)note{
     [Utils setPlaceHolderImage:self.profilePicture blur:NO];
     [Utils setPlaceHolderImage:self.profileAsRightBackground blur:YES] ;
-    self.userName.text = @"";
-   //NSLocalizedString(LastViewedTitle, nil)
-    [self.loginButton  setTitle: @"loggin" forState:UIControlStateNormal];
+    self.userName.text = @"Loggin";
     
+    [self.signInOutLabel  setText:@"Sign in"];
+    self.loginButton.innerImageType = PKSyrupButtonTypePlus;
+
 }
 
 - (IBAction)loginButtonTouched:(id)sender
@@ -115,6 +138,21 @@
              AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
              // Call the app delegate's sessionStateChanged:state:error method to handle session state changes
              [appDelegate sessionStateChanged:session state:state error:error];
+             
+             /*if (!error && state == FBSessionStateOpen){
+                 NSLog(@"Profile opened");
+                 // Show the user the logged-in UI
+                 //[[UserDataHolder sharedInstance] loadFBUser];
+                 [self setUpFacebookUserInfo];
+             }
+             
+             if (state == FBSessionStateClosed || state == FBSessionStateClosedLoginFailed){
+                 // If the session is closed
+                 NSLog(@"Profile closed");
+                 //[[UserDataHolder sharedInstance] loggoutFBUser];
+                 // Show the user the logged-out UI
+                 [self setUpFacebookUserNil];
+             }*/
          }];
     }
 }
@@ -123,7 +161,8 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [feedArticles count];
+    return 6;
+    //[feedArticles count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -140,7 +179,7 @@
     UITableViewCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"FeedArticleCell"];
     cell.contentView.backgroundColor = kArticleViewBlockBackground;
     
-    Article* article = [feedArticles objectAtIndex:[indexPath row]];
+    //Article* article = [feedArticles objectAtIndex:[indexPath row]];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedArticleCell"];
@@ -153,18 +192,18 @@
     [cell.contentView addSubview:overlay];
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
-    feedCellTitle.text = article.title;
+    //feedCellTitle.text = article.title;
     feedCellTitle.font = [UIFont fontWithName:kFontBreeBold size:15];
     feedCellTitle.textColor = kFeedViewListTitleColor;
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
-    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    //[feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
     feedCellThumb.layer.masksToBounds = YES;
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
-    themeTitle.textColor = [Utils colorWithHexString:article.color];
+    //themeTitle.textColor = [Utils colorWithHexString:article.color];
     
     UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(38.0f, 40.0f, 22.0f, 15.0f)];
     check.image = [UIImage imageNamed:@"check_item"];
@@ -175,13 +214,14 @@
     
     UIImageView* zigzag = (UIImageView*)[cell.contentView viewWithTag:60];
     zigzag.image = [zigzag.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [zigzag setTintColor:[Utils colorWithHexString:article.color]];
+    //[zigzag setTintColor:[Utils colorWithHexString:article.color]];
     
     [overlay addSubview:check];
     
     [cell setNeedsLayout];
     
     return cell;
+
 }
 
 

@@ -17,26 +17,18 @@ NSString *const PKNotification = @"PKNotification";
 
 +(UILocalNotification *)initSynchronisationNotificationWithDay : (NSDate *) date{
     
-    UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-    NSSet *categories = [NSSet setWithObjects:[PKNotificationManager withDefaultCategory], [PKNotificationManager withDefaultCategory], nil];
-
-   
-    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
-    
-    
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     localNotif.fireDate = date;
+    localNotif.category = @"SYNC_CATEGORY";
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     localNotif.repeatInterval = NSCalendarUnitDay;
-    localNotif.alertBody = @"Time to fap !";
+    localNotif.alertBody = @"Would you like to synchronize your phone with the most recent news ?";
     //localNotif.soundName = UILocalNotificationDefaultSoundName;
     
-   
     [[UIApplication sharedApplication] scheduleLocalNotification: localNotif];
     [[UIApplication sharedApplication] presentLocalNotificationNow: localNotif];
     
-    NSLog(@"PKNotificationManager new notif : %@", [date description]);
+    //NSLog(@"PKNotificationManager new notif : %@", [date description]);
     
     return localNotif;
     //NSString *docsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -75,7 +67,7 @@ NSString *const PKNotification = @"PKNotification";
     acceptAction.identifier = @"ACCEPT_IDENTIFIER";
     
     // Localized string displayed in the action button
-    acceptAction.title = @"Fap !";
+    acceptAction.title = @"Yes !";
     
     // If you need to show UI, choose foreground
     acceptAction.activationMode = UIUserNotificationActivationModeBackground;
@@ -119,7 +111,7 @@ NSString *const PKNotification = @"PKNotification";
     UIMutableUserNotificationAction *noAction = [PKNotificationManager withPKDefaultNotificationNOAction];
     
     // Identifier to include in your push payload and local notification
-    inviteCategory.identifier = @"INVITE_CATEGORY";
+    inviteCategory.identifier = @"SYNC_CATEGORY";
     
     // Add the actions to the category and set the action context
     [inviteCategory setActions:@[yesAction,noAction] forContext:UIUserNotificationActionContextDefault];
@@ -132,7 +124,12 @@ NSString *const PKNotification = @"PKNotification";
 }
 
 
-
-
++ (void) handleActionWithIdentifier: (NSString *)identifier {
+    
+    if ([identifier isEqualToString: @"ACCEPT_IDENTIFIER"]) {
+        NSLog(@"synchro routine");
+    }
+    
+}
 
 @end
