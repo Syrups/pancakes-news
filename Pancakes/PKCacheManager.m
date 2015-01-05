@@ -8,6 +8,10 @@
 
 #import "PKCacheManager.h"
 #import "ThemeInterest.h"
+#import "UserDataHolder.h"
+#import "PKRestClient.h"
+#import <SDWebImage/SDWebImageManager.h>
+
 NSString * const PINTERESTS = @"PancakesIntrests";
 NSString * const PLASTREADS = @"PancakesLastReads";
 NSString * const PFEED = @"PancakesFeed";
@@ -84,6 +88,14 @@ NSString * const PFEED = @"PancakesFeed";
     
     NSArray *toSave = [Article arrayOfDictionariesFromModels:feed];
     
+    for (NSDictionary* a in toSave) {
+        [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:[a objectForKey:@"coverImage"]] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if (image != nil) {
+                //...
+            }
+        }];
+    }
+    
     [[NSUserDefaults standardUserDefaults]setObject:toSave forKey:PFEED];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -103,7 +115,24 @@ NSString * const PFEED = @"PancakesFeed";
 #pragma Synchro
 
 +(void) synchonizationRoutine {
+    UserDataHolder* holder = [UserDataHolder sharedInstance];
+    [holder loadData];
     
+    NSString* feedUrl = @"";
+    
+    if (holder.user._id != nil) {
+        NSString* userId = holder.user._id;
+        feedUrl = [NSString stringWithFormat:[PKRestClient apiUrlWithRoute:@"/user/%@/feed"], userId];
+    } else {
+        // if no user, use public articles feed
+        feedUrl = [PKRestClient apiUrlWithRoute:@"/articles"];
+    }
+    
+    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:feedUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSError* err = nil;
+        NSArray* feedArticles = [Article arrayOfModelsFromData:data error:&err];
+        [self cacheFeed:feedArticles];
+    }] resume];
 }
 
 @end

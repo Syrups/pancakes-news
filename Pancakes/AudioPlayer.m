@@ -48,8 +48,7 @@
     CGContextSetStrokeColorWithColor(ctx, RgbaColor(255, 255, 255, 0.2f).CGColor);
     CGContextSetLineWidth(ctx, 12.0f);
     CGContextStrokePath(ctx);
-    
-    NSLog(@"%f", [self getAnglePercent]);
+
     
     // inner circle
 //    CGContextBeginPath(ctx);

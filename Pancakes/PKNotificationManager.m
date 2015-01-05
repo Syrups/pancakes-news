@@ -7,6 +7,7 @@
 //
 
 #import "PKNotificationManager.h"
+#import "PKCacheManager.h"
 @import Foundation;
 @import UIKit;
 
@@ -128,6 +129,7 @@ NSString *const PKNotification = @"PKNotification";
     
     if ([identifier isEqualToString: @"ACCEPT_IDENTIFIER"]) {
         NSLog(@"synchro routine");
+        [PKCacheManager synchonizationRoutine];
     }
     
 }

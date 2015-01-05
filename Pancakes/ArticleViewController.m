@@ -17,6 +17,7 @@
 #import "CommentsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PKRestClient.h"
+#import "PKCacheManager.h"
 
 typedef enum  {
     Displayed,
@@ -65,6 +66,14 @@ typedef enum  {
     
     [self createMainMenu];
     [self createDetailMenu];
+    
+//    [PKCacheManager saveLastReadArticle:self.displayedArticle];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    for (int i = 0; i < self.displayedArticle.blocks.count ; i++) {
+        [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+    }
 }
 
 - (void)fetchArticleData {
@@ -78,7 +87,18 @@ typedef enum  {
     
    [PKRestClient getArticleWithId:self.displayedArticle._id :^(id json, JSONModelError *err) {
         NSError* error = nil;
-        self.displayedArticle = [[Article alloc] initWithDictionary:json error:&error];
+       
+       if (err) { // error connecting to network, try loading from cache
+           NSArray* cachedFeed = [PKCacheManager loadCachedFeed];
+           for (Article* a in cachedFeed) {
+               if ([a._id isEqualToString:self.displayedArticle._id]) {
+                   self.displayedArticle = a;
+               }
+           }
+       } else {
+           self.displayedArticle = [[Article alloc] initWithDictionary:json error:&error];
+       }
+       
         self.articleTitleLabel.text = self.displayedArticle.title;
         
         for (Block* block in self.displayedArticle.blocks) {
