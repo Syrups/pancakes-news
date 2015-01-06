@@ -12,7 +12,7 @@
 #import "PKRestClient.h"
 #import <SDWebImage/SDWebImageManager.h>
 
-NSString * const PINTERESTS = @"PancakesIntrests";
+NSString * const PINTERESTS = @"PancakesInterests";
 NSString * const PLASTREADS = @"PancakesLastReads";
 NSString * const PFEED = @"PancakesFeed";
 
@@ -39,48 +39,87 @@ NSString * const PFEED = @"PancakesFeed";
     return _sharedInstance;
 }
 
-#pragma Interests
 
-+(void) cacheIntrests: (NSMutableArray *) interests{
+
+#pragma Generics
++(BOOL) cacheDataWithArray:(NSArray *) array inFile:(NSString *)fileName{
     
-    NSArray *toSave = [ThemeInterest arrayOfDictionariesFromModels:interests];
-    [[NSUserDefaults standardUserDefaults]setObject:toSave forKey:PINTERESTS];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSString *path =[self pathFormPlitsWithName:fileName];
+    
+    BOOL done = [array writeToFile:path atomically:YES];
+    
+    return done;
+}
+
++(id) loadDataFromFile:(NSString *)fileName intoJSONModel:(Class) model{
+    
+    NSArray *interests = [NSArray arrayWithContentsOfFile:[self pathFormPlitsWithName:fileName]];
+    
+    if (!interests){
+        
+        return [[NSMutableArray alloc] init];
+    }
+    return [model arrayOfModelsFromDictionaries:interests];
+}
+
+#pragma Interests
++(void) cacheIntrests: (NSMutableArray *) interests{
+    [self cacheDataWithArray:interests inFile:PINTERESTS];
 }
 
 +(id) loadInterestsFromCache{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:PINTERESTS]){
-        
-        
-        return [ThemeInterest arrayOfModelsFromDictionaries:[[NSUserDefaults standardUserDefaults] objectForKey:PINTERESTS]];
-    }else{
     
+    NSArray *interests = [NSArray arrayWithContentsOfFile:[self pathFormPlitsWithName:PINTERESTS]];
+    
+    if (!interests){
+        
         return [[NSMutableArray alloc] init];
     }
+    
+    return [ThemeInterest arrayOfModelsFromDictionaries:interests];
 }
-
 
 #pragma Articles - LastRead
 +(void) saveLastReadArticle :(Article *) article{
     
-    NSMutableArray * lastReads = [PKCacheManager loadLastReadArticles];
-    [lastReads addObject:[article toDictionary]];
+    NSString *path = [self pathFormPlitsWithName:PLASTREADS];
     
-    [[NSUserDefaults standardUserDefaults]setObject:lastReads forKey:PLASTREADS];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSMutableArray * lastReads = [Article arrayOfDictionariesFromModels:[PKCacheManager loadLastReadArticles]];
+    [self preventDoubleInArray:lastReads withObject:[article toDictionary]];
+    
+    [lastReads insertObject:[article toDictionary] atIndex:0];
+    [lastReads writeToFile:path atomically:YES];
 }
 
 +(NSMutableArray *) loadLastReadArticles{
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:PLASTREADS]){
-        
-        return [Article arrayOfModelsFromDictionaries:[[NSUserDefaults standardUserDefaults] objectForKey:PLASTREADS]];
-    }else{
+    NSArray *last = [NSArray arrayWithContentsOfFile:[self pathFormPlitsWithName:PLASTREADS]];
+    
+    if (!last){
         
         return [[NSMutableArray alloc] init];
     }
+    
+    return [Article arrayOfModelsFromDictionaries:last];
 }
 
++(NSArray *)preventDoubleInArray: (NSMutableArray *) originalArrayOfItems withObject :(NSDictionary *) object{
+    NSMutableArray *discardedItems = [NSMutableArray array];
+    NSDictionary *item;
+    
+    for (item in originalArrayOfItems) {
+        
+        if ([[item objectForKey:@"_id"] isEqualToString:[object objectForKey:@"_id"]]){
+            [discardedItems addObject:item];
+            NSLog(@"%@", [item objectForKey:@"_id"]);
+        }
+        
+    }
+    
+    [originalArrayOfItems removeObjectsInArray:discardedItems];
+    
+    return discardedItems;
+}
 
 #pragma Articles - Feed
 
@@ -96,19 +135,18 @@ NSString * const PFEED = @"PancakesFeed";
         }];
     }
     
-    [[NSUserDefaults standardUserDefaults]setObject:toSave forKey:PFEED];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+   [self cacheDataWithArray:toSave inFile:PFEED];
 }
 
 +(NSArray *) loadCachedFeed{
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:PFEED]){
+    NSArray *last = [NSArray arrayWithContentsOfFile:[self pathFormPlitsWithName:PFEED]];
+    
+    if (!last){
         
-        return [Article arrayOfModelsFromDictionaries:[[NSUserDefaults standardUserDefaults] objectForKey:PFEED]];
-    }else{
-        
-        return [[NSArray alloc] init];
+        return [[NSMutableArray alloc] init];
     }
+    return [Article arrayOfModelsFromDictionaries:last];
 }
 
 
@@ -133,6 +171,14 @@ NSString * const PFEED = @"PancakesFeed";
         NSArray* feedArticles = [Article arrayOfModelsFromData:data error:&err];
         [self cacheFeed:feedArticles];
     }] resume];
+}
+
++(NSString *)pathFormPlitsWithName: (NSString *) name {
+    
+    NSString *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *path = [doc stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.plist",name]];
+    
+    return path;
 }
 
 @end

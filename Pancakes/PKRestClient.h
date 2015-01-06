@@ -14,6 +14,9 @@
 #define kApiRootUrl @"http://localhost:5000/api"
 #define kMediaRootUrl @"http://localhost:5000/media"
 
+//pancakes-back.herokuapp.com/
+//localhost:5000
+//192.168.2.2
 
 @interface PKRestClient : NSObject
 
