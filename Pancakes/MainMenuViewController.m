@@ -159,6 +159,7 @@ PKMenuItemCircle *currentItem;
     
     UIButton *menuButton = [labels objectAtIndex:index];
     menuButton.frame = CGRectMake(0, 0, BUTONS_WIDTH, BUTONS_HEIGHT);
+
     menuButton.center = point;
     menuButton.titleLabel.font = [UIFont fontWithName:@"Heuristica-Italic" size:15.5];
    

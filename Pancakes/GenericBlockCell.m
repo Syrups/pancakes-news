@@ -23,6 +23,7 @@
     NSMutableDictionary* blockLines;
     NSMutableDictionary* blockButtons;
     NSMutableDictionary* closeButtons;
+    NSMutableDictionary* animating;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -151,9 +152,10 @@
                 NSString* blockId = [call objectForKey:@"blockId"];
                 Block* child = [block childWithId:blockId];
                 
-                CGRect blockFrame = CGRectMake(40.0f, 0.0f, self.frame.size.width-120.0f, 0.0f);
+                CGRect blockFrame = CGRectMake(40.0f, 5.0f, self.frame.size.width-120.0f, 0.0f);
                 DefinitionEmbeddedBlock* blockView = [self instanciateBlock:child withFrame:blockFrame];
                 
+                blockView.block = child;
                 if (blockView.class == [DefinitionEmbeddedBlock class]) {
                     [blockView layoutWithBlock:child offsetY:0.0f];
                 }
@@ -353,7 +355,7 @@
     [closeButton setImage:[UIImage imageNamed:@"block-close"] forState:UIControlStateNormal];
     closeButton.backgroundColor = [Utils colorWithHexString:self.articleViewController.displayedArticle.color];
     closeButton.layer.cornerRadius = 20;
-    closeButton.tag = blockId.integerValue;
+    closeButton.tag = blockId;
     [closeButton addTarget:self action:@selector(closeButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:closeButton];
     
@@ -456,6 +458,26 @@
     }
     
     return cell;
+}
+
+
+#pragma mark - Scroll view listener
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    for (UIView* btn in self.subviews) {
+//        if (btn.tag > 0 && (btn.frame.origin.y + self.frame.origin.y) -  scrollView.contentOffset.y < 90 && btn.alpha == 1) {
+//            [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//                btn.alpha = 0;
+//                btn.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
+//            } completion:nil];
+//        }
+//        if (btn.tag > 0 && (btn.frame.origin.y + self.frame.origin.y) -  scrollView.contentOffset.y > 100 && btn.alpha == 0) {
+//            [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//                btn.alpha = 1;
+//                btn.transform = CGAffineTransformMakeScale(1,1);
+//            } completion:nil];
+//        }
+//    }
 }
 
 @end

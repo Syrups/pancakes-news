@@ -18,10 +18,10 @@
     // Embedded map
     RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:@"leoht.kcag6ani"];
     RMMapView* map = [[RMMapView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) andTilesource:tileSource];
-
-    map.centerCoordinate = CLLocationCoordinate2DMake([block.latitude floatValue], [block.longitude floatValue]);
-    map.zoom = 1.0f;
-    map.userInteractionEnabled = NO;
+    
+    [map setCenterCoordinate:CLLocationCoordinate2DMake(block.latitude.floatValue, block.longitude.floatValue)];
+    [map setZoom:4.0f atCoordinate:map.centerCoordinate animated:NO];
+//    map.userInteractionEnabled = NO;
     
     [self addSubview:map];
     

@@ -48,6 +48,7 @@
 		B35841FD1A03DAC400A17468 /* SectionBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B35841FB1A03DAC400A17468 /* SectionBlockCell.m */; };
 		B35841FE1A03DAC400A17468 /* SectionBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */; };
 		B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B35842011A069C4700A17468 /* DefinitionEmbeddedBlock.m */; };
+		B35C891B1A5C1E3F00D2B7C7 /* PKSyrupArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = B35C891A1A5C1E3F00D2B7C7 /* PKSyrupArrow.m */; };
 		B37334611A0791C000FDBF70 /* EditorsBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B37334601A0791C000FDBF70 /* EditorsBlockCell.m */; };
 		B375C0C919F46B6B002D7AE7 /* GenericBlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0C819F46B6A002D7AE7 /* GenericBlockCell.m */; };
 		B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B375C0CC19F47069002D7AE7 /* ContentParser.m */; };
@@ -224,6 +225,8 @@
 		B35841FC1A03DAC400A17468 /* SectionBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionBlockCell.xib; sourceTree = "<group>"; };
 		B35842001A069C4700A17468 /* DefinitionEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinitionEmbeddedBlock.h; sourceTree = "<group>"; };
 		B35842011A069C4700A17468 /* DefinitionEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinitionEmbeddedBlock.m; sourceTree = "<group>"; };
+		B35C89191A5C1E3F00D2B7C7 /* PKSyrupArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKSyrupArrow.h; sourceTree = "<group>"; };
+		B35C891A1A5C1E3F00D2B7C7 /* PKSyrupArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKSyrupArrow.m; sourceTree = "<group>"; };
 		B373345F1A0791C000FDBF70 /* EditorsBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorsBlockCell.h; sourceTree = "<group>"; };
 		B37334601A0791C000FDBF70 /* EditorsBlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorsBlockCell.m; sourceTree = "<group>"; };
 		B375C0C719F46B6A002D7AE7 /* GenericBlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericBlockCell.h; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 				B3F0BD031A24F3F100615279 /* ArticleMenuItem.m */,
 				B3DBD2C91A3F3B5D0013493C /* AudioPlayer.h */,
 				B3DBD2CA1A3F3B5D0013493C /* AudioPlayer.m */,
+				B35C89191A5C1E3F00D2B7C7 /* PKSyrupArrow.h */,
+				B35C891A1A5C1E3F00D2B7C7 /* PKSyrupArrow.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1116,6 +1121,7 @@
 				B3DBD2CB1A3F3B5D0013493C /* AudioPlayer.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
 				73315B1F1A3AFFEF005B7567 /* PKSyrupButton.m in Sources */,
+				B35C891B1A5C1E3F00D2B7C7 /* PKSyrupArrow.m in Sources */,
 				737668171A111379002ECAB5 /* UserDataHolder.m in Sources */,
 				73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */,
 				B34E70231A02DEA200C4ECA2 /* UIImage+DSP.m in Sources */,

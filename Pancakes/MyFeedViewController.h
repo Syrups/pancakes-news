@@ -22,4 +22,7 @@
 @property (strong, nonatomic) UIView* waitingScreen;
 
 //@property (weak, nonatomic) IBOutlet MainMenuViewController *mainMenu;
+
+- (IBAction)displaySelectedArticle:(id)sender;
+
 @end

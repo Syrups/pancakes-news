@@ -198,6 +198,11 @@
     [self.synchroTable reloadInputViews];
     
     NSLog(@"removeNotification %ld, %@", (long)sender.tag , [notif.fireDate description]);
+    
+    if (self.notifications.count < 3) {
+        self.addTimeButton.enabled = YES;
+        self.addTimeButton.alpha = 1;
+    }
 }
 
 - (IBAction)addTimeAction:(id)sender {
@@ -215,6 +220,11 @@
         
         [self.synchroTable reloadData];
         [self.synchroTable reloadInputViews];
+        
+        if (self.notifications.count >= 3) {
+            self.addTimeButton.enabled = NO;
+            self.addTimeButton.alpha = 0.7f;
+        }
     }
 }
 

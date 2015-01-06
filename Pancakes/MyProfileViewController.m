@@ -15,6 +15,7 @@
 #import "Services.h"
 #import "ArticleViewController.h"
 #import "MainViewController.h"
+#import "MyFeedViewController.h"
 #import <UIImageView+WebCache.h>
 
 @implementation MyProfileViewController {
@@ -235,29 +236,23 @@
 
 - (void)displaySelectedArticle:(Article*)article {
     
-    MainViewController* parent = (MainViewController*)self.parentViewController; // get the main view controller
+//    MainViewController* parent = (MainViewController*)self.parentViewController; // get the main view controller
+//
+//        UINavigationController* feedVc = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MyFeedView"];
+//        //                [feedVc setViewControllers:@[vc]];
+//        
+//        [parent displayContentController:feedVc];
+//        
+//        ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
+//        vc.displayedArticle = article;
+//        vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
+//        [vc.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:article.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            if (image != nil) {
+//                MyFeedViewController* feed = (MyFeedViewController*)feedVc.viewControllers[0];
+//                [feed displaySelectedArticle:nil];
+//            }
+//        }];
     
-    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect f = parent.menuTopBar.frame;
-        f.origin.x -= self.view.frame.size.width/2;
-        [parent.menuTopBar setFrame:f];
-        f = parent.menuItem.frame;
-        f.origin.x -= self.view.frame.size.width/2;
-        [parent.menuItem setFrame:f];
-    } completion:^(BOOL finished) {
-        
-        ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
-        vc.displayedArticle = article;
-        vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
-        [vc.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:selectedArticle.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if (image != nil) {
-                UINavigationController* feedVc = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MyFeedView"];
-//                [feedVc setViewControllers:@[vc]];
-                
-                [parent displayContentController:feedVc];
-            }
-        }];
-    }];
 }
 
 

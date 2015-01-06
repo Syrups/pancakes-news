@@ -11,10 +11,7 @@
 #import "ArticleViewController.h"
 #import "JSONHTTPClient.h"
 #import "Block.h"
-#import "GenericBlockCell.h"
-#import "SectionBlockCell.h"
-#import "EditorsBlockCell.h"
-#import "CommentsBlockCell.h"
+#import "Blocks.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PKRestClient.h"
 #import "PKCacheManager.h"
@@ -383,6 +380,7 @@ typedef enum  {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
         cell.articleViewController = self;
         [cell loadWithBlock:block];
+        [self.scrollListeners addObject:cell];
     }
     
 //    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, (long)indexPath.row);

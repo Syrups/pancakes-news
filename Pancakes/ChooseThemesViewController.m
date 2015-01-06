@@ -13,6 +13,7 @@
 #import "Models.h"
 #import "Services.h"
 #import "FXBlurView.h"
+#import "PKSyrupArrow.h"
 
 
 @interface ChooseThemesViewController ()
@@ -38,6 +39,8 @@ float themeCellHeight;
     //InitScrollView and TableView
     screenMidSize = self.view.frame.size.width/2;
     screenHeight = self.view.frame.size.height;
+    
+    
     
     
     self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, screenMidSize, screenHeight - kMenuBarHeigth)];
@@ -76,6 +79,9 @@ float themeCellHeight;
     [self.view addSubview:self.themesView];
     //[self addDropShadowToView:self.themesView];
     [Utils addDropShadowToView:self.themesView];
+    
+    PKSyrupArrow* arr = [[PKSyrupArrow alloc] initWithFrame:CGRectMake(screenMidSize/2 - 7, screenHeight-30, 15, 8)];
+    [self.view addSubview:arr];
     
 }
 
