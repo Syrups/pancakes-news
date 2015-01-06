@@ -32,7 +32,7 @@
 
 // Layout
 
-#define kArticleViewTextLineSpacing             6.0f
+#define kArticleViewTextLineSpacing             9.0f
 #define kMenuBarHeigth                          43
 
 // Keys

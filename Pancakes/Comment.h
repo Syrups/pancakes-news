@@ -15,6 +15,7 @@
 @interface Comment : JSONModel
 
 @property (strong, nonatomic) NSString* _id;
+@property (strong, nonatomic) NSString* author;
 @property (strong, nonatomic) NSString* content;
 
 @end

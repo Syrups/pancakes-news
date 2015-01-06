@@ -16,7 +16,10 @@
 #import "BlockButton.h"
 #import "PKAIDecoder.h"
 
-@implementation SectionBlockCell
+@implementation SectionBlockCell {
+    CGFloat oldContentOffset;
+    BOOL animatingCloseButton;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -124,6 +127,8 @@
     [super layoutWithBlock:block offsetY:200.0f];
     
     self.contentView.backgroundColor = [UIColor whiteColor];
+    
+    [self.articleViewController.scrollListeners addObject:self];
 }
 
 - (void)reveal:(UIButton*)sender {
@@ -158,7 +163,7 @@
             f.origin.y += 60.0f;
             self.revealButton.frame = f;
             f = self.closeButton.frame;
-            f.origin.y += 60.0f;
+            f.origin.y += 140.0f;
             self.closeButton.frame = f;
             self.closeButton.alpha = 1;
             self.revealButton.alpha = 0;
@@ -219,9 +224,18 @@
 #pragma mark - Scroll view listener
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGRect frame = self.closeButton.frame;
-    frame.origin.y = scrollView.contentOffset.y;
-    self.closeButton.frame = frame;
+    if (oldContentOffset == 0) oldContentOffset = scrollView.contentOffset.y;
+    
+    CGFloat diff = scrollView.contentOffset.y - oldContentOffset;
+    
+    if (diff > 340 && !animatingCloseButton) {
+        animatingCloseButton = YES;
+        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.closeButton.transform = CGAffineTransformMakeScale(0, 0);
+        } completion:^(BOOL finished) {
+            animatingCloseButton = NO;
+        }];
+    }
 }
 
 @end

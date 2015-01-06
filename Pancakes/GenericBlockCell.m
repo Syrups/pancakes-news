@@ -253,6 +253,7 @@
                 LettrineParagraph* lettrineParagraph = [[LettrineParagraph alloc] initWithFrame:label.frame];
                 [lettrineParagraph layoutWithAttributedString:label.attributedText color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
                 [paragraphView addSubview:lettrineParagraph];
+                
             } else {
                 [paragraphView addSubview:label];
             }
