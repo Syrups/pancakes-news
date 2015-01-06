@@ -280,7 +280,7 @@ typedef enum  {
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
     } else if ([block.type.name isEqualToString:@"comments"]) {
-        return CGSizeMake(w, 300 + self.displayedArticle.comments.count * 130.0f);
+        return CGSizeMake(w, 300 + self.displayedArticle.comments.count * 200.0f);
     }
     
     // generic block of content

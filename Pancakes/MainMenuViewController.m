@@ -279,7 +279,7 @@ PKMenuItemCircle *currentItem;
     isOpen = !isOpen;
     
     float heightLessBar = self.view.frame.size.height - kMenuBarHeigth;
-    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = self.view.frame.size.width;
@@ -295,7 +295,7 @@ PKMenuItemCircle *currentItem;
     isOpen = !isOpen;
     
     float heightLessBar = self.view.frame.size.height - kMenuBarHeigth;
-    [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.frame = CGRectMake(-self.view.frame.size.width, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = 0;

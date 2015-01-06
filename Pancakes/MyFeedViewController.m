@@ -243,7 +243,7 @@
     
     UIView* overlay = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width/2, self.view.frame.size.height/3)];
     overlay.tag = 5;
-    overlay.backgroundColor = RgbaColor(0, 0, 0, 0.6f);
+    overlay.backgroundColor = RgbaColor(0, 0, 0, 0.65f);
     overlay.hidden = YES;
     [cell.contentView addSubview:overlay];
     
@@ -259,6 +259,7 @@
     feedCellThumb.layer.masksToBounds = YES;
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
+    themeTitle.text = ((SubThemeInterest*)article.subthemes[0]).title;
     themeTitle.textColor = [Utils colorWithHexString:article.color];
     
     UIImageView* check = (UIImageView*)[cell.contentView viewWithTag:77];
@@ -298,6 +299,7 @@
     self.articleExcerpt.alpha = 0.0f;
     
     UIView* overlay = [cell.contentView viewWithTag:5];
+    [cell.contentView sendSubviewToBack:overlay];
     UIView* check = [overlay viewWithTag:77];
     
     // don't allow touching again if animation not performed
@@ -328,6 +330,8 @@
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.textColor = [UIColor whiteColor];
+    UILabel* date = (UILabel*)[cell.contentView viewWithTag:70];
+    date.textColor = [UIColor whiteColor];
     [cell.contentView bringSubviewToFront:feedCellTitle];
     
     

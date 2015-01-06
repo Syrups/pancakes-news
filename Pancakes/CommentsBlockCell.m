@@ -22,27 +22,45 @@
     [cover sd_setImageWithURL:[NSURL URLWithString:self.articleViewController.displayedArticle.coverImage]];
     [self addSubview:cover];
     
-    FXBlurView* blur = [[FXBlurView alloc] initWithFrame:cover.frame];
-    [blur setBlurRadius:8.0f];
-    [self addSubview:blur];
+//    FXBlurView* blur = [[FXBlurView alloc] initWithFrame:cover.frame];
+//    [blur setBlurRadius:8.0f];
+//    [self addSubview:blur];
     
     offsetY += 130.0f;
     
     for (Comment* comment in self.articleViewController.displayedArticle.comments) {
-        UIView* commentBlock = [[UIView alloc] initWithFrame:CGRectMake(30.0f, offsetY, self.bounds.size.width - 110.0f, 100.0f)];
+        
+        UIView* commentBlock = [[UIView alloc] initWithFrame:CGRectMake(40.0f, offsetY, self.bounds.size.width - 110.0f, 150.0f)];
         commentBlock.backgroundColor = RgbColor(253, 253, 253);
         commentBlock.layer.borderColor = RgbColor(222, 222, 222).CGColor;
         commentBlock.layer.borderWidth = 1.0f;
         
-        UILabel* content = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, commentBlock.bounds.size.width - 20, 80)];
+        UIImageView* pic = [[UIImageView alloc] initWithFrame:CGRectMake(commentBlock.bounds.size.width/2-42, -42, 85, 85)];
+        pic.image = [UIImage imageNamed:@"glenn"];
+        pic.layer.cornerRadius = 42.5f;
+        pic.layer.masksToBounds = YES;
+        [commentBlock addSubview:pic];
+        
+        UILabel* author = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, commentBlock.bounds.size.width - 20, 15)];
+        author.numberOfLines = 0;
+        author.font = [UIFont fontWithName:kFontBreeBold size:18];
+        author.text = @"Username";
+        [commentBlock addSubview:author];
+        
+        UIImageView* wave = [[UIImageView alloc] initWithFrame:CGRectMake(20, 55, 30, 6)];
+        wave.image = [UIImage imageNamed:@"gouigoui"];
+        [commentBlock addSubview:wave];
+        
+        UILabel* content = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, commentBlock.bounds.size.width - 20, 80)];
+        content.contentMode = UIViewContentModeTop;
         content.numberOfLines = 0;
-        content.font = [UIFont fontWithName:kFontHeuristicaRegular size:16];
+        content.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
         content.text = comment.content;
         [commentBlock addSubview:content];
         
         [self addSubview:commentBlock];
         
-        offsetY += commentBlock.bounds.size.height + 40.0f;
+        offsetY += commentBlock.bounds.size.height + 60.0f;
     }
     
     [super layoutWithBlock:block offsetY:offsetY];

@@ -228,12 +228,23 @@
     
     CGFloat diff = scrollView.contentOffset.y - oldContentOffset;
     
-    if (diff > 340 && !animatingCloseButton) {
+    if (diff > 350 && !animatingCloseButton) {
         animatingCloseButton = YES;
         [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.closeButton.transform = CGAffineTransformMakeScale(0, 0);
+            self.closeButton.alpha = 0;
+            self.closeButton.transform = CGAffineTransformMakeScale(0.2f, 0.2f);
         } completion:^(BOOL finished) {
-            animatingCloseButton = NO;
+//            animatingCloseButton = NO;
+        }];
+    }
+    
+    if (diff < 350 && animatingCloseButton) {
+        animatingCloseButton = NO;
+        [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.closeButton.alpha = 1;
+            self.closeButton.transform = CGAffineTransformMakeScale(1,1);
+        } completion:^(BOOL finished) {
+//            animatingCloseButton = NO;
         }];
     }
 }

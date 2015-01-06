@@ -140,6 +140,9 @@
             // Confgure now paragraph view height
             frame = paragraphView.frame;
             frame.size.height = label.frame.size.height;
+            if ([block.paragraphs indexOfObject:p] == 0) {
+                frame.size.height += 15.0f;
+            }
             paragraphView.frame = frame;
             
             [items addObject:paragraphView];
