@@ -8,6 +8,10 @@
 
 #import "PKCacheManager.h"
 #import "ThemeInterest.h"
+#import "UserDataHolder.h"
+#import "PKRestClient.h"
+#import <SDWebImage/SDWebImageManager.h>
+
 NSString * const PINTERESTS = @"PancakesInterests";
 NSString * const PLASTREADS = @"PancakesLastReads";
 NSString * const PFEED = @"PancakesFeed";
@@ -60,7 +64,6 @@ NSString * const PFEED = @"PancakesFeed";
 
 #pragma Interests
 +(void) cacheIntrests: (NSMutableArray *) interests{
-    
     [self cacheDataWithArray:interests inFile:PINTERESTS];
 }
 
@@ -79,12 +82,12 @@ NSString * const PFEED = @"PancakesFeed";
 #pragma Articles - LastRead
 +(void) saveLastReadArticle :(Article *) article{
     
-    NSString *path =[self pathFormPlitsWithName:PLASTREADS];
+    NSString *path = [self pathFormPlitsWithName:PLASTREADS];
     
     NSMutableArray * lastReads = [Article arrayOfDictionariesFromModels:[PKCacheManager loadLastReadArticles]];
-    //[self preventFomDoubleInArray:lastReads withObject:[article toDictionary]];
+    [self preventDoubleInArray:lastReads withObject:[article toDictionary]];
     
-    [lastReads addObject:[article toDictionary]];
+    [lastReads insertObject:[article toDictionary] atIndex:0];
     [lastReads writeToFile:path atomically:YES];
 }
 
@@ -100,13 +103,17 @@ NSString * const PFEED = @"PancakesFeed";
     return [Article arrayOfModelsFromDictionaries:last];
 }
 
-+(NSArray *)preventFomDoubleInArray: (NSMutableArray *) originalArrayOfItems withObject :(NSDictionary *) object{
++(NSArray *)preventDoubleInArray: (NSMutableArray *) originalArrayOfItems withObject :(NSDictionary *) object{
     NSMutableArray *discardedItems = [NSMutableArray array];
     NSDictionary *item;
     
     for (item in originalArrayOfItems) {
-        if ([[item objectForKey:@"_id"] isEqualToString:[object objectForKey:@"_id"]])
+        
+        if ([[item objectForKey:@"_id"] isEqualToString:[object objectForKey:@"_id"]]){
             [discardedItems addObject:item];
+            NSLog(@"%@", [item objectForKey:@"_id"]);
+        }
+        
     }
     
     [originalArrayOfItems removeObjectsInArray:discardedItems];
@@ -117,7 +124,18 @@ NSString * const PFEED = @"PancakesFeed";
 #pragma Articles - Feed
 
 +(void) cacheFeed :(NSArray *) feed{
-    [self cacheDataWithArray:feed inFile:PFEED];
+    
+    NSArray *toSave = [Article arrayOfDictionariesFromModels:feed];
+    
+    for (NSDictionary* a in toSave) {
+        [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:[a objectForKey:@"coverImage"]] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if (image != nil) {
+                //...
+            }
+        }];
+    }
+    
+   [self cacheDataWithArray:toSave inFile:PFEED];
 }
 
 +(NSArray *) loadCachedFeed{

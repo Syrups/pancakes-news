@@ -37,8 +37,6 @@
     self.feedTableView.backgroundColor = [UIColor clearColor];
     self.feedTableView.separatorColor = [UIColor clearColor];
     
-    feedArticles = [PKCacheManager loadLastReadArticles].copy;
-    
     NSNotificationCenter *userFB = [NSNotificationCenter defaultCenter];
     [userFB addObserver:self selector:@selector(setUpFacebookUserInfo:) name:@"FBUserLoaded" object:nil];
     [userFB addObserver:self selector:@selector(setUpFacebookUserNil:) name:@"FBUserLoggetOut" object:nil];
@@ -52,6 +50,8 @@
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
+    
+    feedArticles = [PKCacheManager loadLastReadArticles].copy;
     
     if( [UserDataHolder sharedInstance].fbUSer) {
         

@@ -67,7 +67,7 @@ typedef enum  {
     [self createMainMenu];
     [self createDetailMenu];
     
-//    [PKCacheManager saveLastReadArticle:self.displayedArticle];
+    [PKCacheManager saveLastReadArticle:self.displayedArticle];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
