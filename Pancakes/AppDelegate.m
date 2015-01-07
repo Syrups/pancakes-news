@@ -31,12 +31,7 @@
     }*/
     
     
-    UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-    NSSet *categories = [NSSet setWithObjects:[PKNotificationManager withDefaultCategory], nil];
     
-    
-    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
-    [application registerUserNotificationSettings:mySettings];
     
     
     // Whenever a person opens the app, check for a cached session

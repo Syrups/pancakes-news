@@ -117,10 +117,13 @@ float themeCellHeight;
 
 -(void) updateThemeDataWithCell : (UIThemeView *) cell{
     // The key is repositioning without animation
+
     
     self.currentTheme = cell.theme;
     self.currentThemeSubs = self.currentTheme.subthemes;
     self.themeDescription.text = self.currentTheme.desc;
+    
+    
     
     [UIView animateWithDuration:0.3 animations:^() {
         self.themeDescription.alpha =  cell.self.themeCheck.isOn ? 1.0 : 0;

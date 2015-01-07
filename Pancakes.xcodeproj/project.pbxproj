@@ -65,6 +65,7 @@
 		B39C55671A150751005550CC /* UILabel+Lettrine.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C55661A150751005550CC /* UILabel+Lettrine.m */; };
 		B39C556A1A150AAA005550CC /* LettrineParagraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C55691A150AAA005550CC /* LettrineParagraph.m */; };
 		B39C556D1A160407005550CC /* DataEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B39C556C1A160407005550CC /* DataEmbeddedBlock.m */; };
+		B39C97941A5D313000284B23 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39C97931A5D313000284B23 /* Social.framework */; };
 		B39D62061A402BAA00F8AEE8 /* bloc_son_trait_00017.png in Resources */ = {isa = PBXBuildFile; fileRef = B39D62051A402BAA00F8AEE8 /* bloc_son_trait_00017.png */; };
 		B3A8B62C19FBF85B00D52EB6 /* GenericBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */; };
 		B3A8B63019FBF9CB00D52EB6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3A8B62F19FBF9CB00D52EB6 /* Accelerate.framework */; };
@@ -259,6 +260,7 @@
 		B39C55691A150AAA005550CC /* LettrineParagraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LettrineParagraph.m; sourceTree = "<group>"; };
 		B39C556B1A160407005550CC /* DataEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEmbeddedBlock.h; sourceTree = "<group>"; };
 		B39C556C1A160407005550CC /* DataEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEmbeddedBlock.m; sourceTree = "<group>"; };
+		B39C97931A5D313000284B23 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		B39D62051A402BAA00F8AEE8 /* bloc_son_trait_00017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bloc_son_trait_00017.png; sourceTree = "<group>"; };
 		B3A8B62919FBF85B00D52EB6 /* GenericBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericBlockCell.xib; sourceTree = "<group>"; };
 		B3A8B62F19FBF9CB00D52EB6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -365,6 +367,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39C97941A5D313000284B23 /* Social.framework in Frameworks */,
 				B3F82C3D1A0387E40038D763 /* QuartzCore.framework in Frameworks */,
 				B3F82C3B1A0387DF0038D763 /* AVFoundation.framework in Frameworks */,
 				B3F82C391A0387D70038D763 /* OpenGLES.framework in Frameworks */,
@@ -389,6 +392,7 @@
 		39615222AF1BB60813B8A01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B39C97931A5D313000284B23 /* Social.framework */,
 				B3F82C3C1A0387E40038D763 /* QuartzCore.framework */,
 				B3F82C3A1A0387DF0038D763 /* AVFoundation.framework */,
 				B3F82C381A0387D70038D763 /* OpenGLES.framework */,

@@ -12,7 +12,7 @@
 
 // Override to change distance between text and underline
 - (void)underlineGlyphRange:(NSRange)glyphRange underlineType:(NSUnderlineStyle)underlineVal lineFragmentRect:(CGRect)lineRect lineFragmentGlyphRange:(NSRange)lineGlyphRange containerOrigin:(CGPoint)containerOrigin {
-    [self drawUnderlineForGlyphRange:glyphRange underlineType:underlineVal baselineOffset:1.0f lineFragmentRect:lineRect lineFragmentGlyphRange:lineGlyphRange containerOrigin:containerOrigin];
+    [self drawUnderlineForGlyphRange:glyphRange underlineType:underlineVal baselineOffset:3.0f lineFragmentRect:lineRect lineFragmentGlyphRange:lineGlyphRange containerOrigin:containerOrigin];
 }
 
 @end

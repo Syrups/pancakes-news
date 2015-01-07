@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.synchButton.isOn = ![UserDataHolder isSyncAllowed];
+    self.synchButtonLabel.text = [UserDataHolder isSyncAllowed] ? @"Not allow synchronization" : @"Allow synchronization";
 
     self.infoText.text = NSLocalizedString(@"SynchDescription", nil);
     //self.background.image = [[UIImage imageNamed:@"glenn"]  blurredImageWithRadius:20.0f iterations:5 tintColor:[UIColor clearColor]];
@@ -233,8 +235,9 @@
 }
 
 - (IBAction)allowDisallowSync:(PKSyrupButton *)sender {
-    
-    [UserDataHolder allowSynchronisation:sender.isOn];
+    [UserDataHolder allowSynchronisation:!sender.isOn];
+    self.synchButtonLabel.text = [UserDataHolder isSyncAllowed] ? @"Not allow synchronization" : @"Allow synchronization";
+
 }
 
 @end

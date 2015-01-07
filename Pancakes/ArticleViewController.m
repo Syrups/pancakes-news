@@ -35,7 +35,7 @@ typedef enum  {
     
     hiddenBlocks = [NSMutableArray array];
     
-    titleCellAnimated = false;
+    titleCellAnimated = NO;
     
     [self fetchArticleData];
 //    [self loadMenuView];
@@ -65,6 +65,14 @@ typedef enum  {
     [self createDetailMenu];
     
     [PKCacheManager saveLastReadArticle:self.displayedArticle];
+    
+    UISwipeGestureRecognizer *swipeBack = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
+    [swipeBack setDirection:UISwipeGestureRecognizerDirectionRight];
+    [[self view] addGestureRecognizer:swipeBack];
+    
+    UISwipeGestureRecognizer *swipeMenu = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayMenu:)];
+    [swipeMenu setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [[self view] addGestureRecognizer:swipeMenu];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,9 +117,7 @@ typedef enum  {
         [self.collectionView reloadData];
     }];
     
-    UISwipeGestureRecognizer *oneFingerSwipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
-    [oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionRight];
-    [[self view] addGestureRecognizer:oneFingerSwipeUp];
+    
 }
 
 - (Block*)blockAtIndexPath:(NSIndexPath*)indexPath {
@@ -167,6 +173,8 @@ typedef enum  {
         f = self.backButton.frame;
         f.origin.y = -100;
         self.backButton.frame = f;
+        
+        self.coverBlur.alpha = 0;
     } completion:^(BOOL finished) {
         
         [self.navigationController popViewControllerAnimated:NO];
@@ -245,8 +253,11 @@ typedef enum  {
             frame.size.height = self.view.frame.size.height * 1.75f
             ;
             storyline.frame = frame;
+            
         } completion:^(BOOL finished) {
             titleCellAnimated = YES;
+            NSLog(@"TITLE : %f", articleTitle.frame.origin.y);
+            
         }];
     }
     
@@ -380,7 +391,7 @@ typedef enum  {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GenericBlockCell" forIndexPath:indexPath];
         cell.articleViewController = self;
         [cell loadWithBlock:block];
-        [self.scrollListeners addObject:cell];
+        
     }
     
 //    NSLog(@"Showing block cell with block index %lu and ID %@ and type %@ for indexPath row %ld", (unsigned long) [self.displayedArticle.blocks indexOfObject:block], block.id, block.type.name, (long)indexPath.row);

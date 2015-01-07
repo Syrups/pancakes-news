@@ -20,6 +20,7 @@
 @implementation MyFeedViewController {
     NSArray* feedArticles;
     Article* selectedArticle;
+    BOOL switchingView;
 }
 
 - (void)viewDidLoad {
@@ -41,6 +42,8 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (switchingView) return;
+    
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
     
@@ -49,6 +52,7 @@
         if (view.tag == 60 &&
             CGRectContainsPoint(view.frame, touchLocation))
         {
+            switchingView = YES;
             [self displaySelectedArticle:nil];
         }
     }
@@ -79,6 +83,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
+    
+    switchingView = NO;
     
     // back from article view ?
     if (parent.menuItem.frame.origin.x < 0) {
@@ -259,7 +265,10 @@
     feedCellThumb.layer.masksToBounds = YES;
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
-    themeTitle.text = ((SubThemeInterest*)article.subthemes[0]).title;
+    if (article.subthemes.count > 0)
+        themeTitle.text = ((SubThemeInterest*)article.subthemes[0]).title;
+    else
+        themeTitle.text = @"";
     themeTitle.textColor = [Utils colorWithHexString:article.color];
     
     UIImageView* check = (UIImageView*)[cell.contentView viewWithTag:77];
