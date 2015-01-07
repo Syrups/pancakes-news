@@ -23,6 +23,14 @@
     [map setZoom:4.0f atCoordinate:map.centerCoordinate animated:NO];
 //    map.userInteractionEnabled = NO;
     
+    RMAnnotation *annotation1 = [[RMAnnotation alloc] initWithMapView:map
+                                                           coordinate:map.centerCoordinate
+                                                             andTitle:block.title];
+    
+    annotation1.userInfo = @"small";
+    
+    [map addAnnotation:annotation1];
+    
     [self addSubview:map];
     
     // Embedded block title
@@ -69,6 +77,27 @@
 //
 //    });
    
+}
+
+- (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
+{
+    if (annotation.isUserLocationAnnotation)
+        return nil;
+    
+    RMMarker *marker;
+    
+    if ([annotation.userInfo isEqualToString:@"small"])
+    {
+        marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"map-marker"]];
+    }
+    else if ([annotation.userInfo isEqualToString:@"big"])
+    {
+        marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"map-marker"]];
+    }
+    
+    marker.canShowCallout = YES;
+    
+    return marker;
 }
 
 @end
