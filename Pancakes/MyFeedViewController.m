@@ -262,12 +262,11 @@
     feedCellThumb.layer.masksToBounds = YES;
     
     UILabel* themeTitle = (UILabel*)[cell.contentView viewWithTag:50];
-    if(article.subthemes.count > 0){
-        
+    if (article.subthemes.count > 0)
         themeTitle.text = ((SubThemeInterest*)article.subthemes[0]).title;
-        themeTitle.textColor = [Utils colorWithHexString:article.color];
-        
-    }
+    else
+        themeTitle.text = @"";
+    themeTitle.textColor = [Utils colorWithHexString:article.color];
     
     UIImageView* check = (UIImageView*)[cell.contentView viewWithTag:77];
     check.tintColor = [UIColor whiteColor];

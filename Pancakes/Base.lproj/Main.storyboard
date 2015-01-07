@@ -1290,7 +1290,7 @@
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7FAEDDA8-1AEF-4320-B9DB-712327338FCF" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
+                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0D9A2C93-9D24-473E-91D0-6C651D48DF18" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
                                                     <rect key="frame" x="96" y="41" width="24" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="frl-TR-xTE"/>
@@ -1405,8 +1405,8 @@
                                     <constraint firstAttribute="bottom" secondItem="hFa-G6-7Rj" secondAttribute="bottom" constant="30" id="eA1-da-LhF"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share this article?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-nk-ZdG">
-                                <rect key="frame" x="16" y="235" width="256" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this article?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-nk-ZdG">
+                                <rect key="frame" x="16" y="210.5" width="256" height="19.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="ofS-xO-qWU"/>
                                 </constraints>
@@ -1678,7 +1678,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7FAEDDA8-1AEF-4320-B9DB-712327338FCF" width="42" height="7">
+        <image name="0D9A2C93-9D24-473E-91D0-6C651D48DF18" width="42" height="7">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
