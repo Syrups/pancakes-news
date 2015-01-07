@@ -72,8 +72,6 @@
     if(notIncluded){
         
         [[[[UserDataHolder sharedInstance] user] interests] addObject:self.subTheme._id];
-        
-        
     }else{
         
          [[[[UserDataHolder sharedInstance] user] interests] removeObject:self.subTheme._id];
@@ -82,7 +80,6 @@
     //NSLog (notIncluded ? @"Adding : %@" : @"removing : %@", self.subTheme._id);
     
     //NSLog(notIncluded ?  @"after add : %@ " : @"after rem : %@ ", [[[[[UserDataHolder sharedInstance] user] interests] valueForKey:@"description"] componentsJoinedByString:@", "]);
-    
     
     [UIView animateWithDuration:0.3 animations:^() {
         self.selectedFilter.backgroundColor = [self.themeColor colorWithAlphaComponent:notIncluded ? 0.70 :0];

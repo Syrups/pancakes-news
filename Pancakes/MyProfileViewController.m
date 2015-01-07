@@ -66,13 +66,13 @@
     
     [self.view layoutIfNeeded];
     
-    [UIView animateWithDuration:.4f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         
         [self.feedArticleTrailingConstraint setConstant:-16];
         
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^() {
+        [UIView animateWithDuration:.4f  delay:0 options: UIViewAnimationOptionCurveEaseOut animations:^() {
             
             [self.profilePictureConstraint setConstant:kMenuBarHeigth];
             
@@ -237,7 +237,7 @@
     
     MainViewController* parent = (MainViewController*)self.parentViewController; // get the main view controller
     
-    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.2f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect f = parent.menuTopBar.frame;
         f.origin.x -= self.view.frame.size.width/2;
         [parent.menuTopBar setFrame:f];

@@ -47,11 +47,23 @@ NSString * const PSYNC = @"PancakesSync";
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    //NSString *  createUser = [kApiRootUrl stringByAppendingString:@"/user/save"];
-    /*[JSONHTTPClient postJSONFromURLWithString:createUser params:[self.user toDictionary] completion:^(id json, JSONModelError *err) {
+    [PKRestClient saveUser:[self.user toJSONString] completion:^(id json, JSONModelError *err) {
+        if(err){
+            
+            if(err.code == 409){
+                 //NSLog(@"User exists good, %@",);
+            }else{
+                NSLog(@"Unable to save User,(%ld) : %@",(long)err.code , err.localizedDescription);
+            }
+            
+            NSLog(@"Err json : %@", json);
+
+           
+            return ;
+        }
+        
         NSLog(@"saved to network %@", json);
-    }];*/
-    
+    }];
 }
 
 -(void)loadData
@@ -83,7 +95,11 @@ NSString * const PSYNC = @"PancakesSync";
             NSLog(@"Unable to initialize User, %@", err.localizedDescription);
         }
         
-        NSLog(@"user first load %@", [self.user toJSONString]);
+         NSLog(@"user first load %@", [self.user toJSONString]);
+        
+        [self saveData];
+        
+       
         //[self loadJsonFromNetworkParams:@{@"phantomId":phantomId}];
         
     }
