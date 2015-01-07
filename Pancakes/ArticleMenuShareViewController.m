@@ -7,6 +7,9 @@
 //
 
 #import "ArticleMenuShareViewController.h"
+#import <Social/Social.h>
+#import "UserDataHolder.h"
+#import "Utils.h"
 
 @interface ArticleMenuShareViewController ()
 
@@ -16,22 +19,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        self.facebook.enabled = NO;
+    }
+    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        self.twitter.enabled = NO;
+    }
+    
+//    if ([UserDataHolder sharedInstance].fbUSer) {
+        NSDictionary<FBGraphUser> *user  = [UserDataHolder sharedInstance].fbUSer;
+        [Utils setImageWithFacebook:user imageview:self.profilePicture blur:NO] ;
+//    }
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)shareFacebook:(id)sender {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *fbPostSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [fbPostSheet setInitialText:@"Just read an article on Pancakes app !"];
+        [self presentViewController:fbPostSheet animated:YES completion:nil];
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)shareTwitter:(id)sender {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *twiPostSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [twiPostSheet setInitialText:@"Just read an article on Pancakes app !"];
+        [self presentViewController:twiPostSheet animated:YES completion:nil];
+    }
 }
-*/
+
 
 @end

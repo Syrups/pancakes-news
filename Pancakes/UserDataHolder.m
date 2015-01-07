@@ -11,6 +11,7 @@
 #import "Configuration.h"
 #import "PKRestClient.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "PKNotificationManager.h"
 
 NSString * const PUSER = @"PancakesUser";
 NSString * const PSYNC = @"PancakesSync";
@@ -149,6 +150,15 @@ NSString * const PSYNC = @"PancakesSync";
 }
 
 + (void) allowSynchronisation :(BOOL) allow{
+    
+    if (allow) {
+        UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        NSSet *categories = [NSSet setWithObjects:[PKNotificationManager withDefaultCategory], nil];
+        
+        
+        UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    }
     
     [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithBool:allow] forKey:PSYNC];
     [[NSUserDefaults standardUserDefaults] synchronize];

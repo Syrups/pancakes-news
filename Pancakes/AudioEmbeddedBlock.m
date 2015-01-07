@@ -47,9 +47,9 @@
     
     NSURL *soundUrl = [NSURL URLWithString:self.block.url];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [self loadAudioPlayerWithUrl:soundUrl];
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+     [self loadAudioPlayerWithUrl:soundUrl];
+//    });
     
 }
 
@@ -63,7 +63,6 @@
     
     self.audioPlayer = [[AVPlayer alloc] initWithPlayerItem:item];
 
-    dispatch_async(dispatch_get_main_queue(), ^{
         AudioPlayer* player = [[AudioPlayer alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 80, 45, 160, 160) totalDuration:CMTimeGetSeconds(self.audioPlayer.currentItem.asset.duration)];
         [self addSubview:player];
         self.playerView = player;
@@ -71,7 +70,7 @@
         [self setNeedsDisplay];
         
         [self togglePlayPause:nil];
-    });
+    
 }
 
 - (IBAction)togglePlayPause:(id)sender {

@@ -13,6 +13,7 @@
 #import "Models.h"
 #import "Services.h"
 #import "FXBlurView.h"
+#import "PKSyrupArrow.h"
 
 
 @interface ChooseThemesViewController ()
@@ -38,6 +39,8 @@ float themeCellHeight;
     //InitScrollView and TableView
     screenMidSize = self.view.frame.size.width/2;
     screenHeight = self.view.frame.size.height;
+    
+    
     
     
     self.themesView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, screenMidSize, screenHeight - kMenuBarHeigth)];
@@ -77,6 +80,9 @@ float themeCellHeight;
     //[self addDropShadowToView:self.themesView];
     [Utils addDropShadowToView:self.themesView];
     
+    PKSyrupArrow* arr = [[PKSyrupArrow alloc] initWithFrame:CGRectMake(screenMidSize/2 - 7, screenHeight-30, 15, 8)];
+    [self.view addSubview:arr];
+    
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
@@ -111,10 +117,13 @@ float themeCellHeight;
 
 -(void) updateThemeDataWithCell : (UIThemeView *) cell{
     // The key is repositioning without animation
+
     
     self.currentTheme = cell.theme;
     self.currentThemeSubs = self.currentTheme.subthemes;
     self.themeDescription.text = self.currentTheme.desc;
+    
+    
     
     [UIView animateWithDuration:0.3 animations:^() {
         self.themeDescription.alpha =  cell.self.themeCheck.isOn ? 1.0 : 0;

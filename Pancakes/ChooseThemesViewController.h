@@ -25,8 +25,6 @@
 //@property (nonatomic) NSUInteger* currentPageNumber;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundBlurred;
 
-
-
 - (void) setThemeState :(id)sender  ;
 
 @end

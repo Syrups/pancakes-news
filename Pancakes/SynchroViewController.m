@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.synchButton.isOn = ![UserDataHolder isSyncAllowed];
+    self.synchButtonLabel.text = [UserDataHolder isSyncAllowed] ? @"Not allow synchronization" : @"Allow synchronization";
 
     self.infoText.text = NSLocalizedString(@"SynchDescription", nil);
     //self.background.image = [[UIImage imageNamed:@"glenn"]  blurredImageWithRadius:20.0f iterations:5 tintColor:[UIColor clearColor]];
@@ -198,6 +200,11 @@
     [self.synchroTable reloadInputViews];
     
     NSLog(@"removeNotification %ld, %@", (long)sender.tag , [notif.fireDate description]);
+    
+    if (self.notifications.count < 3) {
+        self.addTimeButton.enabled = YES;
+        self.addTimeButton.alpha = 1;
+    }
 }
 
 - (IBAction)addTimeAction:(id)sender {
@@ -215,6 +222,11 @@
         
         [self.synchroTable reloadData];
         [self.synchroTable reloadInputViews];
+        
+        if (self.notifications.count >= 3) {
+            self.addTimeButton.enabled = NO;
+            self.addTimeButton.alpha = 0.7f;
+        }
     }
 }
 
@@ -223,8 +235,9 @@
 }
 
 - (IBAction)allowDisallowSync:(PKSyrupButton *)sender {
-    
-    [UserDataHolder allowSynchronisation:sender.isOn];
+    [UserDataHolder allowSynchronisation:!sender.isOn];
+    self.synchButtonLabel.text = [UserDataHolder isSyncAllowed] ? @"Not allow synchronization" : @"Allow synchronization";
+
 }
 
 @end

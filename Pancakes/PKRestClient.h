@@ -10,10 +10,10 @@
 #import "JSONModel/JSONHTTPClient.h"
 #import "User.h"
 
-//#define kApiRootUrl @"http://pancakes-back.herokuapp.com/api"
-//#define kMediaRootUrl @"http://pancakes-back.herokuapp.com/media" //http://192.168.2.2
-#define kApiRootUrl @"http://localhost:5000/api"
-#define kMediaRootUrl @"http://localhost:5000/media"
+#define kApiRootUrl @"http://pancakes-back.herokuapp.com/api"
+#define kMediaRootUrl @"http://pancakes-back.herokuapp.com/media" //http://192.168.2.2
+//#define kApiRootUrl @"http://localhost:5000/api"
+//#define kMediaRootUrl @"http://localhost:5000/media"
 
 //pancakes-back.herokuapp.com/
 //localhost:5000

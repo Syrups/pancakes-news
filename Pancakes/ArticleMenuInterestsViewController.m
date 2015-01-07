@@ -109,7 +109,7 @@
     wave.image = [wave.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [wave setTintColor:[Utils colorWithHexString:interest.color]];
     
-    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(30.0f, 35.0f, 22.0f, 15.0f)];
+    UIImageView* check = [[UIImageView alloc] initWithFrame:CGRectMake(30, 35.0f, 22.0f, 15.0f)];
     check.image = [UIImage imageNamed:@"check_item"];
     check.tintColor = [UIColor whiteColor];
     check.contentMode = UIViewContentModeScaleAspectFit;

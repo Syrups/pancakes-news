@@ -38,5 +38,6 @@
 // Keys
 
 #define kPancakesTutoThemesCookie               @"PancakesTutoChooseThemes"
+#define kPancakesTutoSynchroCookie              @"PancakesTutoChooseSynchro"
 
 #endif

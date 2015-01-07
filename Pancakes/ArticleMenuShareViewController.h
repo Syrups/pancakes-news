@@ -10,4 +10,8 @@
 
 @interface ArticleMenuShareViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIButton* facebook;
+@property (strong, nonatomic) IBOutlet UIButton* twitter;
+@property (strong, nonatomic) IBOutlet UIImageView* profilePicture;
+
 @end

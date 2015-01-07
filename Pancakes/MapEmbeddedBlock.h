@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "DefinitionEmbeddedBlock.h"
+#import <Mapbox-iOS-SDK/Mapbox.h>
 
-@interface MapEmbeddedBlock : DefinitionEmbeddedBlock
+@interface MapEmbeddedBlock : DefinitionEmbeddedBlock <RMMapViewDelegate>
 
 @property (strong, nonatomic) UILabel* title;
 

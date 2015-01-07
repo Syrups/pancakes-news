@@ -53,21 +53,24 @@
 //    imageMask.backgroundColor = kArticleViewBlockBackground;
 //    [self addSubview:imageMask];
     
-//    FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
-//    imageMask.blurRadius = 8.0f;
-//    [self addSubview:imageMask];
+    FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
+    imageMask.blurRadius = 8.0f;
+//    imageMask.dynamic = NO;
+    imageMask.backgroundColor = [UIColor clearColor];
+    imageMask.tintColor = [UIColor clearColor];
+    [self addSubview:imageMask];
     
-    UIImageView* blur = [[UIImageView alloc] initWithFrame:coverImage.frame];
-    
-    CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
-    [gaussianBlurFilter setDefaults];
-    [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[coverImage.image CGImage]] forKey:kCIInputImageKey];
-    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:20.0f] forKey:kCIInputRadiusKey];
-    [blur setImage:[UIImage imageWithCIImage:[gaussianBlurFilter outputImage]]];
-    self.blurImage = blur;
+//    UIImageView* blur = [[UIImageView alloc] initWithFrame:coverImage.frame];
+//    
+//    CIFilter *gaussianBlurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
+//    [gaussianBlurFilter setDefaults];
+//    [gaussianBlurFilter setValue:[CIImage imageWithCGImage:[coverImage.image CGImage]] forKey:kCIInputImageKey];
+//    [gaussianBlurFilter setValue:[NSNumber numberWithFloat:20.0f] forKey:kCIInputRadiusKey];
+//    [blur setImage:[UIImage imageWithCIImage:[gaussianBlurFilter outputImage]]];
+//    self.blurImage = blur;
 //    [self addSubview:self.blurImage];
     
-//    self.imageMask = imageMask;
+    self.imageMask = imageMask;
     
     UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 15.0f, self.frame.size.width + 2.0f, 50.0f)];
     titleBanner.backgroundColor = [UIColor whiteColor];
@@ -217,6 +220,7 @@
     self.revealButton.transform = CGAffineTransformMakeRotation(0);
     [self.storylineOpen setFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
     self.closeButton.alpha = 0;
+    self.imageMask.alpha = 1;
     
     [self.coverImage reset];
 }
@@ -228,7 +232,9 @@
     
     CGFloat diff = scrollView.contentOffset.y - oldContentOffset;
     
-    if (diff > 350 && !animatingCloseButton) {
+    NSLog(@"%f", diff);
+    
+    if (diff > 300 && !animatingCloseButton) {
         animatingCloseButton = YES;
         [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.closeButton.alpha = 0;
@@ -238,7 +244,7 @@
         }];
     }
     
-    if (diff < 350 && animatingCloseButton) {
+    if (diff < 290 && animatingCloseButton) {
         animatingCloseButton = NO;
         [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.closeButton.alpha = 1;

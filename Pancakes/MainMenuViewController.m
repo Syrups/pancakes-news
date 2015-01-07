@@ -159,6 +159,7 @@ PKMenuItemCircle *currentItem;
     
     UIButton *menuButton = [labels objectAtIndex:index];
     menuButton.frame = CGRectMake(0, 0, BUTONS_WIDTH, BUTONS_HEIGHT);
+
     menuButton.center = point;
     menuButton.titleLabel.font = [UIFont fontWithName:@"Heuristica-Italic" size:15.5];
    
@@ -284,7 +285,7 @@ PKMenuItemCircle *currentItem;
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = self.view.frame.size.width;
         self.toggleItem.frame = theFrame;
-        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, self.view.frame.size.width, heightLessBar);
+        self.blurView.frame = CGRectMake(0.0f, 0, self.view.frame.size.width, heightLessBar);
         
     } completion:^(BOOL finished) {
         [self animateOpening];
