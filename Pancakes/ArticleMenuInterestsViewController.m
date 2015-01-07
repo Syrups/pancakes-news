@@ -48,8 +48,6 @@
             NSLog(@"%@", err);
         }
         
-        
-        
         self.subthemes = @[].mutableCopy;
         NSMutableArray* alreadyRegistered = @[].mutableCopy;
         

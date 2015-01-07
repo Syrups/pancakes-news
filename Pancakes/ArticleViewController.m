@@ -61,9 +61,6 @@ typedef enum  {
     [self.collectionView registerClass:[EditorsBlockCell class] forCellWithReuseIdentifier:@"EditorsBlockCell"];
     [self.collectionView registerClass:[CommentsBlockCell class] forCellWithReuseIdentifier:@"CommentsBlockCell"];
     
-    [self createMainMenu];
-    [self createDetailMenu];
-    
     
     UISwipeGestureRecognizer *swipeBack = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
     [swipeBack setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -117,6 +114,9 @@ typedef enum  {
         //coverOriginalImage = self.articleCoverImage.image;
         [PKCacheManager saveLastReadArticle:self.displayedArticle];
         [self.collectionView reloadData];
+       
+        [self createMainMenu];
+        [self createDetailMenu];
     }];
     
     
