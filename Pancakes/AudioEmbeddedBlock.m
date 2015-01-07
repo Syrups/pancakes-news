@@ -10,6 +10,7 @@
 #import "Configuration.h"
 #import <SDWebImage/SDWebImageManager.h>
 #import "StackBlur/UIImage+StackBlur.h"
+#import "Utils.h"
 
 @implementation AudioEmbeddedBlock {
     NSTimer* playTimer;
@@ -23,9 +24,11 @@
     self.block = block;
     
     UIImageView* background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 230)];
+    background.contentMode = UIViewContentModeTop;
     
     [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:self.article.coverImage] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         if (image) {
+            image = [Utils imageByCroppingImage:image toSize:background.frame.size];
             [background setImage:[image stackBlur:8.0f]];
         }
     }];

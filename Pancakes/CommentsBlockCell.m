@@ -22,11 +22,9 @@
     
     ArcImageView* cover = [[ArcImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f) fullSize:YES];
     [cover sd_setImageWithURL:[NSURL URLWithString:self.articleViewController.displayedArticle.coverImage]];
+    cover.tintColor = RgbaColor(0, 0, 0, 0.5);
     [self addSubview:cover];
     
-//    FXBlurView* blur = [[FXBlurView alloc] initWithFrame:cover.frame];
-//    [blur setBlurRadius:8.0f];
-//    [self addSubview:blur];
     
     offsetY += 130.0f;
     
@@ -46,7 +44,7 @@
         UILabel* author = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, commentBlock.bounds.size.width - 20, 15)];
         author.numberOfLines = 0;
         author.font = [UIFont fontWithName:kFontBreeBold size:18];
-        author.text = @"Username";
+        author.text = @"Glenn Sonna";
         [commentBlock addSubview:author];
         
         UIImageView* wave = [[UIImageView alloc] initWithFrame:CGRectMake(20, 55, 30, 6)];

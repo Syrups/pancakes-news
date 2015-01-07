@@ -20,6 +20,7 @@
 + (void ) setPlaceHolderImage : (UIImageView*)imageView blur:(BOOL)blur;
 
 + (UIView*) addDropShadowToView: (UIView *)view ;
++ (UIImage *)imageByCroppingImage:(UIImage *)chosenImage toSize:(CGSize)size;
 @end
 
 /*

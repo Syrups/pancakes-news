@@ -174,6 +174,8 @@
         [self.cancelButtonTopSpace setConstant:15];
         [self.synchroTableTopSpace setConstant:kMenuBarHeigth + factor]; // - factor - 60
         [self.pickerContainerTopSpace setConstant:90];
+//        [self.addButtonTopSpace setConstant:400];
+        
         
         //NSLog(@"factor : %f", self.synchroTable.superview.frame.size.height);
         

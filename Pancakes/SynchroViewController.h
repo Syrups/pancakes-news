@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pickerContainerTopSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *synchroTableTopSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelButtonTopSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addButtonTopSpace;
 
 @property NSMutableArray *notifications;
 

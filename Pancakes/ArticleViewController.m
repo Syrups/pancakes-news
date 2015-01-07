@@ -64,7 +64,6 @@ typedef enum  {
     [self createMainMenu];
     [self createDetailMenu];
     
-    [PKCacheManager saveLastReadArticle:self.displayedArticle];
     
     UISwipeGestureRecognizer *swipeBack = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
     [swipeBack setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -90,8 +89,10 @@ typedef enum  {
     //NSString* articlePath = [NSString stringWithFormat:@"/articles/%@", self.displayedArticle._id];
     //NSString* articleUrl = [PKRestClient apiUrlWithRoute:articlePath];
     
-   [PKRestClient getArticleWithId:self.displayedArticle._id :^(id json, JSONModelError *err) {
+   [PKRestClient getArticleWithId:self.articleId :^(id json, JSONModelError *err) {
         NSError* error = nil;
+       
+       
        
        if (err) { // error connecting to network, try loading from cache
            NSArray* cachedFeed = [PKCacheManager loadCachedFeed];
@@ -103,6 +104,7 @@ typedef enum  {
        } else {
            self.displayedArticle = [[Article alloc] initWithDictionary:json error:&error];
        }
+    
        
         self.articleTitleLabel.text = self.displayedArticle.title;
         
@@ -113,7 +115,7 @@ typedef enum  {
         }
         
         //coverOriginalImage = self.articleCoverImage.image;
-        
+        [PKCacheManager saveLastReadArticle:self.displayedArticle];
         [self.collectionView reloadData];
     }];
     
@@ -201,7 +203,11 @@ typedef enum  {
 
 - (UICollectionViewCell*) articleTitleCell {
     
+    
+    
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
+    
+    if (self.displayedArticle == nil) return cell;
     UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
     articleTitle.text = self.displayedArticle.title;
     articleTitle.textColor = [UIColor whiteColor];
@@ -213,6 +219,7 @@ typedef enum  {
     creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
     
     if (!titleCellAnimated) {
+        
         CGRect f = self.moreButtonBackground.frame;
         f.origin.y = -60.0f;
         self.moreButtonBackground.frame = f;

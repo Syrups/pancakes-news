@@ -148,5 +148,31 @@
     return backView;
 }
 
++ (UIImage *)imageByCroppingImage:(UIImage *)chosenImage toSize:(CGSize)size
+{
+    CGFloat imageWidth  = chosenImage.size.width;
+    CGFloat imageHeight = chosenImage.size.height;
+    
+    CGRect cropRect;
+    
+    if ( imageWidth < imageHeight) {
+        // Potrait mode
+        cropRect = CGRectMake (0.0, (imageHeight - imageWidth) / 2.0, imageWidth, imageWidth);
+    } else {
+        // Landscape mode
+        cropRect = CGRectMake ((imageWidth - imageHeight) / 2.0, 0.0, imageHeight, imageHeight);
+    }
+    
+    // Draw new image in current graphics context
+    CGImageRef imageRef = CGImageCreateWithImageInRect ([chosenImage CGImage], cropRect);
+    
+    // Create new cropped UIImage
+    UIImage * croppedImage = [UIImage imageWithCGImage: imageRef];
+    
+    CGImageRelease (imageRef);
+    
+    return croppedImage;
+}
+
 
 @end

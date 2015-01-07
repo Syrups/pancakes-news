@@ -207,8 +207,8 @@
     } completion:^(BOOL finished) {
         
         ArticleViewController* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ArticleViewController"];
-        vc.displayedArticle = selectedArticle;
         vc.articleCoverImage = [[UIImageView alloc] initWithFrame:self.view.frame];
+        vc.articleId = selectedArticle._id;
         [vc.articleCoverImage sd_setImageWithURL:[NSURL URLWithString:selectedArticle.coverImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image != nil) {
                 vc.cover = image;

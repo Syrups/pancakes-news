@@ -15,6 +15,7 @@
 @interface ArticleViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) Article* displayedArticle;
+@property (strong, nonatomic) NSString* articleId;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *articleTitleLabel;
