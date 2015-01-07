@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONModel/JSONHTTPClient.h"
+#import "User.h"
 
 #define kApiRootUrl @"http://pancakes-back.herokuapp.com/api"
 #define kMediaRootUrl @"http://pancakes-back.herokuapp.com/media" //http://192.168.2.2
@@ -26,8 +27,8 @@
 + (void) getUserWithUser : (NSDictionary *) user :(JSONObjectBlock)completeBlock;
 
 + (void)getArticleWithId : (NSString *)_id :(JSONObjectBlock)completeBlock;
-
-
++ (void) saveUser :(NSString *)userParam completion:(JSONObjectBlock)completeBlock;
++ (void) getFeedForUser :(User *)user completion:(JSONObjectBlock)completeBlock;
 
 + (NSString *) apiUrlWithRoute : (NSString *)route;
 + (NSString *) mediaUrl : (NSString *)mediaName;

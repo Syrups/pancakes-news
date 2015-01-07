@@ -125,27 +125,39 @@
     UserDataHolder* holder = [UserDataHolder sharedInstance];
     [holder loadData];
     
-    NSString* feedUrl = @"";
     
-    if (holder.user._id != nil) {
-        NSString* userId = holder.user._id;
-        feedUrl = [NSString stringWithFormat:[PKRestClient apiUrlWithRoute:@"/user/%@/feed"], userId];
-    } else {
-        // if no user, use public articles feed
-        feedUrl = [PKRestClient apiUrlWithRoute:@"/articles"];
-    }
-    
-    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:feedUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSError* err = nil;
-        feedArticles = [Article arrayOfModelsFromData:data error:&err];
+    [PKRestClient getFeedForUser:holder.user completion:^(id json, JSONModelError *jErr) {
         
-        if (err != nil) {
-            NSLog(@"%@", err);
+        if(jErr != nil){
+            NSLog(@"PKJError : %@", jErr.localizedDescription);
+        }else{
+            //NSLog(@"Assumed DICO  : %@", json);
             
-            // do we have a cached feed ?
-            feedArticles = [PKCacheManager loadCachedFeed];
+            NSError *err = nil;
+            feedArticles = [Article arrayOfModelsFromDictionaries:json error:&err];
             
-            if (feedArticles.count > 0) {
+            if (err != nil) {
+                NSLog(@"PKER : %@", err);
+                
+                // do we have a cached feed ?
+                feedArticles = [PKCacheManager loadCachedFeed];
+                
+                if (feedArticles.count > 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.feedTableView reloadData];
+                        NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                        [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+                        [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
+                        [self.waitingScreen removeFromSuperview];
+                    });
+                } else {
+                    // schedule another fetch later
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self scheduleNewFetch];
+                    });
+                }
+            } else {
+                // Reload table data on main thread to avoid problems
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.feedTableView reloadData];
                     NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
@@ -153,24 +165,9 @@
                     [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
                     [self.waitingScreen removeFromSuperview];
                 });
-            } else {
-                // schedule another fetch later
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self scheduleNewFetch];
-                });
             }
-        } else {
-            // Reload table data on main thread to avoid problems
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.feedTableView reloadData];
-                NSIndexPath* firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-                [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-                [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
-                [self.waitingScreen removeFromSuperview];
-            });
         }
-        
-    }] resume];
+    }];
 }
 
 - (void)scheduleNewFetch {

@@ -7,7 +7,7 @@
 //
 
 #import "PKRestClient.h"
-
+#import "User.h"
 
 @implementation PKRestClient
 
@@ -15,9 +15,7 @@ NSString * const themesUrl = kApiRootUrl @"/themes";
 NSString * const createUser = kApiRootUrl @"/user/create";
 NSString * const article = kApiRootUrl @"/articles/%@";
 NSString * const articles = kApiRootUrl @"/articles";
-
-
-
+NSString * const user = kApiRootUrl @"/user";
 
 
 +(void) sendCommentWithId : (NSString *)_id params:(NSDictionary*)params completion:(JSONObjectBlock)completeBlock {
@@ -43,6 +41,30 @@ NSString * const articles = kApiRootUrl @"/articles";
     NSString* articleUrl = [NSString stringWithFormat:article, articleId];
     
     [JSONHTTPClient getJSONFromURLWithString:articleUrl completion:completeBlock];
+}
+
+
++ (void) saveUser :(NSString *)userParam completion:(JSONObjectBlock)completeBlock{
+    
+    NSLog(@"url : %@", user);
+    NSLog(@"url : %@", userParam);
+    
+    [JSONHTTPClient postJSONFromURLWithString:user bodyString:userParam completion:completeBlock];
+
+}
+
++ (void) getFeedForUser :(User *)user completion:(JSONObjectBlock)completeBlock{
+    
+    NSString* feedUrl = @"";
+    
+    if (user._id!= nil && user.interests.count > 0) {
+        feedUrl = [NSString stringWithFormat:[PKRestClient apiUrlWithRoute:@"/user/%@/feed"], user._id];
+    } else {
+        // if no user, use public articles feed
+        feedUrl = [PKRestClient apiUrlWithRoute:@"/articles"];
+    }
+    
+    [JSONHTTPClient getJSONFromURLWithString:feedUrl completion:completeBlock];
 }
 
 + (NSString *) apiUrlWithRoute : (NSString *)route{
