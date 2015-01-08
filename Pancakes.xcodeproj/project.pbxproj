@@ -79,6 +79,7 @@
 		B3B40C181A5E918700BA7575 /* VideoEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */; };
 		B3B40C1A1A5E992200BA7575 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B40C191A5E992200BA7575 /* MediaPlayer.framework */; };
 		B3B40C1F1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */; };
+		B3B40C221A5EC4B700BA7575 /* PKLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C211A5EC4B700BA7575 /* PKLabel.m */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
 		B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CB88CE1A13A03A006DFF03 /* Utils.m */; };
 		B3CC2DBA1A3F936D00899F11 /* editors.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3CC2DB71A3F936D00899F11 /* editors.pkai */; };
@@ -284,6 +285,8 @@
 		B3B40C191A5E992200BA7575 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B3B40C1D1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowEmbeddedBlock.h; sourceTree = "<group>"; };
 		B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowEmbeddedBlock.m; sourceTree = "<group>"; };
+		B3B40C201A5EC4B700BA7575 /* PKLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKLabel.h; sourceTree = "<group>"; };
+		B3B40C211A5EC4B700BA7575 /* PKLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKLabel.m; sourceTree = "<group>"; };
 		B3B9375F1A0A41B400584843 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		B3B937601A0A41B400584843 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		B3CB88CD1A13A03A006DFF03 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -808,6 +811,8 @@
 				B39C55661A150751005550CC /* UILabel+Lettrine.m */,
 				B39C55681A150AAA005550CC /* LettrineParagraph.h */,
 				B39C55691A150AAA005550CC /* LettrineParagraph.m */,
+				B3B40C201A5EC4B700BA7575 /* PKLabel.h */,
+				B3B40C211A5EC4B700BA7575 /* PKLabel.m */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -1120,6 +1125,7 @@
 				7324CFB919F83D4C004E2065 /* UISubThemeViewCell.m in Sources */,
 				738168EB1A38D5F4006B5F8C /* PKSandBoxViewController.m in Sources */,
 				B30ED5EC19FA8EC300DB2621 /* MyFeedViewController.m in Sources */,
+				B3B40C221A5EC4B700BA7575 /* PKLabel.m in Sources */,
 				B3D1631F1A1391B100BCBE98 /* ArticleParagraphLayoutManager.m in Sources */,
 				B3E539771A10FEC0006FF158 /* ArticleMenuViewController.m in Sources */,
 				B3F0BD0C1A26252000615279 /* CustomEmbeddedBlock.m in Sources */,
