@@ -13,6 +13,7 @@
 #import "Utils.h"
 #import "LettrineParagraph.h"
 #import "BlockButton.h"
+#import "PKLabel.h"
 
 @implementation GenericBlockCell {
     BOOL layouted;
@@ -103,7 +104,7 @@
             [style setLineSpacing:kArticleViewTextLineSpacing];
             
             UIView* paragraphView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 120.0f)];
-            UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, self.frame.size.width - 140.0f, 120.0f)];
+            PKLabel* label = [[PKLabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, self.frame.size.width - 140.0f, 120.0f)];
             
             label.numberOfLines = 0;
             label.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
@@ -118,6 +119,7 @@
             CGRect frame = label.frame;
             frame.size.height = exceptedSize.height + 60.0f;
             label.frame = frame;
+            label.attributedText = content;
             
             // For each call, underline the corresponding portion of
             // text and (TODO) add a button for displaying the called block.
@@ -127,9 +129,11 @@
                 [(NSValue*)[call objectForKey:@"textRange"] getValue:&range];
                 [content addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithFloat:1.0f] range:range];
                 [content addAttribute:NSUnderlineColorAttributeName value:[Utils colorWithHexString:self.articleViewController.displayedArticle.color] range:range];
+                
             }
             
             label.attributedText = content;
+            
             
             // Make lettrine if it is the first paragraph
             if ([block.paragraphs indexOfObject:p] == 0) {
@@ -268,7 +272,7 @@
             [self.contentView addSubview:paragraphView];
             
             // Change the origin Y point for next paragraph
-            originY += label.frame.size.height + 10.0f;
+            originY += exceptedSize.height + 50.0f;
             
 
         }];
@@ -344,7 +348,7 @@
 
     [self.tableView beginUpdates];
     CGRect f = blockView.frame;
-    f.size.height = blockView.block.paragraphs.count * 100.0f + 230.0f;
+    f.size.height = blockView.block.paragraphs.count * 120.0f + 230.0f;
     blockView.frame = f;
     [blockView layoutWithBlock:blockView.block offsetY:0.0f];
 

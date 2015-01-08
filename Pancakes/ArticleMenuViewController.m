@@ -147,6 +147,7 @@
     // Add the animation and reset the state so we can run again.
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
+        
     }];
     [button.layer addAnimation:pathAnimation forKey:@"arc"];
     

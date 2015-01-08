@@ -49,4 +49,8 @@
     [self bringSubviewToFront:title];
 }
 
+- (void)willClose {
+    [self.videoPlayer stop];
+}
+
 @end

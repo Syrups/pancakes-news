@@ -26,6 +26,7 @@
 //    self.backgroundColor = [UIColor whiteColor];
     
     self.opened = false;
+    self.blurEnabled = YES;
     
     return self;
 }

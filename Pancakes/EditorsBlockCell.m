@@ -9,6 +9,7 @@
 #import "EditorsBlockCell.h"
 #import "Configuration.h"
 #import "ArcImageView.h"
+#import <UIImageView+WebCache.h>
 
 @implementation EditorsBlockCell
 
@@ -29,7 +30,7 @@
         [editorView addSubview:cover];
         
         UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 65, 60, 130, 130)];
-        [image setImage:[UIImage imageNamed:@"glenn"]];
+        [image sd_setImageWithURL:[NSURL URLWithString:[editor objectForKey:@"image"]]];
         image.layer.cornerRadius = 65;
         image.layer.masksToBounds = YES;
         [editorView addSubview:image];
