@@ -336,7 +336,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nra-8G-8M4" userLabel="LoginButton" customClass="PKSyrupButton">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nra-8G-8M4" userLabel="LoginButton" customClass="PKSyrupButton">
                                 <rect key="frame" x="119" y="194" width="45" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -347,7 +347,7 @@
                                     <action selector="loginButtonTouched:" destination="BW0-qs-Cyx" eventType="valueChanged" id="2Rw-JD-54p"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Y-eO-Sz5" userLabel="SignInOutLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Y-eO-Sz5" userLabel="SignInOutLabel">
                                 <rect key="frame" x="123" y="247" width="37" height="18"/>
                                 <fontDescription key="fontDescription" name="Heuristica-Italic" family="Heuristica" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -1029,7 +1029,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWU-rF-Huy">
-                                <rect key="frame" x="382.5" y="239" width="43" height="43"/>
+                                <rect key="frame" x="383" y="239" width="43" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="7rF-8J-coy"/>
                                     <constraint firstAttribute="height" constant="43" id="gmb-oZ-Fhy"/>
@@ -1399,8 +1399,8 @@
                                     <constraint firstAttribute="bottom" secondItem="hFa-G6-7Rj" secondAttribute="bottom" constant="30" id="eA1-da-LhF"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share this article?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-nk-ZdG">
-                                <rect key="frame" x="16" y="210.5" width="256" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share this article?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-nk-ZdG">
+                                <rect key="frame" x="16" y="211" width="256" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="ofS-xO-qWU"/>
                                 </constraints>
@@ -1579,7 +1579,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XF8-bX-jST">
-                                <rect key="frame" x="382.5" y="239" width="43" height="43"/>
+                                <rect key="frame" x="383" y="239" width="43" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="UIt-wq-wJD"/>
                                     <constraint firstAttribute="height" constant="43" id="aYM-Tm-q6S"/>
@@ -1613,7 +1613,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read your articles offline !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Iv-6d-W6I">
-                                <rect key="frame" x="94" y="56" width="380.5" height="38"/>
+                                <rect key="frame" x="94" y="56" width="381" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="7j9-rZ-D8x"/>
                                 </constraints>
@@ -1621,8 +1621,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No, thanks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USX-Tp-nCP">
-                                <rect key="frame" x="375.5" y="281" width="57.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No, thanks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USX-Tp-nCP">
+                                <rect key="frame" x="376" y="281" width="58" height="21"/>
                                 <fontDescription key="fontDescription" name="Heuristica-Italic" family="Heuristica" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
