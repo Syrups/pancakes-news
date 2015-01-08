@@ -177,8 +177,12 @@
 #pragma mark - Helpers
 
 - (NSString*)excerptOfContent:(NSString*)content firstWordsCount:(NSInteger)nWords {
-    NSRange wordRange = NSMakeRange(0, nWords);
-    NSArray *firstWords = [[content componentsSeparatedByString:@" "] subarrayWithRange:wordRange];
+    
+    NSArray* components = [content componentsSeparatedByString:@" "];
+    
+    NSRange wordRange = NSMakeRange(0, components.count < nWords ? components.count : nWords);
+    
+    NSArray *firstWords = [components subarrayWithRange:wordRange];
     
     return [[firstWords componentsJoinedByString:@" "] stringByAppendingString:@" (...)"];
 }
@@ -299,7 +303,10 @@
     NSDictionary* paragraph = firstBlock.paragraphs[0];
     NSString* content = [paragraph objectForKey:@"content"];
     
+    
+    
     ContentParser* parser = [[ContentParser alloc] init];
+        
     self.articleExcerpt.text = [self excerptOfContent:[parser getCleanedString:content] firstWordsCount:22];
     self.articleExcerpt.transform = CGAffineTransformMakeScale(0.9f, 0.9f);
     self.articleExcerpt.alpha = 0.0f;
