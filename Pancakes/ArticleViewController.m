@@ -112,7 +112,7 @@ typedef enum  {
         }
         
         //coverOriginalImage = self.articleCoverImage.image;
-        [PKCacheManager saveLastReadArticle:self.displayedArticle];
+        if (self.displayedArticle != nil) [PKCacheManager saveLastReadArticle:self.displayedArticle];
         [self.collectionView reloadData];
        
         [self createMainMenu];

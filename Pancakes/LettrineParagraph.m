@@ -28,40 +28,67 @@
     UILabel* lettrineSide = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, self.frame.size.width - 60, 70)];
     UILabel* lettrineBottom = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.frame.size.width - 5, self.frame.size.height + 20.0f)];
     
-    NSRange sideRange = NSMakeRange(1, 120);
-    NSRange restRange = NSMakeRange(121, attributedText.length - 121);
-    
-    NSString* rest = [[attributedText attributedSubstringFromRange:restRange].string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    NSMutableAttributedString* sideString = [attributedText attributedSubstringFromRange:sideRange].mutableCopy;
-    NSMutableAttributedString* restString = [[NSMutableAttributedString alloc] initWithString:rest];
+    NSUInteger offset = attributedText.length;
     
     lettrine.font = [UIFont fontWithName:kFontBreeBold size:135];
     lettrine.textColor = color;
-    lettrineSide.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
-    lettrineBottom.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
     
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:kArticleViewTextLineSpacing];
-
-    [sideString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, sideString.length)];
-    [restString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, restString.length)];
-    
-    lettrine.text = firstLetter;
-    lettrineSide.attributedText = sideString;
-    lettrineBottom.attributedText = restString;
-    
-    lettrine.numberOfLines = 0;
-    lettrineSide.numberOfLines = 0;
-    lettrineBottom.numberOfLines = 0;
-    
-//    [lettrine sizeToFit];
-    [lettrineSide sizeToFit];
-    [lettrineBottom sizeToFit];
+    if (offset < 150) {
+        NSRange sideRange = NSMakeRange(1, 120);
+        NSMutableAttributedString* sideString = [attributedText attributedSubstringFromRange:sideRange].mutableCopy;
+        lettrineSide.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        [style setLineSpacing:kArticleViewTextLineSpacing];
+        
+        [sideString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, sideString.length)];
+        
+        lettrine.text = firstLetter;
+        lettrineSide.attributedText = sideString;
+        
+        lettrine.numberOfLines = 0;
+        lettrineSide.numberOfLines = 0;
+        
+        [lettrineSide sizeToFit];
+        
+        [self addSubview:lettrineSide];
+    } else {
+        NSRange sideRange = NSMakeRange(1, 120);
+        NSRange restRange = NSMakeRange(121, attributedText.length - 121);
+        
+        NSString* rest = [[attributedText attributedSubstringFromRange:restRange].string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        NSMutableAttributedString* sideString = [attributedText attributedSubstringFromRange:sideRange].mutableCopy;
+        NSMutableAttributedString* restString = [[NSMutableAttributedString alloc] initWithString:rest];
+        
+        
+        
+        lettrineSide.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
+        lettrineBottom.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
+        
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        [style setLineSpacing:kArticleViewTextLineSpacing];
+        
+        [sideString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, sideString.length)];
+        [restString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, restString.length)];
+        
+        lettrine.text = firstLetter;
+        lettrineSide.attributedText = sideString;
+        lettrineBottom.attributedText = restString;
+        
+        lettrine.numberOfLines = 0;
+        lettrineSide.numberOfLines = 0;
+        lettrineBottom.numberOfLines = 0;
+        
+        //    [lettrine sizeToFit];
+        [lettrineSide sizeToFit];
+        [lettrineBottom sizeToFit];
+        
+        
+        [self addSubview:lettrineSide];
+        [self addSubview:lettrineBottom];
+    }
     
     [self addSubview:lettrine];
-    [self addSubview:lettrineSide];
-    [self addSubview:lettrineBottom];
 }
 
 @end

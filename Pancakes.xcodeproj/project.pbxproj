@@ -79,6 +79,7 @@
 		B3B40C181A5E918700BA7575 /* VideoEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */; };
 		B3B40C1A1A5E992200BA7575 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B40C191A5E992200BA7575 /* MediaPlayer.framework */; };
 		B3B40C1C1A5E9AB200BA7575 /* movie.mov in Resources */ = {isa = PBXBuildFile; fileRef = B3B40C1B1A5E9AB200BA7575 /* movie.mov */; };
+		B3B40C1F1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
 		B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CB88CE1A13A03A006DFF03 /* Utils.m */; };
 		B3CC2DBA1A3F936D00899F11 /* editors.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3CC2DB71A3F936D00899F11 /* editors.pkai */; };
@@ -283,6 +284,8 @@
 		B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3B40C191A5E992200BA7575 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B3B40C1B1A5E9AB200BA7575 /* movie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = movie.mov; path = ../../Downloads/movie.mov; sourceTree = "<group>"; };
+		B3B40C1D1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowEmbeddedBlock.h; sourceTree = "<group>"; };
+		B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3B9375F1A0A41B400584843 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		B3B937601A0A41B400584843 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		B3CB88CD1A13A03A006DFF03 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -581,6 +584,8 @@
 				B3F0BD0B1A26252000615279 /* CustomEmbeddedBlock.m */,
 				B3B40C161A5E918700BA7575 /* VideoEmbeddedBlock.h */,
 				B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */,
+				B3B40C1D1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.h */,
+				B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */,
 			);
 			name = EmbeddedBlocks;
 			sourceTree = "<group>";
@@ -1134,6 +1139,7 @@
 				B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */,
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
 				B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */,
+				B3B40C1F1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
 				B3DBD2CB1A3F3B5D0013493C /* AudioPlayer.m in Sources */,
 				B35842021A069C4700A17468 /* DefinitionEmbeddedBlock.m in Sources */,
