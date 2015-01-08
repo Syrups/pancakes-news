@@ -29,7 +29,6 @@ PODS:
   - FMDB/common (2.3)
   - FMDB/standard (2.3):
     - FMDB/common
-  - FXBlurView (1.6.3)
   - GRMustache (6.8.3):
     - JRSwizzle (~> 1.0)
   - JRSwizzle (1.0)
@@ -48,7 +47,6 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - Facebook-iOS-SDK
   - FLAnimatedImage (~> 1.0)
-  - FXBlurView
   - JSONModel
   - Mapbox-iOS-SDK
   - pop (~> 1.0)
@@ -60,7 +58,6 @@ SPEC CHECKSUMS:
   Facebook-iOS-SDK: 5854404b4b651f612a8ef79ca06d766858f4cb8e
   FLAnimatedImage: d9e8422a9e1d8ee9a657b7433b4a9b073ef3efb3
   FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
-  FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
   GRMustache: ab96109b7ba4b9568425bea40d6cd2cdc7582b6c
   JRSwizzle: 30da7a2c539a4ebf954b16d15f6dd8221c9f6fa5
   JSONModel: 634100aaacbd89811bc8a03da209356e5989c569

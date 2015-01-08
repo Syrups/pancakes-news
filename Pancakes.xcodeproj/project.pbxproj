@@ -30,7 +30,6 @@
 		73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C24E131A1938A40070C62D /* PKMenuItemCircle.m */; };
 		73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79BF1A0C245F00093265 /* MyProfileViewController.m */; };
 		73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79C21A0C25B100093265 /* SynchroViewController.m */; };
-		73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 73DC79C41A0C28F700093265 /* default_place-folder.jpg */; };
 		73FB80471A0BD09900CCA3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FB80461A0BD09900CCA3F1 /* MainViewController.m */; };
 		73FC07861A2BE44B006A57E1 /* climate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07811A2BE44B006A57E1 /* climate.gif */; };
 		73FC07871A2BE44B006A57E1 /* corruption.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07821A2BE44B006A57E1 /* corruption.gif */; };
@@ -200,7 +199,6 @@
 		73DC79BF1A0C245F00093265 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		73DC79C11A0C25B100093265 /* SynchroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchroViewController.h; sourceTree = "<group>"; };
 		73DC79C21A0C25B100093265 /* SynchroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchroViewController.m; sourceTree = "<group>"; };
-		73DC79C41A0C28F700093265 /* default_place-folder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default_place-folder.jpg"; sourceTree = "<group>"; };
 		73FB80451A0BD09900CCA3F1 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		73FB80461A0BD09900CCA3F1 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		73FC077F1A2BDDE0006A57E1 /* climate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = climate.gif; path = ../climate.gif; sourceTree = "<group>"; };
@@ -534,7 +532,6 @@
 		73DC79BC1A0C23E100093265 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				73DC79C41A0C28F700093265 /* default_place-folder.jpg */,
 				73DC79BE1A0C245F00093265 /* MyProfileViewController.h */,
 				73DC79BF1A0C245F00093265 /* MyProfileViewController.m */,
 			);
@@ -1015,7 +1012,6 @@
 				B3CC2E031A3F9A2700899F11 /* bloc_son_trait_00030.png in Resources */,
 				B3CC2DE51A3F9A2700899F11 /* bloc_son_trait_00000.png in Resources */,
 				B3FE6FFB1A3EF9EA0071413B /* comments.pkai in Resources */,
-				73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */,
 				B3CC2DEA1A3F9A2700899F11 /* bloc_son_trait_00005.png in Resources */,
 				B3CC2DF01A3F9A2700899F11 /* bloc_son_trait_00011.png in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,

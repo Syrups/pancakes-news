@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet PKSyrupButton *themeCheck;
 @property (weak, nonatomic) ThemeInterest *theme;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *effectView;
 
 - (void) setSwitchReceiverSelector: (SEL)action;
 - (void) updateCellWithImage;

@@ -67,7 +67,7 @@
     
     NSLog(@"%@", user.objectID);
     [imageView sd_setImageWithURL:[Utils fetchFacebookUserProfilePictureURL:user]
-                 placeholderImage:[UIImage imageNamed:@"default_place-folder.jpg"]
+                 placeholderImage:[UIImage imageNamed:@"place_holder.jpg"]
                           options:SDWebImageRefreshCached
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                             if(image && blur){
@@ -91,7 +91,7 @@
 
 + (void ) setPlaceHolderImage : (UIImageView*)imageView blur:(BOOL)blur{
     
-    UIImage *baseImage = [UIImage imageNamed:@"default_place-folder.jpg"];
+    UIImage *baseImage = [UIImage imageNamed:@"place_holder.jpg"];
     
     if(blur){
         UIImage *baseImage = imageView.image;

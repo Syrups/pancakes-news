@@ -8,7 +8,6 @@ target :Pancakes do
     pod 'JSONModel'
     pod 'SDWebImage'
     pod 'pop', '~> 1.0'
-    pod 'FXBlurView'
     pod 'Mapbox-iOS-SDK'
     pod 'Facebook-iOS-SDK'
     pod 'FLAnimatedImage', '~> 1.0'

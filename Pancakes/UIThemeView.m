@@ -25,21 +25,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    //self.caption.lineBreakMode = NSLineBreakByWordWrapping;
-    //self.caption.numberOfLines = 0;
-    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    //Blur init
-//    [self.blurView updateAsynchronously:YES completion:^{
-//        self.blurView.blurRadius = 0;
-//    }];
-   
-    
-    //self.topBlurView.contentMode = UIViewContentModeRight;
-    //self.topBlurView.layer.contentsGravity = kCAGravityBottomLeft;
-    //[self.blurView setClipsToBounds:YES];
-   
 }
 
 -(void)updateCellWithImage {
@@ -48,18 +34,15 @@
         NSData *gif = [NSData dataWithContentsOfFile:filePath];
     
         self.backgroundImageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData : gif];
-    
 }
 
 
 
 - (void) updateAsFullyVisible : (BOOL) visible{
     
-    [UIView animateWithDuration:0.1f delay:.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            
-        self.themeLabel.alpha = visible ? 1 : 0.4;
-//        self.blurView.blurRadius = visible ? 0 : 40;
+    [UIView animateWithDuration:.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
+        self.effectView.alpha = !visible;
         
     } completion:^(BOOL finished) {
         if(visible){

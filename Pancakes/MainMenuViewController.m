@@ -57,6 +57,10 @@ PKMenuItemCircle *currentItem;
 
 - (void)viewDidLoad {
     
+    self.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    //.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+    //visuaEffectView.setTranslatesAutoresizingMaskIntoConstraints(true)
+    
     //Rotation constant 25
     angles = @[@-45, @-20, @5, @30];
     menuNames = @[@"MenuNews", @"MenuProfile" , @"MenuInterests", @"MenuSynchronization"];
