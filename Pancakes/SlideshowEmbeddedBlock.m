@@ -42,6 +42,7 @@
         UIImageView* image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [image sd_setImageWithURL:[NSURL URLWithString:block.images[i]]];
         [self.imageViews addObject:image];
+        image.contentMode = UIViewContentModeScaleAspectFill;
         
         UIView *subview = [[UIView alloc] initWithFrame:frame];
         [subview addSubview:image];

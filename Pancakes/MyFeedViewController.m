@@ -94,6 +94,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
     
+    touchEnabled = YES;
     switchingView = NO;
     
     // back from article view ?
