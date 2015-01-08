@@ -22,6 +22,7 @@
     ArcImageView* cover = [[ArcImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150.0f) fullSize:YES];
     [cover sd_setImageWithURL:[NSURL URLWithString:self.articleViewController.displayedArticle.coverImage]];
     cover.tintColor = RgbaColor(0, 0, 0, 0.5);
+    cover.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:cover];
     
     

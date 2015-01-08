@@ -7,6 +7,7 @@
 //
 
 #import "ArcImageView.h"
+#import "Configuration.h"
 
 @implementation ArcImageView {
     BOOL isFullSize;

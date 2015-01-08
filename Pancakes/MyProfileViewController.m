@@ -238,6 +238,8 @@
 
 - (void)displaySelectedArticle:(Article*)article {
     
+    return;
+    
    MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
 //
 //        UINavigationController* feedVc = (UINavigationController*)[self.storyboard instantiateViewControllerWithIdentifier:@"MyFeedView"];

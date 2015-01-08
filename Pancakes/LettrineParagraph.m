@@ -33,8 +33,8 @@
     lettrine.font = [UIFont fontWithName:kFontBreeBold size:135];
     lettrine.textColor = color;
     
-    if (offset < 150) {
-        NSRange sideRange = NSMakeRange(1, 120);
+    if (offset < 160) {
+        NSRange sideRange = NSMakeRange(1, offset-1);
         NSMutableAttributedString* sideString = [attributedText attributedSubstringFromRange:sideRange].mutableCopy;
         lettrineSide.font = [UIFont fontWithName:kFontHeuristicaRegular size:18];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -52,8 +52,8 @@
         
         [self addSubview:lettrineSide];
     } else {
-        NSRange sideRange = NSMakeRange(1, 120);
-        NSRange restRange = NSMakeRange(121, attributedText.length - 121);
+        NSRange sideRange = NSMakeRange(1, 160);
+        NSRange restRange = NSMakeRange(161, attributedText.length - 161);
         
         NSString* rest = [[attributedText attributedSubstringFromRange:restRange].string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         

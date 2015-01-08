@@ -13,6 +13,7 @@
 #import "Block.h"
 #import "Blocks.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImageManager.h>
 #import "PKRestClient.h"
 #import "PKCacheManager.h"
 
@@ -69,7 +70,7 @@ typedef enum  {
     visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     
     self.effectView = visualEffectView;
-    visualEffectView.frame = self.articleCoverImage.bounds;
+    visualEffectView.frame = self.view.bounds;
     [self.articleCoverImage addSubview:visualEffectView];
     self.effectView.alpha = 0;
 }
@@ -92,8 +93,6 @@ typedef enum  {
    [PKRestClient getArticleWithId:self.articleId :^(id json, JSONModelError *err) {
         NSError* error = nil;
        
-       
-       
        if (err) { // error connecting to network, try loading from cache
            NSArray* cachedFeed = [PKCacheManager loadCachedFeed];
            for (Article* a in cachedFeed) {
@@ -112,10 +111,17 @@ typedef enum  {
             if (![block.type.name isEqualToString:@"generic"]) {
                 [hiddenBlocks addObject:block];
             }
+            if ([block.type.name isEqualToString:@"context"]) {
+                [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:block.image] options:0 progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                    
+                }];
+            }
         }
         
         //coverOriginalImage = self.articleCoverImage.image;
-        if (self.displayedArticle != nil) [PKCacheManager saveLastReadArticle:self.displayedArticle];
+       if (self.displayedArticle != nil) {
+           [PKCacheManager saveLastReadArticle:self.displayedArticle];
+       }
         [self.collectionView reloadData];
        
         [self createMainMenu];
@@ -196,6 +202,21 @@ typedef enum  {
 
 }
 
+#pragma mark - Swipe to zoom on cover
+
+- (void)zoomCover:(UIGestureRecognizer*)swipe {
+    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleTitleCell" forIndexPath:0];
+    UILabel* articleTitle = (UILabel*)[cell.contentView viewWithTag:10];
+    articleTitle.text = self.displayedArticle.title;
+    UILabel* creditsLabel = (UILabel*)[cell.contentView viewWithTag:20];
+    creditsLabel.text = self.displayedArticle.credits;
+    
+    [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        articleTitle.alpha = 0;
+        creditsLabel.alpha = 0;
+    } completion:nil];
+}
+
 #pragma mark - Helpers
 
 /**
@@ -218,6 +239,10 @@ typedef enum  {
     creditsLabel.text = self.displayedArticle.credits;
     creditsLabel.textColor = [UIColor whiteColor];
     creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
+    
+    UISwipeGestureRecognizer* swipeToZoom = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(zoomCover:)];
+    swipeToZoom.direction = UISwipeGestureRecognizerDirectionDown;
+//    [cell.contentView addGestureRecognizer:swipeToZoom];
     
     if (!titleCellAnimated) {
         
@@ -272,6 +297,7 @@ typedef enum  {
     return cell;
 }
 
+
 - (Block*) blockWithId:(NSString*)blockId {
     Block* block = nil;
     for (Block* b in self.displayedArticle.blocks) {
@@ -292,7 +318,7 @@ typedef enum  {
     }
     
     if ([block.type.name isEqualToString:@"context"]) {
-        return CGSizeMake(w, block.paragraphs.count * 200 + 250.0f);
+        return CGSizeMake(w, block.paragraphs.count * 300 + 250.0f);
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
     } else if ([block.type.name isEqualToString:@"comments"]) {
@@ -300,7 +326,7 @@ typedef enum  {
     }
     
     // generic block of content
-    return CGSizeMake(w, block.paragraphs.count * 100 + block.children.count  * 200);
+    return CGSizeMake(w, block.paragraphs.count * 100 + block.children.count  * 300);
 }
 
 

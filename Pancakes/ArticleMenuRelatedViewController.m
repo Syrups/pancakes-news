@@ -15,17 +15,21 @@
 
 @end
 
-@implementation ArticleMenuRelatedViewController
+@implementation ArticleMenuRelatedViewController {
+    NSArray* related;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     ArticleViewController* articleVc = (ArticleViewController*)self.parentViewController.parentViewController;
     self.article = articleVc.displayedArticle;
+    
+    related = [Article arrayOfModelsFromDictionaries:self.article.related];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.article.related.count;
+    return related.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -33,6 +37,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Article* article = related[indexPath.row];
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"RelatedArticleCell"];
     
     if (cell == nil) {
@@ -40,11 +45,12 @@
     }
     
     UILabel* titleLabel = (UILabel*)[cell.contentView viewWithTag:10];
-    titleLabel.text = self.article.title;
+    titleLabel.text = article.title;
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
-    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:self.article.coverImage]];
+    feedCellThumb.contentMode = UIViewContentModeScaleAspectFill;
+    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
     feedCellThumb.clipsToBounds = YES;
 
     

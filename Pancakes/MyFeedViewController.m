@@ -21,6 +21,7 @@
     NSArray* feedArticles;
     Article* selectedArticle;
     BOOL switchingView;
+    BOOL touchEnabled;
 }
 
 - (void)viewDidLoad {
@@ -36,13 +37,22 @@
     
     self.constraintY.constant = kMenuBarHeigth;
     
+    touchEnabled = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"menu.open" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        touchEnabled = NO;
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"menu.close" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        touchEnabled = YES;
+    }];
+    
 //    UISwipeGestureRecognizer* swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
 //    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
 //    [self.view addGestureRecognizer:swipe];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (switchingView) return;
+    if (switchingView || !touchEnabled) return;
     
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint touchLocation = [touch locationInView:self.view];
@@ -84,6 +94,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     MainViewController* parent = (MainViewController*)self.parentViewController.parentViewController; // get the main view controller
     
+    touchEnabled = YES;
     switchingView = NO;
     
     // back from article view ?

@@ -94,7 +94,7 @@
     
     [button setImage:[images objectAtIndex:images.count-1] forState:UIControlStateNormal];
     
-//    [button.imageView setAnimationImages:[images copy]];
+    [button.imageView setAnimationImages:[images copy]];
     [button.imageView setAnimationDuration:1.3f];
     [button.imageView setAnimationRepeatCount:1];
     
