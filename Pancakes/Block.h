@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSArray<Block, Optional>* children;
 @property (strong, nonatomic) NSArray<Optional>* editors;
 @property (strong, nonatomic) NSString<Optional>* url;
+@property (strong, nonatomic) NSArray<Optional>* images;
 
 - (Block*)childWithId:(NSString*)blockId;
 

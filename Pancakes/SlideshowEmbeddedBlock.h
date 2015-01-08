@@ -11,6 +11,6 @@
 @interface SlideshowEmbeddedBlock : DefinitionEmbeddedBlock
 
 @property (strong, nonatomic) UIScrollView* scrollView;
-@property (strong, nonatomic) NSArray* imageViews;
+@property (strong, nonatomic) NSMutableArray* imageViews;
 
 @end

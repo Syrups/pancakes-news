@@ -80,7 +80,7 @@ float themeCellHeight;
     //[self addDropShadowToView:self.themesView];
     [Utils addDropShadowToView:self.themesView];
     
-    PKSyrupArrow* arr = [[PKSyrupArrow alloc] initWithFrame:CGRectMake(screenMidSize/2 - 7, screenHeight-30, 15, 8)];
+    PKSyrupArrow* arr = [[PKSyrupArrow alloc] initWithFrame:CGRectMake(screenMidSize/2 - 7, screenHeight-50, 15, 8)];
     [self.view addSubview:arr];
     
 }

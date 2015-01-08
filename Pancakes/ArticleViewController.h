@@ -26,6 +26,7 @@
 
 @property (strong, nonatomic) UIImage *cover;
 @property (weak, nonatomic) IBOutlet FXBlurView *coverBlur;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *effectView;
 @property (strong, nonatomic) IBOutlet UIImageView* articleCoverImage;
 
 @property (strong, nonatomic) ArticleMenuViewController* menuViewController;

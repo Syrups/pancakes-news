@@ -50,6 +50,7 @@ typedef enum  {
     self.coverBlur.blurRadius = 0;
 //    self.coverBlur.blurEnabled = NO;
     self.coverBlur.alpha = 0;
+    [self.coverBlur removeFromSuperview];
     
     self.articleCoverImage.image = self.cover;
     self.articleCoverImage.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
@@ -66,9 +67,20 @@ typedef enum  {
     [swipeBack setDirection:UISwipeGestureRecognizerDirectionRight];
     [[self view] addGestureRecognizer:swipeBack];
     
-    UISwipeGestureRecognizer *swipeMenu = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayMenu:)];
-    [swipeMenu setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [[self view] addGestureRecognizer:swipeMenu];
+//    UISwipeGestureRecognizer *swipeMenu = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayMenu:)];
+//    [swipeMenu setDirection:UISwipeGestureRecognizerDirectionLeft];
+//    [[self view] addGestureRecognizer:swipeMenu];
+    
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    self.effectView = visualEffectView;
+    visualEffectView.frame = self.articleCoverImage.bounds;
+    [self.articleCoverImage addSubview:visualEffectView];
+    self.effectView.alpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -529,18 +541,20 @@ typedef enum  {
     if (self.collectionView.contentOffset.y == 0) {
         self.coverBlur.alpha = 0;
     } else {
-        self.coverBlur.alpha = 1;
-        int radius = self.collectionView.contentOffset.y / 7;
+//        self.coverBlur.alpha = 1;
+//        int radius = self.collectionView.contentOffset.y / 7;
+//        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//            
+//            //coverBlurredImage = [coverOriginalImage stackBlur:radius];
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                //[self.articleCoverImage setImage:coverBlurredImage];
+//            });
+//        });
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            
-            //coverBlurredImage = [coverOriginalImage stackBlur:radius];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //[self.articleCoverImage setImage:coverBlurredImage];
-            });
-        });
+        self.effectView.alpha = self.collectionView.contentOffset.y / 200;
     }
     
     
