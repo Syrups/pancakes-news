@@ -34,6 +34,7 @@
     
     self.feedTableView.layoutMargins = UIEdgeInsetsZero;
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
+    self.feedTableView.hidden = YES;
     
     self.constraintY.constant = kMenuBarHeigth;
     
@@ -129,6 +130,8 @@
     screen.frame = self.view.frame;
     [self.view addSubview:screen];
     
+    [self.view bringSubviewToFront:screen];
+    
     self.waitingScreen = screen;
 }
 
@@ -178,6 +181,7 @@
                     [self.feedTableView selectRowAtIndexPath:firstIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
                     [self tableView:self.feedTableView didSelectRowAtIndexPath:firstIndexPath];
                     [self.waitingScreen removeFromSuperview];
+                    self.feedTableView.hidden = NO;
                     [PKCacheManager cacheFeed:feedArticles];
                 });
             }

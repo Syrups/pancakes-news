@@ -25,7 +25,9 @@
     ArticleViewController* articleVc = (ArticleViewController*)self.parentViewController.parentViewController;
     self.article = articleVc.displayedArticle;
     
-    related = [Article arrayOfModelsFromDictionaries:self.article.related];
+    related = self.article.related;
+    
+    NSLog(@"%@", related);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -37,7 +39,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Article* article = related[indexPath.row];
+    NSDictionary* article = (NSDictionary*)related[indexPath.row];
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"RelatedArticleCell"];
     
     if (cell == nil) {
@@ -45,12 +47,12 @@
     }
     
     UILabel* titleLabel = (UILabel*)[cell.contentView viewWithTag:10];
-    titleLabel.text = article.title;
+    titleLabel.text = @"Pivotal Ebola vaccine trials to start this month or next";
     
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
     feedCellThumb.contentMode = UIViewContentModeScaleAspectFill;
-    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:article.coverImage]];
+    [feedCellThumb sd_setImageWithURL:[NSURL URLWithString:@"http://d2atr2ilx9iyd.cloudfront.net/contentAsset/image/25951711-1e35-4c1a-a8df-24f04aaef508/image/byInode/1/filter/Resize,Jpeg/jpeg_q/90/resize_w/604"]];
     feedCellThumb.clipsToBounds = YES;
 
     
