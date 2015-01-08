@@ -8,7 +8,6 @@
 
 #import "CommentsBlockCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <FXBlurView/FXBlurView.h>
 #import "Configuration.h"
 #import "Comment.h"
 #import "ArcImageView.h"

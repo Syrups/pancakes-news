@@ -69,6 +69,8 @@
         blockView = (AudioEmbeddedBlock*)[[AudioEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else if ([blockType isEqualToString:@"video"]) {
         blockView = (VideoEmbeddedBlock*)[[VideoEmbeddedBlock alloc] initWithFrame:blockFrame];
+    } else if ([blockType isEqualToString:@"slide"]) {
+        blockView = (SlideshowEmbeddedBlock*)[[SlideshowEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else if ([blockType isEqualToString:@"custom"]) {
         blockView = (CustomEmbeddedBlock*)[[CustomEmbeddedBlock alloc] initWithFrame:blockFrame];
     } else {

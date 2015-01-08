@@ -9,7 +9,6 @@
 #import "UIThemeView.h"
 #import "FLAnimatedImageView.h"
 #import "FLAnimatedImage.h"
-#import "FXBlurView.h"
 
 @implementation UIThemeView
 
@@ -32,9 +31,9 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //Blur init
-    [self.blurView updateAsynchronously:YES completion:^{
-        self.blurView.blurRadius = 0;
-    }];
+//    [self.blurView updateAsynchronously:YES completion:^{
+//        self.blurView.blurRadius = 0;
+//    }];
    
     
     //self.topBlurView.contentMode = UIViewContentModeRight;
@@ -59,7 +58,7 @@
     [UIView animateWithDuration:0.1f delay:.1f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
         self.themeLabel.alpha = visible ? 1 : 0.4;
-        self.blurView.blurRadius = visible ? 0 : 40;
+//        self.blurView.blurRadius = visible ? 0 : 40;
         
         
     } completion:^(BOOL finished) {

@@ -10,7 +10,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 //#import "UIImage+StackBlur.h"
-#import "FXBlurView.h"
 
 @implementation Utils
 
@@ -73,8 +72,15 @@
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                             if(image && blur){
                                 
-                                UIImage *blurImage = [image blurredImageWithRadius:30.0f iterations:5 tintColor:[UIColor clearColor]];
-                                imageView.image = blurImage;
+                                UIVisualEffect *blurEffect;
+                                blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+                                
+                                UIVisualEffectView *visualEffectView;
+                                visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+                                
+                                visualEffectView.frame = imageView.bounds;
+                                visualEffectView.alpha = 0.5;
+                                [imageView addSubview:visualEffectView];
                             }
                         }
      
@@ -89,8 +95,8 @@
     
     if(blur){
         UIImage *baseImage = imageView.image;
-        UIImage *blurImage = [baseImage blurredImageWithRadius:30.0f iterations:5 tintColor:[UIColor clearColor]];
-        imageView.image = blurImage;
+        
+        imageView.image = baseImage;
     }else{
         imageView.image = baseImage;
     }

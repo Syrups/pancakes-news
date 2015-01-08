@@ -19,5 +19,6 @@
 #import "AudioEmbeddedBlock.h"
 #import "CustomEmbeddedBlock.h"
 #import "VideoEmbeddedBlock.h"
+#import "SlideshowEmbeddedBlock.h"
 
 #endif

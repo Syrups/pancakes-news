@@ -12,7 +12,6 @@
 #import "Utils.h"
 #import "UIImageView+WebCache.h"
 #import "ArcImageView.h"
-#import <FXBlurView/FXBlurView.h>
 #import "BlockButton.h"
 #import "PKAIDecoder.h"
 
@@ -54,12 +53,18 @@
 //    imageMask.backgroundColor = kArticleViewBlockBackground;
 //    [self addSubview:imageMask];
     
-    FXBlurView *imageMask = [[FXBlurView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 200.0f)];
-    imageMask.blurRadius = 8.0f;
-//    imageMask.dynamic = NO;
-    imageMask.backgroundColor = [UIColor clearColor];
-    imageMask.tintColor = [UIColor clearColor];
-    if (self.blurEnabled) [self addSubview:imageMask];
+    UIVisualEffect *blurEffect;
+    blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    
+    UIVisualEffectView *visualEffectView;
+    visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    self.imageMask = visualEffectView;
+    visualEffectView.frame = self.coverImage.bounds;
+    
+    self.imageMask.alpha = 0.8;
+    
+    if (self.blurEnabled)[self.coverImage addSubview:visualEffectView];
     
 //    UIImageView* blur = [[UIImageView alloc] initWithFrame:coverImage.frame];
 //    
@@ -71,7 +76,6 @@
 //    self.blurImage = blur;
 //    [self addSubview:self.blurImage];
     
-    self.imageMask = imageMask;
     
     UIView *titleBanner = [[UIView alloc] initWithFrame:CGRectMake(-1.0f, 15.0f, self.frame.size.width + 2.0f, 50.0f)];
     titleBanner.backgroundColor = [UIColor whiteColor];
@@ -221,7 +225,7 @@
     self.revealButton.transform = CGAffineTransformMakeRotation(0);
     [self.storylineOpen setFrame:CGRectMake(self.frame.size.width - 39.0f, 0.0f, 3.0f, 0.0f)];
     self.closeButton.alpha = 0;
-    self.imageMask.alpha = 1;
+    self.imageMask.alpha = 0.8;
     
     [self.coverImage reset];
 }
