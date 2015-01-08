@@ -12,7 +12,6 @@
 #import "Configuration.h"
 #import "Models.h"
 #import "Services.h"
-#import "FXBlurView.h"
 #import "PKSyrupArrow.h"
 
 
@@ -217,9 +216,9 @@ float themeCellHeight;
 
 - (void)setSubthemesBackground {
     
-    UIImage *baseImage  = [[UIImage imageNamed:self.currentTheme.coverImage] blurredImageWithRadius:20 iterations:1 tintColor:[UIColor clearColor]];
+//    UIImage *baseImage  = [[UIImage imageNamed:self.currentTheme.coverImage] blurredImageWithRadius:20 iterations:1 tintColor:[UIColor clearColor]];
     
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:baseImage];
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.currentTheme.coverImage]];
     [tempImageView setFrame:self.subThemesView.frame];
     tempImageView.contentMode = UIViewContentModeScaleAspectFill;
     

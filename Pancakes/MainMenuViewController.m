@@ -285,7 +285,7 @@ PKMenuItemCircle *currentItem;
         CGRect theFrame = [self.toggleItem frame];
         theFrame.origin.x = self.view.frame.size.width;
         self.toggleItem.frame = theFrame;
-        self.blurView.frame = CGRectMake(0.0f, 0, self.view.frame.size.width, heightLessBar);
+//        self.blurView.frame = CGRectMake(0.0f, 0, self.view.frame.size.width, heightLessBar);
         
     } completion:^(BOOL finished) {
         [self animateOpening];
@@ -302,7 +302,7 @@ PKMenuItemCircle *currentItem;
         theFrame.origin.x = 0;
         self.toggleItem.frame = theFrame;
         
-        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, 0.0f, heightLessBar);
+//        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, 0.0f, heightLessBar);
     } completion:^(BOOL finished) {
         [self animateClosing];
     }];

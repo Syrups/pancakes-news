@@ -63,23 +63,23 @@
     CGRect initFrame = CGRectMake(-screenMidSize, 0.0f, screenMidSize, self.view.frame.size.height);
     
     //Blur init
-    self.blurView = [[FXBlurView alloc] init];
-    self.blurView.blurRadius = 7;
+//    self.blurView = [[FXBlurView alloc] init];
+//    self.blurView.blurRadius = 7;
     //self.blurView.dynamic = NO;
-    self.blurView.tintColor = [UIColor blackColor];
-    self.blurView.contentMode = UIViewContentModeRight;
-    self.blurView.layer.contentsGravity = kCAGravityBottomLeft;
-    [self.blurView setClipsToBounds:YES];
-    [self.blurView updateAsynchronously:YES completion:^{
-        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, 0.0f, self.view.frame.size.height - kMenuBarHeigth);
-    }];
+//    self.blurView.tintColor = [UIColor blackColor];
+//    self.blurView.contentMode = UIViewContentModeRight;
+//    self.blurView.layer.contentsGravity = kCAGravityBottomLeft;
+//    [self.blurView setClipsToBounds:YES];
+//    [self.blurView updateAsynchronously:YES completion:^{
+//        self.blurView.frame = CGRectMake(0.0f, kMenuBarHeigth, 0.0f, self.view.frame.size.height - kMenuBarHeigth);
+//    }];
     
     MainMenuViewController* menuVc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainMenu"];
     [self addChildViewController:menuVc];
     menuVc.view.frame = initFrame;
-    menuVc.blurView = self.blurView;
+//    menuVc.blurView = self.blurView;
     
-    [self.view addSubview:self.blurView];
+//    [self.view addSubview:self.blurView];
     [self.view addSubview:menuVc.view];
     [menuVc didMoveToParentViewController:self];
     

@@ -729,10 +729,6 @@
                                     <constraint firstAttribute="height" constant="210" id="3es-Ar-OxF"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWb-Vp-N4O" customClass="FXBlurView">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4u-hu-pZ4">
                                 <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -816,19 +812,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="n4u-hu-pZ4" secondAttribute="trailing" constant="-16" id="6Xh-bQ-sDd"/>
                             <constraint firstItem="Myw-hq-Hpy" firstAttribute="top" secondItem="UID-BW-YLR" secondAttribute="bottom" constant="-20" id="6lM-Mr-QY5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Myw-hq-Hpy" secondAttribute="trailing" constant="-16" id="C1f-TX-FCi"/>
-                            <constraint firstItem="TWb-Vp-N4O" firstAttribute="top" secondItem="SX6-30-hic" secondAttribute="top" id="FfV-U6-JCu"/>
                             <constraint firstAttribute="width" secondItem="0Ws-Kg-Hbu" secondAttribute="width" id="J3E-ph-NrP"/>
                             <constraint firstItem="bRW-gZ-Lrg" firstAttribute="top" secondItem="SX6-30-hic" secondAttribute="top" constant="10" id="Jwi-KY-0a2"/>
                             <constraint firstItem="SEr-ms-3dg" firstAttribute="top" secondItem="UID-BW-YLR" secondAttribute="bottom" id="NDZ-Pe-cQi"/>
                             <constraint firstItem="0Ws-Kg-Hbu" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-16" id="NNS-eU-BUe"/>
                             <constraint firstItem="7FO-GD-eTy" firstAttribute="top" secondItem="45O-hn-WeM" secondAttribute="bottom" id="Xde-9w-QFn"/>
-                            <constraint firstAttribute="trailing" secondItem="TWb-Vp-N4O" secondAttribute="trailing" id="dq7-fU-SdP"/>
                             <constraint firstItem="n4u-hu-pZ4" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-16" id="dz4-PB-cWf"/>
                             <constraint firstAttribute="trailing" secondItem="SEr-ms-3dg" secondAttribute="trailing" constant="13" id="e67-oV-tyU"/>
-                            <constraint firstItem="TWb-Vp-N4O" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leading" id="eya-a0-7bk"/>
                             <constraint firstItem="n4u-hu-pZ4" firstAttribute="top" secondItem="UID-BW-YLR" secondAttribute="bottom" constant="-20" id="frz-fZ-6ZN"/>
                             <constraint firstItem="0Ws-Kg-Hbu" firstAttribute="top" secondItem="SX6-30-hic" secondAttribute="top" id="h4l-xW-h6B"/>
-                            <constraint firstItem="7FO-GD-eTy" firstAttribute="top" secondItem="TWb-Vp-N4O" secondAttribute="bottom" id="l3c-83-YY3"/>
                             <constraint firstAttribute="trailing" secondItem="bDa-eq-amW" secondAttribute="trailing" constant="13" id="lVy-dW-Pcn"/>
                             <constraint firstItem="bRW-gZ-Lrg" firstAttribute="leading" secondItem="SX6-30-hic" secondAttribute="leadingMargin" constant="-11" id="nZ8-LE-OnP"/>
                             <constraint firstAttribute="trailing" secondItem="45O-hn-WeM" secondAttribute="trailing" id="qjU-A6-JAk"/>
@@ -842,7 +834,6 @@
                         <outlet property="articleCoverImage" destination="0Ws-Kg-Hbu" id="ryg-oK-iER"/>
                         <outlet property="backButton" destination="bRW-gZ-Lrg" id="6eY-4G-wml"/>
                         <outlet property="collectionView" destination="Myw-hq-Hpy" id="uo2-Q1-96A"/>
-                        <outlet property="coverBlur" destination="TWb-Vp-N4O" id="BgY-h8-sYR"/>
                         <outlet property="moreButton" destination="SEr-ms-3dg" id="x1u-AC-EWX"/>
                         <outlet property="moreButtonBackground" destination="bDa-eq-amW" id="gf3-sZ-E4q"/>
                     </connections>
@@ -1283,7 +1274,7 @@
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A5DDF192-B554-4F90-93D0-327667411E3D" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
+                                                <imageView userInteractionEnabled="NO" tag="30" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0EE19AA8-0691-447C-962D-8B6F5D3A82E4" translatesAutoresizingMaskIntoConstraints="NO" id="Zhd-iz-epu">
                                                     <rect key="frame" x="96" y="41" width="24" height="8"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="frl-TR-xTE"/>
@@ -1690,7 +1681,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A5DDF192-B554-4F90-93D0-327667411E3D" width="42" height="7">
+        <image name="0EE19AA8-0691-447C-962D-8B6F5D3A82E4" width="42" height="7">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

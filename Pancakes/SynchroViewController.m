@@ -8,7 +8,6 @@
 
 #import "SynchroViewController.h"
 #import "Configuration.h"
-#import "FXBlurView.h"
 #import "Services.h"
 
 

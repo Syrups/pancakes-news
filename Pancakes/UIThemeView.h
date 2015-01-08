@@ -10,7 +10,6 @@
 @import UIKit;
 
 #import "ThemeInterest.h"
-#import "FXBlurView.h"
 #import "FLAnimatedImageView.h"
 #import "PKSyrupButton.h"
 
@@ -18,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet FLAnimatedImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *themeLabel;
 @property (weak, nonatomic) IBOutlet PKSyrupButton *themeCheck;
-@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @property (weak, nonatomic) ThemeInterest *theme;
 
 - (void) setSwitchReceiverSelector: (SEL)action;

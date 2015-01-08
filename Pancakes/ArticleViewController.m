@@ -43,15 +43,6 @@ typedef enum  {
     self.parser = [[ContentParser alloc] init];
     self.parser.delegate = self;
     
-    //Blur radius init
-    
-    self.coverBlur.dynamic = YES;
-    [self.coverBlur setTintColor:[UIColor clearColor]];
-    self.coverBlur.blurRadius = 0;
-//    self.coverBlur.blurEnabled = NO;
-    self.coverBlur.alpha = 0;
-    [self.coverBlur removeFromSuperview];
-    
     self.articleCoverImage.image = self.cover;
     self.articleCoverImage.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
     
@@ -173,8 +164,6 @@ typedef enum  {
 #pragma mark - Actions
 
 - (IBAction)back:(id)sender {
-    self.coverBlur.blurEnabled = NO;
-    self.coverBlur.blurRadius = 0;
     [UIView animateWithDuration:0.4f delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.collectionView setFrame:CGRectMake(self.view.frame.size.width, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height)];
         CGRect f = self.moreButtonBackground.frame;
@@ -188,7 +177,7 @@ typedef enum  {
         f.origin.y = -100;
         self.backButton.frame = f;
         
-        self.coverBlur.alpha = 0;
+        self.effectView.alpha = 0;
     } completion:^(BOOL finished) {
         
         [self.navigationController popViewControllerAnimated:NO];
@@ -534,12 +523,12 @@ typedef enum  {
     
     lastContentOffset = scrollView.contentOffset.y;
     
-    self.coverBlur.blurRadius = self.collectionView.contentOffset.y / 7;
+    self.effectView.alpha = self.collectionView.contentOffset.y / 200;
     
     if (self.collectionView.contentOffset.y > self.articleCoverImage.frame.size.height/2 || self.collectionView.contentOffset.y <= 0) return;
     
     if (self.collectionView.contentOffset.y == 0) {
-        self.coverBlur.alpha = 0;
+        self.effectView.alpha = 0;
     } else {
 //        self.coverBlur.alpha = 1;
 //        int radius = self.collectionView.contentOffset.y / 7;
