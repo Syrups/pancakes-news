@@ -190,6 +190,7 @@ PKMenuItemCircle *currentItem;
     // Animation
     CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pathAnimation.duration = 0.15f;
     pathAnimation.path = arcPath;
     pathAnimation.removedOnCompletion = NO;

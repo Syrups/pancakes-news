@@ -64,7 +64,7 @@
     
     for (int i = 0; i < angles.count; i++) {
         [self drawAnimationArcForButton:[self.items objectAtIndex:i] withEndAngleAtIndex:i];
-        [self.view bringSubviewToFront:(UIView*)[self.items objectAtIndex:i]];
+        //[self.view bringSubviewToFront:(UIView*)[self.items objectAtIndex:i]];
     }
     
 }
@@ -153,34 +153,7 @@
     [CATransaction commit];
 }
 
-- (void) drawCloseAnimationArcForButton:(UIButton*)button withEndAngleAtIndex:(int) index {
-    float angle = [[angles objectAtIndex:index] floatValue];
-    arcStart = button.frame.origin;
-    arcCenter = CGPointMake(self.view.bounds.size.width - 25.0f, 0.7 * self.view.bounds.size.height);
-    arcRadius =  self.view.frame.size.width * 0.7;
-    
-    CGMutablePathRef arcPath = CGPathCreateMutable();
-    CGPathMoveToPoint(arcPath, NULL, arcStart.x, arcStart.y);
-    CGPathAddArc(arcPath, NULL, arcCenter.x, arcCenter.y, arcRadius, DEGREES_TO_RADIANS(angle), DEGREES_TO_RADIANS(0), YES);
-    
-    
-    // Animation
-    CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    pathAnimation.calculationMode = kCAAnimationPaced;
-    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    pathAnimation.duration = 0.5f;
-    pathAnimation.path = arcPath;
-    pathAnimation.removedOnCompletion = NO;
-    pathAnimation.fillMode = kCAFillModeForwards;
-    CGPathRelease(arcPath);
-    
-    // Add the animation and reset the state so we can run again.
-    [CATransaction begin];
-    [CATransaction setCompletionBlock:^{
-    }];
-    [button.layer addAnimation:pathAnimation forKey:@"arc"];
-    [CATransaction commit];
-}
+
 
 //- (void) layoutButtonAtinddex : (int) index {
 //    float  angle = [[angles objectAtIndex:index] floatValue];
