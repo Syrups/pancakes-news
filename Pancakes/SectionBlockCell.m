@@ -58,7 +58,7 @@
 //    imageMask.dynamic = NO;
     imageMask.backgroundColor = [UIColor clearColor];
     imageMask.tintColor = [UIColor clearColor];
-    [self addSubview:imageMask];
+    if (self.blurEnabled) [self addSubview:imageMask];
     
 //    UIImageView* blur = [[UIImageView alloc] initWithFrame:coverImage.frame];
 //    
@@ -234,7 +234,7 @@
     
     NSLog(@"%f", diff);
     
-    if (diff > 300 && !animatingCloseButton) {
+    if (diff > 320 && !animatingCloseButton) {
         animatingCloseButton = YES;
         [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.closeButton.alpha = 0;
@@ -244,7 +244,7 @@
         }];
     }
     
-    if (diff < 290 && animatingCloseButton) {
+    if (diff < 290 && animatingCloseButton && self.opened) {
         animatingCloseButton = NO;
         [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.closeButton.alpha = 1;

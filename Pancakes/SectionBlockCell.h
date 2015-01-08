@@ -13,6 +13,7 @@
 @interface SectionBlockCell : GenericBlockCell
 
 @property (assign, nonatomic) BOOL opened;
+@property (assign, nonatomic) BOOL blurEnabled;
 
 @property (strong, nonatomic) UILabel* titleLabel;
 @property (strong, nonatomic) UIView* titleBanner;

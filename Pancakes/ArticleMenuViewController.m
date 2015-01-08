@@ -51,6 +51,12 @@
     };
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch* touch = [[event allTouches] anyObject];
+    NSLog(@"%@", touch.view);
+    
+}
+
 - (void)viewDidLayoutSubviews {
     if (closing) return;
     
@@ -143,6 +149,7 @@
     [CATransaction setCompletionBlock:^{
     }];
     [button.layer addAnimation:pathAnimation forKey:@"arc"];
+    
     [CATransaction commit];
 }
 

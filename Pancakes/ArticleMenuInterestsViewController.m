@@ -29,13 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self fetchInterests];
-    
     userInterests = [[[UserDataHolder sharedInstance] user] interests];
     
     ArticleViewController* articleVc = (ArticleViewController*)self.parentViewController.parentViewController;
     
     self.article = articleVc.displayedArticle;
+    
+    [self fetchInterests];
 }
 
 - (void) fetchInterests {
@@ -47,6 +47,8 @@
         if (err != nil) {
             NSLog(@"%@", err);
         }
+        
+        
         
         self.subthemes = @[].mutableCopy;
         NSMutableArray* alreadyRegistered = @[].mutableCopy;
@@ -67,6 +69,8 @@
         [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:subthemesUrl] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSError* err = nil;
             self.article.subthemes = [SubThemeInterest arrayOfModelsFromData:data error:&err].copy;
+            
+            
             
             // Reload table data on main thread to avoid problems
             dispatch_async(dispatch_get_main_queue(), ^{

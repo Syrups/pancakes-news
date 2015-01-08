@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cbi-S2-Bhq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cbi-S2-Bhq">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -272,7 +272,7 @@
                                                         <constraint firstAttribute="width" constant="24" id="jGq-iR-hPj"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30.10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTA-4R-2NQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="30.10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTA-4R-2NQ">
                                                     <rect key="frame" x="241" y="7" width="43" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="43" id="WZ2-rH-NzQ"/>
@@ -683,6 +683,7 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="addButtonTopSpace" destination="MIb-7W-3KX" id="veE-hq-1He"/>
                         <outlet property="addTimeButton" destination="qs6-lX-yMw" id="sQJ-0H-uWT"/>
                         <outlet property="background" destination="3dB-4y-NVP" id="gVC-W1-krX"/>
                         <outlet property="backgroundRight" destination="Dkn-P2-s9F" id="Ks3-Kh-Jht"/>
@@ -749,16 +750,16 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="568" height="325"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567.5" height="325"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4N-nF-bAP">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4N-nF-bAP">
                                                     <rect key="frame" x="43" y="-246" width="421" height="272"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="20" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Article credits" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-XI-h8n">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="20" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Article credits" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwp-XI-h8n">
                                                     <rect key="frame" x="54" y="-84" width="346" height="184"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -768,12 +769,6 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="Q4N-nF-bAP" firstAttribute="leading" secondItem="aie-a6-tTk" secondAttribute="leadingMargin" constant="35" id="WQh-dB-99p"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Q4N-nF-bAP" secondAttribute="trailing" constant="46" id="dHG-fl-8tq"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Fwp-XI-h8n" secondAttribute="trailing" constant="35.5" id="nK2-Xq-KfM"/>
-                                            <constraint firstItem="Fwp-XI-h8n" firstAttribute="leading" secondItem="aie-a6-tTk" secondAttribute="leadingMargin" constant="46" id="pdE-mD-T5C"/>
-                                        </constraints>
                                         <size key="customSize" width="567.5" height="325"/>
                                     </collectionViewCell>
                                 </cells>
@@ -921,9 +916,6 @@
                                     <action selector="closeMenu:" destination="gFo-0F-Y7w" eventType="touchUpInside" id="AOY-Y3-j0r"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="article-menu-bg" translatesAutoresizingMaskIntoConstraints="NO" id="t99-M1-DkM">
-                                <rect key="frame" x="51" y="34" width="244" height="300"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1769,7 +1761,6 @@ AAATUg
 </mutableData>
         </image>
         <image name="article-back" width="75" height="75"/>
-        <image name="article-menu-bg" width="225" height="287"/>
         <image name="article-menu-close" width="48" height="48"/>
         <image name="article-menu-comment" width="47" height="47"/>
         <image name="article-menu-comment-on" width="47" height="47"/>
