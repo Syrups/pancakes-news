@@ -77,6 +77,8 @@
 		B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */; };
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
 		B3B40C181A5E918700BA7575 /* VideoEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */; };
+		B3B40C1A1A5E992200BA7575 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B40C191A5E992200BA7575 /* MediaPlayer.framework */; };
+		B3B40C1C1A5E9AB200BA7575 /* movie.mov in Resources */ = {isa = PBXBuildFile; fileRef = B3B40C1B1A5E9AB200BA7575 /* movie.mov */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
 		B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CB88CE1A13A03A006DFF03 /* Utils.m */; };
 		B3CC2DBA1A3F936D00899F11 /* editors.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3CC2DB71A3F936D00899F11 /* editors.pkai */; };
@@ -279,6 +281,8 @@
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
 		B3B40C161A5E918700BA7575 /* VideoEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEmbeddedBlock.h; sourceTree = "<group>"; };
 		B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEmbeddedBlock.m; sourceTree = "<group>"; };
+		B3B40C191A5E992200BA7575 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		B3B40C1B1A5E9AB200BA7575 /* movie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = movie.mov; path = ../../Downloads/movie.mov; sourceTree = "<group>"; };
 		B3B9375F1A0A41B400584843 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		B3B937601A0A41B400584843 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		B3CB88CD1A13A03A006DFF03 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B40C1A1A5E992200BA7575 /* MediaPlayer.framework in Frameworks */,
 				B39C97941A5D313000284B23 /* Social.framework in Frameworks */,
 				B3F82C3D1A0387E40038D763 /* QuartzCore.framework in Frameworks */,
 				B3F82C3B1A0387DF0038D763 /* AVFoundation.framework in Frameworks */,
@@ -395,6 +400,7 @@
 		39615222AF1BB60813B8A01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3B40C191A5E992200BA7575 /* MediaPlayer.framework */,
 				B39C97931A5D313000284B23 /* Social.framework */,
 				B3F82C3C1A0387E40038D763 /* QuartzCore.framework */,
 				B3F82C3A1A0387DF0038D763 /* AVFoundation.framework */,
@@ -659,6 +665,7 @@
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
+				B3B40C1B1A5E9AB200BA7575 /* movie.mov */,
 				B39D62051A402BAA00F8AEE8 /* bloc_son_trait_00017.png */,
 				B3DBD2CC1A3F46400013493C /* test_audio.mp3 */,
 				738510891A163CF60094056D /* Localizable.strings */,
@@ -1012,6 +1019,7 @@
 				73FC07861A2BE44B006A57E1 /* climate.gif in Resources */,
 				B3CC2E041A3F9A2700899F11 /* bloc_son_trait_00031.png in Resources */,
 				B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */,
+				B3B40C1C1A5E9AB200BA7575 /* movie.mov in Resources */,
 				B3CC2DE61A3F9A2700899F11 /* bloc_son_trait_00001.png in Resources */,
 				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
 				B3FE6FFF1A3EF9EA0071413B /* video.pkai in Resources */,

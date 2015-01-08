@@ -7,7 +7,10 @@
 //
 
 #import "DefinitionEmbeddedBlock.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface VideoEmbeddedBlock : DefinitionEmbeddedBlock
+
+@property (strong, nonatomic) MPMoviePlayerController *videoPlayer;
 
 @end
