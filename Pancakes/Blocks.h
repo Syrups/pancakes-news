@@ -18,5 +18,6 @@
 #import "DataEmbeddedBlock.h"
 #import "AudioEmbeddedBlock.h"
 #import "CustomEmbeddedBlock.h"
+#import "VideoEmbeddedBlock.h"
 
 #endif

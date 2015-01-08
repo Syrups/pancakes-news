@@ -76,6 +76,7 @@
 		B3B1D5BE19EEC499001E8BBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BD19EEC499001E8BBF /* Images.xcassets */; };
 		B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B1D5BF19EEC499001E8BBF /* LaunchScreen.xib */; };
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
+		B3B40C181A5E918700BA7575 /* VideoEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
 		B3CB88CF1A13A03A006DFF03 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3CB88CE1A13A03A006DFF03 /* Utils.m */; };
 		B3CC2DBA1A3F936D00899F11 /* editors.pkai in Resources */ = {isa = PBXBuildFile; fileRef = B3CC2DB71A3F936D00899F11 /* editors.pkai */; };
@@ -276,6 +277,8 @@
 		B3B1D5C619EEC499001E8BBF /* PancakesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PancakesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3B1D5CB19EEC499001E8BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PancakesTests.m; sourceTree = "<group>"; };
+		B3B40C161A5E918700BA7575 /* VideoEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEmbeddedBlock.h; sourceTree = "<group>"; };
+		B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3B9375F1A0A41B400584843 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		B3B937601A0A41B400584843 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		B3CB88CD1A13A03A006DFF03 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 				B3F0BD061A2613DB00615279 /* AudioEmbeddedBlock.m */,
 				B3F0BD0A1A26252000615279 /* CustomEmbeddedBlock.h */,
 				B3F0BD0B1A26252000615279 /* CustomEmbeddedBlock.m */,
+				B3B40C161A5E918700BA7575 /* VideoEmbeddedBlock.h */,
+				B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */,
 			);
 			name = EmbeddedBlocks;
 			sourceTree = "<group>";
@@ -1136,6 +1141,7 @@
 				7388872C1A14DBE400AB74A6 /* PKCacheManager.m in Sources */,
 				B3B1D5B319EEC499001E8BBF /* main.m in Sources */,
 				B302F9341A2F14E00096BF9B /* TutoSynchroViewController.m in Sources */,
+				B3B40C181A5E918700BA7575 /* VideoEmbeddedBlock.m in Sources */,
 				B385A39D1A23825B00585C29 /* ArcImageView.m in Sources */,
 				B39BC80419F2847600277370 /* Comment.m in Sources */,
 				B375C0CD19F47069002D7AE7 /* ContentParser.m in Sources */,
