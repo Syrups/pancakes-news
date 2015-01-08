@@ -268,8 +268,10 @@ PKMenuItemCircle *currentItem;
     
     if(!isOpen){
         [self open];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"menu.open" object:nil];
     }else {
         [self close];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"menu.close" object:nil];
     }
     
     NSLog(@"toggle %hhu", isOpen);

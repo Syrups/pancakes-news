@@ -69,7 +69,7 @@ typedef enum  {
     visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     
     self.effectView = visualEffectView;
-    visualEffectView.frame = self.articleCoverImage.bounds;
+    visualEffectView.frame = self.view.bounds;
     [self.articleCoverImage addSubview:visualEffectView];
     self.effectView.alpha = 0;
 }
@@ -292,7 +292,7 @@ typedef enum  {
     }
     
     if ([block.type.name isEqualToString:@"context"]) {
-        return CGSizeMake(w, block.paragraphs.count * 200 + 250.0f);
+        return CGSizeMake(w, block.paragraphs.count * 300 + 250.0f);
     } else if ([block.type.name isEqualToString:@"editors"]) {
         return CGSizeMake(w, block.editors.count * 450);
     } else if ([block.type.name isEqualToString:@"comments"]) {
@@ -300,7 +300,7 @@ typedef enum  {
     }
     
     // generic block of content
-    return CGSizeMake(w, block.paragraphs.count * 100 + block.children.count  * 200);
+    return CGSizeMake(w, block.paragraphs.count * 100 + block.children.count  * 300);
 }
 
 

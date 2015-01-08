@@ -21,7 +21,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e9J-Hb-BBK" customClass="FLAnimatedImageView">
                         <rect key="frame" x="0.0" y="-1" width="320" height="218"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghi-Pn-Ehj" customClass="FXBlurView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghi-Pn-Ehj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -87,7 +87,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImageView" destination="e9J-Hb-BBK" id="zb6-he-NJP"/>
-                <outlet property="blurView" destination="ghi-Pn-Ehj" id="4FL-L3-DZ9"/>
                 <outlet property="themeCheck" destination="Pbj-el-iBJ" id="DDv-28-q0x"/>
                 <outlet property="themeLabel" destination="qf7-5h-wuh" id="tml-4G-tqN"/>
             </connections>

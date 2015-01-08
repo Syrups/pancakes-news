@@ -150,7 +150,7 @@
             frame = paragraphView.frame;
             frame.size.height = label.frame.size.height;
             if ([block.paragraphs indexOfObject:p] == 0) {
-                frame.size.height += 15.0f;
+//                frame.size.height += 15.0f;
             }
             paragraphView.frame = frame;
             
@@ -368,6 +368,14 @@
     [self addSubview:closeButton];
     
     [closeButtons setObject:closeButton forKey:blockId];
+    
+    // close all other blocks
+//    [embeddedBlocks enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL *stop) {
+//        if (![key isEqualToString:blockId]) {
+//            [self closeEmbeddedBlockWithId:key];
+//            [(UIView*)[closeButtons objectForKey:key] removeFromSuperview];
+//        }
+//    }];
     
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         UIView* line = [blockLines objectForKey:blockId];

@@ -17,10 +17,10 @@
 - (void)viewDidLoad {
     
     // skip tuto if setting present
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kPancakesTutoSynchroCookie] != nil) {
-        UIViewController* mainVc = [self.storyboard instantiateViewControllerWithIdentifier:@"TutoThemes"];
-        [self.navigationController pushViewController:mainVc animated:NO];
-    }
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:kPancakesTutoSynchroCookie] != nil) {
+//        UIViewController* mainVc = [self.storyboard instantiateViewControllerWithIdentifier:@"TutoThemes"];
+//        [self.navigationController pushViewController:mainVc animated:NO];
+//    }
 }
 
 - (IBAction)yes:(id)sender {

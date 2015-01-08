@@ -42,7 +42,7 @@
     CGPathRelease(path);
     
     ArcImageView *coverImage = [[ArcImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 240.0f) fullSize:YES];
-    coverImage.contentMode = UIViewContentModeScaleToFill;
+    coverImage.contentMode = UIViewContentModeScaleAspectFill;
     [coverImage sd_setImageWithURL:[NSURL URLWithString:block.image]];
 //    coverImage.layer.mask = mask;
     [self addSubview:coverImage];
@@ -62,7 +62,8 @@
     self.imageMask = visualEffectView;
     visualEffectView.frame = self.coverImage.bounds;
     
-    self.imageMask.alpha = 0.8;
+    
+    self.imageMask.alpha = 0.9;
     
     if (self.blurEnabled)[self.coverImage addSubview:visualEffectView];
     
