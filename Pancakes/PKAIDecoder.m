@@ -71,6 +71,27 @@
     [imageView startAnimating];
 }
 
++(void)updateAnimatedImageTintInButton: (UIButton *) button withColor:(UIColor*)color withAnimation:(BOOL)animated{
+    
+    if(animated){
+        [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [button.imageView stopAnimating];
+            [button.imageView setTintColor:color];
+        }completion:^(BOOL finished) {
+            [button.imageView startAnimating];
+        }];
+    }else{
+        [PKAIDecoder updateAnimatedImageTintInButton:button withColor:color];
+    }
+}
+
++(void)updateAnimatedImageTintInButton: (UIButton *) button withColor:(UIColor*)color  {
+    
+    [button.imageView stopAnimating];
+    [button.imageView setTintColor:color];
+    [button.imageView startAnimating];
+}
+
 + (void) builAnimatedImageInButton:(UIButton *) button  fromFile:(NSString *)file withColor:(UIColor*)color {
     
     NSArray *images = [PKAIDecoder decodeImageFromFile:file];
@@ -84,24 +105,28 @@
         NSMutableArray* imgs = @[].mutableCopy;
         for (UIImage* img in images) {
             UIImage* newImg = [img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            
             [imgs addObject:newImg];
         }
         
         images = imgs.copy;
-        [button.imageView setTintColor:color];
+       
     }
     
-    
+  
     [button setImage:[images objectAtIndex:images.count-1] forState:UIControlStateNormal];
-    
+   
     [button.imageView setAnimationImages:[images copy]];
     [button.imageView setAnimationDuration:1.3f];
     [button.imageView setAnimationRepeatCount:1];
     
+    [button.imageView stopAnimating];
+    [button.imageView setTintColor:color];
+    [button.imageView setNeedsDisplay];
     
     [UIView setAnimationDelegate:self];
     
-    [button.imageView startAnimating];
+    //[button.imageView startAnimating];
     
 //
 //    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];

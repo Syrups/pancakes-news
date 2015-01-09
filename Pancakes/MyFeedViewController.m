@@ -47,6 +47,7 @@
         touchEnabled = YES;
     }];
     
+    [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto" withColor:[UIColor blueColor]];
 //    UISwipeGestureRecognizer* swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
 //    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
 //    [self.view addGestureRecognizer:swipe];
@@ -261,7 +262,13 @@
     UITableViewCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"FeedArticleCell"];
     cell.contentView.backgroundColor = kArticleViewBlockBackground;
     
+    
+    
     Article* article = [feedArticles objectAtIndex:[indexPath row]];
+    
+    if(indexPath.row == 0){
+        [PKAIDecoder updateAnimatedImageTintInButton:self.readButton withColor:[Utils colorWithHexString:article.color] withAnimation:YES];
+    }
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FeedArticleCell"];
@@ -342,6 +349,8 @@
     check.transform = CGAffineTransformMakeScale(4.0f, 4.0f);
     check.alpha = 0;
     
+    [PKAIDecoder updateAnimatedImageTintInButton:self.readButton withColor:[Utils colorWithHexString:article.color] withAnimation:YES];
+    
     [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.selectedArticleCover.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
         cell.backgroundColor = RgbaColor(0, 0, 0, 0);
@@ -353,12 +362,10 @@
         check.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
         check.alpha = 1.0f;
         
-        UIImage* read = [self.readButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        [self.readButton setImage:read forState:UIControlStateNormal];
-        [self.readButton setTintColor:[Utils colorWithHexString:article.color]];
-        
-        [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto" withColor:[Utils colorWithHexString:article.color]];
+       
     } completion:nil];
+    
+    
     
     UILabel* feedCellTitle = (UILabel*)[cell.contentView viewWithTag:10];
     feedCellTitle.textColor = [UIColor whiteColor];

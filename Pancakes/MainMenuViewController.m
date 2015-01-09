@@ -57,6 +57,10 @@ PKMenuItemCircle *currentItem;
 
 - (void)viewDidLoad {
     
+    self.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    //.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+    //visuaEffectView.setTranslatesAutoresizingMaskIntoConstraints(true)
+    
     //Rotation constant 25
     angles = @[@-45, @-20, @5, @30];
     menuNames = @[@"MenuNews", @"MenuProfile" , @"MenuInterests", @"MenuSynchronization"];
@@ -190,6 +194,7 @@ PKMenuItemCircle *currentItem;
     // Animation
     CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     pathAnimation.duration = 0.15f;
     pathAnimation.path = arcPath;
     pathAnimation.removedOnCompletion = NO;

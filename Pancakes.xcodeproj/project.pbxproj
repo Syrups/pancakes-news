@@ -30,7 +30,6 @@
 		73C24E141A1938A40070C62D /* PKMenuItemCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C24E131A1938A40070C62D /* PKMenuItemCircle.m */; };
 		73DC79C01A0C245F00093265 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79BF1A0C245F00093265 /* MyProfileViewController.m */; };
 		73DC79C31A0C25B100093265 /* SynchroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DC79C21A0C25B100093265 /* SynchroViewController.m */; };
-		73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 73DC79C41A0C28F700093265 /* default_place-folder.jpg */; };
 		73FB80471A0BD09900CCA3F1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73FB80461A0BD09900CCA3F1 /* MainViewController.m */; };
 		73FC07861A2BE44B006A57E1 /* climate.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07811A2BE44B006A57E1 /* climate.gif */; };
 		73FC07871A2BE44B006A57E1 /* corruption.gif in Resources */ = {isa = PBXBuildFile; fileRef = 73FC07821A2BE44B006A57E1 /* corruption.gif */; };
@@ -78,7 +77,6 @@
 		B3B1D5CD19EEC499001E8BBF /* PancakesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B1D5CC19EEC499001E8BBF /* PancakesTests.m */; };
 		B3B40C181A5E918700BA7575 /* VideoEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */; };
 		B3B40C1A1A5E992200BA7575 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B40C191A5E992200BA7575 /* MediaPlayer.framework */; };
-		B3B40C1C1A5E9AB200BA7575 /* movie.mov in Resources */ = {isa = PBXBuildFile; fileRef = B3B40C1B1A5E9AB200BA7575 /* movie.mov */; };
 		B3B40C1F1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */; };
 		B3B40C221A5EC4B700BA7575 /* PKLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B40C211A5EC4B700BA7575 /* PKLabel.m */; };
 		B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B937601A0A41B400584843 /* MainMenuViewController.m */; };
@@ -201,7 +199,6 @@
 		73DC79BF1A0C245F00093265 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		73DC79C11A0C25B100093265 /* SynchroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynchroViewController.h; sourceTree = "<group>"; };
 		73DC79C21A0C25B100093265 /* SynchroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchroViewController.m; sourceTree = "<group>"; };
-		73DC79C41A0C28F700093265 /* default_place-folder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default_place-folder.jpg"; sourceTree = "<group>"; };
 		73FB80451A0BD09900CCA3F1 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		73FB80461A0BD09900CCA3F1 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		73FC077F1A2BDDE0006A57E1 /* climate.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = climate.gif; path = ../climate.gif; sourceTree = "<group>"; };
@@ -284,7 +281,6 @@
 		B3B40C161A5E918700BA7575 /* VideoEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEmbeddedBlock.h; sourceTree = "<group>"; };
 		B3B40C171A5E918700BA7575 /* VideoEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3B40C191A5E992200BA7575 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		B3B40C1B1A5E9AB200BA7575 /* movie.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = movie.mov; path = ../../Downloads/movie.mov; sourceTree = "<group>"; };
 		B3B40C1D1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowEmbeddedBlock.h; sourceTree = "<group>"; };
 		B3B40C1E1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowEmbeddedBlock.m; sourceTree = "<group>"; };
 		B3B40C201A5EC4B700BA7575 /* PKLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKLabel.h; sourceTree = "<group>"; };
@@ -536,7 +532,6 @@
 		73DC79BC1A0C23E100093265 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				73DC79C41A0C28F700093265 /* default_place-folder.jpg */,
 				73DC79BE1A0C245F00093265 /* MyProfileViewController.h */,
 				73DC79BF1A0C245F00093265 /* MyProfileViewController.m */,
 			);
@@ -673,7 +668,6 @@
 		B3B1D5A419EEC498001E8BBF = {
 			isa = PBXGroup;
 			children = (
-				B3B40C1B1A5E9AB200BA7575 /* movie.mov */,
 				B39D62051A402BAA00F8AEE8 /* bloc_son_trait_00017.png */,
 				B3DBD2CC1A3F46400013493C /* test_audio.mp3 */,
 				738510891A163CF60094056D /* Localizable.strings */,
@@ -1018,7 +1012,6 @@
 				B3CC2E031A3F9A2700899F11 /* bloc_son_trait_00030.png in Resources */,
 				B3CC2DE51A3F9A2700899F11 /* bloc_son_trait_00000.png in Resources */,
 				B3FE6FFB1A3EF9EA0071413B /* comments.pkai in Resources */,
-				73DC79C51A0C28F700093265 /* default_place-folder.jpg in Resources */,
 				B3CC2DEA1A3F9A2700899F11 /* bloc_son_trait_00005.png in Resources */,
 				B3CC2DF01A3F9A2700899F11 /* bloc_son_trait_00011.png in Resources */,
 				B3B1D5C119EEC499001E8BBF /* LaunchScreen.xib in Resources */,
@@ -1029,7 +1022,6 @@
 				73FC07861A2BE44B006A57E1 /* climate.gif in Resources */,
 				B3CC2E041A3F9A2700899F11 /* bloc_son_trait_00031.png in Resources */,
 				B3EF69601A03D35D00150BF7 /* BreeRegular.otf in Resources */,
-				B3B40C1C1A5E9AB200BA7575 /* movie.mov in Resources */,
 				B3CC2DE61A3F9A2700899F11 /* bloc_son_trait_00001.png in Resources */,
 				7324CFBA19F83D4C004E2065 /* UISubThemeViewCell.xib in Resources */,
 				B3FE6FFF1A3EF9EA0071413B /* video.pkai in Resources */,
