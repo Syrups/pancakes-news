@@ -346,6 +346,15 @@
 }
 
 - (void)openEmbeddedBlockWithId:(NSString *)blockId completion:(void (^)())completion {
+    
+    /*dispatch_queue_t queue = dispatch_queue_create("myqueue", NULL);
+    dispatch_async(queue, ^{
+        //Heavy things
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //THings like addsubbview
+        });
+    });*/
+    
     DefinitionEmbeddedBlock* blockView = [embeddedBlocks objectForKey:blockId];
 
     [self.tableView beginUpdates];
