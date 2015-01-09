@@ -22,6 +22,7 @@
 		739228501A0D1301005F02E9 /* SubThemeInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7392284F1A0D1301005F02E9 /* SubThemeInterest.m */; };
 		739228541A0D14B3005F02E9 /* MyInterest.json in Resources */ = {isa = PBXBuildFile; fileRef = 739228521A0D14B3005F02E9 /* MyInterest.json */; };
 		739228551A0D14B3005F02E9 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 739228531A0D14B3005F02E9 /* TemplateIcon2x.png */; };
+		73A652F41A5FD547008C020C /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A652F31A5FD547008C020C /* UIImage+Tint.m */; };
 		73B33A6B19F13D6000BFB546 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6919F13D6000BFB546 /* PodFile */; };
 		73B33A6C19F13D6000BFB546 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */; };
 		73B33A7119F15CC600BFB546 /* UIThemeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B33A7019F15CC600BFB546 /* UIThemeView.xib */; };
@@ -187,6 +188,8 @@
 		7392284F1A0D1301005F02E9 /* SubThemeInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubThemeInterest.m; sourceTree = "<group>"; };
 		739228521A0D14B3005F02E9 /* MyInterest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyInterest.json; sourceTree = "<group>"; };
 		739228531A0D14B3005F02E9 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
+		73A652F21A5FD547008C020C /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
+		73A652F31A5FD547008C020C /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
 		73B33A6919F13D6000BFB546 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		73B33A6A19F13D6000BFB546 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		73B33A7019F15CC600BFB546 /* UIThemeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIThemeView.xib; sourceTree = "<group>"; };
@@ -623,6 +626,8 @@
 				7352143A1A23688B00AFE840 /* PKRestClient.m */,
 				738168E21A38CBB0006B5F8C /* PKAIDecoder.h */,
 				738168E31A38CBB0006B5F8C /* PKAIDecoder.m */,
+				73A652F21A5FD547008C020C /* UIImage+Tint.h */,
+				73A652F31A5FD547008C020C /* UIImage+Tint.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1136,6 +1141,7 @@
 				B39C556A1A150AAA005550CC /* LettrineParagraph.m in Sources */,
 				B33CCBC81A0905CC007766E4 /* MapEmbeddedBlock.m in Sources */,
 				B3B937611A0A41B400584843 /* MainMenuViewController.m in Sources */,
+				73A652F41A5FD547008C020C /* UIImage+Tint.m in Sources */,
 				B3F0BD041A24F3F100615279 /* ArticleMenuItem.m in Sources */,
 				B3B40C1F1A5EB8C500BA7575 /* SlideshowEmbeddedBlock.m in Sources */,
 				B3B1D5B619EEC499001E8BBF /* AppDelegate.m in Sources */,
