@@ -36,6 +36,7 @@
     self.feedTableView.contentMode = UIViewContentModeScaleAspectFill;
     self.feedTableView.hidden = YES;
     
+    
     self.constraintY.constant = kMenuBarHeigth;
     
     touchEnabled = YES;
@@ -261,8 +262,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"FeedArticleCell"];
     cell.contentView.backgroundColor = kArticleViewBlockBackground;
-    
-    
     
     Article* article = [feedArticles objectAtIndex:[indexPath row]];
     

@@ -27,11 +27,11 @@
     
      [self setImageEdgeInsets:UIEdgeInsetsMake(6, 6, 6, 6)];
     
-    UIImage* picto = [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:type.name]];
-    [self setImage:[picto imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [self setTintColor:color];
+    //UIImage* picto = [UIImage imageNamed:[@"article-block-button-" stringByAppendingString:type.name]];
+    //[self setImage:[picto imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    //[self setTintColor:color];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.3f target:self selector:@selector(reset) userInfo:nil repeats:NO];
+    //[NSTimer scheduledTimerWithTimeInterval:1.3f target:self selector:@selector(reset) userInfo:nil repeats:NO];
     
 //    [[NSNotificationCenter defaultCenter] addObserverForName:@"scroll.end" object:nil queue:nil usingBlock:^(NSNotification *note) {
 //        

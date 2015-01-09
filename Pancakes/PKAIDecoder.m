@@ -8,7 +8,7 @@
 
 @import UIKit;
 #import "PKAIDecoder.h"
-#import "PKAIDecoder.h"
+#import "UIImage+Tint.h"
 
 
 @implementation PKAIDecoder
@@ -73,10 +73,20 @@
 
 +(void)updateAnimatedImageTintInButton: (UIButton *) button withColor:(UIColor*)color withAnimation:(BOOL)animated{
     
+    NSMutableArray* imgs = @[].mutableCopy;
     if(animated){
         [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            [button.imageView stopAnimating];
-            [button.imageView setTintColor:color];
+            if (color != nil) {
+                
+                for (UIImage* img in button.imageView.animationImages) {
+                    UIImage* tintdImg = [[img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageTintedWithColor:color];
+                    
+                    [imgs addObject:tintdImg];
+                }
+            }
+            
+            [button setImage:[imgs objectAtIndex:imgs.count-1] forState:UIControlStateNormal];
+            [button.imageView setAnimationImages:[imgs copy]];
         }completion:^(BOOL finished) {
             [button.imageView startAnimating];
         }];
@@ -92,6 +102,25 @@
     [button.imageView startAnimating];
 }
 
++ (NSArray *)buildTintedUIImageArrayWithImages: (NSArray *)images WithColor:(UIColor*)color{
+    
+    NSMutableArray* imgs = @[].mutableCopy;
+    
+    if (color != nil) {
+        
+        for (UIImage* img in images) {
+            UIImage* newImg = [[img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageTintedWithColor:color];
+            
+            [imgs addObject:newImg];
+        }
+        
+        images = imgs.copy;
+        
+    }
+    
+    return images;
+}
+
 + (void) builAnimatedImageInButton:(UIButton *) button  fromFile:(NSString *)file withColor:(UIColor*)color {
     
     NSArray *images = [PKAIDecoder decodeImageFromFile:file];
@@ -101,28 +130,24 @@
         return;
     }
     
+    
     if (color != nil) {
         NSMutableArray* imgs = @[].mutableCopy;
         for (UIImage* img in images) {
-            UIImage* newImg = [img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            
+            UIImage* newImg = [[img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] imageTintedWithColor:color];
+         
             [imgs addObject:newImg];
         }
         
         images = imgs.copy;
        
     }
-    
-  
+
     [button setImage:[images objectAtIndex:images.count-1] forState:UIControlStateNormal];
    
     [button.imageView setAnimationImages:[images copy]];
     [button.imageView setAnimationDuration:1.3f];
     [button.imageView setAnimationRepeatCount:1];
-    
-    [button.imageView stopAnimating];
-    [button.imageView setTintColor:color];
-    [button.imageView setNeedsDisplay];
     
     [UIView setAnimationDelegate:self];
     
