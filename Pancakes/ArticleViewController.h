@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *articleTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *introductionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIImageView *moreButtonBackground;
 @property (strong, nonatomic) ContentParser* parser;

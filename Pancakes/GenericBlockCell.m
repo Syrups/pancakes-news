@@ -175,7 +175,12 @@
                 [blockIndexPaths setObject:blockView forKey:[NSIndexPath indexPathForRow:items.count+1 inSection:0]];
                 [items addObject:blockView];
                 
-                BlockButton *blockButton = [[BlockButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 62.0f, offsetY + 40.0f, 50, 50) blockType:child.type color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
+                NSRange textRange;
+                NSValue* val = (NSValue*)[call objectForKey:@"textRange"];
+                [val getValue:&textRange];
+                CGFloat offsetBlock = textRange.location/2.8f;
+                
+                BlockButton *blockButton = [[BlockButton alloc] initWithFrame:CGRectMake(paragraphView.frame.size.width - 62.0f, offsetY + 40.0f + offsetBlock, 50, 50) blockType:child.type color:[Utils colorWithHexString:self.articleViewController.displayedArticle.color]];
                 [blockButton addTarget:self action:@selector(blockButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 blockButton.tag = [child.id integerValue];
                 
