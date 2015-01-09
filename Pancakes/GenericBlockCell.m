@@ -14,6 +14,7 @@
 #import "LettrineParagraph.h"
 #import "BlockButton.h"
 #import "PKLabel.h"
+#import "PKAIDecoder.h"
 
 @implementation GenericBlockCell {
     BOOL layouted;

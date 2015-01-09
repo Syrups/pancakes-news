@@ -151,7 +151,7 @@
     
     [UIView setAnimationDelegate:self];
     
-    //[button.imageView startAnimating];
+    [button.imageView startAnimating];
     
 //
 //    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];
