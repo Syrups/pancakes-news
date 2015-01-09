@@ -240,7 +240,7 @@
     
     NSLog(@"%f", diff);
     
-    if (diff > 320 && !animatingCloseButton) {
+    if (diff > 350 && !animatingCloseButton) {
         animatingCloseButton = YES;
         [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.closeButton.alpha = 0;
