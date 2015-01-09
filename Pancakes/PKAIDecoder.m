@@ -115,17 +115,18 @@
     
   
     [button setImage:[images objectAtIndex:images.count-1] forState:UIControlStateNormal];
-    [button.imageView setTintColor:color];
-    
+   
     [button.imageView setAnimationImages:[images copy]];
     [button.imageView setAnimationDuration:1.3f];
     [button.imageView setAnimationRepeatCount:1];
-    [button.imageView setNeedsDisplay];
     
+    [button.imageView stopAnimating];
+    [button.imageView setTintColor:color];
+    [button.imageView setNeedsDisplay];
     
     [UIView setAnimationDelegate:self];
     
-    [button.imageView startAnimating];
+    //[button.imageView startAnimating];
     
 //
 //    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"contents"];

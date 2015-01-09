@@ -47,6 +47,7 @@
         touchEnabled = YES;
     }];
     
+    [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto" withColor:[UIColor blueColor]];
 //    UISwipeGestureRecognizer* swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
 //    swipe.direction = UISwipeGestureRecognizerDirectionLeft;
 //    [self.view addGestureRecognizer:swipe];
@@ -266,7 +267,7 @@
     Article* article = [feedArticles objectAtIndex:[indexPath row]];
     
     if(indexPath.row == 0){
-        [PKAIDecoder builAnimatedImageInButton:self.readButton fromFile:@"lunette-picto" withColor:[Utils colorWithHexString:article.color]];
+        [PKAIDecoder updateAnimatedImageTintInButton:self.readButton withColor:[Utils colorWithHexString:article.color] withAnimation:YES];
     }
     
     if (cell == nil) {
