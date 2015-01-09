@@ -17,5 +17,6 @@
 @property (strong, nonatomic) NSString* _id;
 @property (strong, nonatomic) NSString* author;
 @property (strong, nonatomic) NSString* content;
+@property (strong, nonatomic) NSString<Optional>* authorImage;
 
 @end

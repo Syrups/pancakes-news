@@ -26,7 +26,13 @@
     [self addSubview:cover];
     
     
-    offsetY += 130.0f;
+    offsetY += 100.0f;
+    
+    UIButton* addButton = [[UIButton alloc] initWithFrame:CGRectMake(40, offsetY, 100, 50)];
+    [addButton setImage:[UIImage imageNamed:@"comment-add"] forState:UIControlStateNormal];
+    [self addSubview:addButton];
+    
+    offsetY += 70;
     
     for (Comment* comment in self.articleViewController.displayedArticle.comments) {
         
@@ -35,11 +41,11 @@
         commentBlock.layer.borderColor = RgbColor(222, 222, 222).CGColor;
         commentBlock.layer.borderWidth = 1.0f;
         
-        UIImageView* pic = [[UIImageView alloc] initWithFrame:CGRectMake(commentBlock.bounds.size.width/2-42, -42, 85, 85)];
-        pic.image = [UIImage imageNamed:@"glenn"];
+        UIImageView* pic = [[UIImageView alloc] initWithFrame:CGRectMake(commentBlock.bounds.size.width/2-2, commentBlock.frame.origin.y-42, 85, 85)];
+        [pic sd_setImageWithURL:[NSURL URLWithString:comment.authorImage]];
         pic.layer.cornerRadius = 42.5f;
         pic.layer.masksToBounds = YES;
-        [commentBlock addSubview:pic];
+        [self addSubview:pic];
         
         UILabel* author = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, commentBlock.bounds.size.width - 20, 15)];
         author.numberOfLines = 0;
@@ -59,6 +65,7 @@
         [commentBlock addSubview:content];
         
         [self addSubview:commentBlock];
+        [self bringSubviewToFront:pic];
         
         offsetY += commentBlock.bounds.size.height + 60.0f;
     }

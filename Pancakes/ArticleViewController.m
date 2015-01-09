@@ -240,6 +240,9 @@ typedef enum  {
     creditsLabel.textColor = [UIColor whiteColor];
     creditsLabel.font = [UIFont fontWithName:kFontHeuristicaItalic size:18];
     
+    UILabel* introLabel = (UILabel*)[cell.contentView viewWithTag:30];
+    introLabel.text = self.displayedArticle.heading;
+    
     UISwipeGestureRecognizer* swipeToZoom = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(zoomCover:)];
     swipeToZoom.direction = UISwipeGestureRecognizerDirectionDown;
 //    [cell.contentView addGestureRecognizer:swipeToZoom];
@@ -277,6 +280,10 @@ typedef enum  {
             frame.origin.y += self.view.frame.size.height;
             creditsLabel.frame = frame;
             [creditsLabel setAlpha:1.0f];
+            frame = introLabel.frame;
+            frame.origin.y += self.view.frame.size.height;
+            introLabel.frame = frame;
+            [introLabel setAlpha:1.0f];
             
             UIView *storyline = [[UIView alloc] initWithFrame:CGRectMake(self.moreButtonBackground.frame.origin.x + self.moreButtonBackground.frame.size.width/2, self.moreButtonBackground.frame.origin.y + self.moreButtonBackground.frame.size.height+15.0f, 1.0f, 0.0f)];
             storyline.backgroundColor = RgbColor(180, 180, 180);

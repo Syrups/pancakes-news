@@ -49,6 +49,7 @@
     UILabel* titleLabel = (UILabel*)[cell.contentView viewWithTag:10];
     titleLabel.text = @"Pivotal Ebola vaccine trials to start this month or next";
     
+    
     UIImageView* feedCellThumb = (UIImageView*)[cell.contentView viewWithTag:20];
     [feedCellThumb setFrame:CGRectMake(feedCellThumb.frame.origin.x, feedCellThumb.frame.origin.y, cell.frame.size.width/3.5, cell.frame.size.height)];
     feedCellThumb.contentMode = UIViewContentModeScaleAspectFill;

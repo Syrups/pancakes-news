@@ -17,6 +17,7 @@
     if (self.opened) return;
     CGFloat y = 0;
     
+    
     for (NSDictionary* editor in block.editors) {
         UIView* editorView = [[UIView alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, 450.0f)];
         CALayer *upperBorder = [CALayer layer];
@@ -34,14 +35,15 @@
         image.layer.cornerRadius = 65;
         image.layer.masksToBounds = YES;
         [editorView addSubview:image];
+        image.contentMode = UIViewContentModeScaleAspectFill;
         
-        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 220, self.frame.size.width - 100.0f, 30)];
+        UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 180, self.frame.size.width - 100.0f, 30)];
         title.text = [editor objectForKey:@"title"];
         title.textColor = RgbColor(51, 51, 51);
         title.font = [UIFont fontWithName:kFontBreeBold size:20];
         [editorView addSubview:title];
         
-        UILabel* bio = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 250, self.frame.size.width - 100.0f, 200)];
+        UILabel* bio = [[UILabel alloc] initWithFrame:CGRectMake(30.0, 220, self.frame.size.width - 100.0f, 200)];
         NSMutableAttributedString* bioString = [[NSMutableAttributedString alloc] initWithString:[editor objectForKey:@"bio"]];
         NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
         [style setLineSpacing:6.0f];
