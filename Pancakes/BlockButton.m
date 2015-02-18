@@ -19,7 +19,12 @@
     self.type = type;
     self.color = color;
     
-    [PKAIDecoder builAnimatedImageInButton:self fromFile:type.name withColor:color];
+    if (![type.name isEqualToString:@"slide"]) {
+        [PKAIDecoder builAnimatedImageInButton:self fromFile:type.name withColor:color];
+    } else {
+        [self setImage:[[UIImage imageNamed:@"article-block-button-slide"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        self.imageView.tintColor = self.color;
+    }
     
     UIImageView* background = [[UIImageView alloc] initWithFrame:frame];
     background.image = [UIImage imageNamed:@"article-block-button"];
@@ -31,8 +36,11 @@
     //[self setImage:[picto imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     //[self setTintColor:color];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.3f target:self selector:@selector(reset) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(repeat) userInfo:nil repeats:YES];
+    if (![type.name isEqualToString:@"slide"]) {
+        [NSTimer scheduledTimerWithTimeInterval:1.3f target:self selector:@selector(reset) userInfo:nil repeats:NO];
+    
+        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(repeat) userInfo:nil repeats:YES];
+    }
 
     
 //    [[NSNotificationCenter defaultCenter] addObserverForName:@"scroll.end" object:nil queue:nil usingBlock:^(NSNotification *note) {
